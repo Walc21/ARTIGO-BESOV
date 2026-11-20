@@ -1045,6 +1045,305 @@
       ]
     },
     {
+      "id": "6.1",
+      "titulo": "dados de regime e agenda uniforme",
+      "rotulo": "lp:def:regime",
+      "estado": "Formalizado (definição)",
+      "nota": "A norma da bola é a soma da norma em $L^p$ e da norma da sequência de Besov. Os expoentes, o fator de crescimento e a condição de admissibilidade distinguem os três regimes.",
+      "lean": [
+        {
+          "nome": "FormalizacaoLow.besovNorm",
+          "arquivo": "../lean4/formalizacao/Formalizacao/UnifSup.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoLow.LamU",
+          "arquivo": "../lean4/formalizacao/Formalizacao/UnifSup.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoLow.nuPrime",
+          "arquivo": "../lean4/formalizacao/Formalizacao/UnifTheorem.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoLow.kapPrime",
+          "arquivo": "../lean4/formalizacao/Formalizacao/UnifTheorem.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoLow.nuHat",
+          "arquivo": "../lean4/formalizacao/Formalizacao/UnifTheorem.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoLow.kapHat",
+          "arquivo": "../lean4/formalizacao/Formalizacao/UnifTheorem.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoLow.Hunif",
+          "arquivo": "../lean4/formalizacao/Formalizacao/UnifTheorem.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoLow.UniformAdmissible",
+          "arquivo": "../lean4/formalizacao/Formalizacao/UnifTheorem.lean",
+          "nota": ""
+        }
+      ]
+    },
+    {
+      "id": "6.2",
+      "titulo": "altura e quantização uniformes",
+      "rotulo": "lp:lem:uniform-height",
+      "estado": "Formalizado e compilado",
+      "nota": "A potência de dois é mínima. A cota nodal tem constante comum à bola. O peso de quantização inclui o fator $1/2$ do erro nodal.",
+      "lean": [
+        {
+          "nome": "FormalizacaoLow.qexp_le_of_target_le",
+          "arquivo": "../lean4/formalizacao/Formalizacao/UnifTheorem.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoLow.uniform_height_quantization",
+          "arquivo": "../lean4/formalizacao/Formalizacao/UnifTheorem.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoLow.uniform_quantWeight_lt_top",
+          "arquivo": "../lean4/formalizacao/Formalizacao/UnifTheorem.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoLow.lam_bound_unif",
+          "arquivo": "../lean4/formalizacao/Formalizacao/UnifSup.lean",
+          "nota": ""
+        }
+      ]
+    },
+    {
+      "id": "6.3",
+      "titulo": "cotas uniformes sobre bolas",
+      "rotulo": "lp:thm:uniform",
+      "estado": "Formalizado e compilado",
+      "nota": "As constantes de altura e de Whitney são escolhidas antes de $\\kappa$, do raio e da função. A cota pontual vale para toda escala diádica $n\\ge2$. A cota em $\\ell^q$ requer admissibilidade.",
+      "lean": [
+        {
+          "nome": "FormalizacaoLow.uniform_besov_ball",
+          "arquivo": "../lean4/formalizacao/Formalizacao/UnifTheorem.lean",
+          "nota": ""
+        }
+      ]
+    },
+    {
+      "id": "6.4",
+      "titulo": "peso sem o fator logarítmico",
+      "rotulo": "lp:obs:uniform-q",
+      "estado": "Formalizado e compilado",
+      "nota": "A taxa pontual admite $\\kappa=0$. Com $s\\ge1$ e $q$ finito, o peso de quantização com $\\kappa=0$ é limitado e afastado de zero, logo a série diverge.",
+      "lean": [
+        {
+          "nome": "FormalizacaoLow.uniform_besov_ball",
+          "arquivo": "../lean4/formalizacao/Formalizacao/UnifTheorem.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoRegular.uniform_quantWeight_zero_not_lt_top",
+          "arquivo": "../lean4/formalizacao/Formalizacao/RegularSchedules.lean",
+          "nota": ""
+        }
+      ]
+    },
+    {
+      "id": "6.5",
+      "titulo": "piso aritmético em $L^p$",
+      "rotulo": "lp:prop:floor",
+      "estado": "Formalizado e compilado",
+      "nota": "A distância racional é exata. A integral em cada folha dá a cota em $L^1$, que se estende a $L^p$ pela monotonia da norma na medida de probabilidade de $[0,1]$.",
+      "lean": [
+        {
+          "nome": "FormalizacaoFloor.rational_arithmetic_floor",
+          "arquivo": "../lean4/formalizacao/Formalizacao/ArithmeticFloor.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoFloor.arithmetic_floor_lp",
+          "arquivo": "../lean4/formalizacao/Formalizacao/ArithmeticFloor.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoFloor.arithmetic_floor_bestError",
+          "arquivo": "../lean4/formalizacao/Formalizacao/ArithmeticFloor.lean",
+          "nota": ""
+        }
+      ]
+    },
+    {
+      "id": "6.6–6.7",
+      "titulo": "necessidade da altura para a taxa uniforme",
+      "rotulo": "lp:cor:floor",
+      "estado": "Formalizado e compilado",
+      "nota": "A função constante de teste pertence à bola unitária. A cota de realização em `uniform_besov_ball` com $\\kappa=0$ fornece a direção suficiente da Observação 6.7 quando $s\\ge1$ e $s>1/p$.",
+      "lean": [
+        {
+          "nome": "FormalizacaoFloor.arithmetic_height_necessary",
+          "arquivo": "../lean4/formalizacao/Formalizacao/ArithmeticFloor.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoLow.uniform_besov_ball",
+          "arquivo": "../lean4/formalizacao/Formalizacao/UnifTheorem.lean",
+          "nota": ""
+        }
+      ]
+    },
+    {
+      "id": "6.8",
+      "titulo": "código binário de comprimento limitado",
+      "rotulo": "lp:prop:bits",
+      "estado": "Formalizado e compilado",
+      "nota": "O orçamento é compartilhado. O código contém um bit inicial, a forma em pré-ordem e as coordenadas de cada folha em largura fixa. A contagem usa a ausência de prefixos próprios e obtém $\\log_2\\#\\Sigma_N\\le4N(c_H+1)$.",
+      "lean": [
+        {
+          "nome": "FormalizacaoBits.coordinateWidth_eq",
+          "arquivo": "../lean4/formalizacao/Formalizacao/BinaryBudget.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoBits.treeWord_prefix",
+          "arquivo": "../lean4/formalizacao/Formalizacao/BinaryBudget.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoBits.boundedLibrary_code",
+          "arquivo": "../lean4/formalizacao/Formalizacao/BinaryBudget.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoBits.boundedLibrary_card",
+          "arquivo": "../lean4/formalizacao/Formalizacao/BinaryBudget.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoBits.boundedLibrary_log_card",
+          "arquivo": "../lean4/formalizacao/Formalizacao/BinaryBudget.lean",
+          "nota": ""
+        }
+      ]
+    },
+    {
+      "id": "6.9",
+      "titulo": "taxa e bits sobre bolas",
+      "rotulo": "lp:cor:bits",
+      "estado": "Formalizado e compilado",
+      "nota": "O mesmo aproximante satisfaz a cota de erro e a cota de comprimento, com constantes que só dependem dos índices.",
+      "lean": [
+        {
+          "nome": "FormalizacaoBits.uniform_rate_bits",
+          "arquivo": "../lean4/formalizacao/Formalizacao/BinaryBudget.lean",
+          "nota": ""
+        }
+      ]
+    },
+    {
+      "id": "6.11",
+      "titulo": "critério exato para agendas regulares",
+      "rotulo": "lp:prop:regular",
+      "estado": "Formalizado e compilado",
+      "nota": "As duas equivalências usam comparabilidade com o fator recíproco e condensação de Cauchy. As séries começam em um por reindexação.",
+      "lean": [
+        {
+          "nome": "FormalizacaoRegular.Hregular",
+          "arquivo": "../lean4/formalizacao/Formalizacao/RegularSchedules.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoRegular.regular_schedule_criterion",
+          "arquivo": "../lean4/formalizacao/Formalizacao/RegularSchedules.lean",
+          "nota": ""
+        }
+      ]
+    },
+    {
+      "id": "6.12",
+      "titulo": "caracterização, estabilidade e cotas uniformes com log-log",
+      "rotulo": "lp:cor:loglog",
+      "estado": "Formalizado e compilado",
+      "nota": "O critério da agenda vale exatamente quando $\\gamma q>1$. O corolário usa as reduções de Jackson já demonstradas, incluindo estabilidade por inclusão aproximada.",
+      "lean": [
+        {
+          "nome": "FormalizacaoLogLog.HlogLog",
+          "arquivo": "../lean4/formalizacao/Formalizacao/LogLogSchedules.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoLogLog.logLog_schedule_iff",
+          "arquivo": "../lean4/formalizacao/Formalizacao/LogLogSchedules.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoLogLog.conj1_loglog",
+          "arquivo": "../lean4/formalizacao/Formalizacao/LogLogSchedules.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoLogLog.conj2_loglog",
+          "arquivo": "../lean4/formalizacao/Formalizacao/LogLogSchedules.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoLogLog.conj2_approx_loglog",
+          "arquivo": "../lean4/formalizacao/Formalizacao/LogLogSchedules.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoLogLog.uniform_loglog_ball",
+          "arquivo": "../lean4/formalizacao/Formalizacao/LogLogSchedules.lean",
+          "nota": ""
+        }
+      ]
+    },
+    {
+      "id": "6.13",
+      "titulo": "comparação de agendas, séries de Bertrand e diagonal",
+      "rotulo": "lp:obs:loglog",
+      "estado": "Formalizado e compilado",
+      "nota": "A razão para a agenda de log simples tende a zero. A série diverge no limiar crítico e o critério vale para qualquer número positivo de logaritmos. Na diagonal $p=s=1$ a agenda contém o fator adicional $L_1^{\\theta_q}$.",
+      "lean": [
+        {
+          "nome": "FormalizacaoLogLog.logLog_schedule_ratio_tendsto_zero",
+          "arquivo": "../lean4/formalizacao/Formalizacao/LogLogSchedules.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoLogLog.logLog_schedule_iff",
+          "arquivo": "../lean4/formalizacao/Formalizacao/LogLogSchedules.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoLogLog.HlogLogDiag_eq",
+          "arquivo": "../lean4/formalizacao/Formalizacao/LogLogSchedules.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoLogLog.conj1_loglog_diagonal",
+          "arquivo": "../lean4/formalizacao/Formalizacao/LogLogSchedules.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoIterated.bertrand_summable_iff",
+          "arquivo": "../lean4/formalizacao/Formalizacao/IteratedSchedules.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoIterated.iterated_schedule_iff",
+          "arquivo": "../lean4/formalizacao/Formalizacao/IteratedSchedules.lean",
+          "nota": ""
+        }
+      ]
+    },
+    {
       "id": "F1",
       "titulo": "arcabouço abstrato do módulo, em valores reais",
       "rotulo": "lp:sec:lean",

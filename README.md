@@ -71,7 +71,7 @@ grep -rn "sorry" Formalizacao/ Formalizacao.lean
 lake env lean Formalizacao/Auditoria.lean
 ```
 
-A saída deve ter 143 linhas, todas com `depends on axioms: [propext, Classical.choice, Quot.sound]`, e nenhuma com `sorryAx`. A saída de referência está em `auditoria_axiomas.txt`. Conferência rápida:
+A auditoria cobre 170 declarações. Cada uma usa apenas axiomas padrão do Lean (`propext`, `Classical.choice` e `Quot.sound`). A saída de referência está em `auditoria_axiomas.txt`. Conferência rápida:
 
 ```bash
 lake env lean Formalizacao/Auditoria.lean | grep -vc "\[propext, Classical.choice, Quot.sound\]"
@@ -95,4 +95,5 @@ O script confere que os rótulos do TeX e os nomes Lean listados em `mapas/MAPA_
 
 - Os enunciados Lean tratam funções mensuráveis $\mathbb R\to\mathbb R$ com a medida de Lebesgue restrita a $[0,1]$, em vez de classes de $L^p$. Os casos com agenda $\widetilde H_{s,\eta}$ são enunciados com $1/p<s<2$, como no artigo.
 - As reduções usam a forma do teorema de Jackson com constantes que podem depender de $f$. A forma com constantes explícitas ($C_0=9C_W(p)$, $C_1=16$) está em `hypJpStrong_of_lt`.
+- A seção 6 tem provas Lean das cotas uniformes sobre bolas, do piso aritmético em $L^p$, do código de árvores livre de prefixo e das agendas de log iterado. A condição exata para a série de Bertrand é $\gamma q>1$.
 - O relatório `mapas/AUDITORIA_FIDELIDADE.md` compara, item a item, o texto do artigo com os enunciados Lean.

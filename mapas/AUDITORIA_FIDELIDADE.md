@@ -1,6 +1,6 @@
 # Auditoria de fidelidade: enunciados Lean × texto de `conjecturas_lp.tex`
 
-Escopo: definições (§2) e enunciados dos resultados principais (§§3–5) comparados com as
+Escopo: definições (§2) e enunciados dos resultados principais (§§3–6) comparados com as
 declarações Lean. Veredito por item: **fiel** (mesmo conteúdo), **diferença documentada**
 (equivalente sob as escolhas de formalização, já explicitadas no artigo), **mais geral** (Lean
 prova mais do que o texto afirma) ou **a corrigir**.
@@ -45,7 +45,9 @@ prova mais do que o texto afirma) ou **a corrigir**.
 
 ## Escopo
 
-Os resultados para `s ≤ 1/p` (Teorema 3.1, itens (ii) e (iii), Teorema 3.2 nesse regime, Lema 4.8, Lema 4.9, Teorema 4.10 e Proposições 5.7 e 5.8) estão formalizados em `Formalizacao/Low*.lean`; a correspondência está em `MAPA_TEX_LEAN.md`.
+Os resultados para `s ≤ 1/p` (Teorema 3.1, itens (ii) e (iii), Teorema 3.2 nesse regime, Lema 4.8, Lema 4.9, Teorema 4.10 e Proposições 5.7 e 5.8) estão formalizados em `Formalizacao/Low*.lean`. A Seção 6 (cotas uniformes, piso aritmético, bits e agendas de log iterado) está formalizada em `UnifSup`, `UnifTheorem`, `ArithmeticFloor`, `BinaryBudget`, `RegularSchedules`, `IteratedSchedules` e `LogLogSchedules`. A correspondência está em `MAPA_TEX_LEAN.md`.
+
+Os enunciados da Seção 6 que envolvem `ω_2` exigem `s < 2`, como no artigo (`uniform_besov_ball`, `uniform_rate_bits`, `conj1_loglog`, `conj2_loglog`, `conj2_approx_loglog`, `uniform_loglog_ball`).
 
 | Resultado | Texto | Lean | Veredito |
 |---|---|---|---|
@@ -57,6 +59,17 @@ Os resultados para `s ≤ 1/p` (Teorema 3.1, itens (ii) e (iii), Teorema 3.2 nes
 | Teorema 3.1 (iii) | `s = 1/p`, `Ĥ_{q,κ}`, `κ > 1/q` se `p = 1`, `q < ∞` | `conj1_diag`, agenda `Hsk 1 (thetaQ q + κ)` | fiel |
 | Teorema 3.2 (`s ≤ 1/p`) | família aninhada, `c ≥ 1` | `conj2_low`, `conj2_diag` | fiel (famílias mensuráveis, como no regime `s > 1/p`) |
 | Teorema 3.3 (estabilidade aproximada) | inclusão aproximada em `L^p`, `(2^{rs}ε_{2^r}) ∈ ℓ^q` | `Conj2ApproxStability`, `conj2_approx_endpoint`/`_subcritical`/`_critical`/`_tilde` (`s > 1/p`), `conj2_approx_low`/`_diag` (`s ≤ 1/p`) | fiel (tolerância `ε : ℕ → ℝ≥0∞`; somabilidade como premissa) |
+
+## Cotas uniformes e agendas de altura (seção 6)
+
+| Resultado | Correspondência e escopo |
+|---|---|
+| 6.1–6.3 | `besovNorm` mede a bola de raio `B`. `uniform_besov_ball` escolhe as constantes de altura e de Whitney antes de `κ`, do raio e da função. A norma de realização reindexa as escalas a partir de `r = 1`. |
+| 6.4 | `uniform_quantWeight_zero_not_lt_top` prova divergência para `q` finito, `s ≥ 1` e `κ = 0`. O teto da potência de dois mantém o peso afastado de zero. |
+| 6.5–6.7 | O piso é provado primeiro em `L¹` pela média afim em cada folha. A monotonia de `Lᵖ` na medida de probabilidade dá o piso com a mesma constante. A necessidade de altura é por escala e uniforme na bola. |
+| 6.8–6.9 | A forma da árvore determina os endereços. As magnitudes têm `⌈log₂(H+1)⌉` bits. A cardinalidade é limitada por `2^L`, com `L = 4N(c_H + 1)`. |
+| 6.10 | A ordem da entropia métrica da bola de Besov é citada no artigo como resultado externo. |
+| 6.11–6.13 | A condensação de Cauchy dá as duas equivalências do critério e reduz as séries de Bertrand a uma série de potências. O limiar `γq = 1` é divergente no critério. A igualdade com log-log inclui a diagonal `p = s = 1`, e a estabilidade no regime `s > 1/p` usa as duas transferências existentes. |
 
 ## Achados
 

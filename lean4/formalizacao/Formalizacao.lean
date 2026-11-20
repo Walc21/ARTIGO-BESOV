@@ -52,6 +52,12 @@ import Formalizacao.LowWeights
 import Formalizacao.LowShift
 import Formalizacao.LowTheorems
 
+import Formalizacao.UnifTheorem
+import Formalizacao.ArithmeticFloor
+import Formalizacao.BinaryBudget
+import Formalizacao.LogLogSchedules
+import Formalizacao.IteratedSchedules
+
 /-!
 # Formalização do artigo «Funcional de realização aritmético em `L^p`»
 

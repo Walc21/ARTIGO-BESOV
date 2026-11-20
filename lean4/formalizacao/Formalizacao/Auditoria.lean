@@ -176,3 +176,36 @@ e nunca `sorryAx`. Executar: `lake env lean Formalizacao/Auditoria.lean`.
 #print axioms FormalizacaoLow.besov_subset_stratum_low_approx
 #print axioms FormalizacaoLow.conj2_approx_low
 #print axioms FormalizacaoLow.conj2_approx_diag
+
+-- Seção 6: cotas uniformes
+#print axioms FormalizacaoLow.lam_bound_unif
+#print axioms FormalizacaoLow.qexp_le_of_target_le
+#print axioms FormalizacaoLow.uniform_height_quantization
+#print axioms FormalizacaoLow.uniform_quantWeight_lt_top
+#print axioms FormalizacaoLow.uniform_besov_ball
+#print axioms FormalizacaoRegular.uniform_quantWeight_zero_not_lt_top
+
+-- Seção 6: piso aritmético e comprimento binário
+#print axioms FormalizacaoFloor.rational_arithmetic_floor
+#print axioms FormalizacaoFloor.arithmetic_floor_lp
+#print axioms FormalizacaoFloor.arithmetic_floor_bestError
+#print axioms FormalizacaoFloor.arithmetic_height_necessary
+#print axioms FormalizacaoBits.coordinateWidth_eq
+#print axioms FormalizacaoBits.treeWord_prefix
+#print axioms FormalizacaoBits.boundedLibrary_code
+#print axioms FormalizacaoBits.boundedLibrary_card
+#print axioms FormalizacaoBits.boundedLibrary_log_card
+#print axioms FormalizacaoBits.uniform_rate_bits
+
+-- Seção 6: agendas regulares, log-log e séries de Bertrand
+#print axioms FormalizacaoRegular.regular_schedule_criterion
+#print axioms FormalizacaoLogLog.logLog_schedule_iff
+#print axioms FormalizacaoLogLog.conj1_loglog
+#print axioms FormalizacaoLogLog.conj2_loglog
+#print axioms FormalizacaoLogLog.conj2_approx_loglog
+#print axioms FormalizacaoLogLog.uniform_loglog_ball
+#print axioms FormalizacaoLogLog.HlogLogDiag_eq
+#print axioms FormalizacaoLogLog.conj1_loglog_diagonal
+#print axioms FormalizacaoLogLog.logLog_schedule_ratio_tendsto_zero
+#print axioms FormalizacaoIterated.bertrand_summable_iff
+#print axioms FormalizacaoIterated.iterated_schedule_iff
