@@ -29,15 +29,18 @@ theorem fam_mono (𝒩 : ℕ → Set (ℝ → ℝ)) (hnest : ∀ N, 𝒩 N ⊆ �
   | base => exact subset_rfl
   | succ n _ ih => exact ih.trans (hnest n)
 
-/-- **Teorema 2 (inclusão `B ⊆ R^𝒩`)**, condicional a `J_p`, para `f` mensurável. -/
-theorem besov_subset_stratum_fam {p : ℝ≥0∞} (hp : 1 ≤ p) {s : ℝ} (hJ : HypJp p s)
+private lemma besov_subset_stratum_fam_core {p : ℝ≥0∞} (hp : 1 ≤ p) {s : ℝ} (hJ : HypJp p s)
     {q : ℝ≥0∞} (hq : 0 < q) (H : ℕ → ℕ)
     (hHlow : ∀ N : ℕ, 1 ≤ N → 8 * (N : ℝ) ^ (max 1 s) ≤ (H N : ℝ))
     (hW : lqNorm q (fun k : ℕ => ENNReal.ofReal ((2 : ℝ) ^ (((k + 1 : ℕ) : ℝ) * s)) /
       (H (2 ^ (k + 1)) : ℝ≥0∞)) < ⊤)
     (𝒩 : ℕ → Set (ℝ → ℝ)) (h0 : ∀ N, (0 : ℝ → ℝ) ∈ 𝒩 N)
     (hnest : ∀ N, 𝒩 N ⊆ 𝒩 (N + 1))
-    {c : ℝ} (hc : 1 ≤ c) (hcont : ∀ N, Pendencias.Agenda.Sigma H N ⊆ 𝒩 ⌈c * N⌉₊)
+    {c : ℝ} (hc : 1 ≤ c) {ε : ℕ → ℝ≥0∞}
+    (hEps : lqNorm q (fun k : ℕ => ENNReal.ofReal ((2 : ℝ) ^ (((k + 1 : ℕ) : ℝ) * s)) *
+      ε (2 ^ (k + 1))) < ⊤)
+    (happrox : ∀ N, ∀ g ∈ Pendencias.Agenda.Sigma H N,
+      ∃ g' ∈ 𝒩 ⌈c * N⌉₊, Measurable g' ∧ eLpNorm (g - g') p vol01 ≤ ε N)
     {f : ℝ → ℝ} (hf : Measurable f) (hbes : f ∈ besovP p s q) :
     f ∈ stratumP p s q 𝒩 := by
   have hbesTop : f ∈ besovP p s ⊤ := by
@@ -97,14 +100,23 @@ theorem besov_subset_stratum_fam {p : ℝ≥0∞} (hp : 1 ≤ p) {s : ℝ} (hJ :
         (H (2 ^ (k - e + 1)) : ℝ≥0∞) else 0) < ⊤ :=
     lt_of_le_of_lt (lq_tail_le hq (fun m : ℕ => ENNReal.ofReal ((2 : ℝ) ^ (((m + 1 : ℕ) : ℝ) * s)) /
       (H (2 ^ (m + 1)) : ℝ≥0∞)) e) hW
+  have hT3 : lqNorm q (fun k : ℕ => if e ≤ k then
+      ENNReal.ofReal ((2 : ℝ) ^ (((k - e + 1 : ℕ) : ℝ) * s)) *
+        ε (2 ^ (k - e + 1)) else 0) < ⊤ :=
+    lt_of_le_of_lt (lq_tail_le hq (fun m : ℕ => ENNReal.ofReal ((2 : ℝ) ^ (((m + 1 : ℕ) : ℝ) * s)) *
+      ε (2 ^ (m + 1))) e) hEps
   set X : ℕ → ℝ≥0∞ := fun k => E * ((1 + 5 * ENNReal.ofReal C0) *
       (if e ≤ k then (fun m : ℕ => besovSeq p s f (m + 1)) (k - e) else 0) +
       (5 * ENNReal.ofReal C1 * ENNReal.ofReal (R + 1)) *
         (if e ≤ k then ENNReal.ofReal ((2 : ℝ) ^ (((k - e + 1 : ℕ) : ℝ) * s)) /
-          (H (2 ^ (k - e + 1)) : ℝ≥0∞) else 0)) with hXdef
+          (H (2 ^ (k - e + 1)) : ℝ≥0∞) else 0) +
+      (5 : ℝ≥0∞) *
+        (if e ≤ k then ENNReal.ofReal ((2 : ℝ) ^ (((k - e + 1 : ℕ) : ℝ) * s)) *
+          ε (2 ^ (k - e + 1)) else 0)) with hXdef
   have hX : lqNorm q X < ⊤ :=
-    lq_const_mul_lt_top hq hE (lq_add_lt_top hq (lq_const_mul_lt_top hq hc1 hT1)
-      (lq_const_mul_lt_top hq hc2 hT2))
+    lq_const_mul_lt_top hq hE (lq_add_lt_top hq
+      (lq_add_lt_top hq (lq_const_mul_lt_top hq hc1 hT1) (lq_const_mul_lt_top hq hc2 hT2))
+      (lq_const_mul_lt_top hq (by norm_num) hT3))
   -- majoração termo a termo para `k ≥ e + r1`
   have hpt : ∀ k : ℕ, e + r1 ≤ k → stratSeq p s 𝒩 f k ≤ X k := by
     intro k hk
@@ -120,14 +132,24 @@ theorem besov_subset_stratum_fam {p : ℝ≥0∞} (hp : 1 ≤ p) {s : ℝ} (hJ :
       rw [← pow_add]
       congr 1
       omega
-    -- o aproximante está em 𝒩_{2^{k+1}}, porque ⌈c n⌉ ≤ 2^{k+1}
+    -- o aproximante de `g` está em `𝒩_{2^{k+1}}`, porque `⌈c n⌉ ≤ 2^{k+1}`
     have hcle : ⌈c * ((2 ^ (k - e + 1) : ℕ) : ℝ)⌉₊ ≤ 2 ^ (k + 1) := by
       apply Nat.ceil_le.2
       rw [hnat]
       exact mul_le_mul_of_nonneg_right hce (Nat.cast_nonneg _)
-    have hgN : g ∈ 𝒩 (2 ^ (k + 1)) :=
-      fam_mono 𝒩 hnest hcle (hcont (2 ^ (k - e + 1)) hg)
-    have hR := realP_le_of_approx' hp hf hmpos hnM hgN hgm hD
+    obtain ⟨g', hg'c, hg'm, hg'err⟩ := happrox (2 ^ (k - e + 1)) g hg
+    have hg'N : g' ∈ 𝒩 (2 ^ (k + 1)) := fam_mono 𝒩 hnest hcle hg'c
+    have hD' : eLpNorm (f - g') p vol01 ≤
+        (ENNReal.ofReal C0 * wtP p (1 / (2 : ℝ) ^ (k - e + 1)) f +
+          ENNReal.ofReal C1 * ENNReal.ofReal (R + 1) / (H (2 ^ (k - e + 1)) : ℝ≥0∞)) +
+          ε (2 ^ (k - e + 1)) := by
+      have hsplitf : f - g' = (f - g) + (g - g') := by ext x; ring
+      calc eLpNorm (f - g') p vol01
+          = eLpNorm ((f - g) + (g - g')) p vol01 := by rw [hsplitf]
+        _ ≤ eLpNorm (f - g) p vol01 + eLpNorm (g - g') p vol01 :=
+            eLpNorm_add_le (hf.sub hgm).aestronglyMeasurable (hgm.sub hg'm).aestronglyMeasurable hp
+        _ ≤ _ := add_le_add hD hg'err
+    have hR := realP_le_of_approx' hp hf hmpos hnM hg'N hg'm hD'
     have hcast : ((2 ^ (k - e + 1) : ℕ) : ℝ) = (2 : ℝ) ^ (k - e + 1) := by push_cast; rfl
     rw [hcast] at hR
     -- desdobramento do peso: 2^{(k+1)s} = E · 2^{(k-e+1)s}
@@ -143,7 +165,7 @@ theorem besov_subset_stratum_fam {p : ℝ≥0∞} (hp : 1 ≤ p) {s : ℝ} (hJ :
             (wtP p (1 / (2 : ℝ) ^ (k - e + 1)) f +
               5 * (ENNReal.ofReal C0 * wtP p (1 / (2 : ℝ) ^ (k - e + 1)) f +
                 ENNReal.ofReal C1 * ENNReal.ofReal (R + 1) /
-                  (H (2 ^ (k - e + 1)) : ℝ≥0∞))) :=
+                  (H (2 ^ (k - e + 1)) : ℝ≥0∞) + ε (2 ^ (k - e + 1)))) :=
           mul_le_mul_left' hR _
       _ = X k := by
           rw [hsplit, hXdef]
@@ -155,6 +177,48 @@ theorem besov_subset_stratum_fam {p : ℝ≥0∞} (hp : 1 ≤ p) {s : ℝ} (hJ :
   have hlq : lqNorm q (stratSeq p s 𝒩 f) < ⊤ :=
     lq_of_eventually_le hq (k1 := e + r1) hfin hX (fun k hk => hpt k hk)
   exact (mem_stratumP_iff p s q 𝒩 f).2 ⟨((mem_besovP_iff p s q f).1 hbes).1, hlq⟩
+
+/-- **Teorema 2 (inclusão `B ⊆ R^𝒩`)**, condicional a `J_p`, para `f` mensurável. -/
+theorem besov_subset_stratum_fam {p : ℝ≥0∞} (hp : 1 ≤ p) {s : ℝ} (hJ : HypJp p s)
+    {q : ℝ≥0∞} (hq : 0 < q) (H : ℕ → ℕ)
+    (hHlow : ∀ N : ℕ, 1 ≤ N → 8 * (N : ℝ) ^ (max 1 s) ≤ (H N : ℝ))
+    (hW : lqNorm q (fun k : ℕ => ENNReal.ofReal ((2 : ℝ) ^ (((k + 1 : ℕ) : ℝ) * s)) /
+      (H (2 ^ (k + 1)) : ℝ≥0∞)) < ⊤)
+    (𝒩 : ℕ → Set (ℝ → ℝ)) (h0 : ∀ N, (0 : ℝ → ℝ) ∈ 𝒩 N)
+    (hnest : ∀ N, 𝒩 N ⊆ 𝒩 (N + 1))
+    {c : ℝ} (hc : 1 ≤ c) (hcont : ∀ N, Pendencias.Agenda.Sigma H N ⊆ 𝒩 ⌈c * N⌉₊)
+    {f : ℝ → ℝ} (hf : Measurable f) (hbes : f ∈ besovP p s q) :
+    f ∈ stratumP p s q 𝒩 := by
+  have hEps : lqNorm q (fun k : ℕ => ENNReal.ofReal ((2 : ℝ) ^ (((k + 1 : ℕ) : ℝ) * s)) *
+      (0 : ℝ≥0∞)) < ⊤ := by
+    have hzero : (fun k : ℕ => ENNReal.ofReal ((2 : ℝ) ^ (((k + 1 : ℕ) : ℝ) * s)) * (0 : ℝ≥0∞)) =
+        fun _ => 0 := by funext _; simp
+    rw [hzero]
+    exact lq_finsupp_lt_top hq (k1 := 0) (fun _ _ => rfl) (fun _ => ENNReal.zero_ne_top)
+  exact besov_subset_stratum_fam_core hp hJ hq H hHlow hW 𝒩 h0 hnest hc hEps
+    (fun N g hg => ⟨g, hcont N hg, measurable_sigma hg, by simp⟩) hf hbes
+
+/-- **Transferência sob inclusão aproximada (inclusão `B ⊆ R^𝒩`)**, condicional a `J_p`. -/
+theorem besov_subset_stratum_fam_approx {p : ℝ≥0∞} (hp : 1 ≤ p) {s : ℝ} (hJ : HypJp p s)
+    {q : ℝ≥0∞} (hq : 0 < q) (H : ℕ → ℕ)
+    (hHlow : ∀ N : ℕ, 1 ≤ N → 8 * (N : ℝ) ^ (max 1 s) ≤ (H N : ℝ))
+    (hW : lqNorm q (fun k : ℕ => ENNReal.ofReal ((2 : ℝ) ^ (((k + 1 : ℕ) : ℝ) * s)) /
+      (H (2 ^ (k + 1)) : ℝ≥0∞)) < ⊤)
+    (𝒩 : ℕ → Set (ℝ → ℝ)) (h0 : ∀ N, (0 : ℝ → ℝ) ∈ 𝒩 N)
+    (hnest : ∀ N, 𝒩 N ⊆ 𝒩 (N + 1))
+    (hm𝒩 : ∀ N, ∀ g ∈ 𝒩 N, Measurable g)
+    {c : ℝ} (hc : 1 ≤ c) {ε : ℕ → ℝ≥0∞}
+    (hEps : lqNorm q (fun k : ℕ => ENNReal.ofReal ((2 : ℝ) ^ (((k + 1 : ℕ) : ℝ) * s)) *
+      ε (2 ^ (k + 1))) < ⊤)
+    (happrox : ∀ N, ∀ g ∈ Pendencias.Agenda.Sigma H N,
+      ∃ g' ∈ 𝒩 ⌈c * N⌉₊, eLpNorm (g - g') p vol01 ≤ ε N)
+    {f : ℝ → ℝ} (hf : Measurable f) (hbes : f ∈ besovP p s q) :
+    f ∈ stratumP p s q 𝒩 :=
+  besov_subset_stratum_fam_core hp hJ hq H hHlow hW 𝒩 h0 hnest hc hEps
+    (fun N g hg => by
+      obtain ⟨g', hg'c, hg'err⟩ := happrox N g hg
+      exact ⟨g', hg'c, hm𝒩 _ g' hg'c, hg'err⟩)
+    hf hbes
 
 /-- **Conjectura 2 (forma bilateral)**: sob `J_p` e a família `𝒩` com elementos mensuráveis,
 `f ∈ B^s_{p,q}` se e só se `f ∈ R^s_q(𝒩)`, para `f` mensurável. -/
@@ -293,5 +357,107 @@ theorem conj2Stability_tilde_of_J {p : ℝ≥0∞} (hp : 1 ≤ p) {s : ℝ} (hJ 
     Conj2Stability p s q (fun N => Pendencias.Jackson.HtilK 0 0 s η N) c :=
   fun hc 𝒩 h0 hnest hm𝒩 hcont f hf =>
     conj2_tilde_of_J hp hJ hq0 hqt hη 𝒩 h0 hnest hm𝒩 hc hcont hf
+
+/-! ## Estabilidade por inclusão aproximada (`lp:thm:approx-stability`) -/
+
+/-- Forma bilateral sob inclusão aproximada, condicional a `J_p`. -/
+theorem stability_approx_iff_of_J {p : ℝ≥0∞} (hp : 1 ≤ p) {s : ℝ} (hJ : HypJp p s)
+    {q : ℝ≥0∞} (hq : 0 < q) (H : ℕ → ℕ)
+    (hHlow : ∀ N : ℕ, 1 ≤ N → 8 * (N : ℝ) ^ (max 1 s) ≤ (H N : ℝ))
+    (hW : lqNorm q (fun k : ℕ => ENNReal.ofReal ((2 : ℝ) ^ (((k + 1 : ℕ) : ℝ) * s)) /
+      (H (2 ^ (k + 1)) : ℝ≥0∞)) < ⊤)
+    (𝒩 : ℕ → Set (ℝ → ℝ)) (h0 : ∀ N, (0 : ℝ → ℝ) ∈ 𝒩 N)
+    (hnest : ∀ N, 𝒩 N ⊆ 𝒩 (N + 1))
+    (hm𝒩 : ∀ N, ∀ g ∈ 𝒩 N, Measurable g)
+    {c : ℝ} (hc : 1 ≤ c) {ε : ℕ → ℝ≥0∞}
+    (hEps : lqNorm q (fun k : ℕ => ENNReal.ofReal ((2 : ℝ) ^ (((k + 1 : ℕ) : ℝ) * s)) *
+      ε (2 ^ (k + 1))) < ⊤)
+    (happrox : ∀ N, ∀ g ∈ Pendencias.Agenda.Sigma H N,
+      ∃ g' ∈ 𝒩 ⌈c * N⌉₊, eLpNorm (g - g') p vol01 ≤ ε N)
+    {f : ℝ → ℝ} (hf : Measurable f) :
+    f ∈ besovP p s q ↔ f ∈ stratumP p s q 𝒩 :=
+  ⟨fun hbes => besov_subset_stratum_fam_approx hp hJ hq H hHlow hW 𝒩 h0 hnest hm𝒩 hc hEps happrox hf hbes,
+    fun h => stratum_subset_besov_conn hp 𝒩 hm𝒩 s q hq hf h⟩
+
+/-- Estabilidade aproximada, caso `q = ∞`, agenda `H_{s,0}`. -/
+theorem conj2ApproxStability_endpoint_of_J {p : ℝ≥0∞} (hp : 1 ≤ p) {s : ℝ} (hJ : HypJp p s)
+    (c : ℝ) (ε : ℕ → ℝ≥0∞) : Conj2ApproxStability p s ⊤ (Pendencias.Agenda.Hsk s 0) c ε := by
+  intro hc hEps 𝒩 h0 hnest hm𝒩 happrox f hf
+  have hH : ∀ N : ℕ, 1 ≤ N → 8 * (N : ℝ) ^ (max 1 s) ≤
+      (Pendencias.Agenda.Hsk s 0 N : ℝ) := fun N hN => Hsk_low (le_refl 0) N hN
+  have hW : lqNorm ⊤ (fun k : ℕ => ENNReal.ofReal ((2 : ℝ) ^ (((k + 1 : ℕ) : ℝ) * s)) /
+      (Pendencias.Agenda.Hsk s 0 (2 ^ (k + 1)) : ℝ≥0∞)) < ⊤ := by
+    rw [lqNorm, if_pos rfl]
+    exact lt_of_le_of_lt (iSup_le fun k => weight_bdd _ hH k) ENNReal.ofReal_lt_top
+  exact stability_approx_iff_of_J hp hJ ENNReal.zero_lt_top (Pendencias.Agenda.Hsk s 0)
+    hH hW 𝒩 h0 hnest hm𝒩 hc hEps happrox hf
+
+/-- Estabilidade aproximada, caso `0 < q < ∞`, `s < 1`, agenda `H_{s,0}`. -/
+theorem conj2ApproxStability_subcritical_of_J {p : ℝ≥0∞} (hp : 1 ≤ p) {s : ℝ} (hJ : HypJp p s)
+    (hs : s < 1) {q : ℝ≥0∞} (hq0 : 0 < q) (hqt : q ≠ ⊤) (c : ℝ) (ε : ℕ → ℝ≥0∞) :
+    Conj2ApproxStability p s q (Pendencias.Agenda.Hsk s 0) c ε := by
+  intro hc hEps 𝒩 h0 hnest hm𝒩 happrox f hf
+  have hH : ∀ N : ℕ, 1 ≤ N → 8 * (N : ℝ) ^ (max 1 s) ≤
+      (Pendencias.Agenda.Hsk s 0 N : ℝ) := fun N hN => Hsk_low (le_refl 0) N hN
+  have hmax : max 1 s = 1 := max_eq_left hs.le
+  have hH1 : ∀ N : ℕ, 1 ≤ N → 8 * (N : ℝ) ^ (1 : ℝ) ≤
+      (Pendencias.Agenda.Hsk s 0 N : ℝ) := by
+    intro N hN
+    have := hH N hN
+    rwa [hmax] at this
+  have hneg : s - 1 < 0 := by linarith
+  have hρ1 : (2 : ℝ) ^ (s - 1) < 1 := Real.rpow_lt_one_of_one_lt_of_neg (by norm_num) hneg
+  have hρ0 : (0 : ℝ) ≤ (2 : ℝ) ^ (s - 1) := by positivity
+  have hW : lqNorm q (fun k : ℕ => ENNReal.ofReal ((2 : ℝ) ^ (((k + 1 : ℕ) : ℝ) * s)) /
+      (Pendencias.Agenda.Hsk s 0 (2 ^ (k + 1)) : ℝ≥0∞)) < ⊤ :=
+    lq_of_geom_le hq0 hqt (C := (2 : ℝ) ^ (s - 1) / 8) (ρ := (2 : ℝ) ^ (s - 1))
+      (by positivity) hρ0 hρ1 (fun k => weight_geom _ hs hH1 k)
+  exact stability_approx_iff_of_J hp hJ hq0 (Pendencias.Agenda.Hsk s 0)
+    hH hW 𝒩 h0 hnest hm𝒩 hc hEps happrox hf
+
+/-- Estabilidade aproximada, caso `0 < q < ∞`, `1 ≤ s`, `κ q > 1`, agenda `H_{s,κ}`. -/
+theorem conj2ApproxStability_critical_of_J {p : ℝ≥0∞} (hp : 1 ≤ p) {s : ℝ} (hJ : HypJp p s)
+    (hs : 1 ≤ s) {q : ℝ≥0∞} (hq0 : 0 < q) (hqt : q ≠ ⊤) {κ : ℝ} (hκ : 0 ≤ κ)
+    (hκq : 1 < κ * q.toReal) (c : ℝ) (ε : ℕ → ℝ≥0∞) :
+    Conj2ApproxStability p s q (Pendencias.Agenda.Hsk s κ) c ε := by
+  intro hc hEps 𝒩 h0 hnest hm𝒩 happrox f hf
+  have hH : ∀ N : ℕ, 1 ≤ N → 8 * (N : ℝ) ^ (max 1 s) ≤
+      (Pendencias.Agenda.Hsk s κ N : ℝ) := fun N hN => Hsk_low hκ N hN
+  have hD : 0 ≤ 1 / 8 * (Real.log 2) ^ (-κ) :=
+    mul_nonneg (by norm_num) (Real.rpow_nonneg (Real.log_nonneg (by norm_num)) _)
+  have hW : lqNorm q (fun k : ℕ => ENNReal.ofReal ((2 : ℝ) ^ (((k + 1 : ℕ) : ℝ) * s)) /
+      (Pendencias.Agenda.Hsk s κ (2 ^ (k + 1)) : ℝ≥0∞)) < ⊤ :=
+    lq_of_poly_le hq0 hqt hD hκq (fun k => weight_poly hs hκ k)
+  exact stability_approx_iff_of_J hp hJ hq0 (Pendencias.Agenda.Hsk s κ)
+    hH hW 𝒩 h0 hnest hm𝒩 hc hEps happrox hf
+
+/-- Estabilidade aproximada, agenda `H̃_{s,η}`, `0 < q < ∞`, `η > 0`. -/
+theorem conj2ApproxStability_tilde_of_J {p : ℝ≥0∞} (hp : 1 ≤ p) {s : ℝ} (hJ : HypJp p s)
+    {q : ℝ≥0∞} (hq0 : 0 < q) (hqt : q ≠ ⊤) {η : ℝ} (hη : 0 < η) (c : ℝ) (ε : ℕ → ℝ≥0∞) :
+    Conj2ApproxStability p s q (fun N => Pendencias.Jackson.HtilK 0 0 s η N) c ε := by
+  intro hc hEps 𝒩 h0 hnest hm𝒩 happrox f hf
+  have hH : ∀ N : ℕ, 1 ≤ N → 8 * (N : ℝ) ^ (max 1 s) ≤
+      (Pendencias.Jackson.HtilK 0 0 s η N : ℝ) := fun N hN => Htil_low hη.le N hN
+  have ha : s < max 1 (s + η) := lt_of_lt_of_le (by linarith) (le_max_right _ _)
+  have hH' : ∀ N : ℕ, 1 ≤ N → 8 * (N : ℝ) ^ (max 1 (s + η)) ≤
+      (Pendencias.Jackson.HtilK 0 0 s η N : ℝ) := by
+    intro N hN
+    have hNr : (1 : ℝ) ≤ (N : ℝ) := by exact_mod_cast hN
+    have h1 : (N : ℝ) ^ (max 1 (s + η)) ≤ ((N : ℝ) + 1) ^ (max 1 (s + η)) :=
+      Real.rpow_le_rpow (Nat.cast_nonneg _) (by linarith)
+        (le_trans zero_le_one (le_max_left _ _))
+    have h2 := Htil_real_ge s η N
+    linarith
+  have hneg : s - max 1 (s + η) < 0 := by linarith
+  have hρ1 : (2 : ℝ) ^ (s - max 1 (s + η)) < 1 :=
+    Real.rpow_lt_one_of_one_lt_of_neg (by norm_num) hneg
+  have hρ0 : (0 : ℝ) ≤ (2 : ℝ) ^ (s - max 1 (s + η)) := by positivity
+  have hW : lqNorm q (fun k : ℕ => ENNReal.ofReal ((2 : ℝ) ^ (((k + 1 : ℕ) : ℝ) * s)) /
+      (Pendencias.Jackson.HtilK 0 0 s η (2 ^ (k + 1)) : ℝ≥0∞)) < ⊤ :=
+    lq_of_geom_le hq0 hqt (C := (2 : ℝ) ^ (s - max 1 (s + η)) / 8)
+      (ρ := (2 : ℝ) ^ (s - max 1 (s + η))) (by positivity) hρ0 hρ1
+      (fun k => weight_geom _ ha hH' k)
+  exact stability_approx_iff_of_J hp hJ hq0 (fun N => Pendencias.Jackson.HtilK 0 0 s η N)
+    hH hW 𝒩 h0 hnest hm𝒩 hc hEps happrox hf
 
 end FormalizacaoStab

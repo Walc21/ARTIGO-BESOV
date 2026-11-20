@@ -50,7 +50,7 @@ Estado: **Formalizado e compilado**. A avaliação de uma árvore é mensurável
 
 ### 2.1 — funcional e espaço de realização em $L^p$
 
-Texto: [conjecturas_lp.tex:188](../conjecturas_lp.tex); rótulo `lp:def:realization`.
+Texto: [conjecturas_lp.tex:198](../conjecturas_lp.tex); rótulo `lp:def:realization`.
 
 Estado: **Formalizado (definição)**. Em `ℝ≥0∞`. O estrato inclui a condição `f ∈ L^p`, como na definição do texto, e é reindexado por `r ↦ r+1` (começa em `N = 2`).
 
@@ -60,7 +60,7 @@ Estado: **Formalizado (definição)**. Em `ℝ≥0∞`. O estrato inclui a condi
 
 ### 2.2 — famílias aninhadas que contêm a biblioteca
 
-Texto: [conjecturas_lp.tex:205](../conjecturas_lp.tex); rótulo `lp:def:network-family`.
+Texto: [conjecturas_lp.tex:215](../conjecturas_lp.tex); rótulo `lp:def:network-family`.
 
 Estado: **Formalizado (definição)**. As hipóteses de `Conj2Stability` expressam aninhamento, inclusão da função nula e inclusão da biblioteca após reescalonamento do orçamento. A declaração se aplica a famílias mensuráveis, entre elas as famílias de funções contínuas do artigo.
 
@@ -69,9 +69,9 @@ Estado: **Formalizado (definição)**. As hipóteses de `Conj2Stability` express
 
 ### 3.1 — caracterização de Besov por realização aritmética
 
-Texto: [conjecturas_lp.tex:222](../conjecturas_lp.tex); rótulo `lp:conj:besov`.
+Texto: [conjecturas_lp.tex:237](../conjecturas_lp.tex); rótulo `lp:conj:besov`.
 
-Estado: **Formalizado e compilado**. As quatro declarações cobrem as agendas e os regimes do artigo para $1\le p<\infty$ e $1/p<s$. O artigo toma $s<2$ para a caracterização clássica de Besov pelo módulo de ordem dois.
+Estado: **Formalizado e compilado**. As quatro declarações cobrem o item (i) do teorema, isto é, as agendas e os regimes para $1\le p<\infty$ e $1/p<s<2$. Os itens (ii) e (iii) ($s\le1/p$) **não estão formalizados**.
 
 - [`FormalizacaoLp.Conj1Endpoint`](../lean4/formalizacao/Formalizacao/LpDefs.lean) — linha 71.
 - [`FormalizacaoLp.Conj1Subcritical`](../lean4/formalizacao/Formalizacao/LpDefs.lean) — linha 76.
@@ -83,9 +83,9 @@ Estado: **Formalizado e compilado**. As quatro declarações cobrem as agendas e
 
 ### 3.2 — estabilidade por inclusão de redes
 
-Texto: [conjecturas_lp.tex:242](../conjecturas_lp.tex); rótulo `lp:conj:stability`.
+Texto: [conjecturas_lp.tex:270](../conjecturas_lp.tex); rótulo `lp:conj:stability`.
 
-Estado: **Formalizado e compilado**. As quatro declarações dão a estabilidade por inclusão para as agendas e os regimes do Teorema 3.1, com constante real $c\ge1$.
+Estado: **Formalizado e compilado**. As quatro declarações dão a estabilidade por inclusão para as agendas e os regimes do item (i) do Teorema 3.1 ($1/p<s<2$), com constante real $c\ge1$. O caso $s\le1/p$ não está formalizado.
 
 - [`FormalizacaoLp.Conj2Stability`](../lean4/formalizacao/Formalizacao/LpDefs.lean) — linha 89.
 - [`FormalizacaoJ.conj2_endpoint`](../lean4/formalizacao/Formalizacao/LpJackson3.lean) — linha 54.
@@ -93,20 +93,32 @@ Estado: **Formalizado e compilado**. As quatro declarações dão a estabilidade
 - [`FormalizacaoJ.conj2_critical`](../lean4/formalizacao/Formalizacao/LpJackson3.lean) — linha 65.
 - [`FormalizacaoJ.conj2_tilde`](../lean4/formalizacao/Formalizacao/LpJackson3.lean) — linha 72.
 
+### 3.3 — estabilidade por inclusão aproximada
+
+Texto: [conjecturas_lp.tex:279](../conjecturas_lp.tex); rótulo `lp:thm:approx-stability`.
+
+Estado: **Formalizado e compilado**. As quatro declarações cobrem o regime $1/p<s<2$, com erro de aproximação $(\varepsilon_N)$ em $L^p$ tal que $(2^{rs}\varepsilon_{2^r})_{r\ge1}\in\ell^q$. O caso $s\le1/p$ não está formalizado.
+
+- [`FormalizacaoLp.Conj2ApproxStability`](../lean4/formalizacao/Formalizacao/LpDefs.lean) — linha 102.
+- [`FormalizacaoJ.conj2_approx_endpoint`](../lean4/formalizacao/Formalizacao/LpJackson3.lean) — linha 78.
+- [`FormalizacaoJ.conj2_approx_subcritical`](../lean4/formalizacao/Formalizacao/LpJackson3.lean) — linha 83.
+- [`FormalizacaoJ.conj2_approx_critical`](../lean4/formalizacao/Formalizacao/LpJackson3.lean) — linha 89.
+- [`FormalizacaoJ.conj2_approx_tilde`](../lean4/formalizacao/Formalizacao/LpJackson3.lean) — linha 96.
+
 ### 4.1 — estimativa de Jackson em $L^p$
 
-Texto: [conjecturas_lp.tex:261](../conjecturas_lp.tex); rótulo `lp:hyp:jackson`.
+Texto: [conjecturas_lp.tex:301](../conjecturas_lp.tex); rótulo `lp:hyp:jackson`.
 
 Estado: **Formalizado e compilado**. `hypJpStrong_of_lt` dá a estimativa com $C_0=9C_W(p)$ e $C_1=16$ para o representante contínuo. A forma usada nas reduções é demonstrada em `hypJp_of_lt` e permite constantes dependentes de $f$.
 
-- [`FormalizacaoLp.HypJp`](../lean4/formalizacao/Formalizacao/LpDefs.lean) — linha 103.
+- [`FormalizacaoLp.HypJp`](../lean4/formalizacao/Formalizacao/LpDefs.lean) — linha 120.
 - [`FormalizacaoJ.hypJp_of_lt`](../lean4/formalizacao/Formalizacao/LpJackson2.lean) — linha 152.
 - [`FormalizacaoJ.hypJpStrong_of_lt`](../lean4/formalizacao/Formalizacao/LpJackson4.lean) — linha 30.
 - [`FormalizacaoJ.lp_jackson_core`](../lean4/formalizacao/Formalizacao/LpJackson2.lean) — linha 25.
 
 ### 4.2 — projeção afim local
 
-Texto: [conjecturas_lp.tex:286](../conjecturas_lp.tex); rótulo `lp:lem:projection`.
+Texto: [conjecturas_lp.tex:326](../conjecturas_lp.tex); rótulo `lp:lem:projection`.
 
 Estado: **Formalizado e compilado**. O núcleo reproduz funções afins, é simétrico e tem imagem afim. Os núcleos avaliam a projeção nos extremos, com cotas dadas por Hölder e pela integral do módulo de cada núcleo.
 
@@ -121,7 +133,7 @@ Estado: **Formalizado e compilado**. O núcleo reproduz funções afins, é sim�
 
 ### 4.3 — quase-interpolante
 
-Texto: [conjecturas_lp.tex:308](../conjecturas_lp.tex); rótulo `lp:lem:quasi`.
+Texto: [conjecturas_lp.tex:348](../conjecturas_lp.tex); rótulo `lp:lem:quasi`.
 
 Estado: **Formalizado e compilado**. Construção de $Q_n$, reprodução de funções afins, erro local e cotas de amplitude e de diferenças nodais.
 
@@ -134,7 +146,7 @@ Estado: **Formalizado e compilado**. Construção de $Q_n$, reprodução de fun�
 
 ### 4.4 — Whitney em partições de $L^p$
 
-Texto: [conjecturas_lp.tex:335](../conjecturas_lp.tex); rótulo `lp:lem:whitney`.
+Texto: [conjecturas_lp.tex:375](../conjecturas_lp.tex); rótulo `lp:lem:whitney`.
 
 Estado: **Formalizado e compilado**. A prova usa média dupla, fórmula de Taylor, reflexão, Jensen e Tonelli. A transferência das duas faixas extremas para o interior e a multiplicidade dos intervalos dão a estimativa global.
 
@@ -150,7 +162,7 @@ Estado: **Formalizado e compilado**. A prova usa média dupla, fórmula de Taylo
 
 ### 4.5 — erro de quase-interpolação
 
-Texto: [conjecturas_lp.tex:402](../conjecturas_lp.tex); rótulo `lp:cor:quasi-error`.
+Texto: [conjecturas_lp.tex:442](../conjecturas_lp.tex); rótulo `lp:cor:quasi-error`.
 
 Estado: **Formalizado e compilado**. `quasi_error_unc` deduz a cota global de `whitney_lp` e do erro local.
 
@@ -161,7 +173,7 @@ Estado: **Formalizado e compilado**. `quasi_error_unc` deduz a cota global de `w
 
 ### 4.6 — imersão e cota de $\omega_1$
 
-Texto: [conjecturas_lp.tex:417](../conjecturas_lp.tex); rótulo `lp:lem:embedding`.
+Texto: [conjecturas_lp.tex:457](../conjecturas_lp.tex); rótulo `lp:lem:embedding`.
 
 Estado: **Formalizado e compilado**. A cota de Besov controla a série telescópica das diferenças de quase-interpolantes. A série fornece o representante contínuo e as estimativas do módulo de primeira ordem.
 
@@ -184,7 +196,7 @@ Estado: **Formalizado e compilado**. A cota de Besov controla a série telescóp
 
 ### 4.7 — interpolação racional com orçamento de altura
 
-Texto: [conjecturas_lp.tex:454](../conjecturas_lp.tex); rótulo `lp:prop:jackson-proof`.
+Texto: [conjecturas_lp.tex:499](../conjecturas_lp.tex); rótulo `lp:prop:jackson-proof`.
 
 Estado: **Formalizado e compilado**. `nodal_tree` constrói o interpolante quantizado sob cotas de altura e de inclinação. A estimativa `lp_jackson_core` aplica essa construção aos valores nodais de $Q_n f$.
 
@@ -196,7 +208,7 @@ Estado: **Formalizado e compilado**. `nodal_tree` constrói o interpolante quant
 
 ### 5.1 — propriedades do módulo em $L^p$
 
-Texto: [conjecturas_lp.tex:497](../conjecturas_lp.tex); rótulo `lp:lem:modulus`.
+Texto: [conjecturas_lp.tex:597](../conjecturas_lp.tex); rótulo `lp:lem:modulus`.
 
 Estado: **Formalizado e compilado**. Para `1 ≤ p` e funções mensuráveis. `modC` mostra que são exatamente os três axiomas do arcabouço abstrato.
 
@@ -208,7 +220,7 @@ Estado: **Formalizado e compilado**. Para `1 ≤ p` e funções mensuráveis. `m
 
 ### 5.2 — desigualdade inversa em $L^p$
 
-Texto: [conjecturas_lp.tex:511](../conjecturas_lp.tex); rótulo `lp:prop:inverse`.
+Texto: [conjecturas_lp.tex:611](../conjecturas_lp.tex); rótulo `lp:prop:inverse`.
 
 Estado: **Formalizado e compilado**. A cota `ω_p(f,1/N) ≤ 4 R_N(f)` vale para toda família de funções mensuráveis; a segunda afirmação usa `0 ∈ G_N`. Também está provada no arcabouço abstrato, em valores reais e em `ℝ≥0∞`, e transferida à instância `L^p`.
 
@@ -220,7 +232,7 @@ Estado: **Formalizado e compilado**. A cota `ω_p(f,1/N) ≤ 4 R_N(f)` vale para
 
 ### 5.3 — inclusão $\mathscr R\subset B$
 
-Texto: [conjecturas_lp.tex:531](../conjecturas_lp.tex); rótulo `lp:cor:inclusion`.
+Texto: [conjecturas_lp.tex:631](../conjecturas_lp.tex); rótulo `lp:cor:inclusion`.
 
 Estado: **Formalizado e compilado**. Vale para `0 < q ≤ ∞`, qualquer família de funções mensuráveis, sem relação com a agenda.
 
@@ -231,7 +243,7 @@ Estado: **Formalizado e compilado**. Vale para `0 < q ≤ ∞`, qualquer famíli
 
 ### 5.4 — critério de somabilidade da agenda
 
-Texto: [conjecturas_lp.tex:543](../conjecturas_lp.tex); rótulo `lp:thm:besov-conditional`.
+Texto: [conjecturas_lp.tex:643](../conjecturas_lp.tex); rótulo `lp:thm:besov-conditional`.
 
 Estado: **Formalizado e compilado, condicional a $J_p$**. `besov_subset_stratum` usa a estimativa de Jackson para a inclusão direta sob o critério de somabilidade. As quatro reduções especializam a agenda.
 
@@ -252,22 +264,35 @@ Estado: **Formalizado e compilado, condicional a $J_p$**. `besov_subset_stratum`
 
 ### 5.5 — transferência da estimativa direta para famílias aninhadas
 
-Texto: [conjecturas_lp.tex:578](../conjecturas_lp.tex); rótulo `lp:thm:stability-conditional`.
+Texto: [conjecturas_lp.tex:678](../conjecturas_lp.tex); rótulo `lp:thm:stability-conditional`.
 
 Estado: **Formalizado e compilado, condicional a $J_p$**. O aproximante de Jackson na escala deslocada fornece a inclusão direta. A desigualdade inversa dá a igualdade nas declarações de estabilidade.
 
-- [`FormalizacaoStab.besov_subset_stratum_fam`](../lean4/formalizacao/Formalizacao/Stability.lean) — linha 33.
-- [`FormalizacaoStab.stability_iff_of_J`](../lean4/formalizacao/Formalizacao/Stability.lean) — linha 161.
-- [`FormalizacaoStab.conj2Stability_endpoint_of_J`](../lean4/formalizacao/Formalizacao/Stability.lean) — linha 274.
-- [`FormalizacaoStab.conj2Stability_subcritical_of_J`](../lean4/formalizacao/Formalizacao/Stability.lean) — linha 278.
-- [`FormalizacaoStab.conj2Stability_critical_of_J`](../lean4/formalizacao/Formalizacao/Stability.lean) — linha 284.
-- [`FormalizacaoStab.conj2Stability_tilde_of_J`](../lean4/formalizacao/Formalizacao/Stability.lean) — linha 291.
+- [`FormalizacaoStab.besov_subset_stratum_fam`](../lean4/formalizacao/Formalizacao/Stability.lean) — linha 182.
+- [`FormalizacaoStab.stability_iff_of_J`](../lean4/formalizacao/Formalizacao/Stability.lean) — linha 225.
+- [`FormalizacaoStab.conj2Stability_endpoint_of_J`](../lean4/formalizacao/Formalizacao/Stability.lean) — linha 338.
+- [`FormalizacaoStab.conj2Stability_subcritical_of_J`](../lean4/formalizacao/Formalizacao/Stability.lean) — linha 342.
+- [`FormalizacaoStab.conj2Stability_critical_of_J`](../lean4/formalizacao/Formalizacao/Stability.lean) — linha 348.
+- [`FormalizacaoStab.conj2Stability_tilde_of_J`](../lean4/formalizacao/Formalizacao/Stability.lean) — linha 355.
 - [`FormalizacaoRed.realP_le_of_approx'`](../lean4/formalizacao/Formalizacao/Reductions.lean) — linha 86.
 - [`FormalizacaoLq.lq_tail_le`](../lean4/formalizacao/Formalizacao/LqLemmas.lean) — linha 233.
 
+### 5.6 — transferência sob inclusão aproximada para $s>1/p$
+
+Texto: [conjecturas_lp.tex:699](../conjecturas_lp.tex); rótulo `lp:thm:approx-transfer`.
+
+Estado: **Formalizado e compilado, condicional a $J_p$**. A desigualdade do módulo soma no máximo $5\varepsilon_n$ ao funcional de realização e preserva a pertinência a $\ell^q$.
+
+- [`FormalizacaoStab.besov_subset_stratum_fam_approx`](../lean4/formalizacao/Formalizacao/Stability.lean) — linha 202.
+- [`FormalizacaoStab.stability_approx_iff_of_J`](../lean4/formalizacao/Formalizacao/Stability.lean) — linha 364.
+- [`FormalizacaoStab.conj2ApproxStability_endpoint_of_J`](../lean4/formalizacao/Formalizacao/Stability.lean) — linha 383.
+- [`FormalizacaoStab.conj2ApproxStability_subcritical_of_J`](../lean4/formalizacao/Formalizacao/Stability.lean) — linha 396.
+- [`FormalizacaoStab.conj2ApproxStability_critical_of_J`](../lean4/formalizacao/Formalizacao/Stability.lean) — linha 419.
+- [`FormalizacaoStab.conj2ApproxStability_tilde_of_J`](../lean4/formalizacao/Formalizacao/Stability.lean) — linha 435.
+
 ### F1 — arcabouço abstrato do módulo, em valores reais
 
-Texto: [conjecturas_lp.tex:601](../conjecturas_lp.tex); rótulo `lp:sec:lean`.
+Texto: [conjecturas_lp.tex:781](../conjecturas_lp.tex); rótulo `lp:sec:lean`.
 
 Estado: **Formalizado e compilado**. Estrutura `ModuloAbs` sobre um espaço seminormado; `ω` real. Serve de modelo para a versão em `ℝ≥0∞`, usada na instância `L^p`.
 
@@ -279,7 +304,7 @@ Estado: **Formalizado e compilado**. Estrutura `ModuloAbs` sobre um espaço semi
 
 ### F2 — arcabouço abstrato em $\mathbb R_{\ge0}^\infty$ e sua instância $L^p$
 
-Texto: [conjecturas_lp.tex:601](../conjecturas_lp.tex); rótulo `lp:sec:lean`.
+Texto: [conjecturas_lp.tex:781](../conjecturas_lp.tex); rótulo `lp:sec:lean`.
 
 Estado: **Formalizado e compilado**. A instância usa o subgrupo `MeasSub` das funções mensuráveis, com `nrm = eLpNorm · p vol01` e `ω = wtP p`. Os teoremas de conexão mostram que `realE`, `stratumE` e `besovE` coincidem com `realP`, `stratumP` e `besovP` para funções mensuráveis.
 
@@ -293,7 +318,7 @@ Estado: **Formalizado e compilado**. A instância usa o subgrupo `MeasSub` das f
 
 ### F3 — Jackson racional com altura explícita sobre dados nodais (Parte IV, Lema IV.4.1)
 
-Texto: [conjecturas_lp.tex:601](../conjecturas_lp.tex); rótulo `lp:sec:lean`.
+Texto: [conjecturas_lp.tex:781](../conjecturas_lp.tex); rótulo `lp:sec:lean`.
 
 Estado: **Formalizado e compilado**. O núcleo `jackson_nodal` aceita dados nodais $y_j$ com erro nodal controlado. A forma para dados pontuais recupera a estimativa de Jackson da Parte IV.
 
@@ -304,7 +329,7 @@ Estado: **Formalizado e compilado**. O núcleo `jackson_nodal` aceita dados noda
 
 ### F4 — Arcabouço abstrato instanciado em $L^\infty$ (Parte IV)
 
-Texto: [conjecturas_lp.tex:601](../conjecturas_lp.tex); rótulo `lp:sec:lean`.
+Texto: [conjecturas_lp.tex:781](../conjecturas_lp.tex); rótulo `lp:sec:lean`.
 
 Estado: **Formalizado e compilado**. O segundo módulo e a norma uniforme da Parte IV satisfazem os três axiomas; a desigualdade inversa e a inclusão $\mathscr R\subset B$ em $L^\infty$ são reobtidas dos teoremas abstratos.
 
@@ -320,6 +345,6 @@ Estado: **Formalizado e compilado**. O segundo módulo e a norma uniforme da Par
 
 | Estado | Entradas |
 |---|---|
-| Formalizado e compilado | 17 |
+| Formalizado e compilado | 18 |
 | Formalizado (definição) | 5 |
-| Formalizado e compilado, condicional a $J_p$ | 2 |
+| Formalizado e compilado, condicional a $J_p$ | 3 |

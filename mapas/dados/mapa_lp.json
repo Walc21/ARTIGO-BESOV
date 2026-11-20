@@ -155,7 +155,7 @@
       "titulo": "caracterização de Besov por realização aritmética",
       "rotulo": "lp:conj:besov",
       "estado": "Formalizado e compilado",
-      "nota": "As quatro declarações cobrem as agendas e os regimes do artigo para $1\\le p<\\infty$ e $1/p<s$. O artigo toma $s<2$ para a caracterização clássica de Besov pelo módulo de ordem dois.",
+      "nota": "As quatro declarações cobrem o item (i) do teorema, isto é, as agendas e os regimes para $1\\le p<\\infty$ e $1/p<s<2$. Os itens (ii) e (iii) ($s\\le1/p$) **não estão formalizados**.",
       "lean": [
         {
           "nome": "FormalizacaoLp.Conj1Endpoint",
@@ -199,7 +199,7 @@
       "titulo": "estabilidade por inclusão de redes",
       "rotulo": "lp:conj:stability",
       "estado": "Formalizado e compilado",
-      "nota": "As quatro declarações dão a estabilidade por inclusão para as agendas e os regimes do Teorema 3.1, com constante real $c\\ge1$.",
+      "nota": "As quatro declarações dão a estabilidade por inclusão para as agendas e os regimes do item (i) do Teorema 3.1 ($1/p<s<2$), com constante real $c\\ge1$. O caso $s\\le1/p$ não está formalizado.",
       "lean": [
         {
           "nome": "FormalizacaoLp.Conj2Stability",
@@ -223,6 +223,40 @@
         },
         {
           "nome": "FormalizacaoJ.conj2_tilde",
+          "arquivo": "../lean4/formalizacao/Formalizacao/LpJackson3.lean",
+          "nota": ""
+        }
+      ]
+    },
+    {
+      "id": "3.3",
+      "titulo": "estabilidade por inclusão aproximada",
+      "rotulo": "lp:thm:approx-stability",
+      "estado": "Formalizado e compilado",
+      "nota": "As quatro declarações cobrem o regime $1/p<s<2$, com erro de aproximação $(\\varepsilon_N)$ em $L^p$ tal que $(2^{rs}\\varepsilon_{2^r})_{r\\ge1}\\in\\ell^q$. O caso $s\\le1/p$ não está formalizado.",
+      "lean": [
+        {
+          "nome": "FormalizacaoLp.Conj2ApproxStability",
+          "arquivo": "../lean4/formalizacao/Formalizacao/LpDefs.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoJ.conj2_approx_endpoint",
+          "arquivo": "../lean4/formalizacao/Formalizacao/LpJackson3.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoJ.conj2_approx_subcritical",
+          "arquivo": "../lean4/formalizacao/Formalizacao/LpJackson3.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoJ.conj2_approx_critical",
+          "arquivo": "../lean4/formalizacao/Formalizacao/LpJackson3.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoJ.conj2_approx_tilde",
           "arquivo": "../lean4/formalizacao/Formalizacao/LpJackson3.lean",
           "nota": ""
         }
@@ -772,6 +806,45 @@
         {
           "nome": "FormalizacaoLq.lq_tail_le",
           "arquivo": "../lean4/formalizacao/Formalizacao/LqLemmas.lean",
+          "nota": ""
+        }
+      ]
+    },
+    {
+      "id": "5.6",
+      "titulo": "transferência sob inclusão aproximada para $s>1/p$",
+      "rotulo": "lp:thm:approx-transfer",
+      "estado": "Formalizado e compilado, condicional a $J_p$",
+      "nota": "A desigualdade do módulo soma no máximo $5\\varepsilon_n$ ao funcional de realização e preserva a pertinência a $\\ell^q$.",
+      "lean": [
+        {
+          "nome": "FormalizacaoStab.besov_subset_stratum_fam_approx",
+          "arquivo": "../lean4/formalizacao/Formalizacao/Stability.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoStab.stability_approx_iff_of_J",
+          "arquivo": "../lean4/formalizacao/Formalizacao/Stability.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoStab.conj2ApproxStability_endpoint_of_J",
+          "arquivo": "../lean4/formalizacao/Formalizacao/Stability.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoStab.conj2ApproxStability_subcritical_of_J",
+          "arquivo": "../lean4/formalizacao/Formalizacao/Stability.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoStab.conj2ApproxStability_critical_of_J",
+          "arquivo": "../lean4/formalizacao/Formalizacao/Stability.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoStab.conj2ApproxStability_tilde_of_J",
+          "arquivo": "../lean4/formalizacao/Formalizacao/Stability.lean",
           "nota": ""
         }
       ]

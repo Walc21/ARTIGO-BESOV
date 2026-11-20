@@ -42,6 +42,11 @@ prova mais do que o texto afirma) ou **a corrigir**.
 | Conj. 1, `s≥1` | `1≤s<2`, `κ>1/q`, `H_{s,κ}` | `conj1_critical` (sem `s<2`) | **mais geral** (`s<2` não é usado) |
 | Conj. 1, `H̃` | enunciado no regime `1/p<s<2`, `0<q<∞`, `η>0` | `conj1_tilde` (com `hs2 : s < 2`, como no artigo) | fiel |
 | Conj. 2 | família aninhada, contém `Σ^H_{⌈cN⌉}`, `c≥1` | `conj2_endpoint`, `_subcritical`, `_critical`, `_tilde` (este último com `hs2 : s < 2`) | fiel |
+| Estabilidade aproximada | inclusão aproximada em `L^p` com `(2^{rs}ε_{2^r}) ∈ ℓ^q` | `conj2_approx_endpoint`, `_subcritical`, `_critical`, `_tilde` | fiel |
+
+## Escopo
+
+Os resultados do artigo para `s ≤ 1/p` (Teorema 3.1, itens (ii) e (iii), Teorema 3.2 nesse regime, Lema 4.8 a Teorema 4.10 e Proposição 5.6) **não têm contrapartida em Lean**. Esta auditoria cobre apenas o regime `1/p < s < 2`.
 
 ## Achados
 

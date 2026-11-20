@@ -40,6 +40,8 @@ e nunca `sorryAx`. Executar: `lake env lean Formalizacao/Auditoria.lean`.
 #print axioms FormalizacaoStab.conj2Stability_subcritical_of_J
 #print axioms FormalizacaoStab.conj2Stability_critical_of_J
 #print axioms FormalizacaoStab.conj2Stability_tilde_of_J
+#print axioms FormalizacaoStab.besov_subset_stratum_fam_approx
+#print axioms FormalizacaoStab.stability_approx_iff_of_J
 
 -- M4: projeção afim local, Hölder, quase-interpolante e erro local
 #print axioms FormalizacaoQuasi.abs_kL_le
@@ -112,6 +114,10 @@ e nunca `sorryAx`. Executar: `lake env lean Formalizacao/Auditoria.lean`.
 #print axioms FormalizacaoJ.conj2_subcritical
 #print axioms FormalizacaoJ.conj2_critical
 #print axioms FormalizacaoJ.conj2_tilde
+#print axioms FormalizacaoJ.conj2_approx_endpoint
+#print axioms FormalizacaoJ.conj2_approx_subcritical
+#print axioms FormalizacaoJ.conj2_approx_critical
+#print axioms FormalizacaoJ.conj2_approx_tilde
 #print axioms FormalizacaoJ.Q_node
 #print axioms FormalizacaoJ.lam_congr_ae
 #print axioms FormalizacaoJ.nodal_G
