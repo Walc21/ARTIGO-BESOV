@@ -209,3 +209,35 @@ e nunca `sorryAx`. Executar: `lake env lean Formalizacao/Auditoria.lean`.
 #print axioms FormalizacaoLogLog.logLog_schedule_ratio_tendsto_zero
 #print axioms FormalizacaoIterated.bertrand_summable_iff
 #print axioms FormalizacaoIterated.iterated_schedule_iff
+
+/-! ## Auditoria de 20/11/2026: altura aritmética em Besov (`AlturaXxx.lean`) -/
+-- Biblioteca e última folha
+#print axioms FormalizacaoAltura.terminal_affine
+#print axioms FormalizacaoAltura.classNH_lipschitz
+-- Funções-teste e cotas de Besov
+#print axioms FormalizacaoAltura.wtP_bumpS_le
+#print axioms FormalizacaoAltura.eLpNorm_bumpS_le
+#print axioms FormalizacaoAltura.besovNorm_bumpS_le
+-- Pisos geométrico e de inclinação
+#print axioms FormalizacaoAltura.L1_affine_lower
+#print axioms FormalizacaoAltura.kappaB_pos
+#print axioms FormalizacaoAltura.geometric_floor
+#print axioms FormalizacaoAltura.two_interval_pointwise
+#print axioms FormalizacaoAltura.slope_floor
+-- Necessidade (erro e realização) e transferência
+#print axioms FormalizacaoAltura.geometric_necessity
+#print axioms FormalizacaoAltura.slope_necessity
+#print axioms FormalizacaoAltura.arithmetic_necessity
+#print axioms FormalizacaoAltura.bestError_le_realP
+#print axioms FormalizacaoAltura.realP_le_bestError_add
+#print axioms FormalizacaoAltura.geometric_necessity_realP
+#print axioms FormalizacaoAltura.slope_necessity_realP
+-- Quantização com salto J
+#print axioms FormalizacaoAltura.quantization_jump
+-- Altura linear crítica
+#print axioms FormalizacaoCrit.nodal_jump
+#print axioms FormalizacaoCrit.critical_approx
+#print axioms FormalizacaoCrit2.critical_level
+#print axioms FormalizacaoCrit3.critical_lq
+#print axioms FormalizacaoCrit3.critical_rate
+#print axioms FormalizacaoCrit3.critical_char_radius
