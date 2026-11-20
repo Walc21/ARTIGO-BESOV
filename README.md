@@ -10,7 +10,7 @@
 
 Victor Gabriel de Oliveira · 19 de novembro de 2026
 
-[Ler o artigo](conjecturas_lp.pdf) · [Explorar o mapa TeX–Lean](mapas/MAPA_TEX_LEAN.md) · [Compilar e verificar](#como-verificar-de-forma-independente)
+[Original revisado](conjecturas_lp.pdf) · [Edição ABNT](conjecturas_lp_abnt.pdf) · [English edition](conjecturas_lp_en.pdf) · [Explorar o mapa TeX–Lean](mapas/MAPA_TEX_LEAN.md) · [Compilar e verificar](#como-verificar-de-forma-independente)
 
 ## Resultados do artigo
 
@@ -27,7 +27,9 @@ O apêndice do artigo descreve a formalização em Lean 4 e a correspondência e
 
 | Caminho | Descrição |
 |---|---|
-| [PDF](conjecturas_lp.pdf) · [Fonte LaTeX](conjecturas_lp.tex) | Artigo e apêndice sobre a formalização. |
+| [PDF](conjecturas_lp.pdf) · [Fonte LaTeX](conjecturas_lp.tex) | Edição original revisada, com apêndice sobre a formalização. |
+| [PDF ABNT](conjecturas_lp_abnt.pdf) · [Fonte LaTeX](conjecturas_lp_abnt.tex) | Edição em português no formato ABNT para artigo científico. |
+| [PDF em inglês](conjecturas_lp_en.pdf) · [Fonte LaTeX](conjecturas_lp_en.tex) | Tradução integral da edição original para o inglês. |
 | [`lean4/formalizacao/`](lean4/formalizacao/) | Projeto Lake com Lean 4.28.0 e Mathlib v4.28.0. |
 | [`Formalizacao.lean`](lean4/formalizacao/Formalizacao.lean) · [`Formalizacao/`](lean4/formalizacao/Formalizacao/) | Ponto de entrada e módulos com as demonstrações principais. |
 | [`Pendencias/`](lean4/formalizacao/Pendencias/) · [`RequestProject/`](lean4/formalizacao/RequestProject/) | Módulos auxiliares dos quais `Formalizacao` depende. |
@@ -43,17 +45,18 @@ git clone https://github.com/Walc21/ARTIGO-BESOV.git
 cd ARTIGO-BESOV
 ```
 
-### 1. Compilar o artigo
+### 1. Compilar os PDFs
 
-Use TeX Live com `pdflatex`, `cleveref`, `tgtermes`, `lmodern` e suporte a português no `babel`. Em Debian e Ubuntu, instale `texlive-latex-base`, `texlive-latex-extra`, `texlive-fonts-recommended`, `texlive-lang-portuguese`, `tex-gyre` e `lmodern`.
+Use uma versão recente do TeX Live com `latexmk`, `pdflatex`, `babel` com suporte a português e inglês, as fontes Latin Modern e TeX Gyre e os pacotes indicados em [conjecturas_lp_estilo.sty](conjecturas_lp_estilo.sty). Em Debian e Ubuntu, a lista de pacotes inclui `latexmk`, `texlive-latex-base`, `texlive-latex-extra`, `texlive-fonts-recommended`, `texlive-lang-portuguese`, `tex-gyre` e `lmodern`.
 
 ```bash
-pdflatex -halt-on-error -interaction=nonstopmode conjecturas_lp.tex
-pdflatex -halt-on-error -interaction=nonstopmode conjecturas_lp.tex
-pdflatex -halt-on-error -interaction=nonstopmode conjecturas_lp.tex
+latexmk -pdf -interaction=nonstopmode -halt-on-error \
+  conjecturas_lp.tex conjecturas_lp_abnt.tex conjecturas_lp_en.tex
 ```
 
-O PDF é gerado na raiz. Em uma compilação do zero, as três passagens resolvem as referências cruzadas.
+Os PDFs são gerados na raiz. O `latexmk` repete a compilação até resolver as referências cruzadas. A edição ABNT carrega a fonte em português, e as três versões compartilham o estilo, os dados de citação e a bibliografia.
+
+A edição ABNT segue a NBR 6022:2018 para a estrutura do artigo, a NBR 6024:2012 para as seções, a NBR 6028:2021 para os resumos, a NBR 10520:2023 para as citações e a NBR 6023:2025 para as referências. Os campos de contato e das datas oficiais de submissão e aprovação estão em [conjecturas_lp_abnt.tex](conjecturas_lp_abnt.tex) e aguardam esses dados.
 
 ### 2. Instalar o Lean
 

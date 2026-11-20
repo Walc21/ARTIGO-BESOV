@@ -1,0 +1,314 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{conjecturas_lp_estilo}[2026/11/20 Estilo do artigo de Besov]
+
+\newif\ifbesovabnt
+\newif\ifbesovenglish
+\DeclareOption{abnt}{\besovabnttrue}
+\DeclareOption{english}{\besovenglishtrue}
+\ProcessOptions\relax
+
+\RequirePackage[a4paper,hmargin=2.65cm,vmargin=2.45cm,footskip=1.1cm]{geometry}
+\ifbesovabnt
+  \geometry{left=3cm,right=2cm,top=3cm,bottom=2cm}
+\fi
+\RequirePackage[T1]{fontenc}
+\RequirePackage{lmodern,tgtermes}
+\RequirePackage{babel}
+\ifbesovenglish
+  \babelprovide[import,main]{english}
+\else
+  \babelprovide[import,main]{portuguese}
+  \babelprovide[import]{english}
+\fi
+\RequirePackage{amsmath,amssymb,amsthm,mathtools,mathrsfs}
+\RequirePackage{microtype,booktabs,tabularx,array,longtable,float,enumitem,etoolbox,needspace}
+\RequirePackage[table]{xcolor}
+\RequirePackage{titlesec,tcolorbox,xurl}
+\RequirePackage{hyperref,bookmark}
+\RequirePackage[nameinlink,noabbrev]{cleveref}
+
+\definecolor{besovInk}{HTML}{17354A}
+\definecolor{besovRule}{HTML}{A3B7C5}
+\definecolor{besovTint}{HTML}{F0F5F8}
+\definecolor{besovStripe}{HTML}{F5F7F9}
+\hypersetup{hidelinks,pdfauthor={Victor Gabriel de Oliveira},bookmarksnumbered,
+  pdflang={\ifbesovenglish en\else pt-BR\fi}}
+\ifbesovabnt
+  \colorlet{besovInk}{black}
+  \colorlet{besovRule}{black}
+\else
+  \RequirePackage{tgheros}
+  \linespread{1.08}
+\fi
+
+\setlength{\parindent}{1.25em}
+\setlength{\emergencystretch}{1.5em}
+\setlength{\LTleft}{0pt}
+\setlength{\LTright}{0pt}
+\setlength{\LTcapwidth}{\textwidth}
+\setlength{\LTpre}{9pt plus 2pt}
+\setlength{\LTpost}{9pt plus 2pt}
+\raggedbottom
+\setlist{nosep,leftmargin=2em}
+\renewcommand{\arraystretch}{1.19}
+\widowpenalty=10000
+\clubpenalty=10000
+\displaywidowpenalty=10000
+\allowdisplaybreaks[1]
+\def\ps@plain{%
+  \let\@oddhead\@empty
+  \let\@evenhead\@empty
+  \def\@oddfoot{\hfil\small\thepage\hfil}%
+  \let\@evenfoot\@oddfoot
+}
+
+\newcommand{\besovheading}{\bfseries\color{besovInk}\ifbesovabnt\else\sffamily\fi}
+\titleformat{\section}{\large\besovheading}{\thesection}{0.65em}{}
+\titleformat{\subsection}{\normalsize\besovheading}{\thesubsection}{0.65em}{}
+\ifbesovabnt
+  \titleformat{name=\section,numberless}{\centering\large\besovheading}{}{0pt}{}
+\fi
+\titlespacing*{\section}{0pt}{2.4ex plus .6ex minus .2ex}{1.05ex plus .2ex}
+\titlespacing*{\subsection}{0pt}{2.1ex plus .4ex minus .2ex}{.8ex plus .2ex}
+
+\newcommand{\articletitle}[4]{%
+  \thispagestyle{plain}%
+  \begingroup
+  \parindent=0pt
+  \ifbesovabnt
+    \centering{\Large\bfseries #1\par}%
+    \smallskip
+    \foreignlanguage{english}{\textit{#4}}\par
+    \medskip Victor Gabriel de Oliveira\par
+    {\small #2\par}%
+  \else
+    \noindent{\color{besovRule}\rule{\linewidth}{.8pt}}\par
+    \vspace{.75em}%
+    {\raggedright\LARGE\besovheading #1\par}%
+    \medskip
+    {\large Victor Gabriel de Oliveira\par}%
+    \smallskip
+    {\small #2 \enspace\textperiodcentered\enspace #3\par}%
+  \fi
+  \endgroup
+  \medskip
+}
+\newcommand{\articleabstract}[5]{%
+  \begin{otherlanguage}{#1}%
+  \pdfbookmark[1]{#2}{besov.#1.abstract}%
+  \ifbesovabnt
+    \section*{#2}%
+    \noindent #3\par
+    \smallskip
+    \noindent\textbf{#4:} #5\par
+  \else
+    \begin{tcolorbox}[colback=besovTint,colframe=besovRule,boxrule=0pt,
+      leftrule=1.5pt, sharp corners,boxsep=0pt,left=12pt,right=12pt,
+      top=9pt,bottom=9pt,before skip=8pt,after skip=8pt]
+      {\besovheading #2\par}\smallskip
+      \small\noindent #3\par
+      \smallskip
+      \footnotesize\noindent{\besovheading #4}\enspace #5
+    \end{tcolorbox}%
+  \fi
+  \end{otherlanguage}%
+}
+
+\theoremstyle{plain}
+\ifbesovenglish
+  \newtheorem{teorema}{Theorem}[section]
+  \newtheorem{lema}[teorema]{Lemma}
+  \newtheorem{proposicao}[teorema]{Proposition}
+  \newtheorem{corolario}[teorema]{Corollary}
+  \theoremstyle{definition}
+  \newtheorem{definicao}[teorema]{Definition}
+  \theoremstyle{remark}
+  \newtheorem{observacao}[teorema]{Remark}
+  \newcommand{\articleand}{ and }
+  \newcommand{\articlecontinued}{continued}
+  \newcommand{\articleReferences}{References}
+  \newcommand{\articletablename}{Table}
+  \crefname{teorema}{theorem}{theorems}
+  \Crefname{teorema}{Theorem}{Theorems}
+  \crefname{lema}{lemma}{lemmas}
+  \Crefname{lema}{Lemma}{Lemmas}
+  \crefname{proposicao}{proposition}{propositions}
+  \Crefname{proposicao}{Proposition}{Propositions}
+  \crefname{corolario}{corollary}{corollaries}
+  \Crefname{corolario}{Corollary}{Corollaries}
+  \crefname{definicao}{definition}{definitions}
+  \Crefname{definicao}{Definition}{Definitions}
+  \crefname{observacao}{remark}{remarks}
+  \Crefname{observacao}{Remark}{Remarks}
+\else
+  \newtheorem{teorema}{Teorema}[section]
+  \newtheorem{lema}[teorema]{Lema}
+  \newtheorem{proposicao}[teorema]{Proposição}
+  \newtheorem{corolario}[teorema]{Corolário}
+  \theoremstyle{definition}
+  \newtheorem{definicao}[teorema]{Definição}
+  \theoremstyle{remark}
+  \newtheorem{observacao}[teorema]{Observação}
+  \AtBeginDocument{\renewcommand{\proofname}{Demonstração}}
+  \newcommand{\articleand}{ e }
+  \newcommand{\articlecontinued}{continuação}
+  \newcommand{\articleReferences}{Referências}
+  \newcommand{\articletablename}{Tabela}
+  \crefname{section}{seção}{seções}
+  \Crefname{section}{Seção}{Seções}
+  \crefname{appendix}{apêndice}{apêndices}
+  \Crefname{appendix}{Apêndice}{Apêndices}
+  \crefname{teorema}{teorema}{teoremas}
+  \Crefname{teorema}{Teorema}{Teoremas}
+  \crefname{lema}{lema}{lemas}
+  \Crefname{lema}{Lema}{Lemas}
+  \crefname{proposicao}{proposição}{proposições}
+  \Crefname{proposicao}{Proposição}{Proposições}
+  \crefname{corolario}{corolário}{corolários}
+  \Crefname{corolario}{Corolário}{Corolários}
+  \crefname{definicao}{definição}{definições}
+  \Crefname{definicao}{Definição}{Definições}
+  \crefname{observacao}{observação}{observações}
+  \Crefname{observacao}{Observação}{Observações}
+  \crefname{subsection}{subseção}{subseções}
+  \Crefname{subsection}{Subseção}{Subseções}
+  \crefname{table}{tabela}{tabelas}
+  \Crefname{table}{Tabela}{Tabelas}
+\fi
+\AtBeginDocument{%
+  \renewcommand{\tablename}{\articletablename}%
+  \renewcommand{\crefpairconjunction}{\articleand}%
+  \renewcommand{\creflastconjunction}{\articleand}%
+}
+\numberwithin{equation}{section}
+
+\newcommand{\articleappendix}{%
+  \par\Needspace{6\baselineskip}%
+  \appendix
+  \ifbesovabnt
+    \titleformat{\section}[block]{\centering\large\besovheading}%
+      {Apêndice \thesection\space\textendash}{.55em}{}%
+  \else
+    \titleformat{\section}[hang]{\large\besovheading}%
+      {\appendixname~\thesection\space\textendash}{.55em}{}%
+  \fi
+}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcommand{\tablehead}[1]{{\besovheading #1}}
+\newcommand{\tablecolors}{%
+  \ifbesovabnt\else\arrayrulecolor{besovRule}\rowcolors{1}{white}{besovStripe}\fi
+}
+\newcommand{\tablecredit}{%
+  \ifbesovabnt\smallskip\noindent Fonte: elaboração própria.\par\fi
+}
+\long\def\@makecaption#1#2{%
+  \vskip\abovecaptionskip
+  {\small\raggedright\textbf{#1}\enspace\textendash\enspace #2\par}%
+  \vskip\belowcaptionskip
+}
+\setlength{\abovecaptionskip}{4pt}
+\setlength{\belowcaptionskip}{6pt}
+\renewcommand{\LT@makecaption}[3]{%
+  \LT@mcol\LT@cols{@{}l@{}}{\parbox[t]{\LTcapwidth}{%
+    \small\raggedright\strut #1{\textbf{#2}\enspace\textendash\enspace}#3\strut\par
+    \vspace{4pt}}}%
+}
+\ifbesovabnt
+  \newcounter{quadro}
+  \newcommand{\ext@quadro}{loq}
+  \newcommand{\fnum@quadro}{Quadro~\thequadro}
+  \crefname{quadro}{quadro}{quadros}
+  \Crefname{quadro}{Quadro}{Quadros}
+\fi
+% Os argumentos mantêm as duas colunas e as legendas de continuação alinhadas.
+\NewDocumentEnvironment{leantable}{mmmmb}{%
+  \begingroup\small
+  \ifbesovabnt\renewcommand{\LTcaptype}{quadro}\fi
+  \setlength{\tabcolsep}{5pt}
+  \renewcommand{\arraystretch}{\ifbesovabnt 1.13\else 1.28\fi}
+  \tablecolors
+  \begin{longtable}{L{.32\linewidth}L{\dimexpr.68\linewidth-4\tabcolsep\relax}}
+  \caption{#1}\label{#2}\\
+  \toprule
+  \tablehead{#3} & \tablehead{#4}\\
+  \midrule
+  \endfirsthead
+  \caption[]{#1\space(\articlecontinued)}\\
+  \toprule
+  \tablehead{#3} & \tablehead{#4}\\
+  \midrule
+  \endhead
+  \midrule
+  \endfoot
+  \bottomrule
+  \ifbesovabnt
+    \multicolumn{2}{@{}l@{}}{\small Fonte: elaboração própria.}\\
+  \fi
+  \endlastfoot
+  #5
+  \end{longtable}
+  \endgroup
+}{}
+
+\newcommand{\N}{\mathbb N}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\R}{\mathbb R}
+\newcommand{\Aclass}{\mathcal A}
+\newcommand{\Library}{\mathcal L}
+\newcommand{\height}{\operatorname{ht}}
+\newcommand{\wt}[3]{\omega_2(#1,#2)_{#3}}
+\newcommand{\Bes}[3]{B^{#1}_{#2,#3}}
+\newcommand{\Rfun}[2]{\mathcal R^{#1}_{#2}}
+\newcommand{\Rstr}[3]{\mathscr R^{#1}_{#2}(#3)}
+\newcommand{\Sig}[1]{\Sigma_{#1}^{\Library,H}}
+\newcommand{\dd}{\,\mathrm{d}}
+\newcommand{\code}[1]{\nolinkurl{#1}}
+\newcommand{\leanname}[1]{\mbox{\code{#1}}}
+
+% Citações autor-data e destinos da lista de referências.
+\newcommand{\abntentry}[4]{\csdef{abU@#1}{#2}\csdef{abN@#1}{#3}\csdef{abY@#1}{#4}}
+\newcommand{\abntlookup}[2]{\ifcsdef{ab#1@#2}{\csuse{ab#1@#2}}{\textbf{??}\PackageWarning{conjecturas_lp_estilo}{Undefined citation #2}}}
+\newcommand{\abntpar}[1]{\hyperlink{bib:#1}{\abntlookup{U}{#1}, \abntlookup{Y}{#1}}}
+\newcommand{\abntsep}{}
+\newcommand{\abntpitem}[1]{\abntsep\renewcommand{\abntsep}{; }\abntpar{#1}}
+\newcommand{\citep}[2][]{\begingroup\renewcommand{\abntsep}{}(\forcsvlist{\abntpitem}{#2}\ifblank{#1}{}{, #1})\endgroup}
+\newcount\abntn \newcount\abnti
+\newcommand{\abntcnt}[1]{\advance\abntn by 1 }
+\newcommand{\abnttitem}[1]{\advance\abnti by 1 \ifnum\abnti>1 \ifnum\abnti=\abntn{}\articleand\else, \fi\fi
+ \hyperlink{bib:#1}{\abntlookup{N}{#1}} (\hyperlink{bib:#1}{\abntlookup{Y}{#1}}\ifnum\abnti=\abntn\abntoptc\fi)}
+\newcommand{\citet}[2][]{\begingroup\ifblank{#1}{\def\abntoptc{}}{\def\abntoptc{, #1}}\abntn=0 \forcsvlist{\abntcnt}{#2}\abnti=0 \forcsvlist{\abnttitem}{#2}\endgroup}
+\newcommand{\abntref}[2]{\par\begingroup\interlinepenalty=10000\relax\hypertarget{bib:#1}{}#2\par\endgroup}
+\newcommand{\articlereferences}{%
+  \ifbesovenglish\clearpage\fi
+  \Needspace{10\baselineskip}%
+  \phantomsection
+  \section*{\articleReferences}%
+  \addcontentsline{toc}{section}{\articleReferences}%
+  \begingroup
+  \raggedright
+  \setlength{\parindent}{0pt}%
+  \ifbesovabnt
+    \setlength{\parskip}{\baselineskip}%
+  \else
+    \small\setlength{\parskip}{4pt plus 1pt}%
+  \fi
+  \input{conjecturas_lp_referencias.tex}%
+  \par\endgroup
+}
+
+\newcommand{\preprintlink}[1]{%
+  \ifbesovabnt
+    Disponível em: \url{https://arxiv.org/abs/#1}. Acesso em: 20 nov. 2026.%
+  \else
+    \url{https://arxiv.org/abs/#1}.%
+  \fi
+}
+
+\newcommand{\refdoi}[1]{%
+  \ifbesovabnt
+    \url{https://doi.org/#1}%
+  \else
+    \href{https://doi.org/#1}{\nolinkurl{#1}}%
+  \fi
+}
