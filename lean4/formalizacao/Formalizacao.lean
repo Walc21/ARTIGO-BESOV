@@ -42,6 +42,16 @@ import Formalizacao.LpJackson4
 import Formalizacao.Kernel
 import Formalizacao.ModuloInf
 
+import Formalizacao.LowNodal
+import Formalizacao.LowJackson
+import Formalizacao.LowSum
+import Formalizacao.LowSup
+import Formalizacao.LowJackson2
+import Formalizacao.LowTransfer
+import Formalizacao.LowWeights
+import Formalizacao.LowShift
+import Formalizacao.LowTheorems
+
 /-!
 # Formalização do artigo «Funcional de realização aritmético em `L^p`»
 

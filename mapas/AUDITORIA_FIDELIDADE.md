@@ -43,6 +43,20 @@ prova mais do que o texto afirma) ou **a corrigir**.
 | Conj. 1, `H̃` | enunciado no regime `1/p<s<2`, `0<q<∞`, `η>0` | `conj1_tilde` (com `hs2 : s < 2`, como no artigo) | fiel |
 | Conj. 2 | família aninhada, contém `Σ^H_{⌈cN⌉}`, `c≥1` | `conj2_endpoint`, `_subcritical`, `_critical`, `_tilde` (este último com `hs2 : s < 2`) | fiel |
 
+## Escopo
+
+Os resultados para `s ≤ 1/p` (Teorema 3.1, itens (ii) e (iii), Teorema 3.2 nesse regime, Lema 4.8, Lema 4.9, Teorema 4.10 e Proposição 5.6) estão formalizados em `Formalizacao/Low*.lean`; a correspondência está em `MAPA_TEX_LEAN.md`.
+
+| Resultado | Texto | Lean | Veredito |
+|---|---|---|---|
+| Lema 4.8 (nodal sem saltos) | `Q = 2^e ≥ n`, `H ≥ 8(M+1)Q`, erro `≤ 1/(2Q)` | `nodal_tree_gen`, `lp_jackson_low_core` | fiel |
+| Lema 4.9 (cota em sup) | `‖Q_n f‖_∞ ≤ C_0 S Λ_n`, `C_0 = C_0(p,s,q)` | `lam_bound`: `∃ K ≥ 1` (depende de `f`) com `|λ_j(f)| ≤ K Λ_r` | **diferença documentada** (constante dependente de `f`; basta para os teoremas) |
+| Teorema 4.10 (Jackson `s ≤ 1/p`) | `H ≥ 8 C_0 (S+1) Λ_n Q` | `jackson_low`: `H ≥ 8 (K Λ_r + 1) 2^e`, `C_W`, `K` dependentes de `f` | **diferença documentada** (mesma razão) |
+| Prop. 5.6 (transferência) | deslocamento `d` com `K Λ_n Q(n) ≤ H(dn)` | `besov_subset_stratum_low` com `hshift`, `m = 0` ou `mDiag κ` | fiel |
+| Teorema 3.1 (ii) | `0 < s < 1/p`, `Ĥ_s` | `conj1_low` (`s < 1/p`, sem exigir `s > 0`), agenda `Hsk (1 + 1/p - s) 0` | **mais geral** em `s` |
+| Teorema 3.1 (iii) | `s = 1/p`, `Ĥ_{q,κ}`, `κ > 1/q` se `p = 1`, `q < ∞` | `conj1_diag`, agenda `Hsk 1 (thetaQ q + κ)` | fiel |
+| Teorema 3.2 (`s ≤ 1/p`) | família aninhada, `c ≥ 1` | `conj2_low`, `conj2_diag` | fiel (famílias mensuráveis, como no regime `s > 1/p`) |
+
 ## Achados
 
 1. **Mensurabilidade das famílias (Conj. 2)**: as famílias do texto são subconjuntos de `C([0,1])`, logo mensuráveis; a exigência Lean não enfraquece o teorema para elas. **Aplicado no artigo** (apêndice, §Representação dos objetos e dos teoremas): a frase agora explica que a exigência não restringe o enunciado.
