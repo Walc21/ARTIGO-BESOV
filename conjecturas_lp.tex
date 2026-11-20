@@ -1,133 +1,52 @@
-\documentclass[11pt,a4paper]{article}
-\usepackage[a4paper,left=3cm,right=2.5cm,top=2.7cm,bottom=2.7cm]{geometry}
-\usepackage[T1]{fontenc}
-\usepackage{lmodern,tgtermes}
-\usepackage{babel}
-\babelprovide[import,main]{portuguese}
-\babelprovide[import]{english}
-\usepackage{amsmath,amssymb,amsthm,mathtools,mathrsfs}
-\usepackage{microtype,booktabs,tabularx,array,enumitem,etoolbox,needspace}
-\usepackage{xurl}
-\usepackage{hyperref}
-\usepackage[nameinlink,noabbrev]{cleveref}
+% Artigo em português; a edição ABNT carrega esta mesma fonte.
+\ifdefined\besovabntedition
+  \documentclass[12pt,a4paper]{article}
+\else
+  \documentclass[11pt,a4paper]{article}
+\fi
+\usepackage{conjecturas_lp_estilo}
+\input{conjecturas_lp_citacoes.tex}
 
-\hypersetup{hidelinks,
+\hypersetup{
   pdftitle={Caracterização dos espaços de Besov em Lp por realização com altura aritmética controlada},
-  pdfauthor={Victor Gabriel de Oliveira},
   pdfsubject={Teoremas de Jackson, espaços de Besov e estabilidade por inclusão de redes ReLU},
-  pdfkeywords={espaços de Besov, aproximação em Lp, altura aritmética, funcional de realização, redes ReLU}}
-\setlength{\parindent}{1.25em}
-\setlength{\emergencystretch}{2em}
-\linespread{1.08}
-\setlist{nosep,leftmargin=2em}
-\renewcommand{\arraystretch}{1.17}
-
-\theoremstyle{plain}
-\newtheorem{teorema}{Teorema}[section]
-\newtheorem{lema}[teorema]{Lema}
-\newtheorem{proposicao}[teorema]{Proposição}
-\newtheorem{corolario}[teorema]{Corolário}
-\theoremstyle{definition}
-\newtheorem{definicao}[teorema]{Definição}
-\theoremstyle{remark}
-\newtheorem{observacao}[teorema]{Observação}
-\renewcommand{\proofname}{Demonstração}
-\numberwithin{equation}{section}
-\crefname{section}{seção}{seções}
-\Crefname{section}{Seção}{Seções}
-\crefname{appendix}{apêndice}{apêndices}
-\Crefname{appendix}{Apêndice}{Apêndices}
-\crefname{teorema}{teorema}{teoremas}
-\Crefname{teorema}{Teorema}{Teoremas}
-\crefname{lema}{lema}{lemas}
-\Crefname{lema}{Lema}{Lemas}
-\crefname{proposicao}{proposição}{proposições}
-\Crefname{proposicao}{Proposição}{Proposições}
-\crefname{corolario}{corolário}{corolários}
-\Crefname{corolario}{Corolário}{Corolários}
-\crefname{definicao}{definição}{definições}
-\Crefname{definicao}{Definição}{Definições}
-\crefname{observacao}{observação}{observações}
-\Crefname{observacao}{Observação}{Observações}
-\crefname{subsection}{subseção}{subseções}
-\Crefname{subsection}{Subseção}{Subseções}
-\newcommand{\crefpairconjunction}{ e }
-\newcommand{\creflastconjunction}{ e }
-
-\newcommand{\N}{\mathbb N}
-\newcommand{\Z}{\mathbb Z}
-\newcommand{\Q}{\mathbb Q}
-\newcommand{\R}{\mathbb R}
-\newcommand{\Aclass}{\mathcal A}
-\newcommand{\Library}{\mathcal L}
-\newcommand{\height}{\operatorname{ht}}
-\newcommand{\wt}[3]{\omega_2(#1,#2)_{#3}}
-\newcommand{\Bes}[3]{B^{#1}_{#2,#3}}
-\newcommand{\Rfun}[2]{\mathcal R^{#1}_{#2}}
-\newcommand{\Rstr}[3]{\mathscr R^{#1}_{#2}(#3)}
-\newcommand{\Sig}[1]{\Sigma_{#1}^{\Library,H}}
-\newcommand{\dd}{\,\mathrm{d}}
-\newcommand{\code}[1]{\nolinkurl{#1}}
-
-% Citações autor-data.
-\newcommand{\abntentry}[4]{\expandafter\gdef\csname abU@#1\endcsname{#2}\expandafter\gdef\csname abN@#1\endcsname{#3}\expandafter\gdef\csname abY@#1\endcsname{#4}}
-\newcommand{\abntlookup}[2]{\ifcsname ab#1@#2\endcsname\csname ab#1@#2\endcsname\else\textbf{??}\PackageWarning{abnt}{Citacao indefinida: #2}\fi}
-\newcommand{\abntpar}[1]{\hyperlink{bib:#1}{\abntlookup{U}{#1}, \abntlookup{Y}{#1}}}
-\newcommand{\abntsep}{}
-\newcommand{\abntpitem}[1]{\abntsep\renewcommand{\abntsep}{; }\abntpar{#1}}
-\newcommand{\citep}[2][]{\begingroup\renewcommand{\abntsep}{}(\forcsvlist{\abntpitem}{#2}\ifblank{#1}{}{, #1})\endgroup}
-\newcount\abntn \newcount\abnti
-\newcommand{\abntcnt}[1]{\advance\abntn by 1 }
-\newcommand{\abnttitem}[1]{\advance\abnti by 1 \ifnum\abnti>1 \ifnum\abnti=\abntn{} e \else, \fi\fi
- \hyperlink{bib:#1}{\abntlookup{N}{#1}} (\hyperlink{bib:#1}{\abntlookup{Y}{#1}}\ifnum\abnti=\abntn\abntoptc\fi)}
-\newcommand{\citet}[2][]{\begingroup\ifblank{#1}{\def\abntoptc{}}{\def\abntoptc{, #1}}\abntn=0 \forcsvlist{\abntcnt}{#2}\abnti=0 \forcsvlist{\abnttitem}{#2}\endgroup}
-\newcommand{\abntref}[2]{\par\begingroup\interlinepenalty=10000\relax\hypertarget{bib:#1}{}#2\par\endgroup}
-\newenvironment{referenciasabnt}{\section*{Referências}\small\raggedright\setlength{\parindent}{0pt}\setlength{\parskip}{6pt plus 1pt}}{}
-\abntentry{artigo_1-devore1998}{DeVore}{DeVore}{1998}
-\abntentry{artigo_1-devore2021}{DeVore; Hanin; Petrova}{DeVore, Hanin e Petrova}{2021}
-\abntentry{artigo_2-devorelorentz1993}{DeVore; Lorentz}{DeVore e Lorentz}{1993}
-\abntentry{artigo_2-devorepopov1988}{DeVore; Popov}{DeVore e Popov}{1988}
-\abntentry{artigo_2-hristovivanov1990}{Hristov; Ivanov}{Hristov e Ivanov}{1990}
-\abntentry{artigo_2-petrushev1988}{Petrushev}{Petrushev}{1988}
-\abntentry{artigo_2-whitney1957}{Whitney}{Whitney}{1957}
-\abntentry{lp-siegel2023}{Siegel}{Siegel}{2023}
-\abntentry{lp-ditzian1987}{Ditzian; Totik}{Ditzian e Totik}{1987}
-\abntentry{lp-oliveiravol}{Oliveira}{Oliveira}{2026}
-\abntentry{lp-ali2020}{Ali; Nouy}{Ali e Nouy}{2020}
-\abntentry{lp-yang2024}{Yang}{Yang}{2024}
-\abntentry{lp-kolomoitsev2019}{Kolomoitsev; Tikhonov}{Kolomoitsev e Tikhonov}{2019}
-\abntentry{lp-ditzian2007}{Ditzian}{Ditzian}{2007}
-\abntentry{lp-lean4}{Moura; Ullrich}{de Moura e Ullrich}{2021}
-\abntentry{lp-mathlib}{Mathlib Community}{The mathlib Community}{2020}
-
-\title{\bfseries Caracterização dos espaços de Besov em \texorpdfstring{$L^p$}{Lp}\\
-por realização com altura aritmética controlada}
-\author{Victor Gabriel de Oliveira\thanks{Pesquisador independente.}}
-\date{19 de novembro de 2026}
+  pdfkeywords={espaços de Besov, aproximação em Lp, altura aritmética, funcional de realização, redes ReLU}
+}
 
 \begin{document}
-\maketitle
+\articletitle{Caracterização dos espaços de Besov em \texorpdfstring{$L^p$}{Lp} por~realização com altura aritmética controlada}
+  {Pesquisador independente\ifbesovabnt
+     \ifdefempty{\besovcontact}{}{\enspace\textperiodcentered\enspace\besovcontact}\fi}
+  {19 de novembro de 2026}
+  {A Realization Characterization of Besov Spaces in \texorpdfstring{$L^p$}{Lp} with Controlled Arithmetic Height}
 
-\begin{abstract}
-Caracterizamos os espaços de Besov $B^s_{p,q}([0,1])$, com $1\le p<\infty$, $0<s<2$ e $0<q\le\infty$, pela somabilidade diádica de um funcional de realização que combina o erro em $L^p$ e o módulo de suavidade de segunda ordem do aproximante. O ínfimo é tomado sobre funções contínuas e afins por partes, com coeficientes racionais, definidas em partições diádicas e sujeitas a orçamentos simultâneos de folhas e altura aritmética. Para $s>1/p$, um teorema de Jackson fornece um aproximante com até $n$ folhas e altura $H$, com erro limitado por $C_p\omega_2(f,n^{-1})_p+16(\|f\|_\infty+1)/H$. A prova combina quase-interpolação por projeções afins locais, uma desigualdade de Whitney em partições e quantização dos valores nodais em grades alternadas. Nesse regime, as agendas de altura são da ordem de $N^{\max\{1,s\}}$ para $q=\infty$ e para $q<\infty$ com $s<1$; para $q<\infty$ e $s\ge1$, basta um fator logarítmico de expoente $\kappa>1/q$. Para $s\le1/p$, onde as classes de Besov contêm funções ilimitadas, uma cota em sup dos quase-interpolantes substitui a imersão contínua, e as agendas são da ordem de $N^{1+1/p-s}$ se $s<1/p$ e de $N$ vezes uma potência de $\log N$ se $s=1/p$. A caracterização permanece válida para toda família aninhada de funções realizadas por redes ReLU que contenha a biblioteca racional após um reescalonamento linear do orçamento, e também quando a família reproduz a biblioteca apenas aproximadamente em $L^p$, com tolerância somável na escala de Besov. Além disso, obtemos cotas uniformes sobre bolas de Besov com uma única agenda, um piso aritmético uniforme em $L^p$, uma descrição dos aproximantes com $O(N\log N)$ bits, ótima a menos de um fator logarítmico, e agendas de log iterado, que reduzem o fator logarítmico crítico à ordem $[\log N]^{1/q}[\log\log N]^{\gamma}$, $\gamma>1/q$.
+\ifbesovabnt
+\articleabstract{portuguese}{Resumo}{%
+Este artigo caracteriza espaços de Besov em $L^p([0,1])$ pela somabilidade diádica de um funcional que combina erro de aproximação e suavidade de segunda ordem. O funcional usa funções contínuas e afins por partes, com coeficientes racionais, em partições diádicas com limites simultâneos para o número de folhas e a altura aritmética. A estimativa direta combina projeções afins locais, uma desigualdade de Whitney e quantização de valores nodais em grades alternadas. Uma cota na norma do supremo para os quase-interpolantes permite tratar também os regimes de baixa regularidade. As estimativas direta e inversa determinam agendas de altura suficientes em cada regime. A caracterização se mantém para famílias aninhadas de redes de unidades lineares retificadas (ReLU) que incluem a biblioteca racional sob reescalonamento linear do orçamento ou a aproximam com tolerância somável na escala de Besov. O estudo também estabelece cotas uniformes sobre bolas de Besov, um piso aritmético em $L^p$ e uma codificação binária cujo comprimento é ótimo a menos de um fator logarítmico. Agendas de altura com logaritmos iterados reduzem o fator logarítmico nas condições críticas de somabilidade.}
+{Palavras-chave}{espaços de Besov; funcional de realização; altura aritmética; teorema de Jackson; redes ReLU.}
 
-\medskip
-\noindent\textbf{Palavras-chave.} Espaços de Besov, funcional de realização, altura aritmética, teorema de Jackson, redes ReLU.
-\end{abstract}
+\articleabstract{english}{Abstract}{%
+This article characterizes Besov spaces in $L^p([0,1])$ through dyadic summability of a functional that combines approximation error with second-order smoothness. The functional uses continuous piecewise affine functions with rational coefficients on dyadic partitions, subject to simultaneous bounds on the number of leaves and arithmetic height. The direct estimate combines local affine projections, a Whitney inequality, and quantization of nodal values on alternating grids. A sup-norm bound for quasi-interpolants also covers the low-regularity regimes. The direct and inverse estimates determine sufficient height schedules in each regime. The characterization extends to nested families of rectified linear unit (ReLU) networks that contain the rational library after a linear rescaling of the budget or approximate it with a tolerance that is summable on the Besov scale. The article also establishes uniform bounds on Besov balls, an arithmetic lower bound in $L^p$, and a binary encoding whose length is optimal up to a logarithmic factor. Height schedules with iterated logarithms reduce the logarithmic factor at critical summability.}
+{Keywords}{Besov spaces; realization functional; arithmetic height; Jackson theorem; ReLU networks.}
 
-\begin{otherlanguage}{english}
-\begin{abstract}
-We characterize the Besov spaces $B^s_{p,q}([0,1])$, for $1\le p<\infty$, $0<s<2$, and $0<q\le\infty$, by the dyadic summability of a realization functional combining the $L^p$ error and the second-order modulus of smoothness of the approximant. The infimum is taken over continuous piecewise affine functions with rational coefficients on dyadic partitions, under simultaneous leaf and arithmetic height budgets. For $s>1/p$, a Jackson theorem gives an approximant with at most $n$ leaves and height $H$, with error bounded by $C_p\omega_2(f,n^{-1})_p+16(\|f\|_\infty+1)/H$. The proof combines quasi-interpolation by local affine projections, a Whitney inequality on partitions, and quantization of nodal values on alternating grids. In this regime, height schedules are of order $N^{\max\{1,s\}}$ for $q=\infty$ and for $q<\infty$ with $s<1$; for $q<\infty$ and $s\ge1$, a logarithmic factor with exponent $\kappa>1/q$ suffices. For $s\le1/p$, where Besov classes contain unbounded functions, a sup-norm bound for the quasi-interpolants replaces the continuous embedding, and the schedules are of order $N^{1+1/p-s}$ if $s<1/p$ and of order $N$ times a power of $\log N$ if $s=1/p$. The characterization extends to every nested family of functions realized by ReLU networks that contains the rational library after a linear rescaling of the budget, and also when the family only reproduces the library approximately in $L^p$, with a tolerance that is summable on the Besov scale. We also obtain uniform bounds on Besov balls under a single schedule, a uniform arithmetic floor in $L^p$, a description of the approximants with $O(N\log N)$ bits, optimal up to a logarithmic factor, and iterated-logarithm schedules that lower the critical logarithmic factor to $[\log N]^{1/q}[\log\log N]^{\gamma}$, $\gamma>1/q$.
+\medskip\noindent{\small
+Versão de 19 de novembro de 2026.\par\noindent
+Submissão: \ifdefempty{\besovsubmitted}{data não informada}{\besovsubmitted}.
+Aprovação: \ifdefempty{\besovaccepted}{data não informada}{\besovaccepted}.\par}
+\else
+\articleabstract{portuguese}{Resumo}{%
+Caracterizamos os espaços de Besov $B^s_{p,q}([0,1])$, com $1\le p<\infty$, $0<s<2$ e $0<q\le\infty$, pela somabilidade diádica de um funcional de realização que combina o erro em $L^p$ e o módulo de suavidade de segunda ordem do aproximante. O ínfimo é tomado sobre funções contínuas e afins por partes, com coeficientes racionais, definidas em partições diádicas e sujeitas a orçamentos simultâneos de folhas e altura aritmética. Para $s>1/p$, um teorema de Jackson fornece um aproximante com até $n$ folhas e altura $H$, com erro limitado por $C_p\omega_2(f,n^{-1})_p+16(\|f\|_\infty+1)/H$. A prova combina quase-interpolação por projeções afins locais, uma desigualdade de Whitney em partições e quantização dos valores nodais em grades alternadas. Nesse regime, as agendas de altura são da ordem de $N^{\max\{1,s\}}$ para $q=\infty$ e para $q<\infty$ com $s<1$; para $q<\infty$ e $s\ge1$, basta um fator logarítmico de expoente $\kappa>1/q$. Para $s\le1/p$, onde as classes de Besov contêm funções ilimitadas, uma cota em sup dos quase-interpolantes substitui a imersão contínua, e as agendas são da ordem de $N^{1+1/p-s}$ se $s<1/p$ e de $N$ vezes uma potência de $\log N$ se $s=1/p$. A caracterização permanece válida para toda família aninhada de funções realizadas por redes ReLU que contenha a biblioteca racional após um reescalonamento linear do orçamento, e também quando a família reproduz a biblioteca apenas aproximadamente em $L^p$, com tolerância somável na escala de Besov. Além disso, obtemos cotas uniformes sobre bolas de Besov com uma única agenda, um piso aritmético uniforme em $L^p$, uma descrição dos aproximantes com $O(N\log N)$ bits, ótima a menos de um fator logarítmico, e agendas de log iterado, que reduzem o fator logarítmico crítico à ordem $[\log N]^{1/q}[\log\log N]^{\gamma}$, $\gamma>1/q$.}
+{Palavras-chave}{Espaços de Besov, funcional de realização, altura aritmética, teorema de Jackson, redes ReLU.}
 
-\medskip
-\noindent\textbf{Keywords.} Besov spaces, realization functional, arithmetic height, Jackson theorem, ReLU networks.
-\end{abstract}
-\end{otherlanguage}
+\articleabstract{english}{Abstract}{%
+We characterize the Besov spaces $B^s_{p,q}([0,1])$, for $1\le p<\infty$, $0<s<2$, and $0<q\le\infty$, by the dyadic summability of a realization functional combining the $L^p$ error and the second-order modulus of smoothness of the approximant. The infimum is taken over continuous piecewise affine functions with rational coefficients on dyadic partitions, under simultaneous leaf and arithmetic height budgets. For $s>1/p$, a Jackson theorem gives an approximant with at most $n$ leaves and height $H$, with error bounded by $C_p\omega_2(f,n^{-1})_p+16(\|f\|_\infty+1)/H$. The proof combines quasi-interpolation by local affine projections, a Whitney inequality on partitions, and quantization of nodal values on alternating grids. In this regime, height schedules are of order $N^{\max\{1,s\}}$ for $q=\infty$ and for $q<\infty$ with $s<1$; for $q<\infty$ and $s\ge1$, a logarithmic factor with exponent $\kappa>1/q$ suffices. For $s\le1/p$, where Besov classes contain unbounded functions, a sup-norm bound for the quasi-interpolants replaces the continuous embedding, and the schedules are of order $N^{1+1/p-s}$ if $s<1/p$ and of order $N$ times a power of $\log N$ if $s=1/p$. The characterization extends to every nested family of functions realized by ReLU networks that contains the rational library after a linear rescaling of the budget, and also when the family only reproduces the library approximately in $L^p$, with a tolerance that is summable on the Besov scale. We also obtain uniform bounds on Besov balls under a single schedule, a uniform arithmetic floor in $L^p$, a description of the approximants with $O(N\log N)$ bits, optimal up to a logarithmic factor, and iterated-logarithm schedules that lower the critical logarithmic factor to $[\log N]^{1/q}[\log\log N]^{\gamma}$, $\gamma>1/q$.}
+{Keywords}{Besov spaces, realization functional, arithmetic height, Jackson theorem, ReLU networks.}
+\fi
 
 \section{Introdução}
 \label{lp:sec:intro}
 
-A teoria da aproximação caracteriza a regularidade de Besov por meio de erros associados a famílias de aproximantes, entre elas os espaços de splines e as classes de funções racionais \citep{artigo_1-devore1998,artigo_2-devorepopov1988,artigo_2-petrushev1988}. Os funcionais de realização incorporam ao erro de aproximação uma medida de suavidade do aproximante \citep{artigo_2-hristovivanov1990,lp-kolomoitsev2019,lp-ditzian2007}. As estimativas para aproximação de classes de Besov por redes ReLU vinculam essa regularidade ao orçamento das redes \citep{artigo_1-devore2021,lp-ali2020,lp-siegel2023,lp-yang2024}.
+A teoria da aproximação caracteriza a regularidade de Besov por meio de erros associados a famílias de aproximantes, entre elas os espaços de splines e as classes de funções racionais \citep{artigo_1-devore1998,artigo_2-devorepopov1988,artigo_2-petrushev1988}. Os funcionais de realização incorporam ao erro de aproximação uma medida de suavidade do aproximante \citep{lp-ditzian2007,artigo_2-hristovivanov1990,lp-kolomoitsev2019}. As estimativas para aproximação de classes de Besov por redes de unidades lineares retificadas (ReLU) vinculam essa regularidade ao orçamento das redes \citep{lp-ali2020,artigo_1-devore2021,lp-siegel2023,lp-yang2024}.
 
 O orçamento de aproximação controla o número de folhas da árvore diádica e a altura dos racionais que definem os segmentos afins. Para cada orçamento $N$ e agenda $H$, o funcional de realização minimiza a soma do erro em $L^p$ e do módulo de segunda ordem do aproximante na escala $N^{-1}$. Sob as agendas e os regimes de parâmetros do \cref{lp:conj:besov}, a somabilidade diádica do funcional caracteriza $B^s_{p,q}([0,1])$. A inclusão da biblioteca racional em uma família aninhada de redes, com ampliação linear de $N$, preserva o espaço caracterizado; o mesmo ocorre sob inclusão aproximada em $L^p$ com tolerância $\varepsilon_N$ somável na escala de Besov. Esses resultados estendem à norma $L^p$ a caracterização uniforme e o teorema de estabilidade da Parte~IV de \citet{lp-oliveiravol}. A \cref{lp:sec:uniform} acrescenta cotas uniformes sobre bolas, o piso aritmético e a complexidade em bits dos aproximantes, e agendas de log iterado.
 
@@ -164,7 +83,6 @@ Para $0<s<2$ e $0<q\le\infty$, adotamos a caracterização diádica de Besov
 \end{equation}
 Para $q=\infty$, usa-se o supremo. Para $s>1/p$, o \cref{lp:lem:embedding} fornece o representante contínuo de cada classe de Besov, usado nas avaliações pontuais. Para $s\le1/p$, as classes de Besov podem conter funções ilimitadas, e nenhuma avaliação pontual de $f$ é usada.
 
-\Needspace{7\baselineskip}
 \subsection{Altura aritmética e funcional de realização}
 
 Para uma fração reduzida $u=a/b\in\Q$, com $b>0$, ponha
@@ -793,19 +711,22 @@ Para $B\ge1$, escrevemos $\mathbb B^s_{p,q}(B)=\{f\in L^p:\|f\|^*_{\Bes{s}{p}{q}
 
 \begin{definicao}[Dados de regime]
 \label{lp:def:regime}
-Sejam $1\le p<\infty$, $0<s<2$, $0<q\le\infty$ e $\kappa\ge0$. Para $n=2^r\ge2$, definimos os pares $(\nu',\kappa')$ e $(\hat\nu,\hat\kappa)$ e o fator $\Lambda_n$ por
-\begin{center}
-\small
-\begin{tabular}{@{}lccc@{}}
+Sejam $1\le p<\infty$, $0<s<2$, $0<q\le\infty$ e $\kappa\ge0$. Para $n=2^r\ge2$, definimos os pares $(\nu',\kappa')$ e $(\hat\nu,\hat\kappa)$ e o fator $\Lambda_n$ por meio da \cref{lp:tab:regime}.
+\begin{table}[H]
+\caption{Parâmetros para cada regime de regularidade}
+\label{lp:tab:regime}
+\small\tablecolors
+\begin{tabularx}{\linewidth}{l*{3}{>{\centering\arraybackslash}X}}
 \toprule
- & $(\nu',\kappa')$ & $(\hat\nu,\hat\kappa)$ & $\Lambda_n$ \\
+\tablehead{Regime} & \tablehead{$(\nu\prime,\kappa\prime)$} & \tablehead{$(\hat\nu,\hat\kappa)$} & \tablehead{$\Lambda_n$} \\
 \midrule
 $s>1/p$ & $(\nu_s,\kappa)$ & $(\nu_s,\kappa)$ & $1$ \\
 $s<1/p$ & $(1,0)$ & $(1+1/p-s,0)$ & $n^{1/p-s}$ \\
 $s=1/p$ & $(1,\kappa)$ & $(1,\theta_q+\kappa)$ & $r^{\theta_q}$ \\
 \bottomrule
-\end{tabular}
-\end{center}
+\end{tabularx}\par
+\tablecredit
+\end{table}
 Dizemos que $(p,s,q,\kappa)$ é \emph{admissível} quando $\kappa>1/q$ sempre que $q<\infty$ e $s\ge1$. Para $B\ge1$ e $A\ge1$, a \emph{agenda uniforme} é
 \begin{equation}
  \widehat H^{[B]}_{A}(N)=\Bigl\lceil A\,(B+1)\,(N+1)^{\hat\nu}\,\mathsf L(N)^{\hat\kappa}\Bigr\rceil .
@@ -988,16 +909,17 @@ Para todo $\kappa>1/q$, vale $H^{(2)}_{s;q,\gamma}(N)/H_{s,\kappa}(N)\to0$, pois
 O mesmo vale no item (iii) do \cref{lp:conj:besov} com $p=1$, $s=1$ e $q<\infty$: se $Q(n)$ é a menor potência de dois com $Q(n)\ge n\,\mathsf L_1(n)^{1/q}\mathsf L_2(n)^{\gamma}$ e $\gamma>1/q$, a quantização contribui com $n^{s}/Q(n)\le(\mathsf L_1^{1/q}\mathsf L_2^{\gamma})^{-1}$, e a agenda passa a ser $\lceil8(N+1)\,\mathsf L_1^{\theta_q+1/q}\mathsf L_2^{\gamma}\rceil$.
 \end{observacao}
 
-\begin{table}[!ht]
+A \cref{lp:tab:schedules} reúne as agendas suficientes para os regimes estudados.
+
+\begin{table}[H]
 \centering
-\setlength{\abovecaptionskip}{4pt}
-\setlength{\belowcaptionskip}{3pt}
-\caption{Agendas suficientes. O fator logarítmico pertence à somabilidade em $\ell^q$ para $q<\infty$, e não à propagação aritmética dos valores.}
+\caption{Agendas de altura suficientes por regime de regularidade}
 \label{lp:tab:schedules}
 \small
-\begin{tabularx}{\linewidth}{@{}p{0.3\linewidth}p{0.14\linewidth}>{\raggedright\arraybackslash}X@{}}
+\tablecolors
+\begin{tabularx}{\linewidth}{L{0.27\linewidth}L{0.16\linewidth}>{\raggedright\arraybackslash}X}
 \toprule
-Regularidade & $q$ & Agenda suficiente \\
+\tablehead{Regularidade} & \tablehead{Índice $q$} & \tablehead{Agenda suficiente} \\
 \midrule
 $1/p<s<1$ & $0<q\le\infty$ & $H(N)\asymp N$ \\
 $1\le s<2$, $s>1/p$ & $q=\infty$ & $H(N)\asymp N^s$ \\
@@ -1008,14 +930,26 @@ $0<s<1/p$ & $0<q\le\infty$ & $H(N)\asymp N^{1+1/p-s}$ \\
 $s=1/p$ & $0<q\le\infty$ & $N\,\mathsf L_1^{\theta_q+\kappa}$, $\kappa\ge0$ ($\kappa>1/q$ se $p=1$, $q<\infty$) \\
 \bottomrule
 \end{tabularx}
+\par\raggedright
+\tablecredit
+\par\smallskip\noindent
+Nota: o fator logarítmico pertence à somabilidade em $\ell^q$ para $q<\infty$,
+e não à propagação aritmética dos valores.
 \end{table}
 
-\clearpage
-\appendix
+\ifbesovabnt
+\section{Considerações finais}
+A somabilidade diádica do funcional de realização caracteriza os espaços de Besov estudados sob os orçamentos simultâneos de folhas e altura aritmética. A estimativa de Jackson fornece a inclusão direta em cada regime de regularidade, e a desigualdade inversa decorre das propriedades do módulo de suavidade. A caracterização se transfere a famílias aninhadas de redes ReLU sob inclusão exata ou aproximada, com o controle de tolerância enunciado no \cref{lp:thm:approx-stability}.
+
+As cotas uniformes sobre bolas de Besov permitem descrever os aproximantes com custo da ordem de $N\log N$ bits. O piso aritmético estabelece a necessidade da ordem $N^s$ para a taxa uniforme quando $s\ge1$ e $s>1/p$. As agendas de log iterado reduzem a correção logarítmica nas condições estudadas. A necessidade dessa correção para funções individuais e a diferença entre as cotas inferiores e as agendas suficientes em baixa regularidade permanecem em aberto.
+\articlereferences
+\fi
+
+\articleappendix
 \section{Formalização das demonstrações em Lean 4}
 \label{lp:sec:lean}
 
-O projeto \code{lean4/formalizacao} verifica, com Lean 4.28.0 e Mathlib v4.28.0 \citep{lp-lean4,lp-mathlib}, o \cref{lp:conj:besov}, nos itens (i), (ii) e (iii), o \cref{lp:conj:stability} e o \cref{lp:thm:approx-stability}. A desigualdade inversa é demonstrada para módulos a valores em $[0,\infty]$ e especializada a $L^p$. A prova direta combina Whitney, quase-interpolação, imersão contínua (regime $s>1/p$), cota em sup dos quase-interpolantes (regime $s\le1/p$) e construção da árvore diádica quantizada. A estimativa de Jackson resultante é aplicada às agendas dos itens (i), (ii) e (iii) do \cref{lp:conj:besov} e às escalas deslocadas dos \cref{lp:conj:stability,lp:thm:approx-stability}. A formalização inclui as cotas uniformes sobre bolas, o piso aritmético, as descrições binárias e as agendas de log iterado da \cref{lp:sec:uniform}.
+O projeto \code{lean4/formalizacao} verifica, com Lean 4.28.0 e Mathlib v4.28.0 \citep{lp-mathlib,lp-lean4}, o \cref{lp:conj:besov}, nos itens (i), (ii) e (iii), o \cref{lp:conj:stability} e o \cref{lp:thm:approx-stability}. A desigualdade inversa é demonstrada para módulos a valores em $[0,\infty]$ e especializada a $L^p$. A prova direta combina Whitney, quase-interpolação, imersão contínua (regime $s>1/p$), cota em sup dos quase-interpolantes (regime $s\le1/p$) e construção da árvore diádica quantizada. A estimativa de Jackson resultante é aplicada às agendas dos itens (i), (ii) e (iii) do \cref{lp:conj:besov} e às escalas deslocadas dos \cref{lp:conj:stability,lp:thm:approx-stability}. A formalização inclui as cotas uniformes sobre bolas, o piso aritmético, as descrições binárias e as agendas de log iterado da \cref{lp:sec:uniform}.
 
 \subsection{Representação dos objetos e dos teoremas}
 \label{lp:sec:fidelity}
@@ -1028,52 +962,35 @@ Para $s\le1/p$, \code{jackson_low} (\cref{lp:thm:jackson-low}) tem constantes $C
 
 A estabilidade no código se aplica a famílias de funções mensuráveis sob \eqref{lp:eq:nesting} e \eqref{lp:eq:contains} (ou \eqref{lp:eq:approx-contains} com \eqref{lp:eq:approx-summable}). Como as famílias consideradas no texto são subconjuntos de $C([0,1])$, que são mensuráveis, essa exigência não restringe os enunciados dos \cref{lp:conj:stability,lp:thm:approx-stability}. Na estabilidade aproximada, a tolerância é uma sequência $\varepsilon\colon\N\to[0,\infty]$ (\texttt{eps : N -> ENNReal}), e a hipótese de somabilidade \eqref{lp:eq:approx-summable} entra como premissa de \code{Conj2ApproxStability}. O teorema \code{besov_subset_stratum_fam} do regime $s>1/p$ é o caso $\varepsilon=0$ de seu núcleo com tolerância, e o mesmo vale para \code{besov_subset_stratum_low} no regime $s\le1/p$. O módulo \code{Stability} transfere a estimativa de Jackson para o orçamento diádico deslocado.
 
-\begin{table}[!ht]
-\centering
-\setlength{\abovecaptionskip}{4pt}
-\setlength{\belowcaptionskip}{3pt}
-\caption{Correspondência entre as demonstrações e as declarações Lean.}
-\label{lp:tab:verified}
-\small
-\begin{tabularx}{\linewidth}{@{}p{0.37\linewidth}>{\raggedright\arraybackslash}X@{}}
-\toprule
-Resultado & Declarações \\
-\midrule
-Desigualdade inversa e inclusão em Besov & \code{wtP_le_four_realP}, \code{stratum_subset_besov_conn} \\
-Projeção afim e quase-interpolação & \code{kernel_is_affine_projection}, \code{local_error_inf}, \code{lam_diff_le} \\
-Whitney e erro global & \code{whitney_lp}, \code{quasi_error_unc} \\
-Imersão e módulo de primeira ordem & \code{besov_continuous_rep}, \code{modulus_lt1_unc}, \code{modulus_eq1_unc}, \code{modulus_gt1_unc} \\
-Quantização nodal e Jackson ($s>1/p$) & \code{nodal_tree}, \code{lp_jackson_core}, \code{hypJpStrong_of_lt} \\
-Caracterização de Besov ($s>1/p$) & \code{conj1_endpoint}, \code{conj1_subcritical}, \code{conj1_critical}, \code{conj1_tilde} \\
-Estabilidade por inclusão ($s>1/p$) & \code{conj2_endpoint}, \code{conj2_subcritical}, \code{conj2_critical}, \code{conj2_tilde} \\
-Quantização sem controle dos saltos, cota em sup e Jackson ($s\le1/p$) & \code{nodal_tree_gen}, \code{lam_bound}, \code{jackson_low} \\
-Transferência e caracterização ($s\le1/p$) & \code{besov_subset_stratum_low}, \code{conj1_low}, \code{conj1_diag} \\
-Estabilidade por inclusão ($s\le1/p$) & \code{conj2_low}, \code{conj2_diag} \\
-Estabilidade aproximada ($s>1/p$) & \code{conj2_approx_endpoint}, \code{conj2_approx_subcritical}, \code{conj2_approx_critical}, \code{conj2_approx_tilde} \\
-Estabilidade aproximada ($s\le1/p$) & \code{besov_subset_stratum_low_approx}, \code{conj2_approx_low}, \code{conj2_approx_diag} \\
-\bottomrule
-\end{tabularx}
-\end{table}
+\Cref{lp:tab:verified} localiza as declarações para as demonstrações principais.
 
-\begin{table}[!ht]
-\centering
-\setlength{\tabcolsep}{4pt}
-\setlength{\belowcaptionskip}{4pt}
-\caption{Declarações Lean para a \cref{lp:sec:uniform}.}
-\small
-\begin{tabularx}{\linewidth}{@{}p{0.37\linewidth}>{\raggedright\arraybackslash}X@{}}
-\toprule
-Resultado & Declarações \\
-\midrule
-Quantização e cotas uniformes & \code{uniform_height_quantization}, \code{lam_bound_unif}, \code{uniform_quantWeight_lt_top}, \code{uniform_besov_ball} \\
-Piso aritmético em $L^p$ & \code{arithmetic_floor_lp}, \code{arithmetic_floor_bestError}, \code{arithmetic_height_necessary} \\
-Código binário e taxa & \code{boundedLibrary_code}, \code{boundedLibrary_log_card}, \code{uniform_rate_bits} \\
-Critério exato da agenda & \code{regular_schedule_criterion}, \code{iterated_schedule_iff} \\
-Log-log e estabilidade & \code{conj1_loglog}, \code{conj2_loglog}, \code{conj2_approx_loglog}, \code{uniform_loglog_ball}, \code{conj1_loglog_diagonal} \\
-\bottomrule
-\end{tabularx}
-\end{table}
+\begin{leantable}{Demonstrações e declarações correspondentes em Lean}{lp:tab:verified}{Resultado}{Declarações Lean}
+Desigualdade inversa e inclusão em Besov & \leanname{wtP_le_four_realP}, \leanname{stratum_subset_besov_conn} \\
+Projeção afim e quase-interpolação & \leanname{kernel_is_affine_projection}, \leanname{local_error_inf}, \leanname{lam_diff_le} \\
+Whitney e erro global & \leanname{whitney_lp}, \leanname{quasi_error_unc} \\
+Imersão e módulo de primeira ordem & \leanname{besov_continuous_rep}, \leanname{modulus_lt1_unc}, \leanname{modulus_eq1_unc}, \leanname{modulus_gt1_unc} \\
+Quantização nodal e Jackson ($s>1/p$) & \leanname{nodal_tree}, \leanname{lp_jackson_core}, \leanname{hypJpStrong_of_lt} \\
+Caracterização de Besov ($s>1/p$) & \leanname{conj1_endpoint}, \leanname{conj1_subcritical}, \leanname{conj1_critical}, \leanname{conj1_tilde} \\
+Estabilidade por inclusão ($s>1/p$) & \leanname{conj2_endpoint}, \leanname{conj2_subcritical}, \leanname{conj2_critical}, \leanname{conj2_tilde} \\
+Quantização sem controle dos saltos, cota em sup e Jackson ($s\le1/p$) & \leanname{nodal_tree_gen}, \leanname{lam_bound}, \leanname{jackson_low} \\
+Transferência e caracterização ($s\le1/p$) & \leanname{besov_subset_stratum_low}, \leanname{conj1_low}, \leanname{conj1_diag} \\
+Estabilidade por inclusão ($s\le1/p$) & \leanname{conj2_low}, \leanname{conj2_diag} \\
+Estabilidade aproximada ($s>1/p$) & \leanname{conj2_approx_endpoint}, \leanname{conj2_approx_subcritical}, \leanname{conj2_approx_critical}, \leanname{conj2_approx_tilde} \\
+Estabilidade aproximada ($s\le1/p$) & \leanname{besov_subset_stratum_low_approx}, \leanname{conj2_approx_low}, \leanname{conj2_approx_diag} \\
+\end{leantable}
 
+\par\Needspace{14\baselineskip}
+\Cref{lp:tab:uniform-lean} localiza as declarações para as extensões da \cref{lp:sec:uniform}.
+
+\begin{leantable}{Declarações Lean para as extensões da Seção~6}{lp:tab:uniform-lean}{Resultado}{Declarações Lean}
+Quantização e cotas uniformes & \leanname{uniform_height_quantization}, \leanname{lam_bound_unif}, \leanname{uniform_quantWeight_lt_top}, \leanname{uniform_besov_ball} \\
+Piso aritmético em $L^p$ & \leanname{arithmetic_floor_lp}, \leanname{arithmetic_floor_bestError}, \leanname{arithmetic_height_necessary} \\
+Código binário e taxa & \leanname{boundedLibrary_code}, \leanname{boundedLibrary_log_card}, \leanname{uniform_rate_bits} \\
+Critério exato da agenda & \leanname{regular_schedule_criterion}, \leanname{iterated_schedule_iff} \\
+Log-log e estabilidade & \leanname{conj1_loglog}, \leanname{conj2_loglog}, \leanname{conj2_approx_loglog}, \leanname{uniform_loglog_ball}, \leanname{conj1_loglog_diagonal} \\
+\end{leantable}
+
+\Needspace{9\baselineskip}
 \subsection{Reprodução da verificação}
 
 Na raiz do projeto Lean, a compilação e a auditoria são executadas por
@@ -1083,23 +1000,5 @@ lake env lean Formalizacao/Auditoria.lean
 \end{verbatim}
 A auditoria examina 170 declarações distintas e registra somente \code{propext}, \code{Classical.choice} e \code{Quot.sound}. A saída está em \code{lean4/formalizacao/auditoria_axiomas.txt}. O mapa \code{mapas/MAPA_TEX_LEAN.md} aponta os nomes qualificados e os arquivos de origem. Na raiz do artigo, \texttt{python3 mapas/verificar\_mapa.py} confere os rótulos TeX e os nomes Lean.
 
-\clearpage
-\begin{referenciasabnt}
-\abntref{lp-ali2020}{\MakeUppercase{Ali}, M.; \MakeUppercase{Nouy}, A. Approximation of smoothness classes by deep rectifier networks. \textbf{arXiv}, 2007.15645, 2020.}
-\abntref{artigo_1-devore1998}{\MakeUppercase{DeVore}, R. A. Nonlinear approximation. \textbf{Acta Numerica}, v. 7, p. 51-150, 1998. DOI: 10.1017/S0962492900002816.}
-\abntref{artigo_1-devore2021}{\MakeUppercase{DeVore}, R.; \MakeUppercase{Hanin}, B.; \MakeUppercase{Petrova}, G. Neural network approximation. \textbf{Acta Numerica}, v. 30, p. 327-444, 2021.}
-\abntref{artigo_2-devorelorentz1993}{\MakeUppercase{DeVore}, R. A.; \MakeUppercase{Lorentz}, G. G. \textbf{Constructive Approximation}. Berlin: Springer, 1993. (Grundlehren der mathematischen Wissenschaften, v. 303). DOI: 10.1007/978-3-662-02888-9.}
-\abntref{artigo_2-devorepopov1988}{\MakeUppercase{DeVore}, R. A.; \MakeUppercase{Popov}, V. A. Interpolation of {B}esov spaces. \textbf{Transactions of the American Mathematical Society}, v. 305, n. 1, p. 397-414, 1988.}
-\abntref{lp-ditzian2007}{\MakeUppercase{Ditzian}, Z. Polynomial approximation and $\omega_\varphi^r(f,t)$ twenty years later. \textbf{Surveys in Approximation Theory}, v. 3, p. 106-151, 2007.}
-\abntref{lp-ditzian1987}{\MakeUppercase{Ditzian}, Z.; \MakeUppercase{Totik}, V. \textbf{Moduli of Smoothness}. New York: Springer, 1987. (Springer Series in Computational Mathematics, v. 9). DOI: 10.1007/978-1-4612-4778-4.}
-\abntref{artigo_2-hristovivanov1990}{\MakeUppercase{Hristov}, V. H.; \MakeUppercase{Ivanov}, K. G. Realization of {$K$}-functionals on subsets and constrained approximation. \textbf{Mathematica Balkanica (New Series)}, v. 4, n. 3, p. 236-257, 1990.}
-\abntref{lp-kolomoitsev2019}{\MakeUppercase{Kolomoitsev}, Yu.; \MakeUppercase{Tikhonov}, S. Properties of moduli of smoothness in {$L_p(\mathbb{R}^d)$}. \textbf{arXiv}, 1907.12788, 2019.}
-\abntref{lp-mathlib}{\MakeUppercase{Mathlib Community}, The. The Lean mathematical library. In: \textbf{Proceedings of the 9th ACM SIGPLAN International Conference on Certified Programs and Proofs (CPP 2020)}. New York: ACM, 2020. p. 367-381. DOI: 10.1145/3372885.3373824.}
-\abntref{lp-lean4}{\MakeUppercase{Moura}, L. de; \MakeUppercase{Ullrich}, S. The Lean 4 theorem prover and programming language. In: \textbf{Automated Deduction -- CADE 28}. Cham: Springer, 2021. p. 625-635. (Lecture Notes in Computer Science, v. 12699).}
-\abntref{lp-oliveiravol}{\MakeUppercase{Oliveira}, V. G. de. \textbf{Biblioteca determinística de segmentos afins racionais: construção, seleção, aproximação e normalização}. Volume unificado com correspondência Lean 4, Parte IV. Edição revisada de 18 de novembro de 2026.}
-\abntref{artigo_2-petrushev1988}{\MakeUppercase{Petrushev}, P. P. Direct and converse theorems for spline and rational approximation and {B}esov spaces. In: \textbf{Function Spaces and Applications}. Berlin: Springer, 1988. (Lecture Notes in Mathematics, v. 1302). p. 363-377.}
-\abntref{lp-siegel2023}{\MakeUppercase{Siegel}, J. W. Optimal approximation rates for deep {ReLU} neural networks on {S}obolev and {B}esov spaces. \textbf{Journal of Machine Learning Research}, v. 24, n. 357, p. 1-52, 2023.}
-\abntref{artigo_2-whitney1957}{\MakeUppercase{Whitney}, H. On functions with bounded {$n$}-th differences. \textbf{Journal de Math{\'e}matiques Pures et Appliqu{\'e}es}, v. 36, p. 67-95, 1957.}
-\abntref{lp-yang2024}{\MakeUppercase{Yang}, Y. On the optimal approximation of {S}obolev and {B}esov functions using deep {ReLU} neural networks. \textbf{arXiv}, 2409.00901, 2024.}
-\end{referenciasabnt}
+\ifbesovabnt\else\articlereferences\fi
 \end{document}
