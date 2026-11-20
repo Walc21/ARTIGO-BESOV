@@ -13,7 +13,7 @@
   {Independent researcher}{November 19, 2026}{}
 
 \articleabstract{english}{Abstract}{%
-We characterize the Besov spaces $B^s_{p,q}([0,1])$, for $1\le p<\infty$, $0<s<2$, and $0<q\le\infty$, by the dyadic summability of a realization functional combining the $L^p$ error and the second-order modulus of smoothness of the approximant. The infimum is taken over continuous piecewise affine functions with rational coefficients on dyadic partitions, under simultaneous leaf and arithmetic height budgets. For $s>1/p$, a Jackson theorem gives an approximant with at most $n$ leaves and height $H$, with error bounded by $C_p\omega_2(f,n^{-1})_p+16(\|f\|_\infty+1)/H$. The proof combines quasi-interpolation by local affine projections, a Whitney inequality on partitions, and quantization of nodal values on alternating grids. In this regime, height schedules are of order $N^{\max\{1,s\}}$ for $q=\infty$ and for $q<\infty$ with $s<1$; for $q<\infty$ and $s\ge1$, a logarithmic factor with exponent $\kappa>1/q$ suffices. For $s\le1/p$, where Besov classes contain unbounded functions, a sup-norm bound for the quasi-interpolants replaces the continuous embedding, and the schedules are of order $N^{1+1/p-s}$ if $s<1/p$ and of order $N$ times a power of $\log N$ if $s=1/p$. The characterization extends to every nested family of functions realized by rectified linear unit (ReLU) networks that contains the rational library after a linear rescaling of the budget, and also when the family only reproduces the library approximately in $L^p$, with a tolerance that is summable on the Besov scale. We also obtain uniform bounds on Besov balls under a single schedule, a uniform arithmetic lower bound in $L^p$, a description of the approximants with $O(N\log N)$ bits, optimal up to a logarithmic factor, and iterated-logarithm schedules that lower the critical logarithmic factor to $[\log N]^{1/q}[\log\log N]^{\gamma}$, $\gamma>1/q$.}
+We characterize the Besov spaces $B^s_{p,q}([0,1])$, for $1\le p<\infty$, $0<s<2$, and $0<q\le\infty$, by the dyadic summability of a realization functional combining the $L^p$ error and the second-order modulus of smoothness of the approximant. The infimum is taken over continuous piecewise affine functions with rational coefficients on dyadic partitions, under simultaneous leaf and arithmetic height budgets. For $s>1/p$, a Jackson theorem gives an approximant with at most $n$ leaves and height $H$, with error bounded by $C_p\omega_2(f,n^{-1})_p+16(\|f\|_\infty+1)/H$. The proof combines quasi-interpolation by local affine projections, a Whitney inequality on partitions, and quantization of nodal values on alternating grids. In this regime, height schedules are of order $N^{\max\{1,s\}}$ for $q=\infty$ and for $q<\infty$ with $s<1$; for $q<\infty$ and $s\ge1$, a logarithmic factor with exponent $\kappa>1/q$ suffices. For $s\le1/p$, where Besov classes contain unbounded functions, a sup-norm bound for the quasi-interpolants replaces the continuous embedding, and the schedules are of order $N^{1+1/p-s}$ if $s<1/p$ and of order $N$ times a power of $\log N$ if $s=1/p$. The characterization extends to every nested family of functions realized by rectified linear unit (ReLU) networks that contains the rational library after a linear rescaling of the budget, and also when the family only reproduces the library approximately in $L^p$, with a tolerance that is summable on the Besov scale. We also obtain uniform bounds on Besov balls under a single schedule, a uniform arithmetic lower bound in $L^p$, a description of the approximants with $O(N\log N)$ bits, optimal up to a logarithmic factor, and iterated-logarithm schedules that lower the critical logarithmic factor to $[\log N]^{1/q}[\log\log N]^{\gamma}$, $\gamma>1/q$. For $p>1$ and $s=1/p$, the linear schedule $H_B(N)\asymp(B+1)N$ removes the critical logarithmic factor, and the geometric and slope floors give the necessity of the orders $N$ and $N^{1+1/p-s}$.}
 {Keywords}{Besov spaces, realization functional, arithmetic height, Jackson theorem, ReLU networks.}
 
 \section{Introduction}
@@ -430,6 +430,19 @@ Condition \eqref{lp:eq:height-threshold} implies $H\ge8n$ and $H\ge16(2R+1)$. Ap
 \end{align*}
 \end{proof}
 
+\begin{lema}[Quantization with bounded jumps]
+\label{lp:lem:nodal-jump}
+Let $n=2^r\ge2$, $M\ge0$, and $J\ge0$, and let $y_0,\dots,y_n\in\mathbb R$ satisfy $|y_j|\le M$ and $|y_{j+1}-y_j|\le J$ for $0\le j<n$. If $H\in\mathbb N$ satisfies
+\[
+ 8n\le H,\qquad 16(M+1)\le H\qquad\text{and}\qquad n(J+1)\le H,
+\]
+then there exists $g\in\Aclass_{n,H}([0,1])$ with $\|u-g\|_\infty\le 8(M+1)/H$, where $u$ is the affine interpolant of the data $(j/n,\,y_j)$.
+\end{lema}
+
+\begin{proof}
+The construction of \cref{lp:lem:nodal-general} uses the heights of the leaves, the bound on the nodal values, and the condition $2^r(|y_{j+1}-y_j|+16(M+1)/H)\le H$ on the jumps. The hypotheses give this condition: $2^r\cdot16(M+1)/H\le2^r$ and $2^r(J+1)\le H$. The height of the last leaf and the addresses are controlled by $n\le H$ and $r+1\le H$. The error is that of the quantization, $8(M+1)/H$.
+\end{proof}
+
 \subsection{Quantization without continuity and Jackson estimates for \texorpdfstring{$s\le1/p$}{s ≤ 1/p}}
 
 In this subsection, $\theta_q=\max\{0,1-1/q\}$, with $\theta_\infty=1$. For $s\le1/p$, there is generally no continuous representative, and the nodal values $\lambda_j(f)$ may grow with $n$. The following quantization uses no bound on the jumps $|y_{j+1}-y_j|$. It requires $Q\ge n$ and accounts for the growth of the values in the height budget.
@@ -758,6 +771,45 @@ Multiply by $n^s=2^{rs}$ and take the $\ell^q$ norm over $r\ge1$. The first term
 The index $q$ enters in two ways. The per-scale rate \eqref{lp:eq:uniform-approx} holds with $\kappa=0$ for every $q$. The factor $\mathsf L(N)^\kappa$, with $\kappa>1/q$, is needed only to sum the quantization error in $\ell^q$ when $s\ge1$ and $q<\infty$. Without it, the terms of $2^{rs}/Q(2^r)$ lie between $1/2$ and $1$, so the sequence does not belong to $\ell^q$.
 \end{observacao}
 
+\begin{lema}[Uniform nodal jumps]
+\label{lp:lem:critical-jump}
+Let $p>1$, let $f$ satisfy $\|f\|^*_{\Bes{1/p}{p}{q}}\le B$, let $n=2^r\ge2$, and set $\lambda_j=\lambda_j(f)$. For $0\le j<n$,
+\begin{equation}
+ |\lambda_{j+1}-\lambda_j|\le\frac{4\,\sup_{[0,1]}|Q_2f|}{n}+\sum_{k=1}^{r-1}\frac{K_k}{n},
+ \qquad K_k=8\,(2^{k+1})^{1/p+1}\,18\,C_W\,\wt{f}{2^{-k}}{p}.
+ \label{lp:eq:critical-jump}
+\end{equation}
+Moreover, $K_k\le 144\,C_W\,2^{1/p}\,2^{k+1}\,B$ and $\sum_{k=1}^{r-1}K_k/n\le 288\,C_W\,2^{1/p}B$.
+\end{lema}
+
+\begin{proof}
+By the telescoping identity $Q_{2^r}f=Q_2f+\sum_{k=1}^{r-1}(Q_{2^{k+1}}f-Q_{2^k}f)$ and $\lambda_j=Q_{2^r}f(j/n)$, the difference $\lambda_{j+1}-\lambda_j$ is the sum of the differences of the terms. Each term is affine on cells of length $1/2$ (for $Q_2f$) or $2^{-(k+1)}$ (for the differences), and $[j/n,(j+1)/n]$ lies in one of these cells. The slope of $Q_{2^{k+1}}f-Q_{2^k}f$ is bounded by \cref{lp:lem:quasi}, together with the sup-norm bound for the level steps, and the slope of $Q_2f$ by $4\sup|Q_2f|$. The inequality $2^{k/p}\wt f{2^{-k}}p\le B$ gives the second part.
+\end{proof}
+
+\begin{teorema}[Critical linear height for $s=1/p$ with $p>1$]
+\label{lp:thm:critical-linear}
+Let $p>1$, $s=1/p$, and $0<q<\infty$. There exists $A\ge1$, depending only on $(p,C_W)$, such that for every $B\ge1$ the linear schedule $H_B(N)=\lceil A(B+1)(N+1)\rceil$ satisfies the following properties for every measurable $f$ with $\|f\|^*_{\Bes{1/p}{p}{q}}\le B$.
+\begin{enumerate}[label=(\alph*)]
+ \item For $n=2^r\ge2$, there exists $g\in\Aclass_{n,H_B(n)}([0,1])$ with
+ \[
+  \|f-g\|_p\le 9C_W\,\wt{f}{n^{-1}}{p}+\frac{8(M_r+1)}{H_B(n)},\qquad M_r=\mathsf B_0(f)+144\,C_W\,2^{1/p}\,B\,r,
+ \]
+ where $\mathsf B_0(f)\le C_0B$ is the first-level term of the sup-norm bound for the quasi-interpolants.
+ \item There exists $C_2=C_2(p,q,C_W)$ such that $\Rfun{\Library,H_B}{n}(f)_p\le C_2(B+1)\,n^{-1/p}$ for all $n=2^r\ge2$.
+ \item There exists $C_3=C_3(p,q,C_W)$ such that $\big\|\big(2^{r/p}\Rfun{\Library,H_B}{2^r}(f)_p\big)_{r\ge1}\big\|_{\ell^q}\le C_3(B+1)$.
+ \item $f\in\mathbb B^{1/p}_{p,q}$ if and only if $f\in\Rstr{1/p}{q}{\Library,H_B}_p$.
+\end{enumerate}
+\end{teorema}
+
+\begin{proof}
+For (a), \cref{lp:lem:critical-jump} gives jumps at most $J=4C_0B+288C_W2^{1/p}B$, and the sup-norm bound gives $|\lambda_j|\le M_r$. With $A\ge\max\{16C_M,C_J,8\}$ (constants depending only on $(p,C_W)$), the schedule satisfies $8n\le H$, $16(M_r+1)\le H$ and $n(J+1)\le H$, so \cref{lp:lem:nodal-jump} applies to $Q_nf$. Adding the quasi-interpolation error (\cref{lp:cor:quasi-error}) and the quantization error gives (a). For (b), $\mathscr R\le\omega(f,1/N)+5\|f-g\|_p$ (\cref{lp:prop:transfer}) and $\omega(f,1/N)\le BN^{-1/p}$; the quantization term is at most $C(r+2)2^{-r}\le C'2^{-r/p}$, since $(r+2)2^{-r(1-1/p)}$ is bounded. For (c), the sequence is majorized by two terms: the $\omega$ terms, whose $\ell^q$ norm is at most $B$, and quantization terms dominated by $C(r+2)\rho^r$ with $\rho=2^{1/p-1}<1$, whose $\ell^q$ norm is finite. For (d), one implication is the inclusion in Besov spaces (\cref{lp:cor:inclusion}), and the other follows from (c).
+\end{proof}
+
+\begin{observacao}
+\label{lp:obs:critical-scope}
+The schedule of \cref{lp:thm:critical-linear} depends on $B$ through the factor $(B+1)$. For $p>1$ and $s=1/p$, it gives the linear order $N$ without a logarithmic factor. This replaces the logarithmic schedule of \cref{lp:thm:besov-conditional} in this regime, and the linear schedule can be used in place of $\widehat H^{[B]}_A$ with the same rate. The formal verification covers $0<q<\infty$ and the characterization (d) with a schedule depending on $B$. The case $q=\infty$ and a single schedule for all functions of $\mathbb B^{1/p}_{p,q}$ are not included in the verifications of this version.
+\end{observacao}
+
 \subsection{Arithmetic lower bound and bit complexity}
 \label{lp:sec:bits}
 
@@ -833,6 +885,65 @@ and a binary description of length at most $c\,n\,\bigl(\log n+\log(B+1)\bigr)$.
 \begin{observacao}
 \label{lp:obs:entropy}
 The metric entropy of the unit ball of $\Bes{s}{p}{q}$ in $L^p([0,1])$ is of order $\varepsilon^{-1/s}$. For this classical result, see \citet{artigo_2-devorelorentz1993}. Describing every function in the ball with error $n^{-s}$ therefore requires at least order $n$ bits. For fixed $B$, \cref{lp:cor:bits} gives $O(n\log n)$ bits for this rate, which is optimal up to a logarithmic factor. The cost of \emph{computing} an optimal approximant by dynamic programming is a separate question, treated in Part~III of \citet{lp-oliveiravol} (Theorems III.9.1 and III.9.3) for the uniform-norm error. It plays no role here.
+\end{observacao}
+
+\subsection{Geometric and slope floors, necessity, and transfer}
+\label{lp:sec:floors}
+
+The floors below complete \cref{lp:prop:floor}. They hold for the full library $\Sig{N}$, not only for the arithmetic floor, and their constants depend only on $(p,s,q)$.
+
+\begin{proposicao}[Geometric floor]
+\label{lp:prop:geom-floor}
+Let $1\le p<\infty$, $0<s<2$, and $0<q\le\infty$. There exists $c_G=c_G(p,s,q)>0$ such that for every integer $H\ge2$ there is a measurable $f_H$ with $\|f_H\|^*_{\Bes sp q}\le1$ and
+\[
+ \|f_H-g\|_p\ge c_G\,H^{-s}\qquad\text{for every }N\ge1\text{ and every }g\in\Sig{N}\text{ with schedule }H.
+\]
+\end{proposicao}
+
+\begin{proof}
+Fix a bump $\varphi\in C^\infty_c(1/8,5/8)$ with $\varphi=1$ on $[1/4,1/2]$. Take $t=1/H$ and $f_H(x)=a\,\varphi((x-(1-t))/t)$ with $a=c\,t^{s-1/p}$, where $c$ depends only on $(p,s,q)$. The Besov norm of the rescaled function gives $\|f_H\|^*\le1$. By the last leaf, every $g\in\Sig{N}$ is affine on $[1-1/H,1]$. For such $g$, integration by parts with $\varphi''$ gives $a\kappa\le M\int_0^1|a\varphi-(\alpha+\beta y)|\,dy$, with $\kappa=\int(\varphi')^2>0$. This yields $\|f_H-g\|_p\ge c_G H^{-s}$.
+\end{proof}
+
+\begin{proposicao}[Slope floor]
+\label{lp:prop:slope-floor}
+Let $1\le p<\infty$, $0<s\le1/p$, and $0<q\le\infty$, and set $\beta=s/(1+1/p-s)$. There exists $c_L=c_L(p,s,q)>0$ such that for every integer $H\ge2$ there is a measurable $f_H$ with $\|f_H\|^*_{\Bes sp q}\le1$ and
+\[
+ \|f_H-g\|_p\ge c_L\,H^{-\beta}\qquad\text{for every }N\ge1\text{ and every }g\in\Sig{N}\text{ with schedule }H.
+\]
+\end{proposicao}
+
+\begin{proof}
+Use the same bump, now centred at $x_0=1/4$, with scale $t=(c/(2H))^{1/(1+\delta)}$, $\delta=1/p-s$, and $a=c\,t^{-\delta}$. The functions $g$ are $H$-Lipschitz on $[0,1]$. On $I=[1/4+t/4,1/4+t/2]$, the function equals $a$ at $x$ and $0$ at $x+t$, so $|f-g|(x)+|f-g|(x+t)\ge a/2$, because $Ht\le a/2$. Integrating over $I$ and $I+t$ (which are disjoint) and using convexity in $\ell^p$ gives $\|f-g\|_p\ge c\,t^{1/p}a$, which equals $c_L H^{-\beta}$.
+\end{proof}
+
+\begin{corolario}[Joint necessity]
+\label{lp:cor:joint-necessity}
+Let $1\le p<\infty$, $0<s<2$, $0<q\le\infty$, $C>0$, $N\ge1$, and a schedule $H$ with $H(N)\ge2$. Suppose that, for every measurable $f$ with $\|f\|^*_{\Bes sp q}\le1$,
+\[
+ \Rfun{\Library,H}{N}(f)_p\le C\,N^{-s}.
+\]
+Then $H(N)\ge(c_G/C)^{1/s}N$. If $s\le1/p$, then $H(N)\ge(c_L/C)^{1/\beta}N^{1+1/p-s}$. In particular, $H(N)\ge N^s/(2C)$ by \cref{lp:cor:floor}. The same conclusions hold with $e^{H(N)}_{N,p}$ in place of $\mathscr R$, since $e\le\mathscr R$ by \cref{lp:prop:transfer}.
+\end{corolario}
+
+\begin{proof}
+Apply the corresponding floor with the constant schedule $H(N)$. The infimum over $\Sig{N}$ is at least $c_GH(N)^{-s}$ (or $c_LH(N)^{-\beta}$), and the hypothesis gives $c_GH(N)^{-s}\le CN^{-s}$. Solving gives $(c_G/C)N^{s}\le H(N)^s$. For the arithmetic floor, $f\equiv1/(2H)$ has norm at most $1$ and $e\ge1/(2H)$.
+\end{proof}
+
+\begin{proposicao}[Exact transfer between error and realization]
+\label{lp:prop:transfer}
+Let $1\le p<\infty$, let $G_N$ be families of measurable functions, and let $f$ be measurable. With $e_N(f)=\inf_{g\in G_N}\|f-g\|_p$ and $\mathscr R_N(f)=\inf_{g\in G_N}\{\|f-g\|_p+\omega_p(g,1/N)\}$,
+\[
+ e_N(f)\le\mathscr R_N(f)\le\omega_p(f,1/N)+5\,e_N(f).
+\]
+\end{proposicao}
+
+\begin{proof}
+The first inequality holds because $\mathscr R_N$ adds $\omega_p(g,1/N)\ge0$ to each term of the infimum. For the second, if $g\in G_N$, then $\omega_p(g,1/N)\le\omega_p(f,1/N)+4\|f-g\|_p$ by the subadditivity of $\omega_p$ and the bound $\omega_p(h,t)\le4\|h\|_p$. Hence $\mathscr R_N(f)\le\omega_p(f,1/N)+5\|f-g\|_p$ for every $g$, and the infimum over $g$ gives the bound.
+\end{proof}
+
+\begin{observacao}
+\label{lp:obs:floor-closure}
+\Cref{lp:cor:joint-necessity} closes the comparison that \cref{lp:obs:floor} left open for $s<1$. A uniform rate $N^{-s}$ over the Besov ball requires $H(N)\gtrsim N^{1+1/p-s}$ if $s<1/p$ and $H(N)\gtrsim N$ if $1/p\le s<2$. The power $N^s$ for $s>1$ comes from the arithmetic floor. This necessity holds for the uniform family over the ball, and not for each individual function.
 \end{observacao}
 
 \subsection{Iterated-logarithm schedules}
@@ -955,6 +1066,21 @@ Log-log schedule and stability & \leanname{conj1_loglog}, \leanname{conj2_loglog
 \end{leantable}
 
 \Needspace{9\baselineskip}
+\subsection{Floors, necessity, and critical height}
+\label{lp:sec:lean-floors}
+
+\Cref{lp:tab:critical-lean} lists the Lean declarations for the results of this section, in \code{FormalizacaoAltura}, \code{FormalizacaoCrit}, \code{FormalizacaoCrit2} and \code{FormalizacaoCrit3}.
+
+\begin{leantable}{Lean declarations for the floors, necessity, and critical height}{lp:tab:critical-lean}{Result}{Lean declarations}
+Quantization with bounded jumps & \leanname{quantization_jump} \\
+Uniform nodal jumps & \leanname{nodal_jump} \\
+Geometric floor & \leanname{geometric_floor}, \leanname{geometric_dist_lower}, \leanname{L1_affine_lower}, \leanname{terminal_affine} \\
+Slope floor & \leanname{slope_floor}, \leanname{two_interval_pointwise}, \leanname{slope_dist_lower} \\
+Joint necessity & \leanname{geometric_necessity}, \leanname{slope_necessity}, \leanname{arithmetic_necessity}, \leanname{geometric_necessity_realP}, \leanname{slope_necessity_realP}, \leanname{arithmetic_necessity_realP} \\
+Transfer & \leanname{bestError_le_realP}, \leanname{realP_le_bestError_add} \\
+Critical linear height & \leanname{critical_approx}, \leanname{critical_level}, \leanname{critical_lq}, \leanname{critical_rate}, \leanname{critical_char_radius} \\
+\end{leantable}
+
 \subsection{Reproducing the verification}
 
 From the Lean project root, run the following commands to build the formalization and audit its axioms.
@@ -962,7 +1088,7 @@ From the Lean project root, run the following commands to build the formalizatio
 lake build Formalizacao
 lake env lean Formalizacao/Auditoria.lean
 \end{verbatim}
-The audit checks 170 distinct declarations and reports only \code{propext}, \code{Classical.choice}, and \code{Quot.sound}. Its output is in \code{lean4/formalizacao/auditoria_axiomas.txt}. The map at \code{mapas/MAPA_TEX_LEAN.md} lists the qualified names and their source files. From the article root, \texttt{python3 mapas/verificar\_mapa.py} checks the TeX labels and the Lean names.
+The audit checks 194 distinct declarations and reports only \code{propext}, \code{Classical.choice}, and \code{Quot.sound}. Its output is in \code{lean4/formalizacao/auditoria_axiomas.txt}. The map at \code{mapas/MAPA_TEX_LEAN.md} lists the qualified names and their source files. From the article root, \texttt{python3 mapas/verificar\_mapa.py} checks the TeX labels and the Lean names.
 
 \articlereferences
 \end{document}

@@ -1493,6 +1493,205 @@
           "nota": ""
         }
       ]
+    },
+    {
+      "id": "A1",
+      "titulo": "quantização com salto limitado $J$ (Parte V, Lema 4.7 estendido)",
+      "rotulo": "lp:lem:nodal-jump",
+      "estado": "Formalizado e compilado",
+      "nota": "Corolário de `FormalizacaoJ.nodal_tree`, com as condições `8n ≤ H`, `16(M+1) ≤ H` e `n(J+1) ≤ H`.",
+      "lean": [
+        {
+          "nome": "FormalizacaoAltura.quantization_jump",
+          "arquivo": "../lean4/formalizacao/Formalizacao/AlturaQuant.lean",
+          "nota": ""
+        }
+      ]
+    },
+    {
+      "id": "A2",
+      "titulo": "saltos nodais uniformes do quase-interpolante",
+      "rotulo": "lp:lem:critical-jump",
+      "estado": "Formalizado e compilado",
+      "nota": "A soma telescópica dos níveis dá o salto em `1/n`; cada nível é afim em células finas (`Q_affine_on_cell`, `slope_diff_le`).",
+      "lean": [
+        {
+          "nome": "FormalizacaoCrit.nodal_jump",
+          "arquivo": "../lean4/formalizacao/Formalizacao/AlturaCritical.lean",
+          "nota": ""
+        }
+      ]
+    },
+    {
+      "id": "A3",
+      "titulo": "altura linear crítica para $s=1/p$, $p>1$",
+      "rotulo": "lp:thm:critical-linear",
+      "estado": "Formalizado e compilado (para $0<q<\\infty$)",
+      "nota": "Itens (a)–(d) formalizados com agenda que depende de $B$. O caso $q=\\infty$ e a agenda única para todo $f$ de $\\mathbb B^{1/p}_{p,q}$ não estão formalizados.",
+      "lean": [
+        {
+          "nome": "FormalizacaoCrit.critical_approx",
+          "arquivo": "../lean4/formalizacao/Formalizacao/AlturaCritical.lean",
+          "nota": "; item (a)."
+        },
+        {
+          "nome": "FormalizacaoCrit2.critical_level",
+          "arquivo": "../lean4/formalizacao/Formalizacao/AlturaCritical2.lean",
+          "nota": "; cota de realização por nível."
+        },
+        {
+          "nome": "FormalizacaoCrit3.critical_lq",
+          "arquivo": "../lean4/formalizacao/Formalizacao/AlturaCritical3.lean",
+          "nota": "; item (c)."
+        },
+        {
+          "nome": "FormalizacaoCrit3.critical_rate",
+          "arquivo": "../lean4/formalizacao/Formalizacao/AlturaCritical3.lean",
+          "nota": "; item (b)."
+        },
+        {
+          "nome": "FormalizacaoCrit3.critical_char_radius",
+          "arquivo": "../lean4/formalizacao/Formalizacao/AlturaCritical3.lean",
+          "nota": "; item (d)."
+        }
+      ]
+    },
+    {
+      "id": "A4",
+      "titulo": "piso geométrico em toda a biblioteca",
+      "rotulo": "lp:prop:geom-floor",
+      "estado": "Formalizado e compilado",
+      "nota": "Teste suave com última folha, distância positiva a afins por integração por partes, e cota de Besov do bump escalado.",
+      "lean": [
+        {
+          "nome": "FormalizacaoAltura.geometric_floor",
+          "arquivo": "../lean4/formalizacao/Formalizacao/AlturaFloor.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoAltura.geometric_dist_lower",
+          "arquivo": "../lean4/formalizacao/Formalizacao/AlturaFloor.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoAltura.L1_affine_lower",
+          "arquivo": "../lean4/formalizacao/Formalizacao/AlturaFloor.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoAltura.terminal_affine",
+          "arquivo": "../lean4/formalizacao/Formalizacao/AlturaTerminal.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoAltura.classNH_lipschitz",
+          "arquivo": "../lean4/formalizacao/Formalizacao/AlturaTerminal.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoAltura.besovNorm_bumpS_le",
+          "arquivo": "../lean4/formalizacao/Formalizacao/AlturaBesov.lean",
+          "nota": ""
+        }
+      ]
+    },
+    {
+      "id": "A5",
+      "titulo": "piso por inclinação em toda a biblioteca",
+      "rotulo": "lp:prop:slope-floor",
+      "estado": "Formalizado e compilado",
+      "nota": "Dois intervalos disjuntos, convexidade em $\\ell^p$ e Lipschitz da biblioteca com constante $H$.",
+      "lean": [
+        {
+          "nome": "FormalizacaoAltura.slope_floor",
+          "arquivo": "../lean4/formalizacao/Formalizacao/AlturaSlope.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoAltura.two_interval_pointwise",
+          "arquivo": "../lean4/formalizacao/Formalizacao/AlturaSlope.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoAltura.slope_dist_lower",
+          "arquivo": "../lean4/formalizacao/Formalizacao/AlturaSlope.lean",
+          "nota": ""
+        }
+      ]
+    },
+    {
+      "id": "A6",
+      "titulo": "necessidade conjunta (erro e realização)",
+      "rotulo": "lp:cor:joint-necessity",
+      "estado": "Formalizado e compilado",
+      "nota": "Versões com erro em `AlturaNecessity.lean` e com realização em `AlturaTransfer.lean`.",
+      "lean": [
+        {
+          "nome": "FormalizacaoAltura.geometric_necessity",
+          "arquivo": "../lean4/formalizacao/Formalizacao/AlturaNecessity.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoAltura.slope_necessity",
+          "arquivo": "../lean4/formalizacao/Formalizacao/AlturaNecessity.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoAltura.arithmetic_necessity",
+          "arquivo": "../lean4/formalizacao/Formalizacao/AlturaNecessity.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoAltura.geometric_necessity_realP",
+          "arquivo": "../lean4/formalizacao/Formalizacao/AlturaTransfer.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoAltura.slope_necessity_realP",
+          "arquivo": "../lean4/formalizacao/Formalizacao/AlturaTransfer.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoAltura.arithmetic_necessity_realP",
+          "arquivo": "../lean4/formalizacao/Formalizacao/AlturaTransfer.lean",
+          "nota": ""
+        }
+      ]
+    },
+    {
+      "id": "A7",
+      "titulo": "transferência exata entre erro e realização",
+      "rotulo": "lp:prop:transfer",
+      "estado": "Formalizado e compilado",
+      "nota": "A cota inferior `e ≤ R` e a superior `R ≤ ω + 5e` (ínfimo sobre os membros de `G_N`).",
+      "lean": [
+        {
+          "nome": "FormalizacaoAltura.bestError_le_realP",
+          "arquivo": "../lean4/formalizacao/Formalizacao/AlturaTransfer.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoAltura.realP_le_bestError_add",
+          "arquivo": "../lean4/formalizacao/Formalizacao/AlturaTransfer.lean",
+          "nota": ""
+        }
+      ]
+    },
+    {
+      "id": "A8",
+      "titulo": "escopo da altura crítica (dependência de $B$, $q$ e agenda única)",
+      "rotulo": "lp:obs:critical-scope",
+      "estado": "Observação (escopo)",
+      "nota": "Registra o que a formalização cobre: $0<q<\\infty$, agenda dependente de $B$.",
+      "lean": []
+    },
+    {
+      "id": "A9",
+      "titulo": "fecho da comparação de potências (Observação)",
+      "rotulo": "lp:obs:floor-closure",
+      "estado": "Observação",
+      "nota": "Consequência da necessidade conjunta sobre a família uniforme, não sobre funções isoladas.",
+      "lean": []
     }
   ]
 }
