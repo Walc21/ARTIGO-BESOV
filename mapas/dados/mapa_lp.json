@@ -249,6 +249,50 @@
       ]
     },
     {
+      "id": "3.3",
+      "titulo": "estabilidade por inclusão aproximada",
+      "rotulo": "lp:thm:approx-stability",
+      "estado": "Formalizado e compilado",
+      "nota": "A tolerância é `ε : ℕ → ℝ≥0∞`; a somabilidade $(2^{rs}\\varepsilon_{2^r})\\in\\ell^q$ é premissa de `Conj2ApproxStability`. Cobre todos os regimes: $s>1/p$ em `LpJackson3.lean` e $s\\le1/p$ em `LowTheorems.lean`.",
+      "lean": [
+        {
+          "nome": "FormalizacaoLp.Conj2ApproxStability",
+          "arquivo": "../lean4/formalizacao/Formalizacao/LpDefs.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoJ.conj2_approx_endpoint",
+          "arquivo": "../lean4/formalizacao/Formalizacao/LpJackson3.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoJ.conj2_approx_subcritical",
+          "arquivo": "../lean4/formalizacao/Formalizacao/LpJackson3.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoJ.conj2_approx_critical",
+          "arquivo": "../lean4/formalizacao/Formalizacao/LpJackson3.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoJ.conj2_approx_tilde",
+          "arquivo": "../lean4/formalizacao/Formalizacao/LpJackson3.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoLow.conj2_approx_low",
+          "arquivo": "../lean4/formalizacao/Formalizacao/LowTheorems.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoLow.conj2_approx_diag",
+          "arquivo": "../lean4/formalizacao/Formalizacao/LowTheorems.lean",
+          "nota": ""
+        }
+      ]
+    },
+    {
       "id": "4.1",
       "titulo": "estimativa de Jackson em $L^p$",
       "rotulo": "lp:hyp:jackson",
@@ -875,6 +919,45 @@
     },
     {
       "id": "5.6",
+      "titulo": "transferência sob inclusão aproximada para $s>1/p$",
+      "rotulo": "lp:thm:approx-transfer",
+      "estado": "Formalizado e compilado, condicional a $J_p$",
+      "nota": "O núcleo com tolerância é `besov_subset_stratum_fam_core`; o teorema sem tolerância é o caso $\\varepsilon=0$.",
+      "lean": [
+        {
+          "nome": "FormalizacaoStab.besov_subset_stratum_fam_approx",
+          "arquivo": "../lean4/formalizacao/Formalizacao/Stability.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoStab.stability_approx_iff_of_J",
+          "arquivo": "../lean4/formalizacao/Formalizacao/Stability.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoStab.conj2ApproxStability_endpoint_of_J",
+          "arquivo": "../lean4/formalizacao/Formalizacao/Stability.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoStab.conj2ApproxStability_subcritical_of_J",
+          "arquivo": "../lean4/formalizacao/Formalizacao/Stability.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoStab.conj2ApproxStability_critical_of_J",
+          "arquivo": "../lean4/formalizacao/Formalizacao/Stability.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoStab.conj2ApproxStability_tilde_of_J",
+          "arquivo": "../lean4/formalizacao/Formalizacao/Stability.lean",
+          "nota": ""
+        }
+      ]
+    },
+    {
+      "id": "5.7",
       "titulo": "transferência para $s\\le1/p$",
       "rotulo": "lp:thm:low-transfer",
       "estado": "Formalizado e compilado",
@@ -932,6 +1015,30 @@
         },
         {
           "nome": "FormalizacaoLow.sigma_family",
+          "arquivo": "../lean4/formalizacao/Formalizacao/LowTheorems.lean",
+          "nota": ""
+        }
+      ]
+    },
+    {
+      "id": "5.8",
+      "titulo": "transferência aproximada para $s\\le1/p$",
+      "rotulo": "lp:thm:low-approx-transfer",
+      "estado": "Formalizado e compilado",
+      "nota": "`besov_subset_stratum_low` é o caso $\\varepsilon=0$ do núcleo com tolerância.",
+      "lean": [
+        {
+          "nome": "FormalizacaoLow.besov_subset_stratum_low_core",
+          "arquivo": "../lean4/formalizacao/Formalizacao/LowTransfer.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoLow.besov_subset_stratum_low_approx",
+          "arquivo": "../lean4/formalizacao/Formalizacao/LowTransfer.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoLow.hW_diag",
           "arquivo": "../lean4/formalizacao/Formalizacao/LowTheorems.lean",
           "nota": ""
         }

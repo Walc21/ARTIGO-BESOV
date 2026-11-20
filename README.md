@@ -11,7 +11,7 @@ Resultados principais:
 
 - **Teorema de Jackson racional em $L^p$.** Existe um aproximante com até $n$ folhas e altura $H$, com erro limitado por $C_p\,\omega_2(f,n^{-1})_p + 16(\|f\|_\infty+1)/H$. A prova combina quase-interpolação por projeções afins locais, uma desigualdade de Whitney em partições e quantização dos valores nodais em grades alternadas.
 - **Caracterização de Besov.** Para $s>1/p$, as agendas de altura são da ordem de $N^{\max\{1,s\}}$ para $q=\infty$ e para $q<\infty$ com $s<1$; para $q<\infty$ e $s\ge1$ basta um fator logarítmico de expoente $\kappa>1/q$. Para $s\le1/p$, onde as classes de Besov contêm funções ilimitadas, uma cota em sup dos quase-interpolantes substitui a imersão contínua, e as agendas são da ordem de $N^{1+1/p-s}$ ($s<1/p$) e de $N$ vezes uma potência de $\log N$ ($s=1/p$).
-- **Estabilidade.** A caracterização vale para toda família aninhada de funções realizadas por redes ReLU que contenha a biblioteca racional após um reescalonamento linear do orçamento.
+- **Estabilidade.** A caracterização vale para toda família aninhada de funções realizadas por redes ReLU que contenha a biblioteca racional após um reescalonamento linear do orçamento. Vale também sob inclusão aproximada em $L^p$, com tolerância $\varepsilon_N$ tal que $(2^{rs}\varepsilon_{2^r})\in\ell^q$ (Teorema 3.3).
 
 O apêndice do artigo descreve a formalização em Lean 4 e a correspondência entre as demonstrações e as declarações verificadas.
 
@@ -71,7 +71,7 @@ grep -rn "sorry" Formalizacao/ Formalizacao.lean
 lake env lean Formalizacao/Auditoria.lean
 ```
 
-A saída deve ter 132 linhas, todas com `depends on axioms: [propext, Classical.choice, Quot.sound]`, e nenhuma com `sorryAx`. A saída de referência está em `auditoria_axiomas.txt`. Conferência rápida:
+A saída deve ter 143 linhas, todas com `depends on axioms: [propext, Classical.choice, Quot.sound]`, e nenhuma com `sorryAx`. A saída de referência está em `auditoria_axiomas.txt`. Conferência rápida:
 
 ```bash
 lake env lean Formalizacao/Auditoria.lean | grep -vc "\[propext, Classical.choice, Quot.sound\]"

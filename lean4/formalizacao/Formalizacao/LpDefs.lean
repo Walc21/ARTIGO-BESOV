@@ -95,6 +95,23 @@ def Conj2Stability (p : ℝ≥0∞) (s : ℝ) (q : ℝ≥0∞) (H : ℕ → ℕ)
     (∀ N, Pendencias.Agenda.Sigma H N ⊆ 𝒩 ⌈c * N⌉₊) →
     ∀ f : ℝ → ℝ, Measurable f → (f ∈ besovP p s q ↔ f ∈ stratumP p s q 𝒩)
 
+/-- **Estabilidade por inclusão aproximada** (`lp:thm:approx-stability`), para a agenda `H`,
+constante `c ≥ 1` e sequência de tolerâncias `ε : ℕ → ℝ≥0∞`: se `𝒩` é aninhada, contém `0`,
+tem elementos mensuráveis, aproxima `Σ^H_N` em `𝒩_{⌈cN⌉}` com erro em `L^p` no máximo `ε N`,
+e `(2^{r s} ε (2^r))_{r≥1} ∈ ℓ^q`, então `B^s_{p,q} = R^s_q(𝒩)`. -/
+def Conj2ApproxStability (p : ℝ≥0∞) (s : ℝ) (q : ℝ≥0∞) (H : ℕ → ℕ) (c : ℝ)
+    (ε : ℕ → ℝ≥0∞) : Prop :=
+  1 ≤ c →
+  lqNorm q (fun r : ℕ => ENNReal.ofReal ((2 : ℝ) ^ (((r + 1 : ℕ) : ℝ) * s)) *
+    ε (2 ^ (r + 1))) < ⊤ →
+  ∀ 𝒩 : ℕ → Set (ℝ → ℝ),
+    (∀ N, (0 : ℝ → ℝ) ∈ 𝒩 N) →
+    (∀ N, 𝒩 N ⊆ 𝒩 (N + 1)) →
+    (∀ N, ∀ g ∈ 𝒩 N, Measurable g) →
+    (∀ N, ∀ g ∈ Pendencias.Agenda.Sigma H N, ∃ g' ∈ 𝒩 ⌈c * N⌉₊,
+      eLpNorm (g - g') p vol01 ≤ ε N) →
+    ∀ f : ℝ → ℝ, Measurable f → (f ∈ besovP p s q ↔ f ∈ stratumP p s q 𝒩)
+
 /-- **Hipótese `J_p`** (Jackson racional em `L^p` com altura controlada,
 `lp:hyp:jackson`). Para `f` mensurável em `B^s_{p,∞}`, com `R = ‖f‖_∞` (norma uniforme em
 `[0,1]`), existem constantes reais `C₀, C₁ ≥ 0` e `n₀` tais que, para toda potência de dois

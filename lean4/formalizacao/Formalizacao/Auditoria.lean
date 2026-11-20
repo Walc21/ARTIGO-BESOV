@@ -163,3 +163,16 @@ e nunca `sorryAx`. Executar: `lake env lean Formalizacao/Auditoria.lean`.
 #print axioms FormalizacaoLow.conj2_diag
 #print axioms FormalizacaoLow.conj1_low
 #print axioms FormalizacaoLow.conj1_diag
+
+-- Estabilidade aproximada (ramo Estabilidade)
+#print axioms FormalizacaoStab.besov_subset_stratum_fam_approx
+#print axioms FormalizacaoStab.stability_approx_iff_of_J
+#print axioms FormalizacaoJ.conj2_approx_endpoint
+#print axioms FormalizacaoJ.conj2_approx_subcritical
+#print axioms FormalizacaoJ.conj2_approx_critical
+#print axioms FormalizacaoJ.conj2_approx_tilde
+#print axioms FormalizacaoLow.hW_diag
+#print axioms FormalizacaoLow.besov_subset_stratum_low_core
+#print axioms FormalizacaoLow.besov_subset_stratum_low_approx
+#print axioms FormalizacaoLow.conj2_approx_low
+#print axioms FormalizacaoLow.conj2_approx_diag

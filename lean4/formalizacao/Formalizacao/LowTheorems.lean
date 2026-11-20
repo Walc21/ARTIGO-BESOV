@@ -53,6 +53,18 @@ theorem conj2_low {p s : ℝ} (hp : 1 ≤ p) (hs : s < 1 / p) {q : ℝ≥0∞} (
     (fun _ => 0) (hshift_low hs q (fun _ => 0) (fun _ => rfl)) (hW_geom hs1 hq (fun _ => 0))
     𝒩 h0 hnest hc hcont hf hbes
 
+lemma hW_diag {p : ℝ} (hp : 1 ≤ p) {q : ℝ≥0∞} (hq : 0 < q) {κ : ℝ} (hκ0 : 0 ≤ κ)
+    (hκq : p = 1 → q ≠ ⊤ → 1 < κ * q.toReal) :
+    lqNorm q (fun k : ℕ => ENNReal.ofReal ((2 : ℝ) ^ (((k + 1 : ℕ) : ℝ) * (1 / p))) *
+      ENNReal.ofReal (1 / (2 * 2 ^ ((k + 1) + mDiag κ (k + 1))))) < ⊤ := by
+  rcases eq_or_lt_of_le hp with hp1 | hp1
+  · have hpe : p = 1 := hp1.symm
+    subst hpe
+    simp only [one_div_one]
+    exact hW_poly hκ0 hq (hκq rfl) (mDiag κ) (fun r hr => mDiag_ge hr)
+  · have hs1 : 1 / p < 1 := by rw [div_lt_one (by linarith)]; exact hp1
+    exact hW_geom hs1 hq (mDiag κ)
+
 /-- **Estabilidade (Teorema 3.2) para `s = 1/p`.** -/
 theorem conj2_diag {p : ℝ} (hp : 1 ≤ p) {q : ℝ≥0∞} (hq : 0 < q) {κ : ℝ} (hκ0 : 0 ≤ κ)
     (hκq : p = 1 → q ≠ ⊤ → 1 < κ * q.toReal) (c : ℝ) :
@@ -60,18 +72,9 @@ theorem conj2_diag {p : ℝ} (hp : 1 ≤ p) {q : ℝ≥0∞} (hq : 0 < q) {κ : 
       (Pendencias.Agenda.Hsk 1 (thetaQ q + κ)) c := by
   intro hc 𝒩 h0 hnest hm𝒩 hcont f hf
   have hP1 : (1 : ℝ≥0∞) ≤ ENNReal.ofReal p := by simpa using ENNReal.ofReal_le_ofReal hp
-  have hW : lqNorm q (fun k : ℕ => ENNReal.ofReal ((2 : ℝ) ^ (((k + 1 : ℕ) : ℝ) * (1 / p))) *
-      ENNReal.ofReal (1 / (2 * 2 ^ ((k + 1) + mDiag κ (k + 1))))) < ⊤ := by
-    rcases eq_or_lt_of_le hp with hp1 | hp1
-    · have hpe : p = 1 := hp1.symm
-      subst hpe
-      simp only [one_div_one]
-      exact hW_poly hκ0 hq (hκq rfl) (mDiag κ) (fun r hr => mDiag_ge hr)
-    · have hs1 : 1 / p < 1 := by rw [div_lt_one (by linarith)]; exact hp1
-      exact hW_geom hs1 hq (mDiag κ)
   refine ⟨fun hbes => ?_, fun h => stratum_subset_besov_conn hP1 𝒩 hm𝒩 (1 / p) q hq hf h⟩
   exact besov_subset_stratum_low hp le_rfl hq (Pendencias.Agenda.Hsk 1 (thetaQ q + κ))
-    (mDiag κ) (hshift_diag hκ0) hW 𝒩 h0 hnest hc hcont hf hbes
+    (mDiag κ) (hshift_diag hκ0) (hW_diag hp hq hκ0 hκq) 𝒩 h0 hnest hc hcont hf hbes
 
 /-- Nesting e demais hipóteses de `Σ^H` como família `𝒩`, para `H` monótona. -/
 lemma sigma_family {H : ℕ → ℕ} (hH : Monotone H) :
@@ -107,5 +110,30 @@ theorem conj1_diag {p : ℝ} (hp : 1 ≤ p) {q : ℝ≥0∞} (hq : 0 < q) {κ : 
     sigma_family (Pendencias.Agenda.Hsk_mono (s := 1) (κ := thetaQ q + κ)
       (add_nonneg (thetaQ_nonneg q) hκ0))
   exact conj2_diag hp hq hκ0 hκq 1 le_rfl _ h0 hnest hm hcont f hf
+
+/-- **Estabilidade aproximada para `0 < s < 1/p`.** -/
+theorem conj2_approx_low {p s : ℝ} (hp : 1 ≤ p) (hs : s < 1 / p) {q : ℝ≥0∞} (hq : 0 < q)
+    (c : ℝ) (ε : ℕ → ℝ≥0∞) :
+    Conj2ApproxStability (ENNReal.ofReal p) s q (Pendencias.Agenda.Hsk (1 + 1 / p - s) 0) c ε := by
+  intro hc hEps 𝒩 h0 hnest hm𝒩 happrox f hf
+  have hP1 : (1 : ℝ≥0∞) ≤ ENNReal.ofReal p := by simpa using ENNReal.ofReal_le_ofReal hp
+  have hs1 : s < 1 := by
+    have : 1 / p ≤ 1 := by rw [div_le_one (by linarith)]; exact hp
+    linarith
+  refine ⟨fun hbes => ?_, fun h => stratum_subset_besov_conn hP1 𝒩 hm𝒩 s q hq hf h⟩
+  exact besov_subset_stratum_low_approx hp hs.le hq (Pendencias.Agenda.Hsk (1 + 1 / p - s) 0)
+    (fun _ => 0) (hshift_low hs q (fun _ => 0) (fun _ => rfl)) (hW_geom hs1 hq (fun _ => 0))
+    𝒩 h0 hnest hm𝒩 hc hEps happrox hf hbes
+
+/-- **Estabilidade aproximada para `s = 1/p`.** -/
+theorem conj2_approx_diag {p : ℝ} (hp : 1 ≤ p) {q : ℝ≥0∞} (hq : 0 < q) {κ : ℝ} (hκ0 : 0 ≤ κ)
+    (hκq : p = 1 → q ≠ ⊤ → 1 < κ * q.toReal) (c : ℝ) (ε : ℕ → ℝ≥0∞) :
+    Conj2ApproxStability (ENNReal.ofReal p) (1 / p) q
+      (Pendencias.Agenda.Hsk 1 (thetaQ q + κ)) c ε := by
+  intro hc hEps 𝒩 h0 hnest hm𝒩 happrox f hf
+  have hP1 : (1 : ℝ≥0∞) ≤ ENNReal.ofReal p := by simpa using ENNReal.ofReal_le_ofReal hp
+  refine ⟨fun hbes => ?_, fun h => stratum_subset_besov_conn hP1 𝒩 hm𝒩 (1 / p) q hq hf h⟩
+  exact besov_subset_stratum_low_approx hp le_rfl hq (Pendencias.Agenda.Hsk 1 (thetaQ q + κ))
+    (mDiag κ) (hshift_diag hκ0) (hW_diag hp hq hκ0 hκq) 𝒩 h0 hnest hm𝒩 hc hEps happrox hf hbes
 
 end FormalizacaoLow
