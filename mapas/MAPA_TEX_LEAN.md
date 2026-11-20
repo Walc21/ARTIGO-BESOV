@@ -355,9 +355,126 @@ Estado: **Formalizado e compilado**. `besov_subset_stratum_low` é o caso $\vare
 - [`FormalizacaoLow.besov_subset_stratum_low_approx`](../lean4/formalizacao/Formalizacao/LowTransfer.lean) — linha 200.
 - [`FormalizacaoLow.hW_diag`](../lean4/formalizacao/Formalizacao/LowTheorems.lean) — linha 56.
 
+### 6.1 — dados de regime e agenda uniforme
+
+Texto: [conjecturas_lp.tex:795](../conjecturas_lp.tex); rótulo `lp:def:regime`.
+
+Estado: **Formalizado (definição)**. A norma da bola é a soma da norma em $L^p$ e da norma da sequência de Besov. Os expoentes, o fator de crescimento e a condição de admissibilidade distinguem os três regimes.
+
+- [`FormalizacaoLow.besovNorm`](../lean4/formalizacao/Formalizacao/UnifSup.lean) — linha 23.
+- [`FormalizacaoLow.LamU`](../lean4/formalizacao/Formalizacao/UnifSup.lean) — linha 27.
+- [`FormalizacaoLow.nuPrime`](../lean4/formalizacao/Formalizacao/UnifTheorem.lean) — linha 36.
+- [`FormalizacaoLow.kapPrime`](../lean4/formalizacao/Formalizacao/UnifTheorem.lean) — linha 38.
+- [`FormalizacaoLow.nuHat`](../lean4/formalizacao/Formalizacao/UnifTheorem.lean) — linha 40.
+- [`FormalizacaoLow.kapHat`](../lean4/formalizacao/Formalizacao/UnifTheorem.lean) — linha 43.
+- [`FormalizacaoLow.Hunif`](../lean4/formalizacao/Formalizacao/UnifTheorem.lean) — linha 47.
+- [`FormalizacaoLow.UniformAdmissible`](../lean4/formalizacao/Formalizacao/UnifTheorem.lean) — linha 182.
+
+### 6.2 — altura e quantização uniformes
+
+Texto: [conjecturas_lp.tex:817](../conjecturas_lp.tex); rótulo `lp:lem:uniform-height`.
+
+Estado: **Formalizado e compilado**. A potência de dois é mínima. A cota nodal tem constante comum à bola. O peso de quantização inclui o fator $1/2$ do erro nodal.
+
+- [`FormalizacaoLow.qexp_le_of_target_le`](../lean4/formalizacao/Formalizacao/UnifTheorem.lean) — linha 186.
+- [`FormalizacaoLow.uniform_height_quantization`](../lean4/formalizacao/Formalizacao/UnifTheorem.lean) — linha 205.
+- [`FormalizacaoLow.uniform_quantWeight_lt_top`](../lean4/formalizacao/Formalizacao/UnifTheorem.lean) — linha 221.
+- [`FormalizacaoLow.lam_bound_unif`](../lean4/formalizacao/Formalizacao/UnifSup.lean) — linha 138.
+
+### 6.3 — cotas uniformes sobre bolas
+
+Texto: [conjecturas_lp.tex:835](../conjecturas_lp.tex); rótulo `lp:thm:uniform`.
+
+Estado: **Formalizado e compilado**. As constantes de altura e de Whitney são escolhidas antes de $\kappa$, do raio e da função. A cota pontual vale para toda escala diádica $n\ge2$. A cota em $\ell^q$ requer admissibilidade.
+
+- [`FormalizacaoLow.uniform_besov_ball`](../lean4/formalizacao/Formalizacao/UnifTheorem.lean) — linha 409.
+
+### 6.4 — peso sem o fator logarítmico
+
+Texto: [conjecturas_lp.tex:863](../conjecturas_lp.tex); rótulo `lp:obs:uniform-q`.
+
+Estado: **Formalizado e compilado**. A taxa pontual admite $\kappa=0$. Com $s\ge1$ e $q$ finito, o peso de quantização com $\kappa=0$ é limitado e afastado de zero, logo a série diverge.
+
+- [`FormalizacaoLow.uniform_besov_ball`](../lean4/formalizacao/Formalizacao/UnifTheorem.lean) — linha 409.
+- [`FormalizacaoRegular.uniform_quantWeight_zero_not_lt_top`](../lean4/formalizacao/Formalizacao/RegularSchedules.lean) — linha 161.
+
+### 6.5 — piso aritmético em $L^p$
+
+Texto: [conjecturas_lp.tex:873](../conjecturas_lp.tex); rótulo `lp:prop:floor`.
+
+Estado: **Formalizado e compilado**. A distância racional é exata. A integral em cada folha dá a cota em $L^1$, que se estende a $L^p$ pela monotonia da norma na medida de probabilidade de $[0,1]$.
+
+- [`FormalizacaoFloor.rational_arithmetic_floor`](../lean4/formalizacao/Formalizacao/ArithmeticFloor.lean) — linha 35.
+- [`FormalizacaoFloor.arithmetic_floor_lp`](../lean4/formalizacao/Formalizacao/ArithmeticFloor.lean) — linha 129.
+- [`FormalizacaoFloor.arithmetic_floor_bestError`](../lean4/formalizacao/Formalizacao/ArithmeticFloor.lean) — linha 148.
+
+### 6.6–6.7 — necessidade da altura para a taxa uniforme
+
+Texto: [conjecturas_lp.tex:893](../conjecturas_lp.tex); rótulo `lp:cor:floor`.
+
+Estado: **Formalizado e compilado**. A função constante de teste pertence à bola unitária. A cota de realização em `uniform_besov_ball` com $\kappa=0$ fornece a direção suficiente da Observação 6.7 quando $s\ge1$ e $s>1/p$.
+
+- [`FormalizacaoFloor.arithmetic_height_necessary`](../lean4/formalizacao/Formalizacao/ArithmeticFloor.lean) — linha 168.
+- [`FormalizacaoLow.uniform_besov_ball`](../lean4/formalizacao/Formalizacao/UnifTheorem.lean) — linha 409.
+
+### 6.8 — código binário de comprimento limitado
+
+Texto: [conjecturas_lp.tex:918](../conjecturas_lp.tex); rótulo `lp:prop:bits`.
+
+Estado: **Formalizado e compilado**. O orçamento é compartilhado. O código contém um bit inicial, a forma em pré-ordem e as coordenadas de cada folha em largura fixa. A contagem usa a ausência de prefixos próprios e obtém $\log_2\#\Sigma_N\le4N(c_H+1)$.
+
+- [`FormalizacaoBits.coordinateWidth_eq`](../lean4/formalizacao/Formalizacao/BinaryBudget.lean) — linha 18.
+- [`FormalizacaoBits.treeWord_prefix`](../lean4/formalizacao/Formalizacao/BinaryBudget.lean) — linha 148.
+- [`FormalizacaoBits.boundedLibrary_code`](../lean4/formalizacao/Formalizacao/BinaryBudget.lean) — linha 178.
+- [`FormalizacaoBits.boundedLibrary_card`](../lean4/formalizacao/Formalizacao/BinaryBudget.lean) — linha 209.
+- [`FormalizacaoBits.boundedLibrary_log_card`](../lean4/formalizacao/Formalizacao/BinaryBudget.lean) — linha 231.
+
+### 6.9 — taxa e bits sobre bolas
+
+Texto: [conjecturas_lp.tex:927](../conjecturas_lp.tex); rótulo `lp:cor:bits`.
+
+Estado: **Formalizado e compilado**. O mesmo aproximante satisfaz a cota de erro e a cota de comprimento, com constantes que só dependem dos índices.
+
+- [`FormalizacaoBits.uniform_rate_bits`](../lean4/formalizacao/Formalizacao/BinaryBudget.lean) — linha 314.
+
+### 6.11 — critério exato para agendas regulares
+
+Texto: [conjecturas_lp.tex:954](../conjecturas_lp.tex); rótulo `lp:prop:regular`.
+
+Estado: **Formalizado e compilado**. As duas equivalências usam comparabilidade com o fator recíproco e condensação de Cauchy. As séries começam em um por reindexação.
+
+- [`FormalizacaoRegular.Hregular`](../lean4/formalizacao/Formalizacao/RegularSchedules.lean) — linha 16.
+- [`FormalizacaoRegular.regular_schedule_criterion`](../lean4/formalizacao/Formalizacao/RegularSchedules.lean) — linha 124.
+
+### 6.12 — caracterização, estabilidade e cotas uniformes com log-log
+
+Texto: [conjecturas_lp.tex:968](../conjecturas_lp.tex); rótulo `lp:cor:loglog`.
+
+Estado: **Formalizado e compilado**. O critério da agenda vale exatamente quando $\gamma q>1$. O corolário usa as reduções de Jackson já demonstradas, incluindo estabilidade por inclusão aproximada.
+
+- [`FormalizacaoLogLog.HlogLog`](../lean4/formalizacao/Formalizacao/LogLogSchedules.lean) — linha 58.
+- [`FormalizacaoLogLog.logLog_schedule_iff`](../lean4/formalizacao/Formalizacao/LogLogSchedules.lean) — linha 61.
+- [`FormalizacaoLogLog.conj1_loglog`](../lean4/formalizacao/Formalizacao/LogLogSchedules.lean) — linha 79.
+- [`FormalizacaoLogLog.conj2_loglog`](../lean4/formalizacao/Formalizacao/LogLogSchedules.lean) — linha 90.
+- [`FormalizacaoLogLog.conj2_approx_loglog`](../lean4/formalizacao/Formalizacao/LogLogSchedules.lean) — linha 100.
+- [`FormalizacaoLogLog.uniform_loglog_ball`](../lean4/formalizacao/Formalizacao/LogLogSchedules.lean) — linha 162.
+
+### 6.13 — comparação de agendas, séries de Bertrand e diagonal
+
+Texto: [conjecturas_lp.tex:985](../conjecturas_lp.tex); rótulo `lp:obs:loglog`.
+
+Estado: **Formalizado e compilado**. A razão para a agenda de log simples tende a zero. A série diverge no limiar crítico e o critério vale para qualquer número positivo de logaritmos. Na diagonal $p=s=1$ a agenda contém o fator adicional $L_1^{\theta_q}$.
+
+- [`FormalizacaoLogLog.logLog_schedule_ratio_tendsto_zero`](../lean4/formalizacao/Formalizacao/LogLogSchedules.lean) — linha 324.
+- [`FormalizacaoLogLog.logLog_schedule_iff`](../lean4/formalizacao/Formalizacao/LogLogSchedules.lean) — linha 61.
+- [`FormalizacaoLogLog.HlogLogDiag_eq`](../lean4/formalizacao/Formalizacao/LogLogSchedules.lean) — linha 201.
+- [`FormalizacaoLogLog.conj1_loglog_diagonal`](../lean4/formalizacao/Formalizacao/LogLogSchedules.lean) — linha 292.
+- [`FormalizacaoIterated.bertrand_summable_iff`](../lean4/formalizacao/Formalizacao/IteratedSchedules.lean) — linha 89.
+- [`FormalizacaoIterated.iterated_schedule_iff`](../lean4/formalizacao/Formalizacao/IteratedSchedules.lean) — linha 188.
+
 ### F1 — arcabouço abstrato do módulo, em valores reais
 
-Texto: [conjecturas_lp.tex:1011](../conjecturas_lp.tex); rótulo `lp:sec:lean`.
+Texto: [conjecturas_lp.tex:1016](../conjecturas_lp.tex); rótulo `lp:sec:lean`.
 
 Estado: **Formalizado e compilado**. Estrutura `ModuloAbs` sobre um espaço seminormado; `ω` real. Serve de modelo para a versão em `ℝ≥0∞`, usada na instância `L^p`.
 
@@ -369,7 +486,7 @@ Estado: **Formalizado e compilado**. Estrutura `ModuloAbs` sobre um espaço semi
 
 ### F2 — arcabouço abstrato em $\mathbb R_{\ge0}^\infty$ e sua instância $L^p$
 
-Texto: [conjecturas_lp.tex:1011](../conjecturas_lp.tex); rótulo `lp:sec:lean`.
+Texto: [conjecturas_lp.tex:1016](../conjecturas_lp.tex); rótulo `lp:sec:lean`.
 
 Estado: **Formalizado e compilado**. A instância usa o subgrupo `MeasSub` das funções mensuráveis, com `nrm = eLpNorm · p vol01` e `ω = wtP p`. Os teoremas de conexão mostram que `realE`, `stratumE` e `besovE` coincidem com `realP`, `stratumP` e `besovP` para funções mensuráveis.
 
@@ -383,7 +500,7 @@ Estado: **Formalizado e compilado**. A instância usa o subgrupo `MeasSub` das f
 
 ### F3 — Jackson racional com altura explícita sobre dados nodais (Parte IV, Lema IV.4.1)
 
-Texto: [conjecturas_lp.tex:1011](../conjecturas_lp.tex); rótulo `lp:sec:lean`.
+Texto: [conjecturas_lp.tex:1016](../conjecturas_lp.tex); rótulo `lp:sec:lean`.
 
 Estado: **Formalizado e compilado**. O núcleo `jackson_nodal` aceita dados nodais $y_j$ com erro nodal controlado. A forma para dados pontuais recupera a estimativa de Jackson da Parte IV.
 
@@ -394,7 +511,7 @@ Estado: **Formalizado e compilado**. O núcleo `jackson_nodal` aceita dados noda
 
 ### F4 — Arcabouço abstrato instanciado em $L^\infty$ (Parte IV)
 
-Texto: [conjecturas_lp.tex:1011](../conjecturas_lp.tex); rótulo `lp:sec:lean`.
+Texto: [conjecturas_lp.tex:1016](../conjecturas_lp.tex); rótulo `lp:sec:lean`.
 
 Estado: **Formalizado e compilado**. O segundo módulo e a norma uniforme da Parte IV satisfazem os três axiomas; a desigualdade inversa e a inclusão $\mathscr R\subset B$ em $L^\infty$ são reobtidas dos teoremas abstratos.
 
@@ -410,6 +527,6 @@ Estado: **Formalizado e compilado**. O segundo módulo e a norma uniforme da Par
 
 | Estado | Entradas |
 |---|---|
-| Formalizado e compilado | 23 |
-| Formalizado (definição) | 5 |
+| Formalizado e compilado | 33 |
+| Formalizado (definição) | 6 |
 | Formalizado e compilado, condicional a $J_p$ | 3 |

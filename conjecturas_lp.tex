@@ -784,7 +784,7 @@ Se $s>1/p$, o critério \eqref{lp:eq:summability} vale para as agendas do \cref{
 \section{Cotas uniformes, complexidade em bits e agendas de log iterado}
 \label{lp:sec:uniform}
 
-Esta seção reúne complementos sem formalização em Lean: cotas uniformes sobre bolas de Besov com uma única agenda (\cref{lp:sec:ball}), o piso aritmético e a complexidade em bits dos aproximantes (\cref{lp:sec:bits}) e a redução do fator logarítmico crítico por logaritmos iterados (\cref{lp:sec:loglog}). As demonstrações usam o \cref{lp:lem:nodal-general}, o \cref{lp:lem:sup-bound} e o critério de somabilidade da \cref{lp:thm:besov-conditional}. O ponto de partida é a versão em norma uniforme desses resultados na Parte~IV de \citet{lp-oliveiravol}, com a imersão contínua e a cota em sup dos quase-interpolantes substituindo ali a norma supremo.
+Esta seção reúne quatro complementos formalizados em Lean (ver a \cref{lp:sec:lean}): cotas uniformes sobre bolas de Besov com uma única agenda (\cref{lp:sec:ball}), o piso aritmético e a complexidade em bits dos aproximantes (\cref{lp:sec:bits}) e a redução do fator logarítmico crítico por logaritmos iterados (\cref{lp:sec:loglog}). As demonstrações usam o \cref{lp:lem:nodal-general}, o \cref{lp:lem:sup-bound} e o critério de somabilidade da \cref{lp:thm:besov-conditional}. O ponto de partida é a versão em norma uniforme desses resultados na Parte~IV de \citet{lp-oliveiravol}, com a imersão contínua e a cota em sup dos quase-interpolantes substituindo ali a norma supremo.
 
 \subsection{Cotas uniformes sobre bolas de Besov}
 \label{lp:sec:ball}
@@ -861,7 +861,7 @@ Multiplicando por $n^s=2^{rs}$ e tomando a norma de $\ell^q$ em $r\ge1$, o prime
 
 \begin{observacao}
 \label{lp:obs:uniform-q}
-O índice $q$ entra de duas maneiras distintas. A taxa por escala \eqref{lp:eq:uniform-approx} vale com $\kappa=0$ para todo $q$. O fator $\mathsf L(N)^\kappa$, com $\kappa>1/q$, só serve para somar o erro de quantização em $\ell^q$ quando $s\ge1$ e $q<\infty$: sem ele, a sequência $2^{rs}/Q(2^r)$ é limitada mas constante, e não pertence a $\ell^q$.
+O índice $q$ entra de duas maneiras distintas. A taxa por escala \eqref{lp:eq:uniform-approx} vale com $\kappa=0$ para todo $q$. O fator $\mathsf L(N)^\kappa$, com $\kappa>1/q$, só serve para somar o erro de quantização em $\ell^q$ quando $s\ge1$ e $q<\infty$: sem ele, a sequência $2^{rs}/Q(2^r)$ tem valores entre $1/2$ e $1$, e não pertence a $\ell^q$.
 \end{observacao}
 
 \subsection{Piso aritmético e complexidade em bits}
@@ -904,7 +904,12 @@ Como $H(N)\ge2$, a constante $f\equiv a_{H(N)}$ tem $a_{H(N)}\le1/4$, e portanto
 
 \begin{observacao}
 \label{lp:obs:floor}
-Sejam $s\ge1$ com $s>1/p$ e $\kappa=0$. Pela prova do \cref{lp:thm:uniform}, $\sup_{f\in\mathbb B^s_{p,q}(B)}\Rfun{\Library,\widehat H}{n}(f)_p\le\bigl((1+45C_W)B+\tfrac52\bigr)n^{-s}$ para $n=2^r$, com $\widehat H(N)\asymp(B+1)N^s$. Pelo \cref{lp:cor:floor}, nenhuma agenda de ordem menor que $N^s$ serve para essa taxa uniforme, de modo que $\max\{1,s\}$ é o expoente certo para cotas uniformes quando $s\ge1$. A necessidade fica estabelecida apenas nesse sentido uniforme. Não se afirma que a agenda de cada função individual precise dessa ordem. Para $s<1$, o piso $N^s$ é menor que a agenda linear usada acima, e o mesmo ocorre com $N^{1+1/p-s}$ para $s<1/p$. A malha uniforme de $N=2^r$ folhas só é admissível quando $H\ge N$, e árvores adaptativas poderiam usar menos. A lacuna entre esses pisos e as agendas fica em aberto neste texto.
+Sejam $s\ge1$ com $s>1/p$ e $\kappa=0$. Pela prova do \cref{lp:thm:uniform}, para $n=2^r$ vale
+\[
+ \sup_{f\in\mathbb B^s_{p,q}(B)}\Rfun{\Library,\widehat H}{n}(f)_p
+ \le\bigl((1+45C_W)B+\tfrac52\bigr)n^{-s},
+\]
+com $\widehat H(N)\asymp(B+1)N^s$. Pelo \cref{lp:cor:floor}, nenhuma agenda de ordem menor que $N^s$ serve para essa taxa uniforme, de modo que $\max\{1,s\}$ é o expoente certo para cotas uniformes quando $s\ge1$. A necessidade fica estabelecida apenas nesse sentido uniforme. Não se afirma que a agenda de cada função individual precise dessa ordem. Para $s<1$, o piso $N^s$ é menor que a agenda linear usada acima, e o mesmo ocorre com $N^{1+1/p-s}$ para $s<1/p$. A malha uniforme de $N=2^r$ folhas só é admissível quando $H\ge N$, e árvores adaptativas poderiam usar menos. A lacuna entre esses pisos e as agendas fica em aberto neste texto.
 \end{observacao}
 
 Para tratar bits, fixe uma codificação binária das funções $g\in\Aclass_{N,H}([0,1])$: um bit indica $g=0$ ou $g\ne0$; a forma da árvore, em pré-ordem, usa um bit por nó, indicando folha ou nó interno; e cada folha traz as duas coordenadas racionais $(y_0,s)$, cada uma com sinal, numerador e denominador. A posição de cada folha, isto é, o par $(k,m)$, é determinada pela forma da árvore.
@@ -1010,7 +1015,7 @@ $s=1/p$ & $0<q\le\infty$ & $N\,\mathsf L_1^{\theta_q+\kappa}$, $\kappa\ge0$ ($\k
 \section{Formalização das demonstrações em Lean 4}
 \label{lp:sec:lean}
 
-O projeto \code{lean4/formalizacao} verifica, com Lean 4.28.0 e Mathlib v4.28.0 \citep{lp-lean4,lp-mathlib}, o \cref{lp:conj:besov}, nos itens (i), (ii) e (iii), o \cref{lp:conj:stability} e o \cref{lp:thm:approx-stability}. A desigualdade inversa é demonstrada para módulos a valores em $[0,\infty]$ e especializada a $L^p$. A prova direta combina Whitney, quase-interpolação, imersão contínua (regime $s>1/p$), cota em sup dos quase-interpolantes (regime $s\le1/p$) e construção da árvore diádica quantizada. A estimativa de Jackson resultante é aplicada às agendas dos itens (i), (ii) e (iii) do \cref{lp:conj:besov} e às escalas deslocadas dos \cref{lp:conj:stability,lp:thm:approx-stability}. Os resultados da \cref{lp:sec:uniform}, isto é, as cotas uniformes sobre bolas, o piso aritmético, a complexidade em bits e as agendas de log iterado, \textbf{não estão formalizados em Lean}; suas demonstrações neste texto não foram verificadas mecanicamente.
+O projeto \code{lean4/formalizacao} verifica, com Lean 4.28.0 e Mathlib v4.28.0 \citep{lp-lean4,lp-mathlib}, o \cref{lp:conj:besov}, nos itens (i), (ii) e (iii), o \cref{lp:conj:stability} e o \cref{lp:thm:approx-stability}. A desigualdade inversa é demonstrada para módulos a valores em $[0,\infty]$ e especializada a $L^p$. A prova direta combina Whitney, quase-interpolação, imersão contínua (regime $s>1/p$), cota em sup dos quase-interpolantes (regime $s\le1/p$) e construção da árvore diádica quantizada. A estimativa de Jackson resultante é aplicada às agendas dos itens (i), (ii) e (iii) do \cref{lp:conj:besov} e às escalas deslocadas dos \cref{lp:conj:stability,lp:thm:approx-stability}. A formalização inclui as cotas uniformes sobre bolas, o piso aritmético, as descrições binárias e as agendas de log iterado da \cref{lp:sec:uniform}.
 
 \subsection{Representação dos objetos e dos teoremas}
 \label{lp:sec:fidelity}
@@ -1050,6 +1055,25 @@ Estabilidade aproximada ($s\le1/p$) & \code{besov_subset_stratum_low_approx}, \c
 \end{tabularx}
 \end{table}
 
+\begin{table}[!ht]
+\centering
+\setlength{\tabcolsep}{4pt}
+\setlength{\belowcaptionskip}{4pt}
+\caption{Declarações Lean para a \cref{lp:sec:uniform}.}
+\small
+\begin{tabularx}{\linewidth}{@{}p{0.37\linewidth}>{\raggedright\arraybackslash}X@{}}
+\toprule
+Resultado & Declarações \\
+\midrule
+Quantização e cotas uniformes & \code{uniform_height_quantization}, \code{lam_bound_unif}, \code{uniform_quantWeight_lt_top}, \code{uniform_besov_ball} \\
+Piso aritmético em $L^p$ & \code{arithmetic_floor_lp}, \code{arithmetic_floor_bestError}, \code{arithmetic_height_necessary} \\
+Código binário e taxa & \code{boundedLibrary_code}, \code{boundedLibrary_log_card}, \code{uniform_rate_bits} \\
+Critério exato da agenda & \code{regular_schedule_criterion}, \code{iterated_schedule_iff} \\
+Log-log e estabilidade & \code{conj1_loglog}, \code{conj2_loglog}, \code{conj2_approx_loglog}, \code{uniform_loglog_ball}, \code{conj1_loglog_diagonal} \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
 \subsection{Reprodução da verificação}
 
 Na raiz do projeto Lean, a compilação e a auditoria são executadas por
@@ -1057,7 +1081,7 @@ Na raiz do projeto Lean, a compilação e a auditoria são executadas por
 lake build Formalizacao
 lake env lean Formalizacao/Auditoria.lean
 \end{verbatim}
-A auditoria examina 143 declarações distintas e registra somente \code{propext}, \code{Classical.choice} e \code{Quot.sound}. A saída está em \code{lean4/formalizacao/auditoria_axiomas.txt}. O mapa \code{mapas/MAPA_TEX_LEAN.md} aponta os nomes qualificados e os arquivos de origem. Na raiz do artigo, \texttt{python3 mapas/verificar\_mapa.py} confere os rótulos TeX e os nomes Lean.
+A auditoria examina 170 declarações distintas e registra somente \code{propext}, \code{Classical.choice} e \code{Quot.sound}. A saída está em \code{lean4/formalizacao/auditoria_axiomas.txt}. O mapa \code{mapas/MAPA_TEX_LEAN.md} aponta os nomes qualificados e os arquivos de origem. Na raiz do artigo, \texttt{python3 mapas/verificar\_mapa.py} confere os rótulos TeX e os nomes Lean.
 
 \clearpage
 \begin{referenciasabnt}
