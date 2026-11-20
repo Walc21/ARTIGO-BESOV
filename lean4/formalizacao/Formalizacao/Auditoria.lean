@@ -1,0 +1,139 @@
+import Formalizacao
+
+/-!
+# Auditoria de axiomas
+
+Cada `#print axioms` abaixo deve listar somente `propext`, `Classical.choice` e `Quot.sound`
+e nunca `sorryAx`. Executar: `lake env lean Formalizacao/Auditoria.lean`.
+-/
+
+-- Arcabouço abstrato (valores reais)
+#print axioms Formalizacao.inverse_le
+#print axioms Formalizacao.realization_le_norm
+#print axioms Formalizacao.stratum_subset_besov
+-- Arcabouço abstrato (ENNReal)
+#print axioms Formalizacao.ModE.inverse_E
+#print axioms Formalizacao.ModE.stratum_subset_besovE
+-- Módulo em L^p
+#print axioms FormalizacaoLp.wtP_add_le
+#print axioms FormalizacaoLp.wtP_le_four
+#print axioms FormalizacaoLp.wtP_mono_t
+#print axioms FormalizacaoLp.wtP_le_four_realP
+#print axioms FormalizacaoLp.realE_conn
+#print axioms FormalizacaoLp.stratum_conn
+#print axioms FormalizacaoLp.besov_conn
+#print axioms FormalizacaoLp.wtP_le_four_realP_of_abstract
+#print axioms FormalizacaoLp.stratum_subset_besov_conn
+#print axioms FormalizacaoLp.measurable_sigma
+#print axioms FormalizacaoLp.classNH_subset_sigma
+-- Reduções
+#print axioms FormalizacaoRed.realP_le_norm
+#print axioms FormalizacaoRed.realP_le_of_approx
+#print axioms FormalizacaoRed.besov_subset_stratum
+#print axioms FormalizacaoThm.conj1_endpoint_of_J
+#print axioms FormalizacaoThm.conj1_subcritical_of_J
+#print axioms FormalizacaoThm.conj1_critical_of_J
+#print axioms FormalizacaoThm.conj1_tilde_of_J
+#print axioms FormalizacaoStab.besov_subset_stratum_fam
+#print axioms FormalizacaoStab.stability_iff_of_J
+#print axioms FormalizacaoStab.conj2Stability_endpoint_of_J
+#print axioms FormalizacaoStab.conj2Stability_subcritical_of_J
+#print axioms FormalizacaoStab.conj2Stability_critical_of_J
+#print axioms FormalizacaoStab.conj2Stability_tilde_of_J
+
+-- M4: projeção afim local, Hölder, quase-interpolante e erro local
+#print axioms FormalizacaoQuasi.abs_kL_le
+#print axioms FormalizacaoQuasi.abs_kR_le
+#print axioms FormalizacaoQuasi.integral_kL_mul_affine
+#print axioms FormalizacaoQuasi.integral_kR_mul_affine
+#print axioms FormalizacaoQuasi.abs_integral_kernel_le
+#print axioms FormalizacaoGrid.lam_affine
+#print axioms FormalizacaoGrid.Q_cell
+#print axioms FormalizacaoGrid.Q_affine
+#print axioms FormalizacaoGrid.abs_lam_le
+#print axioms FormalizacaoGrid.local_error
+
+-- M4(c), M5 (contingência), M6 (núcleo discreto)
+#print axioms FormalizacaoQuasi.integral_abs_kL
+#print axioms FormalizacaoQuasi.integral_abs_kR
+#print axioms FormalizacaoQuasi.abs_integral_kL_mul_le
+#print axioms FormalizacaoGrid.abs_lam_sup_le
+#print axioms FormalizacaoCor.quasi_error
+#print axioms FormalizacaoCor.local_error_inf
+#print axioms FormalizacaoEmb.inverse_affine_sup
+#print axioms FormalizacaoEmb.bernstein_affine
+
+-- Lema 5.5 (M6)
+#print axioms FormalizacaoL55c.ae_eq_Glim
+#print axioms FormalizacaoL55c.Glim_continuousOn
+#print axioms FormalizacaoL55c.Glim_bound
+#print axioms FormalizacaoL55b.vk_sup_le
+#print axioms FormalizacaoL55b.vk_slope_le
+#print axioms FormalizacaoL55d.F_lip
+#print axioms FormalizacaoL55e.modulus_lt1
+#print axioms FormalizacaoL55e.modulus_eq1
+#print axioms FormalizacaoL55e.modulus_gt1
+
+-- Parte IV: refatoração de Jackson sobre dados nodais (M7)
+#print axioms Pendencias.Jackson.jackson_nodal
+#print axioms Pendencias.Jackson.atom_height_nodal
+#print axioms Pendencias.Jackson.rational_jackson_height
+#print axioms Pendencias.Jackson.rational_jackson_uniform_explicit
+
+-- Lema 5.2(d) (M4)
+#print axioms FormalizacaoL52d.lam_diff_le
+#print axioms FormalizacaoL52d.omega1_ne_top
+
+-- Lema 5.3 (Whitney em L^p, M5) e consequências incondicionais
+#print axioms FormalizacaoW.whitney_lp
+#print axioms FormalizacaoW.local_whitney
+#print axioms FormalizacaoW.taylor_lp
+#print axioms FormalizacaoW.fg_lp
+#print axioms FormalizacaoW.double_sym
+#print axioms FormalizacaoW.Wt_global
+#print axioms FormalizacaoW.sum_lintegral_le
+#print axioms FormalizacaoW.Ek_bound
+#print axioms FormalizacaoW.quasi_error_unc
+#print axioms FormalizacaoW.Glim_continuousOn_unc
+#print axioms FormalizacaoW.ae_eq_Glim_unc
+#print axioms FormalizacaoW.modulus_lt1_unc
+#print axioms FormalizacaoW.modulus_eq1_unc
+#print axioms FormalizacaoW.modulus_gt1_unc
+
+-- M8: a hipótese J_p e as Conjecturas 1 e 2 como teoremas
+#print axioms FormalizacaoJ.nodal_tree
+#print axioms FormalizacaoJ.hypJp_of_lt
+#print axioms FormalizacaoJ.hypJp_of_lt'
+#print axioms FormalizacaoJ.conj1_endpoint
+#print axioms FormalizacaoJ.conj1_subcritical
+#print axioms FormalizacaoJ.conj1_critical
+#print axioms FormalizacaoJ.conj1_tilde
+#print axioms FormalizacaoJ.conj2_endpoint
+#print axioms FormalizacaoJ.conj2_subcritical
+#print axioms FormalizacaoJ.conj2_critical
+#print axioms FormalizacaoJ.conj2_tilde
+#print axioms FormalizacaoJ.Q_node
+#print axioms FormalizacaoJ.lam_congr_ae
+#print axioms FormalizacaoJ.nodal_G
+
+-- L^∞ sobre o arcabouço abstrato (M1) e J_p com as constantes do artigo (M8)
+#print axioms FormalizacaoInf.nInf_sub
+#print axioms FormalizacaoInf.omega2_add_le
+#print axioms FormalizacaoInf.realE_modInf
+#print axioms FormalizacaoInf.inverse_realG_of_abstract
+#print axioms FormalizacaoInf.besovE_top_iff
+#print axioms FormalizacaoInf.besovE_fin_iff
+#print axioms FormalizacaoInf.rG_eq
+#print axioms FormalizacaoInf.besovQ_of_RGQ_abstract
+#print axioms FormalizacaoInf.besovInf_of_RGInf_abstract
+#print axioms FormalizacaoJ.lp_jackson_core
+#print axioms FormalizacaoJ.hypJpStrong_of_lt
+#print axioms FormalizacaoJ.besov_continuous_rep
+
+-- Lema 5.1: núcleo = projeção em afins (fidelidade, correção 4)
+#print axioms FormalizacaoKer.Kf_symm
+#print axioms FormalizacaoKer.kL_eq_Kf
+#print axioms FormalizacaoKer.kR_eq_Kf
+#print axioms FormalizacaoKer.reproduce_affine
+#print axioms FormalizacaoKer.range_affine
+#print axioms FormalizacaoKer.kernel_is_affine_projection

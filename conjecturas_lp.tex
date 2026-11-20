@@ -1,0 +1,664 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[a4paper,left=3cm,right=2.5cm,top=2.7cm,bottom=2.7cm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern,tgtermes}
+\usepackage{babel}
+\babelprovide[import,main]{portuguese}
+\babelprovide[import]{english}
+\usepackage{amsmath,amssymb,amsthm,mathtools,mathrsfs}
+\usepackage{microtype,booktabs,tabularx,array,enumitem,etoolbox,needspace}
+\usepackage{xurl}
+\usepackage{hyperref}
+\usepackage[nameinlink,noabbrev]{cleveref}
+
+\hypersetup{hidelinks,
+  pdftitle={Caracterização dos espaços de Besov em Lp por realização com altura aritmética controlada},
+  pdfauthor={Victor Gabriel de Oliveira},
+  pdfsubject={Teoremas de Jackson, espaços de Besov e estabilidade por inclusão de redes ReLU},
+  pdfkeywords={espaços de Besov, aproximação em Lp, altura aritmética, funcional de realização, redes ReLU}}
+\setlength{\parindent}{1.25em}
+\setlength{\emergencystretch}{2em}
+\linespread{1.08}
+\setlist{nosep,leftmargin=2em}
+\renewcommand{\arraystretch}{1.17}
+
+\theoremstyle{plain}
+\newtheorem{teorema}{Teorema}[section]
+\newtheorem{lema}[teorema]{Lema}
+\newtheorem{proposicao}[teorema]{Proposição}
+\newtheorem{corolario}[teorema]{Corolário}
+\theoremstyle{definition}
+\newtheorem{definicao}[teorema]{Definição}
+\renewcommand{\proofname}{Demonstração}
+\numberwithin{equation}{section}
+\crefname{section}{seção}{seções}
+\Crefname{section}{Seção}{Seções}
+\crefname{appendix}{apêndice}{apêndices}
+\Crefname{appendix}{Apêndice}{Apêndices}
+\crefname{teorema}{teorema}{teoremas}
+\Crefname{teorema}{Teorema}{Teoremas}
+\crefname{lema}{lema}{lemas}
+\Crefname{lema}{Lema}{Lemas}
+\crefname{proposicao}{proposição}{proposições}
+\Crefname{proposicao}{Proposição}{Proposições}
+\crefname{corolario}{corolário}{corolários}
+\Crefname{corolario}{Corolário}{Corolários}
+\crefname{definicao}{definição}{definições}
+\Crefname{definicao}{Definição}{Definições}
+\newcommand{\crefpairconjunction}{ e }
+\newcommand{\creflastconjunction}{ e }
+
+\newcommand{\N}{\mathbb N}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\R}{\mathbb R}
+\newcommand{\Aclass}{\mathcal A}
+\newcommand{\Library}{\mathcal L}
+\newcommand{\height}{\operatorname{ht}}
+\newcommand{\wt}[3]{\omega_2(#1,#2)_{#3}}
+\newcommand{\Bes}[3]{B^{#1}_{#2,#3}}
+\newcommand{\Rfun}[2]{\mathcal R^{#1}_{#2}}
+\newcommand{\Rstr}[3]{\mathscr R^{#1}_{#2}(#3)}
+\newcommand{\Sig}[1]{\Sigma_{#1}^{\Library,H}}
+\newcommand{\dd}{\,\mathrm{d}}
+\newcommand{\code}[1]{\nolinkurl{#1}}
+
+% Citações autor-data.
+\newcommand{\abntentry}[4]{\expandafter\gdef\csname abU@#1\endcsname{#2}\expandafter\gdef\csname abN@#1\endcsname{#3}\expandafter\gdef\csname abY@#1\endcsname{#4}}
+\newcommand{\abntlookup}[2]{\ifcsname ab#1@#2\endcsname\csname ab#1@#2\endcsname\else\textbf{??}\PackageWarning{abnt}{Citacao indefinida: #2}\fi}
+\newcommand{\abntpar}[1]{\hyperlink{bib:#1}{\abntlookup{U}{#1}, \abntlookup{Y}{#1}}}
+\newcommand{\abntsep}{}
+\newcommand{\abntpitem}[1]{\abntsep\renewcommand{\abntsep}{; }\abntpar{#1}}
+\newcommand{\citep}[2][]{\begingroup\renewcommand{\abntsep}{}(\forcsvlist{\abntpitem}{#2}\ifblank{#1}{}{, #1})\endgroup}
+\newcount\abntn \newcount\abnti
+\newcommand{\abntcnt}[1]{\advance\abntn by 1 }
+\newcommand{\abnttitem}[1]{\advance\abnti by 1 \ifnum\abnti>1 \ifnum\abnti=\abntn{} e \else, \fi\fi
+ \hyperlink{bib:#1}{\abntlookup{N}{#1}} (\hyperlink{bib:#1}{\abntlookup{Y}{#1}}\ifnum\abnti=\abntn\abntoptc\fi)}
+\newcommand{\citet}[2][]{\begingroup\ifblank{#1}{\def\abntoptc{}}{\def\abntoptc{, #1}}\abntn=0 \forcsvlist{\abntcnt}{#2}\abnti=0 \forcsvlist{\abnttitem}{#2}\endgroup}
+\newcommand{\abntref}[2]{\par\begingroup\interlinepenalty=10000\relax\hypertarget{bib:#1}{}#2\par\endgroup}
+\newenvironment{referenciasabnt}{\section*{Referências}\small\raggedright\setlength{\parindent}{0pt}\setlength{\parskip}{6pt plus 1pt}}{}
+\abntentry{artigo_1-devore1998}{DeVore}{DeVore}{1998}
+\abntentry{artigo_1-devore2021}{DeVore; Hanin; Petrova}{DeVore, Hanin e Petrova}{2021}
+\abntentry{artigo_2-devorelorentz1993}{DeVore; Lorentz}{DeVore e Lorentz}{1993}
+\abntentry{artigo_2-devorepopov1988}{DeVore; Popov}{DeVore e Popov}{1988}
+\abntentry{artigo_2-hristovivanov1990}{Hristov; Ivanov}{Hristov e Ivanov}{1990}
+\abntentry{artigo_2-petrushev1988}{Petrushev}{Petrushev}{1988}
+\abntentry{artigo_2-whitney1957}{Whitney}{Whitney}{1957}
+\abntentry{lp-siegel2023}{Siegel}{Siegel}{2023}
+\abntentry{lp-ditzian1987}{Ditzian; Totik}{Ditzian e Totik}{1987}
+\abntentry{lp-oliveiravol}{Oliveira}{Oliveira}{2026}
+\abntentry{lp-ali2020}{Ali; Nouy}{Ali e Nouy}{2020}
+\abntentry{lp-yang2024}{Yang}{Yang}{2024}
+\abntentry{lp-kolomoitsev2019}{Kolomoitsev; Tikhonov}{Kolomoitsev e Tikhonov}{2019}
+\abntentry{lp-ditzian2007}{Ditzian}{Ditzian}{2007}
+\abntentry{lp-lean4}{Moura; Ullrich}{de Moura e Ullrich}{2021}
+\abntentry{lp-mathlib}{Mathlib Community}{The mathlib Community}{2020}
+
+\title{\bfseries Caracterização dos espaços de Besov em \texorpdfstring{$L^p$}{Lp}\\
+por realização com altura aritmética controlada}
+\author{Victor Gabriel de Oliveira\thanks{Pesquisador independente.}}
+\date{19 de novembro de 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Caracterizamos os espaços de Besov $B^s_{p,q}([0,1])$, com $1\le p<\infty$, $1/p<s<2$ e $0<q\le\infty$, pela somabilidade diádica de um funcional de realização que combina o erro em $L^p$ e o módulo de suavidade de segunda ordem do aproximante. O ínfimo é tomado sobre funções contínuas e afins por partes, com coeficientes racionais, definidas em partições diádicas e sujeitas a orçamentos simultâneos de folhas e altura aritmética. Um teorema de Jackson fornece um aproximante com até $n$ folhas e altura $H$, com erro limitado por $C_p\omega_2(f,n^{-1})_p+16(\|f\|_\infty+1)/H$. A prova combina quase-interpolação por projeções afins locais, uma desigualdade de Whitney em partições e quantização dos valores nodais em grades alternadas. As agendas de altura são da ordem de $N^{\max\{1,s\}}$ para $q=\infty$ e para $q<\infty$ com $s<1$. Para $q<\infty$ e $s\ge1$, basta um fator logarítmico de expoente $\kappa>1/q$. A caracterização permanece válida para toda família aninhada de funções realizadas por redes ReLU que contenha a biblioteca racional após um reescalonamento linear do orçamento.
+
+\medskip
+\noindent\textbf{Palavras-chave.} Espaços de Besov, funcional de realização, altura aritmética, teorema de Jackson, redes ReLU.
+\end{abstract}
+
+\begin{otherlanguage}{english}
+\begin{abstract}
+We characterize the Besov spaces $B^s_{p,q}([0,1])$, for $1\le p<\infty$, $1/p<s<2$, and $0<q\le\infty$, by the dyadic summability of a realization functional combining the $L^p$ error and the second-order modulus of smoothness of the approximant. The infimum is taken over continuous piecewise affine functions with rational coefficients on dyadic partitions, under simultaneous leaf and arithmetic height budgets. A Jackson theorem gives an approximant with at most $n$ leaves and height $H$, with error bounded by $C_p\omega_2(f,n^{-1})_p+16(\|f\|_\infty+1)/H$. The proof combines quasi-interpolation by local affine projections, a Whitney inequality on partitions, and quantization of nodal values on alternating grids. Height schedules are of order $N^{\max\{1,s\}}$ for $q=\infty$ and for $q<\infty$ with $s<1$. For $q<\infty$ and $s\ge1$, a logarithmic factor with exponent $\kappa>1/q$ suffices. The characterization extends to every nested family of functions realized by ReLU networks that contains the rational library after a linear rescaling of the budget.
+
+\medskip
+\noindent\textbf{Keywords.} Besov spaces, realization functional, arithmetic height, Jackson theorem, ReLU networks.
+\end{abstract}
+\end{otherlanguage}
+
+\section{Introdução}
+\label{lp:sec:intro}
+
+A teoria da aproximação caracteriza a regularidade de Besov por meio de erros associados a famílias de aproximantes, entre elas os espaços de splines e as classes de funções racionais \citep{artigo_1-devore1998,artigo_2-devorepopov1988,artigo_2-petrushev1988}. Os funcionais de realização incorporam ao erro de aproximação uma medida de suavidade do aproximante \citep{artigo_2-hristovivanov1990,lp-kolomoitsev2019,lp-ditzian2007}. As estimativas para aproximação de classes de Besov por redes ReLU vinculam essa regularidade ao orçamento das redes \citep{artigo_1-devore2021,lp-ali2020,lp-siegel2023,lp-yang2024}.
+
+O orçamento de aproximação controla o número de folhas da árvore diádica e a altura dos racionais que definem os segmentos afins. Para cada orçamento $N$ e agenda $H$, o funcional de realização minimiza a soma do erro em $L^p$ e do módulo de segunda ordem do aproximante na escala $N^{-1}$. Sob as agendas e os regimes de parâmetros do \cref{lp:conj:besov}, a somabilidade diádica do funcional caracteriza $B^s_{p,q}([0,1])$. A inclusão da biblioteca racional em uma família aninhada de redes, com ampliação linear de $N$, preserva o espaço caracterizado. Esses resultados estendem à norma $L^p$ a caracterização uniforme e o teorema de estabilidade da Parte~IV de \citet{lp-oliveiravol}.
+
+A estimativa direta resulta de um teorema de Jackson com dois termos. O módulo de segunda ordem controla o erro de um quase-interpolante construído por projeções afins locais. A quantização de seus valores nodais produz o aproximante racional e acrescenta um termo da ordem de $H^{-1}$. A desigualdade inversa decorre da subaditividade do módulo e vale para toda família de aproximantes em $L^p$. A combinação das duas estimativas determina as agendas de altura enunciadas na \cref{lp:sec:statements}.
+
+\section{Espaços de Besov e biblioteca racional}
+\label{lp:sec:defs}
+
+\subsection{Módulos de suavidade}
+
+Fixe $1\le p<\infty$. Escrevemos $L^p=L^p([0,1])$ e $\|\cdot\|_p=\|\cdot\|_{L^p([0,1])}$. Para $f\in L^p$ e $0<h\le1/2$, definimos
+\begin{equation}
+ \Delta_h^2f(x)=f(x+2h)-2f(x+h)+f(x),\qquad x\in[0,1-2h].
+ \label{lp:eq:second-difference}
+\end{equation}
+O módulo de segunda ordem é
+\begin{equation}
+ \wt{f}{t}{p}
+ =\sup_{0<h\le\min\{t,1/2\}}\|\Delta_h^2f\|_{L^p([0,1-2h])},
+ \qquad t>0.
+ \label{lp:eq:modulus-p}
+\end{equation}
+Cada termo da diferença é avaliado em $[0,1]$. Para $f$ contínua, escrevemos
+$\omega_1(f,t)_\infty=\sup\{|f(x)-f(y)|:x,y\in[0,1],\ |x-y|\le t\}$.
+
+Para $0<s<2$ e $0<q\le\infty$, adotamos a caracterização diádica de Besov
+\citep{artigo_2-devorelorentz1993,lp-ditzian1987}
+\begin{equation}
+ \|f\|^*_{\Bes{s}{p}{q}}
+ =\|f\|_p+\big\|\big(2^{rs}\wt{f}{2^{-r}}{p}\big)_{r\ge0}\big\|_{\ell^q},
+ \qquad
+ \Bes{s}{p}{q}=\{f\in L^p:\|f\|^*_{\Bes{s}{p}{q}}<\infty\}.
+ \label{lp:eq:besov-p}
+\end{equation}
+Para $q=\infty$, usa-se o supremo. Para $s>1/p$, o \cref{lp:lem:embedding} fornece o representante contínuo de cada classe de Besov, usado nas avaliações pontuais.
+
+\Needspace{7\baselineskip}
+\subsection{Altura aritmética e funcional de realização}
+
+Para uma fração reduzida $u=a/b\in\Q$, com $b>0$, ponha
+$\height(u)=\max\{|a|,b\}$. Seja $J_{k,m}=[m2^{-k},(m+1)2^{-k}]$ uma célula diádica, com centro $x_{k,m}=(m+\tfrac12)2^{-k}$. Sobre essa célula, um segmento da biblioteca $\Library$ tem a forma $u+v(x-x_{k,m})$, com $u\in\Q$ e $v\in\Q\setminus\{0\}$. Sua altura é
+\[
+ \max\{2,k+1,|m|+1,\height(u),\height(v)\}.
+\]
+
+Uma representação sobre $[0,1]$ é obtida por bisseções diádicas sucessivas, com um segmento em cada folha e coincidência dos valores nos extremos compartilhados. Denotamos por $\Aclass_{N,H}([0,1])$ o conjunto das funções contínuas que admitem tal representação com até $N$ folhas de altura no máximo $H$ \citep{lp-oliveiravol}.
+
+Para uma agenda não decrescente $H\colon\N\to\N$, definimos
+\begin{equation}
+ \Sig{N}=\{0\}\cup\Aclass_{N,H(N)}([0,1]).
+ \label{lp:eq:sigma}
+\end{equation}
+Com $\nu_s=\max\{1,s\}$, as agendas utilizadas são
+\begin{align}
+ H_{s,\kappa}(N)
+ &=\left\lceil8(N+1)^{\nu_s}[\log(eN)]^\kappa\right\rceil,
+ &&\kappa\ge0,\quad N\ge1,\label{lp:eq:schedule}\\
+ \widetilde H_{s,\eta}(N)
+ &=\left\lceil8(N+1)^{\max\{1,s+\eta\}}\right\rceil,
+ &&\eta>0,\quad N\ge1.\label{lp:eq:slack}
+\end{align}
+
+\begin{definicao}[Funcional e espaço de realização]
+\label{lp:def:realization}
+Para $\mathcal G=(\mathcal G_N)_{N\ge2}$, com $\mathcal G_N\subseteq L^p$, e $f\in L^p$, o funcional de realização é
+\begin{equation}
+ \Rfun{\mathcal G}{N}(f)_p
+ =\inf_{g\in\mathcal G_N}\bigl\{\|f-g\|_p+\wt{g}{N^{-1}}{p}\bigr\},
+ \label{lp:eq:realization-p}
+\end{equation}
+com a convenção $\inf\varnothing=+\infty$. O espaço de realização é
+\begin{equation}
+ \Rstr{s}{q}{\mathcal G}_p
+ =\Bigl\{f\in L^p:\big\|\big(2^{rs}\Rfun{\mathcal G}{2^r}(f)_p\big)_{r\ge1}\big\|_{\ell^q}<\infty\Bigr\}.
+ \label{lp:eq:stratum-p}
+\end{equation}
+Para a família $(\Sig{N})_{N\ge2}$, escrevemos $\Rfun{\Library,H}{N}$ e $\Rstr{s}{q}{\Library,H}_p$.
+\end{definicao}
+
+\begin{definicao}[Família aninhada que contém a biblioteca]
+\label{lp:def:network-family}
+Uma família $\mathcal N=(\mathcal N_N)_{N\ge1}$ de subconjuntos de $C([0,1])$ é aninhada e contém a função nula quando
+\begin{equation}
+ 0\in\mathcal N_N,\qquad \mathcal N_N\subseteq\mathcal N_{N+1}\qquad(N\ge1).
+ \label{lp:eq:nesting}
+\end{equation}
+Ela contém a biblioteca sob a agenda $H$ com constante $c\ge1$ quando
+\begin{equation}
+ \Sig{N}\subseteq\mathcal N_{\lceil cN\rceil}\qquad(N\ge1).
+ \label{lp:eq:contains}
+\end{equation}
+\end{definicao}
+
+\section{Caracterização de Besov e estabilidade}
+\label{lp:sec:statements}
+
+\begin{teorema}[Caracterização por realização aritmética]
+\label{lp:conj:besov}
+Sejam $1\le p<\infty$ e $1/p<s<2$. Valem as seguintes igualdades em $L^p([0,1])$:
+\begin{align}
+ \Bes{s}{p}{\infty}
+ &=\Rstr{s}{\infty}{\Library,H_{s,0}}_p,
+ &&\label{lp:eq:conj-endpoint}\\
+ \Bes{s}{p}{q}
+ &=\Rstr{s}{q}{\Library,H_{s,0}}_p,
+ &&0<q<\infty,\quad s<1,\label{lp:eq:conj-subcritical}\\
+ \Bes{s}{p}{q}
+ &=\Rstr{s}{q}{\Library,H_{s,\kappa}}_p,
+ &&0<q<\infty,\quad s\ge1,\quad\kappa>1/q,\label{lp:eq:conj-critical}\\
+ \Bes{s}{p}{q}
+ &=\Rstr{s}{q}{\Library,\widetilde H_{s,\eta}}_p,
+ &&0<q<\infty,\quad\eta>0.
+ \label{lp:eq:besov-tilde}
+\end{align}
+\end{teorema}
+
+\begin{teorema}[Estabilidade por inclusão de redes]
+\label{lp:conj:stability}
+Sejam $p,s,q,H$ como em qualquer dos casos do \cref{lp:conj:besov}. Se $\mathcal N$ satisfaz \eqref{lp:eq:nesting} e \eqref{lp:eq:contains} para algum $c\ge1$, então
+\begin{equation}
+ \Bes{s}{p}{q}=\Rstr{s}{q}{\mathcal N}_p.
+ \label{lp:eq:network-realization-p}
+\end{equation}
+\end{teorema}
+
+Para uma família de redes ReLU, a inclusão \eqref{lp:eq:contains} é uma condição sobre as funções realizadas. Por exemplo, uma função afim por partes com nós internos $t_1<\cdots<t_{m-1}$ e inclinações consecutivas $\beta_1,\ldots,\beta_m$ admite em $[0,1]$ a representação
+\[
+ g(x)=g(0)+\beta_1 x+\sum_{j=1}^{m-1}(\beta_{j+1}-\beta_j)(x-t_j)_+,
+ \qquad u_+=\max\{u,0\}.
+\]
+Como $x=x_+$ em $[0,1]$, a expressão é realizável por uma camada oculta de largura no máximo $m$. Assim, as classes de funções realizadas por redes de uma camada oculta e largura no máximo $N$ contêm $\Sig{N}$ com $c=1$.
+
+\section{Jackson racional com altura controlada}
+\label{lp:sec:program}
+
+\begin{teorema}[Estimativa de Jackson em $L^p$]
+\label{lp:hyp:jackson}
+Para $1\le p<\infty$ existe $C_W=C_W(p)\ge1$ com a seguinte propriedade. Se $1/p<s<2$ e $f\in\Bes{s}{p}{\infty}$, seja $R=\|f\|_\infty$ a norma do representante contínuo. Existe $n_0=n_0(f,p,s)\ge2$ tal que, para toda potência de dois $n\ge n_0$ e todo inteiro
+\begin{equation}
+ H\ge\max\{8n^{\nu_s},32(R+1)\},
+ \label{lp:eq:height-threshold}
+\end{equation}
+há $g_{n,H}\in\Aclass_{n,H}([0,1])$ com
+\begin{equation}
+ \|f-g_{n,H}\|_p\le9C_W\,\wt{f}{n^{-1}}{p}+\frac{16(R+1)}{H}.
+ \label{lp:eq:jackson-p}
+\end{equation}
+\end{teorema}
+
+A prova constrói um quase-interpolante em $L^p$, obtém controle dos seus valores nodais e quantiza esses valores sob o orçamento $H$.
+
+\subsection{Projeção afim local e quase-interpolação}
+
+Para $I=[a,a+\ell]$, $\ell>0$, ponha $u_x=(x-a)/\ell$. Definimos
+\[
+ P_I h(x)=\int_I K_I(x,y)h(y)\dd y,
+ \qquad
+ K_I(x,y)=\frac{1+3(2u_x-1)(2u_y-1)}{\ell}.
+\]
+
+\begin{lema}[Projeção afim local]
+\label{lp:lem:projection}
+O operador $P_I$ reproduz funções afins e coincide em $L^2(I)$ com a projeção ortogonal sobre elas. Se $e$ é um extremo de $I$, então
+\begin{equation}
+ |(P_I h)(e)|\le4\ell^{-1/p}\|h\|_{L^p(I)},\qquad
+ |(P_I h)(e)|\le2\|h\|_{L^\infty(I)}\quad(h\in L^\infty(I)).
+ \label{lp:eq:projection-bounds}
+\end{equation}
+\end{lema}
+
+\begin{proof}
+As funções $\ell^{-1/2}$ e $\sqrt{3/\ell}(2u_x-1)$ formam uma base ortonormal do espaço das funções afins em $L^2(I)$. A soma dos produtos das funções da base em $x$ e $y$ dá $K_I(x,y)$, o que estabelece a projeção e a reprodução. Nos extremos, $\ell K_I(e,y)$ é $4-6u_y$ ou $6u_y-2$. Seu módulo é limitado por $4$, e Hölder dá a primeira estimativa. A integral do módulo de cada uma dessas funções em $u_y\in[0,1]$ vale $5/3$, o que dá a segunda.
+\end{proof}
+
+Para $n\ge2$, sejam $t_j=j/n$, $0\le j\le n$, e $I_k=[t_k,t_{k+1}]$, $0\le k<n$. Seja $\varphi_j$ a função chapéu contínua e afim em cada célula, de valor $1$ em $t_j$ e $0$ nos demais nós. Com $c(j)=\min\{j,n-1\}$, definimos
+\begin{equation}
+ \lambda_j(f)=(P_{I_{c(j)}}f)(t_j),
+ \qquad Q_nf=\sum_{j=0}^n\lambda_j(f)\varphi_j .
+ \label{lp:eq:quasi}
+\end{equation}
+Usaremos $J_k=I_k\cup I_{k+1}$ para $k<n-1$ e $J_{n-1}=I_{n-2}\cup I_{n-1}$. Escrevemos $E(f,J)_p=\inf_{a\,\mathrm{afim}}\|f-a\|_{L^p(J)}$.
+
+\begin{lema}[Quase-interpolação por projeções locais]
+\label{lp:lem:quasi}
+Para $f\in L^p$ valem as seguintes propriedades.
+\begin{enumerate}[label=(\alph*)]
+ \item $Q_n$ é linear, produz funções contínuas e afins em cada célula $I_k$ e reproduz funções afins.
+ \item $\|f-Q_nf\|_{L^p(I_k)}\le9E(f,J_k)_p$.
+ \item Se $f$ é limitada, $|\lambda_j(f)|\le2\|f\|_\infty$.
+ \item Se $f$ é contínua, $|\lambda_{j+1}(f)-\lambda_j(f)|\le5\omega_1(f,n^{-1})_\infty$ para $0\le j<n$.
+\end{enumerate}
+\end{lema}
+
+\begin{proof}
+A fórmula \eqref{lp:eq:quasi} dá a linearidade e a estrutura por células. Para $a$ afim, $\lambda_j(a)=a(t_j)$ pelo \cref{lp:lem:projection}, logo $Q_na=a$. Em $I_k$, os únicos termos de $Q_n$ são os associados a $t_k$ e $t_{k+1}$. Para toda função afim $a$, a primeira estimativa de \eqref{lp:eq:projection-bounds} e $\|\varphi_j\|_{L^p(I_k)}\le n^{-1/p}$ dão
+\[
+ \|Q_n(f-a)\|_{L^p(I_k)}
+ \le4\|f-a\|_{L^p(I_k)}+4\|f-a\|_{L^p(I_{c(k+1)})}.
+\]
+Como $f-Q_nf=(f-a)-Q_n(f-a)$ e ambas as células estão em $J_k$, segue a cota $9\|f-a\|_{L^p(J_k)}$. O ínfimo em $a$ dá (b).
+
+A segunda estimativa de \eqref{lp:eq:projection-bounds} dá (c). Aplicada a $f-f(t_j)$ em $I_{c(j)}$, ela fornece
+$|\lambda_j(f)-f(t_j)|\le2\omega_1(f,n^{-1})_\infty$. Somando as estimativas nos dois nós e a de $|f(t_{j+1})-f(t_j)|$, obtemos (d).
+\end{proof}
+
+\subsection{Desigualdade de Whitney em partições}
+
+A estimativa a seguir controla a soma dos erros locais por um único módulo global. O controle do erro de aproximação polinomial por diferenças finitas remonta a \citet{artigo_2-whitney1957} e integra a teoria da aproximação por splines \citep{artigo_2-devorelorentz1993}. A demonstração a seguir explicita uma constante que depende apenas de $p$.
+
+\begin{lema}[Whitney de ordem dois em partições]
+\label{lp:lem:whitney}
+Existe $C_W=C_W(p)\ge1$ tal que, para $n\ge2$ e $f\in L^p$,
+\begin{equation}
+ \left(\sum_{k=0}^{n-1}E(f,J_k)_p^p\right)^{1/p}
+ \le C_W\,\wt{f}{n^{-1}}{p}.
+ \label{lp:eq:whitney-partition}
+\end{equation}
+\end{lema}
+
+\begin{proof}
+Escreva $J_k=[a,a+8\delta]$, com $\delta=1/(4n)$, e tome
+$S_k=[a+\delta,a+7\delta]$. Para $|\rho|\le\delta$ e $x\in S_k$, defina $W_\rho(x)=f(x+\rho)-2f(x)+f(x-\rho)$. Consideremos a média dupla
+\[
+ g(x)=\delta^{-2}\int_0^\delta\!\!\int_0^\delta
+            f(x-\delta+u+v)\dd v\dd u.
+\]
+Se $U(x)=\int_a^x f(y)\dd y$ e $V(x)=\int_a^x U(y)\dd y$, então
+$g(x)=\delta^{-2}\big(V(x+\delta)-2V(x)+V(x-\delta)\big)$ em $S_k$.
+Portanto $g'$ é absolutamente contínua e $g''=\delta^{-2}W_\delta$ quase em toda parte nesse intervalo. Para a reta tangente $A$ de $g$ em $a+4\delta$, a fórmula de Taylor com resto integral, seguida de Hölder, dá
+\[
+ \|g-A\|_{L^p(S_k)}
+ \le (6\delta)^2\|g''\|_{L^p(S_k)}
+ =36\|W_\delta\|_{L^p(S_k)} .
+\]
+
+A reflexão $(u,v)\mapsto(\delta-u,\delta-v)$ na integral que define $g$ dá
+\[
+ 2\delta^2(g(x)-f(x))
+ =\int_0^\delta\!\!\int_0^\delta W_{u+v-\delta}(x)\dd v\dd u .
+\]
+Aplicando Jensen à média no quadrado e Tonelli, obtemos
+\[
+ \|f-g\|_{L^p(S_k)}^p
+ \le \frac{1}{2^p\delta^2}\int_0^\delta\!\!\int_0^\delta
+        \|W_{u+v-\delta}\|_{L^p(S_k)}^p\dd v\dd u .
+\]
+
+Ponha $z=f-A$. Como a segunda diferença de $A$ se anula, na faixa $[a,a+\delta]$ vale
+\[
+ z(x)=2z(x+\delta)-z(x+2\delta)+W_\delta(x+\delta).
+\]
+Na faixa $[a+7\delta,a+8\delta]$ vale a identidade com $x-\delta$ e $x-2\delta$ no lugar de $x+\delta$ e $x+2\delta$. Em ambas as faixas, os argumentos do lado direito pertencem a $S_k$. Pela convexidade de $t\mapsto t^p$ em $[0,\infty)$,
+$(\sum_{i=1}^j b_i)^p\le j^{p-1}\sum_{i=1}^j b_i^p$ para $b_i\ge0$. Aplicamos a desigualdade com três termos em cada faixa e majoramos $3^{p-1}$ por $4^{p-1}$. Após as translações para $S_k$, cada faixa contribui com um fator $2^p+1$ na integral de $|z|^p$. Assim, com $c_4=4^{p-1}$ e $M_p=1+2c_4(2^p+1)$,
+\[
+ \|z\|_{L^p(J_k)}^p
+ \le M_p\|z\|_{L^p(S_k)}^p+2c_4\|W_\delta\|_{L^p(S_k)}^p.
+\]
+Usando a desigualdade de convexidade com $j=2$ em $z=(f-g)+(g-A)$, concluímos que
+\begin{multline*}
+ E(f,J_k)_p^p\le
+ K_1\|W_\delta\|_{L^p(S_k)}^p\\
+ {}+\frac{K_2}{2^p\delta^2}\int_0^\delta\!\!\int_0^\delta
+ \|W_{u+v-\delta}\|_{L^p(S_k)}^p\dd v\dd u ,
+\end{multline*}
+em que $K_2=M_p2^{p-1}$ e $K_1=36^pK_2+2c_4$.
+
+Cada ponto pertence a no máximo quatro intervalos $J_k$. Para $0<|\rho|\le\delta$, temos $S_k\subseteq[|\rho|,1-|\rho|]$ e $W_\rho(x)=\Delta_{|\rho|}^2f(x-|\rho|)$. Logo
+\[
+ \sum_k\|W_\rho\|_{L^p(S_k)}^p
+ \le4\|\Delta_{|\rho|}^2f\|_{L^p([0,1-2|\rho|])}^p
+ \le4\wt{f}{n^{-1}}{p}^p .
+\]
+Para $\rho=0$ a soma é nula. Somando as estimativas locais e usando a área $\delta^2$ do quadrado de integração, obtemos \eqref{lp:eq:whitney-partition} com
+$C_W=(4K_1+4K_2)^{1/p}$.
+\end{proof}
+
+\begin{corolario}[Erro global de quase-interpolação]
+\label{lp:cor:quasi-error}
+Para todo $f\in L^p$ e todo $n\ge2$,
+\begin{equation}
+ \|f-Q_nf\|_p\le9C_W\,\wt{f}{n^{-1}}{p}.
+ \label{lp:eq:quasi-error}
+\end{equation}
+\end{corolario}
+
+\begin{proof}
+Somamos as potências $p$ das estimativas locais do \cref{lp:lem:quasi}, uma vez que as células $I_k$ são disjuntas a menos dos extremos, e aplicamos \eqref{lp:eq:whitney-partition}.
+\end{proof}
+
+\subsection{Imersão contínua e controle da inclinação}
+
+\begin{lema}[Imersão e módulo de primeira ordem]
+\label{lp:lem:embedding}
+Sejam $1/p<s<2$, $\alpha=s-1/p$ e $f\in\Bes{s}{p}{\infty}$. A classe $f$ tem um único representante contínuo $F$, com
+$\|F\|_\infty\le C\|f\|^*_{\Bes{s}{p}{\infty}}$. Para $0<t\le1/2$, vale
+\begin{equation}
+ \omega_1(F,t)_\infty
+ \le C\|f\|^*_{\Bes{s}{p}{\infty}}
+ \begin{cases}
+ t^\alpha,&0<\alpha<1,\\
+ t\log(e/t),&\alpha=1,\\
+ t,&\alpha>1.
+ \end{cases}
+ \label{lp:eq:omega1-regimes}
+\end{equation}
+A constante $C$ depende apenas de $p$ e $s$.
+\end{lema}
+
+\begin{proof}
+Para uma função $v$ contínua e afim em cada célula de uma malha uniforme de passo $m^{-1}$, a equivalência de normas no espaço das funções afins de $[0,1]$, seguida da mudança de escala em cada célula, dá $\|v\|_\infty\le C_p m^{1/p}\|v\|_p$. Como a inclinação em cada célula é $m$ vezes a diferença de valores nos extremos, $\|v'\|_\infty\le2m\|v\|_\infty$, com a derivada tomada no interior das células.
+
+Ponha $S=\|f\|^*_{\Bes{s}{p}{\infty}}$ e $v_k=Q_{2^{k+1}}f-Q_{2^k}f$ para $k\ge1$. Cada $v_k$ é afim por células na malha de passo $2^{-(k+1)}$. Por \eqref{lp:eq:quasi-error}, pela monotonicidade de $t\mapsto\wt{f}{t}{p}$ e por \eqref{lp:eq:besov-p},
+\[
+ \|v_k\|_p\le18C_W\,\wt{f}{2^{-k}}{p}\le18C_W 2^{-ks}S.
+\]
+Assim $\|v_k\|_\infty\le C2^{-k\alpha}S$ e $\|v_k'\|_\infty\le C2^{k(1-\alpha)}S$. A série $Q_2f+\sum_{k\ge1}v_k$ converge uniformemente para uma função contínua $F$. A estimativa \eqref{lp:eq:quasi-error} também dá $Q_{2^r}f\to f$ em $L^p$, logo $F=f$ quase em toda parte. Dois representantes contínuos da mesma classe coincidem, pois todo subintervalo aberto não vazio tem medida positiva. A cota de $\|F\|_\infty$ resulta da série geométrica e de $\|Q_2f\|_\infty\le8\|f\|_p$, por \eqref{lp:eq:projection-bounds}.
+
+Para $r\ge1$, a cauda da série dá $\|F-Q_{2^r}f\|_\infty\le C2^{-r\alpha}S$. Somando as cotas de inclinação,
+\[
+ \omega_1(F,2^{-r})_\infty
+ \le 2\|F-Q_{2^r}f\|_\infty+2^{-r}\|(Q_{2^r}f)'\|_\infty
+ \le CS\left(2^{-r\alpha}+2^{-r}\Bigl(1+\sum_{k=1}^{r-1}2^{k(1-\alpha)}\Bigr)\right).
+\]
+O fator entre parênteses é limitado por um múltiplo de $2^{-r\alpha}$, de $r2^{-r}$ ou de $2^{-r}$, conforme $\alpha<1$, $\alpha=1$ ou $\alpha>1$. Para $t$ entre duas escalas diádicas consecutivas, a monotonicidade de $\omega_1$ dá \eqref{lp:eq:omega1-regimes}.
+\end{proof}
+
+\subsection{Quantização nodal e prova da estimativa de Jackson}
+
+\begin{lema}[Interpolação racional com orçamento de altura]
+\label{lp:prop:jackson-proof}
+Seja $n=2^r\ge2$ e sejam $y_0,\ldots,y_n$ dados reais com $|y_j|\le M$ e $|y_{j+1}-y_j|\le1$. Se $H\ge\max\{8n,16(M+1)\}$, o interpolante afim por células $u$ dos dados $(j/n,y_j)$ admite um aproximante $g\in\Aclass_{n,H}([0,1])$ tal que
+\[
+ \|u-g\|_\infty\le\frac{8(M+1)}{H}.
+\]
+\end{lema}
+
+\begin{proof}
+Seja $Q$ a maior potência de dois com $8(M+1)Q\le H$. Então $Q\ge1$ e $H<16(M+1)Q$. Para cada $j$, escolha o ponto $v_j$ mais próximo de $y_j$ na grade
+$Q^{-1}(\Z+\tfrac12(j\bmod 2))$, com desempate pelo menor valor. Temos $|v_j-y_j|\le1/(2Q)$. Escrevendo $v_j=b_j/(2Q)$, temos $b_j\in\Z$, $b_j\equiv j\pmod 2$ e $|b_j|\le2QM+1$.
+
+O interpolante $g$ dos valores $v_j$ é contínuo, e cada uma de suas $n$ células é uma folha da árvore diádica completa de profundidade $r$. Na folha de índice $j$, o valor central e a inclinação são
+\[
+ \frac{b_j+b_{j+1}}{4Q},
+ \qquad
+ \frac{n(b_{j+1}-b_j)}{2Q},
+\]
+com inclinação não nula pela paridade oposta dos numeradores. Para o valor central, o denominador e o módulo do numerador são limitados por $4Q$ e $4QM+2$, respectivamente, ambos no máximo $H$. Se $n\le2Q$, a inclinação pode ser escrita com numerador $b_{j+1}-b_j$ e denominador $2Q/n$, inteiros porque $n$ e $Q$ são potências de dois. As duas alturas ficam limitadas por $H$, visto que $|b_{j+1}-b_j|\le4QM+2$ e $2Q/n\le2Q$. Se $n>2Q$, a inclinação é inteira e seu módulo é no máximo
+\[
+ n\bigl(|y_{j+1}-y_j|+1/Q\bigr)\le2n\le H.
+\]
+A redução das frações preserva essas cotas. Como $r+1\le n$ e $j+1\le n$, a altura de cada folha é no máximo $H$. Por fim, $u-g$ é afim em cada célula e seu módulo é limitado pelo maior erro nos nós. Portanto $\|u-g\|_\infty\le1/(2Q)\le8(M+1)/H$.
+\end{proof}
+
+\begin{proof}[Demonstração do \cref{lp:hyp:jackson}]
+Seja $F$ o representante contínuo de $f$ do \cref{lp:lem:embedding}. Os valores $y_j=\lambda_j(F)$ satisfazem $|y_j|\le2R$ pelo \cref{lp:lem:quasi}. O mesmo lema dá
+$|y_{j+1}-y_j|\le5\omega_1(F,n^{-1})_\infty$. Pela continuidade uniforme de $F$, existe $n_0\ge2$ tal que essa cota é no máximo $1$ para $n\ge n_0$.
+
+A condição \eqref{lp:eq:height-threshold} implica $H\ge8n$ e $H\ge16(2R+1)$. Aplicamos o \cref{lp:prop:jackson-proof} com $M=2R$ e $u=Q_nF$. Como $F=f$ quase em toda parte, $Q_nF=Q_nf$ e $\wt{F}{n^{-1}}{p}=\wt{f}{n^{-1}}{p}$. Pela desigualdade triangular, por \eqref{lp:eq:quasi-error} e pela normalização da medida de $[0,1]$,
+\begin{align*}
+ \|f-g_{n,H}\|_p
+ &\le\|f-Q_nf\|_p+\|Q_nf-g_{n,H}\|_\infty\\
+ &\le9C_W\,\wt{f}{n^{-1}}{p}+\frac{8(2R+1)}{H}
+ \le9C_W\,\wt{f}{n^{-1}}{p}+\frac{16(R+1)}{H}.\qedhere
+\end{align*}
+\end{proof}
+
+\section{Demonstração dos teoremas de caracterização e estabilidade}
+\label{lp:sec:proved}
+
+\subsection{Estimativa inversa}
+
+\begin{lema}[Propriedades do módulo]
+\label{lp:lem:modulus}
+Para $f,g\in L^p$ e $t>0$,
+\[
+ \wt{f+g}{t}{p}\le\wt{f}{t}{p}+\wt{g}{t}{p},
+ \qquad \wt{g}{t}{p}\le4\|g\|_p.
+\]
+Além disso, $t\mapsto\wt{f}{t}{p}$ é não decrescente.
+\end{lema}
+
+\begin{proof}
+A primeira desigualdade decorre da linearidade de $\Delta_h^2$ e de Minkowski para cada $h$ admissível. Para a segunda, cada translação $x\mapsto x+jh$, $j\in\{0,1,2\}$, leva $[0,1-2h]$ a um subintervalo de $[0,1]$. A soma dos módulos dos coeficientes da diferença é $4$. A monotonicidade segue da inclusão dos conjuntos sobre os quais se toma o supremo em \eqref{lp:eq:modulus-p}.
+\end{proof}
+
+\begin{proposicao}[Desigualdade inversa de realização]
+\label{lp:prop:inverse}
+Para toda família $\mathcal G$ da \cref{lp:def:realization}, todo $f\in L^p$ e $N\ge2$,
+\begin{equation}
+ \wt{f}{N^{-1}}{p}\le4\Rfun{\mathcal G}{N}(f)_p.
+ \label{lp:eq:inverse}
+\end{equation}
+Se $0\in\mathcal G_N$, vale também $\Rfun{\mathcal G}{N}(f)_p\le\|f\|_p$.
+\end{proposicao}
+
+\begin{proof}
+Para $g\in\mathcal G_N$, o \cref{lp:lem:modulus} dá
+\[
+ \wt{f}{N^{-1}}{p}
+ \le4\|f-g\|_p+\wt{g}{N^{-1}}{p}
+ \le4\bigl(\|f-g\|_p+\wt{g}{N^{-1}}{p}\bigr).
+\]
+O ínfimo em $g$ dá \eqref{lp:eq:inverse}, e a escolha de $g=0$ dá a cota superior.
+\end{proof}
+
+\begin{corolario}[Inclusão em Besov]
+\label{lp:cor:inclusion}
+Para toda família $\mathcal G$ da \cref{lp:def:realization}, $0<s<2$ e $0<q\le\infty$, vale
+$\Rstr{s}{q}{\mathcal G}_p\subseteq\Bes{s}{p}{q}$.
+\end{corolario}
+
+\begin{proof}
+Multiplicamos \eqref{lp:eq:inverse} por $2^{rs}$ para $N=2^r$, $r\ge1$. O termo $r=0$ da sequência em \eqref{lp:eq:besov-p} é finito, pois $\wt{f}{1}{p}\le4\|f\|_p$.
+\end{proof}
+
+\subsection{Estimativa direta e agendas de altura}
+
+\begin{proposicao}[Critério de somabilidade da agenda]
+\label{lp:thm:besov-conditional}
+Sejam $1/p<s<2$ e $0<q\le\infty$. Se $H(N)\ge8N^{\nu_s}$ para $N\ge1$ e
+\begin{equation}
+ \left(\frac{2^{rs}}{H(2^r)}\right)_{r\ge1}\in\ell^q,
+ \label{lp:eq:summability}
+\end{equation}
+então $\Bes{s}{p}{q}=\Rstr{s}{q}{\Library,H}_p$.
+\end{proposicao}
+
+\begin{proof}
+A inclusão em Besov é o \cref{lp:cor:inclusion}. Para a inclusão direta, tome $f\in\Bes{s}{p}{q}\subseteq\Bes{s}{p}{\infty}$ e ponha $R=\|f\|_\infty$ no representante contínuo. Para $N=2^r$ suficientemente grande, $H(N)$ satisfaz \eqref{lp:eq:height-threshold} e o \cref{lp:hyp:jackson} dá $g=g_{N,H(N)}\in\Sig{N}$. Pelo \cref{lp:lem:modulus},
+$\wt{g}{N^{-1}}{p}\le\wt{f}{N^{-1}}{p}+4\|f-g\|_p$. Assim
+\begin{align}
+ \Rfun{\Library,H}{N}(f)_p
+ &\le \wt{f}{N^{-1}}{p}+5\|f-g\|_p\notag\\
+ &\le (1+45 C_W)\wt{f}{N^{-1}}{p}+\frac{80(R+1)}{H(N)}.
+ \label{lp:eq:direct-bound}
+\end{align}
+Após a multiplicação por $N^s$, o primeiro termo pertence a $\ell^q$ por \eqref{lp:eq:besov-p}, e o segundo por \eqref{lp:eq:summability}. Para $0<q<\infty$, a soma permanece em $\ell^q$ pela desigualdade $(a+b)^q\le2^q(a^q+b^q)$, $a,b\ge0$. Para $q=\infty$, basta tomar o supremo. Nos orçamentos diádicos restantes, a escolha do aproximante nulo dá $\Rfun{\Library,H}{N}(f)_p\le\|f\|_p$.
+\end{proof}
+
+\begin{proof}[Demonstração do \cref{lp:conj:besov}]
+Ambas as agendas satisfazem $H(N)\ge8N^{\nu_s}$. Para $q=\infty$ e $H_{s,0}$, temos $N^s/H_{s,0}(N)\le1/8$. Se $q<\infty$ e $s<1$, obtemos
+$N^s/H_{s,0}(N)\le2^{-r(1-s)}/8$ para $N=2^r$, o que dá uma sequência em $\ell^q$.
+Quando $q<\infty$ e $s\ge1$, vale
+\[
+ \frac{2^{rs}}{H_{s,\kappa}(2^r)}\le\frac{1}{8}(1+r\log 2)^{-\kappa}.
+\]
+A série das potências $q$ dessa cota converge para $\kappa q>1$. Por fim,
+$2^{rs}/\widetilde H_{s,\eta}(2^r)\le2^{-r\eta}/8$ para $\eta>0$, uma vez que $\max\{1,s+\eta\}\ge s+\eta$. Em cada caso, aplica-se a \cref{lp:thm:besov-conditional}.
+\end{proof}
+
+\subsection{Transferência para famílias aninhadas}
+
+\begin{proposicao}[Transferência da estimativa direta]
+\label{lp:thm:stability-conditional}
+Sejam $1/p<s<2$ e $0<q\le\infty$. Suponha que $H(N)\ge8N^{\nu_s}$ para $N\ge1$ e que valha \eqref{lp:eq:summability}. Se $\mathcal N$ satisfaz \eqref{lp:eq:nesting} e \eqref{lp:eq:contains}, então $\Bes{s}{p}{q}\subseteq\Rstr{s}{q}{\mathcal N}_p$.
+\end{proposicao}
+
+\begin{proof}
+Fixe $f\in\Bes{s}{p}{q}$ e ponha $R=\|f\|_\infty$ no representante contínuo. Seja $e=\lceil\log_2 c\rceil$ e $d=2^e\ge c$. Para $M=2^r$ suficientemente grande, tome $n=M/d$. Como $\lceil cn\rceil\le M$, temos
+$\Sig{n}\subseteq\mathcal N_{\lceil cn\rceil}\subseteq\mathcal N_M$.
+O aproximante de Jackson $g=g_{n,H(n)}$ pertence, portanto, a $\mathcal N_M$.
+A monotonicidade em escala dá $\wt{g}{M^{-1}}{p}\le\wt{g}{n^{-1}}{p}$. Aplicando a estimativa dos termos em \eqref{lp:eq:direct-bound} na escala $n$, obtemos
+\[
+ M^s\Rfun{\mathcal N}{M}(f)_p
+ \le d^s\left((1+45C_W)n^s\wt{f}{n^{-1}}{p}+\frac{80(R+1)n^s}{H(n)}\right).
+\]
+A passagem de $M$ a $n$ desloca o índice diádico de $r$ para $r-e$. Os dois termos entre parênteses pertencem a $\ell^q$ por \eqref{lp:eq:besov-p} e \eqref{lp:eq:summability}. Nos orçamentos restantes, $\Rfun{\mathcal N}{M}(f)_p\le\|f\|_p$ porque $0\in\mathcal N_M$.
+\end{proof}
+
+\begin{proof}[Demonstração do \cref{lp:conj:stability}]
+As agendas do \cref{lp:conj:besov} satisfazem o critério \eqref{lp:eq:summability}, como se mostrou na subseção anterior. A \cref{lp:thm:stability-conditional} dá a inclusão direta, e o \cref{lp:cor:inclusion}, aplicado a $\mathcal N$, dá a inclusão inversa.
+\end{proof}
+
+\clearpage
+\appendix
+\section{Formalização das demonstrações em Lean 4}
+\label{lp:sec:lean}
+
+O projeto \code{lean4/formalizacao} verifica os teoremas com Lean 4.28.0 e Mathlib v4.28.0 \citep{lp-lean4,lp-mathlib}. A desigualdade inversa é demonstrada para módulos a valores em $[0,\infty]$ e especializada a $L^p$. A prova direta combina Whitney, quase-interpolação, imersão contínua e construção da árvore diádica quantizada. A estimativa de Jackson resultante é aplicada às agendas do \cref{lp:conj:besov} e às escalas deslocadas do \cref{lp:conj:stability}.
+
+\subsection{Representação dos objetos e dos teoremas}
+\label{lp:sec:fidelity}
+
+O código representa as classes de $L^p$ por funções mensuráveis $\R\to\R$ e usa a medida de Lebesgue restrita a $[0,1]$. Em \code{wtP}, a medida é restrita a $[0,1-2h]$, conforme \eqref{lp:eq:modulus-p}. As definições \code{besovP}, \code{realP} e \code{stratumP} correspondem à condição de Besov, ao funcional e ao espaço de realização. A sequência de realização usa o orçamento $2^{r+1}$ para $r\ge0$.
+
+A forma de Jackson com $C_0=9C_W(p)$ e $C_1=16$ é \code{hypJpStrong_of_lt}, aplicada ao representante contínuo fornecido por \code{besov_continuous_rep}. As reduções usam \code{HypJp}, demonstrada em \code{hypJp_of_lt}, com constantes que podem depender de $f$. Os teoremas finais incorporam essa prova e usam $1/p<s$. No artigo, $s<2$ é o intervalo da caracterização clássica de Besov por diferenças de ordem dois.
+
+A estabilidade no código se aplica a famílias de funções mensuráveis sob \eqref{lp:eq:nesting} e \eqref{lp:eq:contains}. Como as famílias consideradas no texto são subconjuntos de $C([0,1])$, que são mensuráveis, essa exigência não restringe o enunciado do \cref{lp:conj:stability}. O módulo \code{Stability} transfere a estimativa de Jackson para o orçamento diádico deslocado.
+
+\begin{table}[!ht]
+\centering
+\setlength{\abovecaptionskip}{4pt}
+\setlength{\belowcaptionskip}{3pt}
+\caption{Correspondência entre as demonstrações e as declarações Lean.}
+\label{lp:tab:verified}
+\small
+\begin{tabularx}{\linewidth}{@{}p{0.37\linewidth}>{\raggedright\arraybackslash}X@{}}
+\toprule
+Resultado & Declarações \\
+\midrule
+Desigualdade inversa e inclusão em Besov & \code{wtP_le_four_realP}, \code{stratum_subset_besov_conn} \\
+Projeção afim e quase-interpolação & \code{kernel_is_affine_projection}, \code{local_error_inf}, \code{lam_diff_le} \\
+Whitney e erro global & \code{whitney_lp}, \code{quasi_error_unc} \\
+Imersão e módulo de primeira ordem & \code{besov_continuous_rep}, \code{modulus_lt1_unc}, \code{modulus_eq1_unc}, \code{modulus_gt1_unc} \\
+Quantização nodal e Jackson & \code{nodal_tree}, \code{lp_jackson_core}, \code{hypJpStrong_of_lt} \\
+Caracterização de Besov & \code{conj1_endpoint}, \code{conj1_subcritical}, \code{conj1_critical}, \code{conj1_tilde} \\
+Estabilidade por inclusão & \code{conj2_endpoint}, \code{conj2_subcritical}, \code{conj2_critical}, \code{conj2_tilde} \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Reprodução da verificação}
+
+Na raiz do projeto Lean, a compilação e a auditoria são executadas por
+\begin{verbatim}
+lake build Formalizacao
+lake env lean Formalizacao/Auditoria.lean
+\end{verbatim}
+A auditoria examina 108 declarações distintas e registra somente \code{propext}, \code{Classical.choice} e \code{Quot.sound}. A saída está em \code{lean4/formalizacao/auditoria_axiomas.txt}. O mapa \code{mapas/MAPA_TEX_LEAN.md} aponta os nomes qualificados e os arquivos de origem. Na raiz do artigo, \texttt{python3 mapas/verificar\_mapa.py} confere os rótulos TeX e os nomes Lean.
+
+\clearpage
+\begin{referenciasabnt}
+\abntref{lp-ali2020}{\MakeUppercase{Ali}, M.; \MakeUppercase{Nouy}, A. Approximation of smoothness classes by deep rectifier networks. \textbf{arXiv}, 2007.15645, 2020.}
+\abntref{artigo_1-devore1998}{\MakeUppercase{DeVore}, R. A. Nonlinear approximation. \textbf{Acta Numerica}, v. 7, p. 51-150, 1998. DOI: 10.1017/S0962492900002816.}
+\abntref{artigo_1-devore2021}{\MakeUppercase{DeVore}, R.; \MakeUppercase{Hanin}, B.; \MakeUppercase{Petrova}, G. Neural network approximation. \textbf{Acta Numerica}, v. 30, p. 327-444, 2021.}
+\abntref{artigo_2-devorelorentz1993}{\MakeUppercase{DeVore}, R. A.; \MakeUppercase{Lorentz}, G. G. \textbf{Constructive Approximation}. Berlin: Springer, 1993. (Grundlehren der mathematischen Wissenschaften, v. 303). DOI: 10.1007/978-3-662-02888-9.}
+\abntref{artigo_2-devorepopov1988}{\MakeUppercase{DeVore}, R. A.; \MakeUppercase{Popov}, V. A. Interpolation of {B}esov spaces. \textbf{Transactions of the American Mathematical Society}, v. 305, n. 1, p. 397-414, 1988.}
+\abntref{lp-ditzian2007}{\MakeUppercase{Ditzian}, Z. Polynomial approximation and $\omega_\varphi^r(f,t)$ twenty years later. \textbf{Surveys in Approximation Theory}, v. 3, p. 106-151, 2007.}
+\abntref{lp-ditzian1987}{\MakeUppercase{Ditzian}, Z.; \MakeUppercase{Totik}, V. \textbf{Moduli of Smoothness}. New York: Springer, 1987. (Springer Series in Computational Mathematics, v. 9). DOI: 10.1007/978-1-4612-4778-4.}
+\abntref{artigo_2-hristovivanov1990}{\MakeUppercase{Hristov}, V. H.; \MakeUppercase{Ivanov}, K. G. Realization of {$K$}-functionals on subsets and constrained approximation. \textbf{Mathematica Balkanica (New Series)}, v. 4, n. 3, p. 236-257, 1990.}
+\abntref{lp-kolomoitsev2019}{\MakeUppercase{Kolomoitsev}, Yu.; \MakeUppercase{Tikhonov}, S. Properties of moduli of smoothness in {$L_p(\mathbb{R}^d)$}. \textbf{arXiv}, 1907.12788, 2019.}
+\abntref{lp-mathlib}{\MakeUppercase{Mathlib Community}, The. The Lean mathematical library. In: \textbf{Proceedings of the 9th ACM SIGPLAN International Conference on Certified Programs and Proofs (CPP 2020)}. New York: ACM, 2020. p. 367-381. DOI: 10.1145/3372885.3373824.}
+\abntref{lp-lean4}{\MakeUppercase{Moura}, L. de; \MakeUppercase{Ullrich}, S. The Lean 4 theorem prover and programming language. In: \textbf{Automated Deduction -- CADE 28}. Cham: Springer, 2021. p. 625-635. (Lecture Notes in Computer Science, v. 12699).}
+\abntref{lp-oliveiravol}{\MakeUppercase{Oliveira}, V. G. de. \textbf{Biblioteca determinística de segmentos afins racionais: construção, seleção, aproximação e normalização}. Volume unificado com correspondência Lean 4, Parte IV. Edição revisada de 18 de novembro de 2026.}
+\abntref{artigo_2-petrushev1988}{\MakeUppercase{Petrushev}, P. P. Direct and converse theorems for spline and rational approximation and {B}esov spaces. In: \textbf{Function Spaces and Applications}. Berlin: Springer, 1988. (Lecture Notes in Mathematics, v. 1302). p. 363-377.}
+\abntref{lp-siegel2023}{\MakeUppercase{Siegel}, J. W. Optimal approximation rates for deep {ReLU} neural networks on {S}obolev and {B}esov spaces. \textbf{Journal of Machine Learning Research}, v. 24, n. 357, p. 1-52, 2023.}
+\abntref{artigo_2-whitney1957}{\MakeUppercase{Whitney}, H. On functions with bounded {$n$}-th differences. \textbf{Journal de Math{\'e}matiques Pures et Appliqu{\'e}es}, v. 36, p. 67-95, 1957.}
+\abntref{lp-yang2024}{\MakeUppercase{Yang}, Y. On the optimal approximation of {S}obolev and {B}esov functions using deep {ReLU} neural networks. \textbf{arXiv}, 2409.00901, 2024.}
+\end{referenciasabnt}
+\end{document}

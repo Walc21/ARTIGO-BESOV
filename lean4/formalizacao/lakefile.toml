@@ -1,0 +1,22 @@
+name = "formalizacao"
+version = "0.1.0"
+defaultTargets = ["Formalizacao"]
+
+[[require]]
+name = "mathlib"
+scope = "leanprover-community"
+rev = "v4.28.0"
+
+[[lean_lib]]
+name = "Formalizacao"
+
+[leanOptions]
+pp.unicode.fun = true
+
+[[lean_lib]]
+name = "RequestProject"
+globs = ["RequestProject", "RequestProject.+"]
+
+[[lean_lib]]
+name = "Pendencias"
+globs = ["Pendencias", "Pendencias.+"]

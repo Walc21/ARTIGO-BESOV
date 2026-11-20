@@ -1,0 +1,18 @@
+# Lean/Lake: dependências e artefatos de compilação (reconstruídos com `lake build`)
+.lake/
+lean4/formalizacao/.lake/
+*.olean
+*.ilean
+
+# LaTeX
+*.aux
+*.log
+*.out
+*.toc
+*.synctex.gz
+*.fls
+*.fdb_latexmk
+
+# Rascunhos locais
+arquivos_obsoletos/
+__pycache__/

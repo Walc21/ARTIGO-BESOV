@@ -1,0 +1,931 @@
+{
+  "cabecalho": "# Correspondência do artigo sobre $L^p$ com Lean 4\n\nGerado por `mapas/gerar_mapa.py` a partir de `mapas/dados/mapa_lp.json`. O verificador confere os rótulos do TeX, localiza as declarações nos arquivos indicados e valida os nomes com `#check`. O apêndice A descreve a relação entre os enunciados do artigo e a formalização.\n\nO projeto usa Lean 4.28.0 e Mathlib v4.28.0. A auditoria de dependências axiomáticas está em `lean4/formalizacao/Formalizacao/Auditoria.lean`, com saída registrada em `lean4/formalizacao/auditoria_axiomas.txt`.\n",
+  "entradas": [
+    {
+      "id": "D1",
+      "titulo": "módulo de suavidade $\\omega_p$ e convenção",
+      "rotulo": "lp:eq:modulus-p",
+      "estado": "Formalizado (definição)",
+      "nota": "Convenção da Parte IV: a segunda diferença usa $x, x+h, x+2h \\in [0,1]$ e o supremo é sobre $0<h\\le\\min\\{t,1/2\\}$. A norma é `eLpNorm` na medida de Lebesgue restrita a `[0, 1-2h]`.",
+      "lean": [
+        {
+          "nome": "FormalizacaoLp.diff2",
+          "arquivo": "../lean4/formalizacao/Formalizacao/LpDefs.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoLp.wtP",
+          "arquivo": "../lean4/formalizacao/Formalizacao/LpDefs.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoLp.vol01",
+          "arquivo": "../lean4/formalizacao/Formalizacao/LpDefs.lean",
+          "nota": ""
+        }
+      ]
+    },
+    {
+      "id": "D2",
+      "titulo": "espaço de Besov diádico $B^s_{p,q}$",
+      "rotulo": "lp:eq:besov-p",
+      "estado": "Formalizado (definição)",
+      "nota": "`besovP p s q` exige `f ∈ L^p` e a sequência `(2^{rs} ω_p(f, 2^{-r}))_{r≥0}` em `ℓ^q`; a norma `ℓ^q` é `lqNorm` (`q = ∞` é o supremo).",
+      "lean": [
+        {
+          "nome": "FormalizacaoLp.lqNorm",
+          "arquivo": "../lean4/formalizacao/Formalizacao/LpDefs.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoLp.besovP",
+          "arquivo": "../lean4/formalizacao/Formalizacao/LpDefs.lean",
+          "nota": ""
+        }
+      ]
+    },
+    {
+      "id": "D3",
+      "titulo": "biblioteca $\\Sigma_N$ e agendas $H_{s,\\kappa}$, $\\widetilde H_{s,\\eta}$",
+      "rotulo": "lp:eq:schedule",
+      "estado": "Formalizado (definição)",
+      "nota": "A biblioteca da Parte IV é representada por `Sigma H N = {0} ∪ 𝒜_{N,H(N)}`. As agendas são `Hsk s κ` e `HtilK 0 0 s η`, com `CK 0 0 = 8`. A classe `classNH N H` representa 𝒜_{N,H}.",
+      "lean": [
+        {
+          "nome": "Pendencias.Agenda.Sigma",
+          "arquivo": "../lean4/formalizacao/Pendencias/Agenda.lean",
+          "nota": ""
+        },
+        {
+          "nome": "Pendencias.Agenda.Hsk",
+          "arquivo": "../lean4/formalizacao/Pendencias/Inversa.lean",
+          "nota": ""
+        },
+        {
+          "nome": "Pendencias.Jackson.HtilK",
+          "arquivo": "../lean4/formalizacao/Pendencias/Direta.lean",
+          "nota": ""
+        },
+        {
+          "nome": "Artigo.AdmNH",
+          "arquivo": "../lean4/formalizacao/RequestProject/JointBudget.lean",
+          "nota": ""
+        },
+        {
+          "nome": "Artigo.LTree",
+          "arquivo": "../lean4/formalizacao/RequestProject/Trees.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoLp.classNH",
+          "arquivo": "../lean4/formalizacao/Formalizacao/LpDefs.lean",
+          "nota": ""
+        }
+      ]
+    },
+    {
+      "id": "D4",
+      "titulo": "mensurabilidade dos elementos de $\\Sigma_N$",
+      "rotulo": "lp:eq:sigma",
+      "estado": "Formalizado e compilado",
+      "nota": "A avaliação de uma árvore é mensurável por indução, pois a avaliação é definida por casos sobre folhas afins.",
+      "lean": [
+        {
+          "nome": "FormalizacaoLp.measurable_eval",
+          "arquivo": "../lean4/formalizacao/Formalizacao/Library.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoLp.measurable_sigma",
+          "arquivo": "../lean4/formalizacao/Formalizacao/Library.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoLp.classNH_subset_sigma",
+          "arquivo": "../lean4/formalizacao/Formalizacao/Library.lean",
+          "nota": ""
+        }
+      ]
+    },
+    {
+      "id": "2.1",
+      "titulo": "funcional e espaço de realização em $L^p$",
+      "rotulo": "lp:def:realization",
+      "estado": "Formalizado (definição)",
+      "nota": "Em `ℝ≥0∞`. O estrato inclui a condição `f ∈ L^p`, como na definição do texto, e é reindexado por `r ↦ r+1` (começa em `N = 2`).",
+      "lean": [
+        {
+          "nome": "FormalizacaoLp.distP",
+          "arquivo": "../lean4/formalizacao/Formalizacao/LpDefs.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoLp.realP",
+          "arquivo": "../lean4/formalizacao/Formalizacao/LpDefs.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoLp.stratumP",
+          "arquivo": "../lean4/formalizacao/Formalizacao/LpDefs.lean",
+          "nota": ""
+        }
+      ]
+    },
+    {
+      "id": "2.2",
+      "titulo": "famílias aninhadas que contêm a biblioteca",
+      "rotulo": "lp:def:network-family",
+      "estado": "Formalizado (definição)",
+      "nota": "As hipóteses de `Conj2Stability` expressam aninhamento, inclusão da função nula e inclusão da biblioteca após reescalonamento do orçamento. A declaração se aplica a famílias mensuráveis, entre elas as famílias de funções contínuas do artigo.",
+      "lean": [
+        {
+          "nome": "FormalizacaoLp.Conj2Stability",
+          "arquivo": "../lean4/formalizacao/Formalizacao/LpDefs.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoStab.fam_mono",
+          "arquivo": "../lean4/formalizacao/Formalizacao/Stability.lean",
+          "nota": ""
+        }
+      ]
+    },
+    {
+      "id": "3.1",
+      "titulo": "caracterização de Besov por realização aritmética",
+      "rotulo": "lp:conj:besov",
+      "estado": "Formalizado e compilado",
+      "nota": "As quatro declarações cobrem as agendas e os regimes do artigo para $1\\le p<\\infty$ e $1/p<s$. O artigo toma $s<2$ para a caracterização clássica de Besov pelo módulo de ordem dois.",
+      "lean": [
+        {
+          "nome": "FormalizacaoLp.Conj1Endpoint",
+          "arquivo": "../lean4/formalizacao/Formalizacao/LpDefs.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoLp.Conj1Subcritical",
+          "arquivo": "../lean4/formalizacao/Formalizacao/LpDefs.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoLp.Conj1Critical",
+          "arquivo": "../lean4/formalizacao/Formalizacao/LpDefs.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoJ.conj1_endpoint",
+          "arquivo": "../lean4/formalizacao/Formalizacao/LpJackson3.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoJ.conj1_subcritical",
+          "arquivo": "../lean4/formalizacao/Formalizacao/LpJackson3.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoJ.conj1_critical",
+          "arquivo": "../lean4/formalizacao/Formalizacao/LpJackson3.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoJ.conj1_tilde",
+          "arquivo": "../lean4/formalizacao/Formalizacao/LpJackson3.lean",
+          "nota": ""
+        }
+      ]
+    },
+    {
+      "id": "3.2",
+      "titulo": "estabilidade por inclusão de redes",
+      "rotulo": "lp:conj:stability",
+      "estado": "Formalizado e compilado",
+      "nota": "As quatro declarações dão a estabilidade por inclusão para as agendas e os regimes do Teorema 3.1, com constante real $c\\ge1$.",
+      "lean": [
+        {
+          "nome": "FormalizacaoLp.Conj2Stability",
+          "arquivo": "../lean4/formalizacao/Formalizacao/LpDefs.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoJ.conj2_endpoint",
+          "arquivo": "../lean4/formalizacao/Formalizacao/LpJackson3.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoJ.conj2_subcritical",
+          "arquivo": "../lean4/formalizacao/Formalizacao/LpJackson3.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoJ.conj2_critical",
+          "arquivo": "../lean4/formalizacao/Formalizacao/LpJackson3.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoJ.conj2_tilde",
+          "arquivo": "../lean4/formalizacao/Formalizacao/LpJackson3.lean",
+          "nota": ""
+        }
+      ]
+    },
+    {
+      "id": "4.1",
+      "titulo": "estimativa de Jackson em $L^p$",
+      "rotulo": "lp:hyp:jackson",
+      "estado": "Formalizado e compilado",
+      "nota": "`hypJpStrong_of_lt` dá a estimativa com $C_0=9C_W(p)$ e $C_1=16$ para o representante contínuo. A forma usada nas reduções é demonstrada em `hypJp_of_lt` e permite constantes dependentes de $f$.",
+      "lean": [
+        {
+          "nome": "FormalizacaoLp.HypJp",
+          "arquivo": "../lean4/formalizacao/Formalizacao/LpDefs.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoJ.hypJp_of_lt",
+          "arquivo": "../lean4/formalizacao/Formalizacao/LpJackson2.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoJ.hypJpStrong_of_lt",
+          "arquivo": "../lean4/formalizacao/Formalizacao/LpJackson4.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoJ.lp_jackson_core",
+          "arquivo": "../lean4/formalizacao/Formalizacao/LpJackson2.lean",
+          "nota": ""
+        }
+      ]
+    },
+    {
+      "id": "4.2",
+      "titulo": "projeção afim local",
+      "rotulo": "lp:lem:projection",
+      "estado": "Formalizado e compilado",
+      "nota": "O núcleo reproduz funções afins, é simétrico e tem imagem afim. Os núcleos avaliam a projeção nos extremos, com cotas dadas por Hölder e pela integral do módulo de cada núcleo.",
+      "lean": [
+        {
+          "nome": "FormalizacaoQuasi.abs_kL_le",
+          "arquivo": "../lean4/formalizacao/Formalizacao/QuasiLocal.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoQuasi.abs_kR_le",
+          "arquivo": "../lean4/formalizacao/Formalizacao/QuasiLocal.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoQuasi.integral_kL_mul_affine",
+          "arquivo": "../lean4/formalizacao/Formalizacao/QuasiLocal.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoQuasi.integral_kR_mul_affine",
+          "arquivo": "../lean4/formalizacao/Formalizacao/QuasiLocal.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoQuasi.abs_integral_kernel_le",
+          "arquivo": "../lean4/formalizacao/Formalizacao/QuasiLocal.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoKer.kernel_is_affine_projection",
+          "arquivo": "../lean4/formalizacao/Formalizacao/Kernel.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoKer.kL_eq_Kf",
+          "arquivo": "../lean4/formalizacao/Formalizacao/Kernel.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoKer.kR_eq_Kf",
+          "arquivo": "../lean4/formalizacao/Formalizacao/Kernel.lean",
+          "nota": ""
+        }
+      ]
+    },
+    {
+      "id": "4.3",
+      "titulo": "quase-interpolante",
+      "rotulo": "lp:lem:quasi",
+      "estado": "Formalizado e compilado",
+      "nota": "Construção de $Q_n$, reprodução de funções afins, erro local e cotas de amplitude e de diferenças nodais.",
+      "lean": [
+        {
+          "nome": "FormalizacaoGrid.Q_affine",
+          "arquivo": "../lean4/formalizacao/Formalizacao/QuasiGrid.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoGrid.Q_cell",
+          "arquivo": "../lean4/formalizacao/Formalizacao/QuasiGrid.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoGrid.abs_lam_sup_le",
+          "arquivo": "../lean4/formalizacao/Formalizacao/QuasiGrid.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoGrid.local_error",
+          "arquivo": "../lean4/formalizacao/Formalizacao/LocalError.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoL52d.lam_diff_le",
+          "arquivo": "../lean4/formalizacao/Formalizacao/Lemma52d.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoL52d.omega1",
+          "arquivo": "../lean4/formalizacao/Formalizacao/Lemma52d.lean",
+          "nota": ""
+        }
+      ]
+    },
+    {
+      "id": "4.4",
+      "titulo": "Whitney em partições de $L^p$",
+      "rotulo": "lp:lem:whitney",
+      "estado": "Formalizado e compilado",
+      "nota": "A prova usa média dupla, fórmula de Taylor, reflexão, Jensen e Tonelli. A transferência das duas faixas extremas para o interior e a multiplicidade dos intervalos dão a estimativa global.",
+      "lean": [
+        {
+          "nome": "FormalizacaoW.whitney_lp",
+          "arquivo": "../lean4/formalizacao/Formalizacao/Whitney12.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoW.local_whitney",
+          "arquivo": "../lean4/formalizacao/Formalizacao/Whitney7.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoW.taylor_lp",
+          "arquivo": "../lean4/formalizacao/Formalizacao/Whitney2.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoW.double_sym",
+          "arquivo": "../lean4/formalizacao/Formalizacao/Whitney3.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoW.fg_lp",
+          "arquivo": "../lean4/formalizacao/Formalizacao/Whitney4.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoW.sum_lintegral_le",
+          "arquivo": "../lean4/formalizacao/Formalizacao/Whitney8.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoW.Wt_global",
+          "arquivo": "../lean4/formalizacao/Formalizacao/Whitney9.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoW.Ek_bound",
+          "arquivo": "../lean4/formalizacao/Formalizacao/Whitney10.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoCor.WhitneyLp",
+          "arquivo": "../lean4/formalizacao/Formalizacao/Corollary54.lean",
+          "nota": ""
+        }
+      ]
+    },
+    {
+      "id": "4.5",
+      "titulo": "erro de quase-interpolação",
+      "rotulo": "lp:cor:quasi-error",
+      "estado": "Formalizado e compilado",
+      "nota": "`quasi_error_unc` deduz a cota global de `whitney_lp` e do erro local.",
+      "lean": [
+        {
+          "nome": "FormalizacaoCor.quasi_error",
+          "arquivo": "../lean4/formalizacao/Formalizacao/Corollary54.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoCor.local_error_inf",
+          "arquivo": "../lean4/formalizacao/Formalizacao/Corollary54.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoCor.sum_cells_le",
+          "arquivo": "../lean4/formalizacao/Formalizacao/Corollary54.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoW.quasi_error_unc",
+          "arquivo": "../lean4/formalizacao/Formalizacao/Whitney13.lean",
+          "nota": ""
+        }
+      ]
+    },
+    {
+      "id": "4.6",
+      "titulo": "imersão e cota de $\\omega_1$",
+      "rotulo": "lp:lem:embedding",
+      "estado": "Formalizado e compilado",
+      "nota": "A cota de Besov controla a série telescópica das diferenças de quase-interpolantes. A série fornece o representante contínuo e as estimativas do módulo de primeira ordem.",
+      "lean": [
+        {
+          "nome": "FormalizacaoEmb.inverse_affine_sup",
+          "arquivo": "../lean4/formalizacao/Formalizacao/Embedding.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoEmb.bernstein_affine",
+          "arquivo": "../lean4/formalizacao/Formalizacao/Embedding.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoL55b.vk_sup_le",
+          "arquivo": "../lean4/formalizacao/Formalizacao/Lemma55b.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoL55b.vk_slope_le",
+          "arquivo": "../lean4/formalizacao/Formalizacao/Lemma55b.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoL55c.ae_eq_Glim",
+          "arquivo": "../lean4/formalizacao/Formalizacao/Lemma55c.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoL55c.Glim_continuousOn",
+          "arquivo": "../lean4/formalizacao/Formalizacao/Lemma55c.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoL55d.F_lip",
+          "arquivo": "../lean4/formalizacao/Formalizacao/Lemma55d.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoL55e.modulus_lt1",
+          "arquivo": "../lean4/formalizacao/Formalizacao/Lemma55e.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoL55e.modulus_eq1",
+          "arquivo": "../lean4/formalizacao/Formalizacao/Lemma55e.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoL55e.modulus_gt1",
+          "arquivo": "../lean4/formalizacao/Formalizacao/Lemma55e.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoW.Glim_continuousOn_unc",
+          "arquivo": "../lean4/formalizacao/Formalizacao/Whitney13.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoW.ae_eq_Glim_unc",
+          "arquivo": "../lean4/formalizacao/Formalizacao/Whitney13.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoW.modulus_lt1_unc",
+          "arquivo": "../lean4/formalizacao/Formalizacao/Whitney13.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoW.modulus_eq1_unc",
+          "arquivo": "../lean4/formalizacao/Formalizacao/Whitney13.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoW.modulus_gt1_unc",
+          "arquivo": "../lean4/formalizacao/Formalizacao/Whitney13.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoJ.besov_continuous_rep",
+          "arquivo": "../lean4/formalizacao/Formalizacao/LpJackson4.lean",
+          "nota": ""
+        }
+      ]
+    },
+    {
+      "id": "4.7",
+      "titulo": "interpolação racional com orçamento de altura",
+      "rotulo": "lp:prop:jackson-proof",
+      "estado": "Formalizado e compilado",
+      "nota": "`nodal_tree` constrói o interpolante quantizado sob cotas de altura e de inclinação. A estimativa `lp_jackson_core` aplica essa construção aos valores nodais de $Q_n f$.",
+      "lean": [
+        {
+          "nome": "FormalizacaoJ.nodal_tree",
+          "arquivo": "../lean4/formalizacao/Formalizacao/LpJackson0.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoJ.Q_node",
+          "arquivo": "../lean4/formalizacao/Formalizacao/LpJackson1.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoJ.lam_congr_ae",
+          "arquivo": "../lean4/formalizacao/Formalizacao/LpJackson1.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoJ.nodal_G",
+          "arquivo": "../lean4/formalizacao/Formalizacao/LpJackson1.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoJ.hypJp_of_lt",
+          "arquivo": "../lean4/formalizacao/Formalizacao/LpJackson2.lean",
+          "nota": ""
+        }
+      ]
+    },
+    {
+      "id": "5.1",
+      "titulo": "propriedades do módulo em $L^p$",
+      "rotulo": "lp:lem:modulus",
+      "estado": "Formalizado e compilado",
+      "nota": "Para `1 ≤ p` e funções mensuráveis. `modC` mostra que são exatamente os três axiomas do arcabouço abstrato.",
+      "lean": [
+        {
+          "nome": "FormalizacaoLp.wtP_add_le",
+          "arquivo": "../lean4/formalizacao/Formalizacao/LpAxioms.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoLp.wtP_le_four",
+          "arquivo": "../lean4/formalizacao/Formalizacao/LpAxioms.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoLp.wtP_mono_t",
+          "arquivo": "../lean4/formalizacao/Formalizacao/LpAxioms.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoLp.modC",
+          "arquivo": "../lean4/formalizacao/Formalizacao/ModuloConn.lean",
+          "nota": ""
+        },
+        {
+          "nome": "Formalizacao.ModE.ModuloE",
+          "arquivo": "../lean4/formalizacao/Formalizacao/ModuloENN.lean",
+          "nota": ""
+        }
+      ]
+    },
+    {
+      "id": "5.2",
+      "titulo": "desigualdade inversa em $L^p$",
+      "rotulo": "lp:prop:inverse",
+      "estado": "Formalizado e compilado",
+      "nota": "A cota `ω_p(f,1/N) ≤ 4 R_N(f)` vale para toda família de funções mensuráveis; a segunda afirmação usa `0 ∈ G_N`. Também está provada no arcabouço abstrato, em valores reais e em `ℝ≥0∞`, e transferida à instância `L^p`.",
+      "lean": [
+        {
+          "nome": "FormalizacaoLp.wtP_le_four_realP",
+          "arquivo": "../lean4/formalizacao/Formalizacao/LpAxioms.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoRed.realP_le_norm",
+          "arquivo": "../lean4/formalizacao/Formalizacao/Reductions.lean",
+          "nota": ""
+        },
+        {
+          "nome": "Formalizacao.ModE.inverse_E",
+          "arquivo": "../lean4/formalizacao/Formalizacao/ModuloENN.lean",
+          "nota": ""
+        },
+        {
+          "nome": "Formalizacao.inverse_le",
+          "arquivo": "../lean4/formalizacao/Formalizacao/Modulo.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoLp.wtP_le_four_realP_of_abstract",
+          "arquivo": "../lean4/formalizacao/Formalizacao/ModuloConn.lean",
+          "nota": ""
+        }
+      ]
+    },
+    {
+      "id": "5.3",
+      "titulo": "inclusão $\\mathscr R\\subset B$",
+      "rotulo": "lp:cor:inclusion",
+      "estado": "Formalizado e compilado",
+      "nota": "Vale para `0 < q ≤ ∞`, qualquer família de funções mensuráveis, sem relação com a agenda.",
+      "lean": [
+        {
+          "nome": "FormalizacaoLp.stratum_subset_besov_conn",
+          "arquivo": "../lean4/formalizacao/Formalizacao/ModuloConn.lean",
+          "nota": ""
+        },
+        {
+          "nome": "Formalizacao.ModE.stratum_subset_besovE",
+          "arquivo": "../lean4/formalizacao/Formalizacao/ModuloENN.lean",
+          "nota": ""
+        },
+        {
+          "nome": "Formalizacao.ModE.lqE_lt_top_of_succ_le",
+          "arquivo": "../lean4/formalizacao/Formalizacao/ModuloENN.lean",
+          "nota": ""
+        },
+        {
+          "nome": "Formalizacao.stratum_subset_besov",
+          "arquivo": "../lean4/formalizacao/Formalizacao/Modulo.lean",
+          "nota": ""
+        }
+      ]
+    },
+    {
+      "id": "5.4",
+      "titulo": "critério de somabilidade da agenda",
+      "rotulo": "lp:thm:besov-conditional",
+      "estado": "Formalizado e compilado, condicional a $J_p$",
+      "nota": "`besov_subset_stratum` usa a estimativa de Jackson para a inclusão direta sob o critério de somabilidade. As quatro reduções especializam a agenda.",
+      "lean": [
+        {
+          "nome": "FormalizacaoRed.besov_subset_stratum",
+          "arquivo": "../lean4/formalizacao/Formalizacao/Reductions.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoRed.realP_le_of_approx",
+          "arquivo": "../lean4/formalizacao/Formalizacao/Reductions.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoThm.conj1_endpoint_of_J",
+          "arquivo": "../lean4/formalizacao/Formalizacao/Theorems.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoThm.conj1_subcritical_of_J",
+          "arquivo": "../lean4/formalizacao/Formalizacao/Theorems.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoThm.conj1_critical_of_J",
+          "arquivo": "../lean4/formalizacao/Formalizacao/Theorems.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoThm.conj1_tilde_of_J",
+          "arquivo": "../lean4/formalizacao/Formalizacao/Theorems.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoSched.weight_bdd",
+          "arquivo": "../lean4/formalizacao/Formalizacao/Schedules.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoSched.weight_geom",
+          "arquivo": "../lean4/formalizacao/Formalizacao/Schedules.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoSched.weight_poly",
+          "arquivo": "../lean4/formalizacao/Formalizacao/Schedules.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoSched.Hsk_low",
+          "arquivo": "../lean4/formalizacao/Formalizacao/Schedules.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoSched.Htil_low",
+          "arquivo": "../lean4/formalizacao/Formalizacao/Schedules.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoLq.lq_of_eventually_le",
+          "arquivo": "../lean4/formalizacao/Formalizacao/LqLemmas.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoLq.lq_of_geom_le",
+          "arquivo": "../lean4/formalizacao/Formalizacao/LqLemmas.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoLq.lq_of_poly_le",
+          "arquivo": "../lean4/formalizacao/Formalizacao/LqLemmas.lean",
+          "nota": ""
+        }
+      ]
+    },
+    {
+      "id": "5.5",
+      "titulo": "transferência da estimativa direta para famílias aninhadas",
+      "rotulo": "lp:thm:stability-conditional",
+      "estado": "Formalizado e compilado, condicional a $J_p$",
+      "nota": "O aproximante de Jackson na escala deslocada fornece a inclusão direta. A desigualdade inversa dá a igualdade nas declarações de estabilidade.",
+      "lean": [
+        {
+          "nome": "FormalizacaoStab.besov_subset_stratum_fam",
+          "arquivo": "../lean4/formalizacao/Formalizacao/Stability.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoStab.stability_iff_of_J",
+          "arquivo": "../lean4/formalizacao/Formalizacao/Stability.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoStab.conj2Stability_endpoint_of_J",
+          "arquivo": "../lean4/formalizacao/Formalizacao/Stability.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoStab.conj2Stability_subcritical_of_J",
+          "arquivo": "../lean4/formalizacao/Formalizacao/Stability.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoStab.conj2Stability_critical_of_J",
+          "arquivo": "../lean4/formalizacao/Formalizacao/Stability.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoStab.conj2Stability_tilde_of_J",
+          "arquivo": "../lean4/formalizacao/Formalizacao/Stability.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoRed.realP_le_of_approx'",
+          "arquivo": "../lean4/formalizacao/Formalizacao/Reductions.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoLq.lq_tail_le",
+          "arquivo": "../lean4/formalizacao/Formalizacao/LqLemmas.lean",
+          "nota": ""
+        }
+      ]
+    },
+    {
+      "id": "F1",
+      "titulo": "arcabouço abstrato do módulo, em valores reais",
+      "rotulo": "lp:sec:lean",
+      "estado": "Formalizado e compilado",
+      "nota": "Estrutura `ModuloAbs` sobre um espaço seminormado; `ω` real. Serve de modelo para a versão em `ℝ≥0∞`, usada na instância `L^p`.",
+      "lean": [
+        {
+          "nome": "Formalizacao.ModuloAbs",
+          "arquivo": "../lean4/formalizacao/Formalizacao/Modulo.lean",
+          "nota": ""
+        },
+        {
+          "nome": "Formalizacao.ModuloAbs.realization",
+          "arquivo": "../lean4/formalizacao/Formalizacao/Modulo.lean",
+          "nota": ""
+        },
+        {
+          "nome": "Formalizacao.ModuloAbs.stratum",
+          "arquivo": "../lean4/formalizacao/Formalizacao/Modulo.lean",
+          "nota": ""
+        },
+        {
+          "nome": "Formalizacao.ModuloAbs.besov",
+          "arquivo": "../lean4/formalizacao/Formalizacao/Modulo.lean",
+          "nota": ""
+        },
+        {
+          "nome": "Formalizacao.memℓp_of_succ_le",
+          "arquivo": "../lean4/formalizacao/Formalizacao/Modulo.lean",
+          "nota": ""
+        }
+      ]
+    },
+    {
+      "id": "F2",
+      "titulo": "arcabouço abstrato em $\\mathbb R_{\\ge0}^\\infty$ e sua instância $L^p$",
+      "rotulo": "lp:sec:lean",
+      "estado": "Formalizado e compilado",
+      "nota": "A instância usa o subgrupo `MeasSub` das funções mensuráveis, com `nrm = eLpNorm · p vol01` e `ω = wtP p`. Os teoremas de conexão mostram que `realE`, `stratumE` e `besovE` coincidem com `realP`, `stratumP` e `besovP` para funções mensuráveis.",
+      "lean": [
+        {
+          "nome": "Formalizacao.ModE.realE",
+          "arquivo": "../lean4/formalizacao/Formalizacao/ModuloENN.lean",
+          "nota": ""
+        },
+        {
+          "nome": "Formalizacao.ModE.stratumE",
+          "arquivo": "../lean4/formalizacao/Formalizacao/ModuloENN.lean",
+          "nota": ""
+        },
+        {
+          "nome": "Formalizacao.ModE.besovE",
+          "arquivo": "../lean4/formalizacao/Formalizacao/ModuloENN.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoLp.MeasSub",
+          "arquivo": "../lean4/formalizacao/Formalizacao/ModuloConn.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoLp.realE_conn",
+          "arquivo": "../lean4/formalizacao/Formalizacao/ModuloConn.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoLp.stratum_conn",
+          "arquivo": "../lean4/formalizacao/Formalizacao/ModuloConn.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoLp.besov_conn",
+          "arquivo": "../lean4/formalizacao/Formalizacao/ModuloConn.lean",
+          "nota": ""
+        }
+      ]
+    },
+    {
+      "id": "F3",
+      "titulo": "Jackson racional com altura explícita sobre dados nodais (Parte IV, Lema IV.4.1)",
+      "rotulo": "lp:sec:lean",
+      "estado": "Formalizado e compilado",
+      "nota": "O núcleo `jackson_nodal` aceita dados nodais $y_j$ com erro nodal controlado. A forma para dados pontuais recupera a estimativa de Jackson da Parte IV.",
+      "lean": [
+        {
+          "nome": "Pendencias.Jackson.jackson_nodal",
+          "arquivo": "../lean4/formalizacao/Pendencias/Jackson.lean",
+          "nota": ""
+        },
+        {
+          "nome": "Pendencias.Jackson.atom_height_nodal",
+          "arquivo": "../lean4/formalizacao/Pendencias/Jackson.lean",
+          "nota": ""
+        },
+        {
+          "nome": "Pendencias.Jackson.rational_jackson_height",
+          "arquivo": "../lean4/formalizacao/Pendencias/Jackson.lean",
+          "nota": ""
+        },
+        {
+          "nome": "Pendencias.Jackson.rational_jackson_uniform_explicit",
+          "arquivo": "../lean4/formalizacao/Pendencias/Jackson.lean",
+          "nota": ""
+        }
+      ]
+    },
+    {
+      "id": "F4",
+      "titulo": "Arcabouço abstrato instanciado em $L^\\infty$ (Parte IV)",
+      "rotulo": "lp:sec:lean",
+      "estado": "Formalizado e compilado",
+      "nota": "O segundo módulo e a norma uniforme da Parte IV satisfazem os três axiomas; a desigualdade inversa e a inclusão $\\mathscr R\\subset B$ em $L^\\infty$ são reobtidas dos teoremas abstratos.",
+      "lean": [
+        {
+          "nome": "FormalizacaoInf.modInf",
+          "arquivo": "../lean4/formalizacao/Formalizacao/ModuloInf.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoInf.realE_modInf",
+          "arquivo": "../lean4/formalizacao/Formalizacao/ModuloInf.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoInf.inverse_realG_of_abstract",
+          "arquivo": "../lean4/formalizacao/Formalizacao/ModuloInf.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoInf.besovE_top_iff",
+          "arquivo": "../lean4/formalizacao/Formalizacao/ModuloInf.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoInf.besovE_fin_iff",
+          "arquivo": "../lean4/formalizacao/Formalizacao/ModuloInf.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoInf.besovQ_of_RGQ_abstract",
+          "arquivo": "../lean4/formalizacao/Formalizacao/ModuloInf.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoInf.besovInf_of_RGInf_abstract",
+          "arquivo": "../lean4/formalizacao/Formalizacao/ModuloInf.lean",
+          "nota": ""
+        }
+      ]
+    }
+  ]
+}
