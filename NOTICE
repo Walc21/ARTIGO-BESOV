@@ -1,0 +1,13 @@
+ARTIGO-BESOV
+Copyright 2026 Victor Gabriel de Oliveira
+
+O código original do projeto Lean em lean4/formalizacao/ e os scripts
+Python em mapas/ são licenciados sob Apache-2.0. Consulte LICENSE.
+
+O artigo (conjecturas_lp.tex e conjecturas_lp.pdf), a documentação
+original, os dados do mapa em mapas/dados/ e a saída de auditoria em
+lean4/formalizacao/auditoria_axiomas.txt são licenciados sob CC-BY-4.0.
+Consulte LICENSES/CC-BY-4.0.txt.
+
+As dependências e demais materiais de terceiros conservam suas licenças
+e avisos de direitos autorais.
