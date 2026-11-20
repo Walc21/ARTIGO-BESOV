@@ -137,3 +137,29 @@ e nunca `sorryAx`. Executar: `lake env lean Formalizacao/Auditoria.lean`.
 #print axioms FormalizacaoKer.reproduce_affine
 #print axioms FormalizacaoKer.range_affine
 #print axioms FormalizacaoKer.kernel_is_affine_projection
+
+-- Regimes s ≤ 1/p: Teoremas 3.1 (ii), (iii) e 3.2 nesses regimes
+#print axioms FormalizacaoJ.nodal_tree_gen
+#print axioms FormalizacaoJ.lp_jackson_low_core
+#print axioms FormalizacaoLow.sum_le_lq
+#print axioms FormalizacaoLow.step_le
+#print axioms FormalizacaoLow.Q_sup_le
+#print axioms FormalizacaoLow.lam_bound
+#print axioms FormalizacaoLow.classNH_le_sigma
+#print axioms FormalizacaoLow.jackson_low
+#print axioms FormalizacaoLow.besov_subset_stratum_low
+#print axioms FormalizacaoLow.lq_geom_all
+#print axioms FormalizacaoLow.lq_poly_all
+#print axioms FormalizacaoLow.wreal_geom
+#print axioms FormalizacaoLow.wreal_poly
+#print axioms FormalizacaoLow.mDiag_ge
+#print axioms FormalizacaoLow.mDiag_le
+#print axioms FormalizacaoLow.hshift_low
+#print axioms FormalizacaoLow.hshift_diag
+#print axioms FormalizacaoLow.hW_geom
+#print axioms FormalizacaoLow.hW_poly
+#print axioms FormalizacaoLow.sigma_family
+#print axioms FormalizacaoLow.conj2_low
+#print axioms FormalizacaoLow.conj2_diag
+#print axioms FormalizacaoLow.conj1_low
+#print axioms FormalizacaoLow.conj1_diag

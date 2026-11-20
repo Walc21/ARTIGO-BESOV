@@ -155,7 +155,7 @@
       "titulo": "caracterização de Besov por realização aritmética",
       "rotulo": "lp:conj:besov",
       "estado": "Formalizado e compilado",
-      "nota": "As quatro declarações cobrem as agendas e os regimes do artigo para $1\\le p<\\infty$ e $1/p<s$. O artigo toma $s<2$ para a caracterização clássica de Besov pelo módulo de ordem dois.",
+      "nota": "Os itens (i), (ii) e (iii) estão formalizados. `conj1_low` e `conj1_diag` usam `p` real com `ENNReal.ofReal p`; as agendas são `Hsk (1 + 1/p - s) 0` e `Hsk 1 (thetaQ q + κ)`, que coincidem com $\\widehat H_s$ e $\\widehat H_{q,\\kappa}$ do texto. O Lean não exige $s>0$ em (ii).",
       "lean": [
         {
           "nome": "FormalizacaoLp.Conj1Endpoint",
@@ -191,6 +191,16 @@
           "nome": "FormalizacaoJ.conj1_tilde",
           "arquivo": "../lean4/formalizacao/Formalizacao/LpJackson3.lean",
           "nota": ""
+        },
+        {
+          "nome": "FormalizacaoLow.conj1_low",
+          "arquivo": "../lean4/formalizacao/Formalizacao/LowTheorems.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoLow.conj1_diag",
+          "arquivo": "../lean4/formalizacao/Formalizacao/LowTheorems.lean",
+          "nota": ""
         }
       ]
     },
@@ -199,7 +209,7 @@
       "titulo": "estabilidade por inclusão de redes",
       "rotulo": "lp:conj:stability",
       "estado": "Formalizado e compilado",
-      "nota": "As quatro declarações dão a estabilidade por inclusão para as agendas e os regimes do Teorema 3.1, com constante real $c\\ge1$.",
+      "nota": "As quatro declarações dão a estabilidade por inclusão para as agendas e os regimes do item (i) do Teorema 3.1 ($1/p<s<2$), com constante real $c\\ge1$. O caso $s\\le1/p$ não está formalizado. Para $s\\le1/p$: `conj2_low` e `conj2_diag`.",
       "lean": [
         {
           "nome": "FormalizacaoLp.Conj2Stability",
@@ -224,6 +234,16 @@
         {
           "nome": "FormalizacaoJ.conj2_tilde",
           "arquivo": "../lean4/formalizacao/Formalizacao/LpJackson3.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoLow.conj2_low",
+          "arquivo": "../lean4/formalizacao/Formalizacao/LowTheorems.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoLow.conj2_diag",
+          "arquivo": "../lean4/formalizacao/Formalizacao/LowTheorems.lean",
           "nota": ""
         }
       ]
@@ -552,6 +572,83 @@
       ]
     },
     {
+      "id": "4.8",
+      "titulo": "interpolação racional sem controle dos saltos",
+      "rotulo": "lp:lem:nodal-general",
+      "estado": "Formalizado e compilado",
+      "nota": "Árvore nodal com `Q = 2^e ≥ 2^r` e `H ≥ 8(M+1)Q`, sem hipótese sobre `|y_{n+1}-y_n|`; `lp_jackson_low_core` é o núcleo do Jackson para $s\\le1/p$.",
+      "lean": [
+        {
+          "nome": "FormalizacaoJ.nodal_tree_gen",
+          "arquivo": "../lean4/formalizacao/Formalizacao/LowNodal.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoJ.lp_jackson_low_core",
+          "arquivo": "../lean4/formalizacao/Formalizacao/LowJackson.lean",
+          "nota": ""
+        }
+      ]
+    },
+    {
+      "id": "4.9",
+      "titulo": "cota em sup dos quase-interpolantes",
+      "rotulo": "lp:lem:sup-bound",
+      "estado": "Formalizado e compilado",
+      "nota": "Na forma «existe `K ≥ 1`, dependendo de `f`», com `Lam p s q r` $=\\Lambda_r$. As somas parciais de $\\ell^q$ estão em `sum_le_lq`.",
+      "lean": [
+        {
+          "nome": "FormalizacaoLow.step_le",
+          "arquivo": "../lean4/formalizacao/Formalizacao/LowSup.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoLow.Q_sup_le",
+          "arquivo": "../lean4/formalizacao/Formalizacao/LowSup.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoLow.Lam",
+          "arquivo": "../lean4/formalizacao/Formalizacao/LowSup.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoLow.lam_bound",
+          "arquivo": "../lean4/formalizacao/Formalizacao/LowSup.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoLow.thetaQ",
+          "arquivo": "../lean4/formalizacao/Formalizacao/LowSum.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoLow.sum_le_lq",
+          "arquivo": "../lean4/formalizacao/Formalizacao/LowSum.lean",
+          "nota": ""
+        }
+      ]
+    },
+    {
+      "id": "4.10",
+      "titulo": "Jackson para $s\\le1/p$",
+      "rotulo": "lp:thm:jackson-low",
+      "estado": "Formalizado e compilado",
+      "nota": "As constantes $C_W$ e $K$ dependem de `f`, em vez de $C_0(S+1)$ do texto.",
+      "lean": [
+        {
+          "nome": "FormalizacaoLow.classNH_le_sigma",
+          "arquivo": "../lean4/formalizacao/Formalizacao/LowJackson2.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoLow.jackson_low",
+          "arquivo": "../lean4/formalizacao/Formalizacao/LowJackson2.lean",
+          "nota": ""
+        }
+      ]
+    },
+    {
       "id": "5.1",
       "titulo": "propriedades do módulo em $L^p$",
       "rotulo": "lp:lem:modulus",
@@ -772,6 +869,70 @@
         {
           "nome": "FormalizacaoLq.lq_tail_le",
           "arquivo": "../lean4/formalizacao/Formalizacao/LqLemmas.lean",
+          "nota": ""
+        }
+      ]
+    },
+    {
+      "id": "5.6",
+      "titulo": "transferência para $s\\le1/p$",
+      "rotulo": "lp:thm:low-transfer",
+      "estado": "Formalizado e compilado",
+      "nota": "A condição de deslocamento do texto é `hshift`; o expoente extra `m` é `0` ($s<1/p$) ou `mDiag κ` ($s=1/p$).",
+      "lean": [
+        {
+          "nome": "FormalizacaoLow.besov_subset_stratum_low",
+          "arquivo": "../lean4/formalizacao/Formalizacao/LowTransfer.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoLow.hshift_low",
+          "arquivo": "../lean4/formalizacao/Formalizacao/LowShift.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoLow.hshift_diag",
+          "arquivo": "../lean4/formalizacao/Formalizacao/LowShift.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoLow.mDiag",
+          "arquivo": "../lean4/formalizacao/Formalizacao/LowWeights.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoLow.mDiag_ge",
+          "arquivo": "../lean4/formalizacao/Formalizacao/LowWeights.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoLow.mDiag_le",
+          "arquivo": "../lean4/formalizacao/Formalizacao/LowWeights.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoLow.wreal_geom",
+          "arquivo": "../lean4/formalizacao/Formalizacao/LowWeights.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoLow.wreal_poly",
+          "arquivo": "../lean4/formalizacao/Formalizacao/LowWeights.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoLow.hW_geom",
+          "arquivo": "../lean4/formalizacao/Formalizacao/LowTheorems.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoLow.hW_poly",
+          "arquivo": "../lean4/formalizacao/Formalizacao/LowTheorems.lean",
+          "nota": ""
+        },
+        {
+          "nome": "FormalizacaoLow.sigma_family",
+          "arquivo": "../lean4/formalizacao/Formalizacao/LowTheorems.lean",
           "nota": ""
         }
       ]
