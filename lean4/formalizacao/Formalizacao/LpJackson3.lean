@@ -74,4 +74,29 @@ theorem conj2_tilde {p : ℝ≥0∞} (hp : 1 ≤ p) (hpt : p ≠ ⊤) {s : ℝ} 
     Conj2Stability p s q (fun N => Pendencias.Jackson.HtilK 0 0 s η N) c :=
   conj2Stability_tilde_of_J hp (hypJp_of_lt' hp hpt hs) hq0 hqt hη c
 
+/-- **Estabilidade aproximada (`lp:thm:approx-stability`), `q = ∞`.** -/
+theorem conj2_approx_endpoint {p : ℝ≥0∞} (hp : 1 ≤ p) (hpt : p ≠ ⊤) {s : ℝ} (hs : 1 / p.toReal < s)
+    (c : ℝ) (ε : ℕ → ℝ≥0∞) : Conj2ApproxStability p s ⊤ (Pendencias.Agenda.Hsk s 0) c ε :=
+  conj2ApproxStability_endpoint_of_J hp (hypJp_of_lt' hp hpt hs) c ε
+
+/-- **Estabilidade aproximada (`lp:thm:approx-stability`), `0 < q < ∞`, `s < 1`.** -/
+theorem conj2_approx_subcritical {p : ℝ≥0∞} (hp : 1 ≤ p) (hpt : p ≠ ⊤) {s : ℝ}
+    (hs : 1 / p.toReal < s) (hs1 : s < 1) {q : ℝ≥0∞} (hq0 : 0 < q) (hqt : q ≠ ⊤) (c : ℝ)
+    (ε : ℕ → ℝ≥0∞) : Conj2ApproxStability p s q (Pendencias.Agenda.Hsk s 0) c ε :=
+  conj2ApproxStability_subcritical_of_J hp (hypJp_of_lt' hp hpt hs) hs1 hq0 hqt c ε
+
+/-- **Estabilidade aproximada (`lp:thm:approx-stability`), `0 < q < ∞`, `1 ≤ s`, `κ q > 1`.** -/
+theorem conj2_approx_critical {p : ℝ≥0∞} (hp : 1 ≤ p) (hpt : p ≠ ⊤) {s : ℝ}
+    (hs : 1 / p.toReal < s) (hs1 : 1 ≤ s) {q : ℝ≥0∞} (hq0 : 0 < q) (hqt : q ≠ ⊤) {κ : ℝ}
+    (hκ : 0 ≤ κ) (hκq : 1 < κ * q.toReal) (c : ℝ) (ε : ℕ → ℝ≥0∞) :
+    Conj2ApproxStability p s q (Pendencias.Agenda.Hsk s κ) c ε :=
+  conj2ApproxStability_critical_of_J hp (hypJp_of_lt' hp hpt hs) hs1 hq0 hqt hκ hκq c ε
+
+/-- **Estabilidade aproximada (`lp:thm:approx-stability`) com `H̃_{s,η}`**, com `1/p < s < 2`. -/
+theorem conj2_approx_tilde {p : ℝ≥0∞} (hp : 1 ≤ p) (hpt : p ≠ ⊤) {s : ℝ} (hs : 1 / p.toReal < s)
+    (_hs2 : s < 2) {q : ℝ≥0∞} (hq0 : 0 < q) (hqt : q ≠ ⊤) {η : ℝ} (hη : 0 < η) (c : ℝ)
+    (ε : ℕ → ℝ≥0∞) :
+    Conj2ApproxStability p s q (fun N => Pendencias.Jackson.HtilK 0 0 s η N) c ε :=
+  conj2ApproxStability_tilde_of_J hp (hypJp_of_lt' hp hpt hs) hq0 hqt hη c ε
+
 end FormalizacaoJ
