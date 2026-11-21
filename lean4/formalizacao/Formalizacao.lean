@@ -53,6 +53,7 @@ import Formalizacao.AlturaLq
 import Formalizacao.AlturaCritical
 import Formalizacao.AlturaCritical2
 import Formalizacao.AlturaCritical3
+import Formalizacao.AlturaRadius
 
 import Formalizacao.LowNodal
 import Formalizacao.LowJackson

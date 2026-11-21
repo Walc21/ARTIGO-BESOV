@@ -1,5 +1,6 @@
 import Formalizacao.LpJackson0
 import Formalizacao.AlturaTerminal
+import Formalizacao.AlturaCoarse
 
 /-!
 # Quantização com salto limitado por `J` (auditoria, Parte V, Lema 5.1)
@@ -14,7 +15,9 @@ open Artigo
 
 namespace FormalizacaoAltura
 
-/-- **Quantização com salto `J`.** -/
+/-- **Quantização com salto `J` (Lema lp:lem:nodal-jump).** Escolhe-se `Q = 2^e` com
+`x < Q ≤ 2x`, `x = H/(16(M+1))`; então `8(M+1)Q ≤ H` e `1/(2Q) ≤ 8(M+1)/H`. Se `r ≤ e`
+(caso `n ≤ Q`), vale `nodal_tree_gen`; se `e < r` (caso `n > Q`), vale `nodal_tree_coarse`. -/
 theorem quantization_jump {r : ℕ} {M J : ℝ} {y : ℤ → ℝ} (hM : 0 ≤ M)
     (hy : ∀ n : ℤ, 0 ≤ n → n ≤ 2 ^ r → |y n| ≤ M)
     (hJ : ∀ n : ℤ, 0 ≤ n → n < 2 ^ r → |y (n + 1) - y n| ≤ J)
@@ -28,30 +31,36 @@ theorem quantization_jump {r : ℕ} {M J : ℝ} {y : ℤ → ℝ} (hM : 0 ≤ M)
     have : (0 : ℝ) < 8 * (2 : ℝ) ^ r := by positivity
     linarith
   have h2r : (2 : ℝ) ^ r ≤ H := by nlinarith [pow_pos (by norm_num : (0 : ℝ) < 2) r]
-  have h2rN : 2 ^ r ≤ H := by exact_mod_cast h2r
-  have hrlt : r < 2 ^ r := Nat.lt_two_pow_self
-  have hk : 0 + r + 1 ≤ H := by omega
-  have hm : ∀ n : ℤ, 0 ≤ n → n < 2 ^ r → n.natAbs + 1 ≤ H := by
-    intro n hn hlt
-    have hlt' : n < ((2 ^ r : ℕ) : ℤ) := by push_cast; exact hlt
-    have hab : n.natAbs = n.toNat := by omega
-    have : n.toNat < 2 ^ r := by omega
-    omega
-  have hfrac : 16 * (M + 1) / H ≤ 1 := by
-    rw [div_le_one hH0]; exact hH2
-  have hsl : ∀ n : ℤ, 0 ≤ n → n < 2 ^ r →
-      (2 : ℝ) ^ (0 + r) * (|y (n + 1) - y n| + 16 * (M + 1) / H) ≤ H := by
-    intro n hn hlt
-    have h1 := hJ n hn hlt
-    have hpos : (0 : ℝ) < (2 : ℝ) ^ (0 + r) := by positivity
-    have h2 : |y (n + 1) - y n| + 16 * (M + 1) / H ≤ J + 1 := by linarith
-    have h3 : (2 : ℝ) ^ (0 + r) * (|y (n + 1) - y n| + 16 * (M + 1) / H) ≤
-        (2 : ℝ) ^ (0 + r) * (J + 1) :=
-      mul_le_mul_of_nonneg_left h2 hpos.le
-    have h4 : (2 : ℝ) ^ (0 + r) * (J + 1) ≤ H := by simpa using hH3
+  have hkH : r + 1 ≤ H := by
+    have h1 : ((r + 1 : ℕ) : ℝ) ≤ (2 : ℝ) ^ r := by
+      have : r + 1 ≤ 2 ^ r := Nat.lt_two_pow_self
+      exact_mod_cast this
+    have : ((r + 1 : ℕ) : ℝ) ≤ H := by linarith
+    exact_mod_cast this
+  have hM1 : (0 : ℝ) < 16 * (M + 1) := by linarith
+  -- x = H/(16(M+1)) ≥ 1 e a potência de dois Q = 2^e com x < Q ≤ 2x
+  set x : ℝ := H / (16 * (M + 1)) with hx_def
+  have hx1 : 1 ≤ x := by rw [hx_def, le_div_iff₀ hM1]; linarith
+  obtain ⟨n0, hn0a, hn0b⟩ := exists_nat_pow_near hx1 (by norm_num : (1 : ℝ) < 2)
+  set e : ℕ := n0 + 1 with he_def
+  have hQx : x < (2 : ℝ) ^ e := hn0b
+  have hQ2x : (2 : ℝ) ^ e ≤ 2 * x := by rw [he_def, pow_succ]; linarith
+  have hQ : 8 * (M + 1) * (2 : ℝ) ^ e ≤ (H : ℝ) := by
+    have h := mul_le_mul_of_nonneg_left hQ2x (by linarith : (0 : ℝ) ≤ 8 * (M + 1))
+    have hxH : 8 * (M + 1) * (2 * x) = (H : ℝ) := by
+      rw [hx_def]; field_simp; ring
     linarith
-  have hH16 : (16 : ℝ) * (M + 1) ≤ (H : ℝ) := hH2
-  obtain ⟨T, hT, hg⟩ := FormalizacaoJ.nodal_tree (r := r) (R := M) hM hy hH16 hk hm hsl
-  refine ⟨T, hT, hg⟩
+  have hErr : 1 / (2 * 2 ^ e) ≤ 8 * (M + 1) / H := by
+    rw [div_le_div_iff₀ (by positivity) hH0]
+    have h := mul_le_mul_of_nonneg_left hQx.le (by linarith : (0 : ℝ) ≤ 16 * (M + 1))
+    have hxH : 16 * (M + 1) * x = (H : ℝ) := by rw [hx_def]; field_simp
+    nlinarith
+  by_cases hre : r ≤ e
+  · obtain ⟨T, hT, hg⟩ := FormalizacaoJ.nodal_tree_gen (r := r) (e := e) hre hM hy hQ
+    refine ⟨T, hT, fun g0 h1 h2 x hx => (hg g0 h1 h2 x hx).trans (hErr.trans le_rfl)⟩
+  · push_neg at hre
+    obtain ⟨T, hT, hg⟩ := FormalizacaoJ.nodal_tree_coarse (r := r) (e := e) (J := J) hM hy hJ hQ
+      h2r hkH hH3
+    refine ⟨T, hT, fun g0 h1 h2 x hx => (hg g0 h1 h2 x hx).trans hErr⟩
 
 end FormalizacaoAltura

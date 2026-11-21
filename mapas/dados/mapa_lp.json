@@ -1505,6 +1505,16 @@
           "nome": "FormalizacaoAltura.quantization_jump",
           "arquivo": "../lean4/formalizacao/Formalizacao/AlturaQuant.lean",
           "nota": ""
+        },
+        {
+          "nome": "FormalizacaoJ.nodal_tree_gen",
+          "arquivo": "../lean4/formalizacao/Formalizacao/LowNodal.lean",
+          "nota": "; caso n ≤ Q."
+        },
+        {
+          "nome": "FormalizacaoJ.nodal_tree_coarse",
+          "arquivo": "../lean4/formalizacao/Formalizacao/AlturaCoarse.lean",
+          "nota": "; caso n > Q."
         }
       ]
     },
@@ -1553,6 +1563,11 @@
           "nome": "FormalizacaoCrit3.critical_char_radius",
           "arquivo": "../lean4/formalizacao/Formalizacao/AlturaCritical3.lean",
           "nota": "; item (d)."
+        },
+        {
+          "nome": "FormalizacaoCrit4.critical_radius_ball_and_inclusion",
+          "arquivo": "../lean4/formalizacao/Formalizacao/AlturaRadius.lean",
+          "nota": "; item (d): bola ⊆ Rstr e Rstr ⊆ B."
         }
       ]
     },
@@ -1692,6 +1707,25 @@
       "estado": "Observação",
       "nota": "Consequência da necessidade conjunta sobre a família uniforme, não sobre funções isoladas.",
       "lean": []
+    },
+    {
+      "id": "A10",
+      "titulo": "escala de um bump e constante do piso",
+      "rotulo": "lp:lem:bump",
+      "estado": "Formalizado e compilado",
+      "nota": "Norma de Besov do bump escalado e cota inferior em L^p por integração por partes e Hölder; usado na prova de lp:prop:geom-floor.",
+      "lean": [
+        {
+          "nome": "FormalizacaoAltura.besovNorm_bumpS_le",
+          "arquivo": "../lean4/formalizacao/Formalizacao/AlturaBesov.lean",
+          "nota": "; norma de Besov com Λ."
+        },
+        {
+          "nome": "FormalizacaoAltura.geometric_dist_lower",
+          "arquivo": "../lean4/formalizacao/Formalizacao/AlturaFloor.lean",
+          "nota": "; cota inferior com κ/M."
+        }
+      ]
     }
   ]
 }
