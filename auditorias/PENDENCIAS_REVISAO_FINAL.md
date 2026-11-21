@@ -58,3 +58,19 @@ Os quatro PDFs externos analisados (Yang, Cohen et al., DeVore–Popov, Kerkyach
 
 - Relatórios E3/E4 e mapas de formalização preservados, sem alterações: `RELATORIO_CORRECOES_E3_E4.md`, `RELATORIO_VALIDACAO_ETAPA_2.md`, `RELATORIO_VALIDACAO_INTEGRACAO.md`, `AUDITORIA_INTEGRACAO.md`, `mapas/MAPA_TEX_LEAN.md`, `mapas/AUDITORIA_FIDELIDADE.md`, `mapas/dados/mapa_lp.json`, `mapas/gerar_mapa.py`, `mapas/verificar_mapa.py`.
 - Manuscritos LaTeX, PDFs, bibliografia, Lean e testes: não modificados.
+
+---
+
+## Status de resolução (Etapa 4B.4, integração E1/E2)
+
+As cinco pendências acima foram tratadas nas três edições (a ABNT compartilha a fonte portuguesa) e na bibliografia. O histórico acima foi preservado. Detalhes em `RELATORIO_INTEGRACAO_E1_E2.md`.
+
+| # | Pendência | Estado | Onde |
+|---|---|---|---|
+| 1 | `O(N log N)` contra `Ω(N)` de bits | **Resolvida no manuscrito** | PT 1392 / EN 1362 (Considerações finais): a diferença é a lacuna entre a cota superior do código de comprimento fixo (`lp:prop:bits`) e a cota inferior de entropia; o texto não afirma `Ω(N log N)` em toda codificação. |
+| 2 | Spline de DeVore–Popov e biblioteca racional | **Resolvida no manuscrito** | PT 55 / EN 26: a estimativa direta é o ponto de partida do termo `N^{-s}`; a passagem às montagens racionais exige racionalizar valores nodais e controlar alturas. Nenhuma inclusão é afirmada. |
+| 3 | Mesmo calibre aritmético contra qualquer quantização | **Resolvida no manuscrito** | PT 55 / EN 26: Cohen et al., Birman–Solomyak e Kerkyacharian–Picard "quantizam coeficientes e medem o custo em bits"; Siegel e Yang usam parâmetros reais; Elbrächter et al. usam pesos quantizados em precisão `~ (log ε⁻¹)^k`, em `L^2`. Os modelos "diferem" e nenhuma redução é estabelecida. |
+| 4 | Referências de Cohen et al. e Elbrächter et al. | **Resolvida, com duas conferências abertas** | Chaves `lp-cohen2001`, `lp-elbrachter2021` (e `lp-birmansolomyak1967`) em `conjecturas_lp_citacoes.tex` e `conjecturas_lp_referencias.tex`. Cohen: v. 11, n. 2, p. 192–226, DOI do cabeçalho do PDF. Elbrächter: v. 67, n. 5, p. 2581–2623 (registro do periódico), arXiv 1901.02220; **DOI não verificado e não incluído**. Birman–Solomyak: dados conforme citados por Cohen et al. e Kerkyacharian–Picard; **original não consultado**. |
+| 5 | Lei conjunta `C²` | **Resolvida no manuscrito** | PT 55 / EN 26: atribuída à Parte II e aos pisos aritmético e quadrático; "não se confunde com o caso `s=2`" do Teorema 5.2, cuja hipótese é `0<s<2`. |
+
+**Itens ainda abertos:** (i) DOI de Elbrächter et al.; (ii) páginas de Birman–Solomyak no original; (iii) a lei conjunta `C²` é afirmada no texto como consequência da Parte II, mas a dedução (cota superior para `(N,H)` independentes e piso quadrático) consta só em `RELATORIO_E1_E2_CONCLUSIVO_4_FONTES.md`, seção 11, e não no manuscrito; (iv) o relatório preservado `RELATORIO_E1_E2_CONCLUSIVO_4_FONTES.md` mantém, por decisão, as formulações originais criticadas nas pendências 1, 2, 3 e 5; (v) os PDFs rastreados não foram regenerados.
