@@ -280,3 +280,6 @@ e nunca `sorryAx`. Executar: `lake env lean Formalizacao/Auditoria.lean`.
 
 -- F3.1: quantização com denominadores diádicos por nó
 #print axioms FormalizacaoAltura.nodal_variable_height
+
+-- F3.2: altura linear no caso p = s = 1
+#print axioms FormalizacaoAltura.l1_linear_height

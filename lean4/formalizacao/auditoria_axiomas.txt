@@ -227,3 +227,4 @@
 'FormalizacaoLeaf.dfun_slope_floor' depends on axioms: [propext, Classical.choice, Quot.sound]
 'FormalizacaoLeaf.dfun_arithmetic_floor' depends on axioms: [propext, Classical.choice, Quot.sound]
 'FormalizacaoAltura.nodal_variable_height' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FormalizacaoAltura.l1_linear_height' depends on axioms: [propext, Classical.choice, Quot.sound]
