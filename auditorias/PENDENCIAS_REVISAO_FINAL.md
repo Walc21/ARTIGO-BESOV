@@ -74,3 +74,19 @@ As cinco pendências acima foram tratadas nas três edições (a ABNT compartilh
 | 5 | Lei conjunta `C²` | **Resolvida no manuscrito** | PT 55 / EN 26: atribuída à Parte II e aos pisos aritmético e quadrático; "não se confunde com o caso `s=2`" do Teorema 5.2, cuja hipótese é `0<s<2`. |
 
 **Itens ainda abertos:** (i) DOI de Elbrächter et al.; (ii) páginas de Birman–Solomyak no original; (iii) a lei conjunta `C²` é afirmada no texto como consequência da Parte II, mas a dedução (cota superior para `(N,H)` independentes e piso quadrático) consta só em `RELATORIO_E1_E2_CONCLUSIVO_4_FONTES.md`, seção 11, e não no manuscrito; (iv) o relatório preservado `RELATORIO_E1_E2_CONCLUSIVO_4_FONTES.md` mantém, por decisão, as formulações originais criticadas nas pendências 1, 2, 3 e 5; (v) os PDFs rastreados não foram regenerados.
+
+---
+
+## Atualização (Etapa 5, E5/E6)
+
+Itens abertos ao final da integração E1/E2 e seu estado:
+
+| Item aberto | Estado | Como foi tratado |
+|---|---|---|
+| (i) DOI de Elbrächter et al. | **Fechado** | DOI `10.1109/TIT.2021.3062161`, v. 67, n. 5, p. 2581–2623, 2021, conferido em registro do Crossref; incluído na entrada `lp-elbrachter2021`. |
+| (ii) Páginas de Birman–Solomyak | **Fechado, com ressalva** | O registro do Crossref dá *Mathematics of the USSR-Sbornik*, v. 2, n. 3, p. 295–317, 1967, DOI `10.1070/SM1967v002n03ABEH002343`. As páginas 295–317 são, portanto, as da tradução inglesa. A entrada `lp-birmansolomyak1967` passou a citar essa tradução. Os dados do original russo (*Mat. Sb.* 73) não foram confirmados e não foram incluídos. |
+| (iii) Dedução da lei `C²` fora do manuscrito | **Fechado** | Nova `lp:obs:c2-joint` (Seção 5, após `lp:obs:floor-closure`) traz a dedução curta, atribui à Parte II só o que ela demonstra (montagem de `n` folhas, erro `≤(M+4)/(8n²)`, altura `≤C_Hn²`) e declara que a lei não é o caso `s=2` do Teorema 5.2. |
+| (iv) Relatório de auditoria preservado com formulações originais | Mantido por decisão | `RELATORIO_E1_E2_CONCLUSIVO_4_FONTES.md` não foi alterado. |
+| (v) PDFs rastreados desatualizados | **Fechado** | Os três PDFs foram regenerados. |
+
+Pendências novas ou que permanecem: ver `RELATORIO_E5_E6_CONSOLIDACAO.md`, seção 9.

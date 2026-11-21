@@ -35,6 +35,7 @@ O apêndice do artigo descreve a formalização em Lean 4 e a correspondência e
 | [`Pendencias/`](lean4/formalizacao/Pendencias/) · [`RequestProject/`](lean4/formalizacao/RequestProject/) | Módulos auxiliares dos quais `Formalizacao` depende. |
 | [`Auditoria.lean`](lean4/formalizacao/Formalizacao/Auditoria.lean) · [saída da auditoria](lean4/formalizacao/auditoria_axiomas.txt) | Comandos de inspeção e axiomas de cada declaração auditada. |
 | [`mapas/`](mapas/) | Dados e scripts do mapa, [correspondência TeX–Lean](mapas/MAPA_TEX_LEAN.md) e [auditoria de fidelidade](mapas/AUDITORIA_FIDELIDADE.md). |
+| [`auditorias/`](auditorias/) | Relatórios das auditorias de originalidade (E1/E2), da integração bibliográfica e da consolidação editorial (E5/E6), com as pendências registradas. |
 
 ## Como verificar de forma independente
 
@@ -84,7 +85,7 @@ A compilação deve terminar com `Build completed successfully`. Para conferir o
 grep -rnw 'sorry' Formalizacao/ Formalizacao.lean
 ```
 
-A saída esperada é vazia.
+A única ocorrência esperada é o comentário ``nenhum resultado depende de `sorry` `` em `Formalizacao/AlturaBump.lean`, linha 13. Não há `sorry` em demonstrações.
 
 ### 4. Auditar os axiomas
 
