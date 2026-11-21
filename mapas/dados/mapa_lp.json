@@ -1,5 +1,5 @@
 {
-  "cabecalho": "# Correspondência do artigo sobre $L^p$ com Lean 4\n\nGerado por `mapas/gerar_mapa.py` a partir de `mapas/dados/mapa_lp.json`. O verificador confere os rótulos do TeX, localiza as declarações nos arquivos indicados e valida os nomes com `#check`. O apêndice A descreve a relação entre os enunciados do artigo e a formalização.\n\nO projeto usa Lean 4.28.0 e Mathlib v4.28.0. A auditoria de dependências axiomáticas está em `lean4/formalizacao/Formalizacao/Auditoria.lean`, com saída registrada em `lean4/formalizacao/auditoria_axiomas.txt`.\n",
+  "cabecalho": "# Correspondência do artigo sobre $L^p$ com Lean 4\n\nGerado por `mapas/gerar_mapa.py` a partir de `mapas/dados/mapa_lp.json`. O verificador confere os rótulos do TeX, localiza as declarações nos arquivos indicados e valida os nomes com `#check`. O apêndice A descreve a relação entre os enunciados do artigo e a formalização.\n\nO projeto usa Lean 4.28.0 e Mathlib v4.28.0. A auditoria de dependências axiomáticas está em `lean4/formalizacao/Formalizacao/Auditoria.lean`, com saída registrada em `lean4/formalizacao/auditoria_axiomas.txt`.\n\nOs identificadores preservam o inventário histórico. Os rótulos e as linhas remetem à edição atual. Uma declaração indicada como apoio parcial cobre uma dependência da prova analítica.\n",
   "entradas": [
     {
       "id": "D1",
@@ -1522,8 +1522,8 @@
       "id": "A2",
       "titulo": "saltos nodais uniformes do quase-interpolante",
       "rotulo": "lp:lem:critical-jump",
-      "estado": "Formalizado e compilado",
-      "nota": "A soma telescópica dos níveis dá o salto em `1/n`; cada nível é afim em células finas (`Q_affine_on_cell`, `slope_diff_le`).",
+      "estado": "Apoio Lean (salto com hipóteses por célula)",
+      "nota": "A soma telescópica aceita a cota de sup em Q₂ e as cotas de inclinação em cada nível como hipóteses, sem parâmetro p. A aplicação a p=1 com o controle analítico do módulo é explicitada no texto.",
       "lean": [
         {
           "nome": "FormalizacaoCrit.nodal_jump",
@@ -1536,8 +1536,8 @@
       "id": "A3",
       "titulo": "altura linear crítica para $s=1/p$, $p>1$",
       "rotulo": "lp:thm:critical-linear",
-      "estado": "Formalizado e compilado (para $0<q<\\infty$)",
-      "nota": "A agenda crítica usa a constante `Avc p CW`, independente de $q$, e o fator $B+1$. As cotas dos itens (b) e (c) têm constantes uniformes em $B$, no alvo e na escala. O item (d) dá a inclusão direta na bola e a inversa global para $0<q<\\infty$.",
+      "estado": "Formalizado para q finito, extensão analítica a q infinito",
+      "nota": "A agenda crítica usa a constante `Avc p CW`, independente de q, e o fator B+1. As declarações por nível usam controle de cada coeficiente do módulo, sem introduzir q. As estimativas em sequência e a inclusão direta na bola exigem `q ≠ ⊤` no Lean. O texto também prova o caso q infinito.",
       "lean": [
         {
           "nome": "FormalizacaoCrit.critical_approx",
@@ -1576,7 +1576,7 @@
       "titulo": "piso geométrico em toda a biblioteca",
       "rotulo": "lp:prop:geom-floor",
       "estado": "Formalizado e compilado",
-      "nota": "Teste suave com última folha, distância positiva a afins por integração por partes, e cota de Besov do bump escalado.",
+      "nota": "Teste suave com última folha, distância positiva a afins por integração por partes, e cota de Besov do bump escalado. O campo do endereço da última folha implica m+1=2^k≤H, com a consequência formal em `terminal_affine`.",
       "lean": [
         {
           "nome": "FormalizacaoAltura.geometric_floor",
@@ -1697,7 +1697,7 @@
       "titulo": "escopo da altura crítica (dependência de $B$, $q$ e agenda única)",
       "rotulo": "lp:obs:critical-scope",
       "estado": "Observação (escopo)",
-      "nota": "Registra o que a formalização cobre: $0<q<\\infty$, agenda dependente de $B$.",
+      "nota": "Distingue a agenda calibrada pelo raio, a agenda linear fixa e o endpoint p=s=1. A caracterização global sob a agenda fixa, inclusive no endpoint por supremo, é analítica.",
       "lean": []
     },
     {
@@ -1705,7 +1705,7 @@
       "titulo": "fecho da comparação de potências (Observação)",
       "rotulo": "lp:obs:floor-closure",
       "estado": "Observação",
-      "nota": "Consequência da necessidade conjunta sobre a família uniforme, não sobre funções isoladas.",
+      "nota": "O minimax por escala dá a potência ótima em toda a faixa, inclusive p=s=1. A necessidade é uniforme na bola e pode usar alvos que dependem dos orçamentos.",
       "lean": []
     },
     {
@@ -1758,6 +1758,132 @@
       "estado": "Demonstrado no texto (sem formalização Lean)",
       "nota": "Registra que só a cota inferior é demonstrada e que a restrição a $\\varepsilon\\le\\varepsilon_0B$ é indispensável. Sem declaração Lean correspondente.",
       "lean": []
+    },
+    {
+      "id": "M1",
+      "titulo": "constante 4 na desigualdade de Nikolskii",
+      "rotulo": "lp:eq:nikolskii",
+      "estado": "Justificação analítica com apoio Lean",
+      "nota": "A especialização a funções afins usa P_Iv=v, a estimativa nos extremos e a fórmula elementar da inclinação.",
+      "lean": [
+        {
+          "nome": "FormalizacaoKer.kernel_is_affine_projection",
+          "arquivo": "../lean4/formalizacao/Formalizacao/Kernel.lean",
+          "nota": " Apoio parcial para esta prova."
+        },
+        {
+          "nome": "FormalizacaoQuasi.abs_integral_kernel_le",
+          "arquivo": "../lean4/formalizacao/Formalizacao/QuasiLocal.lean",
+          "nota": " Apoio parcial para esta prova."
+        }
+      ]
+    },
+    {
+      "id": "M2",
+      "titulo": "piso pelo número de folhas",
+      "rotulo": "lp:lem:leaf-budget-floor",
+      "estado": "Demonstrado no texto (sem formalização Lean)",
+      "nota": "A contagem das células de teste livres de fronteiras e o argumento com 2N bumps são analíticos. O teste de distância a funções afins em uma célula oferece apoio parcial.",
+      "lean": [
+        {
+          "nome": "FormalizacaoAltura.L1_affine_lower",
+          "arquivo": "../lean4/formalizacao/Formalizacao/AlturaFloor.lean",
+          "nota": " Apoio parcial para esta prova."
+        }
+      ]
+    },
+    {
+      "id": "M3",
+      "titulo": "quantização com denominador por nó",
+      "rotulo": "lp:lem:nodal-variable-height",
+      "estado": "Demonstrado no texto (sem formalização Lean)",
+      "nota": "A quantização variável usa um denominador comum por folha e duas exclusões nos nós ímpares. A declaração de denominador comum em toda a malha cobre a construção anterior.",
+      "lean": []
+    },
+    {
+      "id": "M4",
+      "titulo": "altura linear em B¹₁,q por escala",
+      "rotulo": "lp:prop:l1-linear-height",
+      "estado": "Demonstrado no texto (sem formalização Lean)",
+      "nota": "A média dos módulos dos valores nodais e o novo lema de quantização dão a cota em p=s=1. A declaração citada controla a soma dos saltos sob hipóteses por célula.",
+      "lean": [
+        {
+          "nome": "FormalizacaoCrit.nodal_jump",
+          "arquivo": "../lean4/formalizacao/Formalizacao/AlturaCritical.lean",
+          "nota": " Apoio parcial para esta prova."
+        }
+      ]
+    },
+    {
+      "id": "M5",
+      "titulo": "lei minimax conjunta em N e H",
+      "rotulo": "lp:thm:minimax-nh",
+      "estado": "Demonstrado no texto (sem formalização Lean)",
+      "nota": "A equivalência conjunta combina o piso em folhas com os três pisos de altura e as construções por escala. O enunciado final, com supremo sobre a bola e ambos os orçamentos livres, é analítico.",
+      "lean": [
+        {
+          "nome": "FormalizacaoAltura.geometric_floor",
+          "arquivo": "../lean4/formalizacao/Formalizacao/AlturaFloor.lean",
+          "nota": " Apoio parcial para esta prova."
+        },
+        {
+          "nome": "FormalizacaoAltura.slope_floor",
+          "arquivo": "../lean4/formalizacao/Formalizacao/AlturaSlope.lean",
+          "nota": " Apoio parcial para esta prova."
+        },
+        {
+          "nome": "FormalizacaoFloor.arithmetic_floor_bestError",
+          "arquivo": "../lean4/formalizacao/Formalizacao/ArithmeticFloor.lean",
+          "nota": " Apoio parcial para esta prova."
+        }
+      ]
+    },
+    {
+      "id": "M6",
+      "titulo": "lei minimax do funcional de realização",
+      "rotulo": "lp:cor:minimax-realization",
+      "estado": "Demonstrado no texto (sem formalização Lean)",
+      "nota": "A comparação por escala está formalizada. A equivalência minimax, incluindo a redução de todo N ao nível diádico para controlar o módulo, é demonstrada no texto.",
+      "lean": [
+        {
+          "nome": "FormalizacaoAltura.bestError_le_realP",
+          "arquivo": "../lean4/formalizacao/Formalizacao/AlturaTransfer.lean",
+          "nota": " Apoio parcial para esta prova."
+        },
+        {
+          "nome": "FormalizacaoAltura.realP_le_bestError_add",
+          "arquivo": "../lean4/formalizacao/Formalizacao/AlturaTransfer.lean",
+          "nota": " Apoio parcial para esta prova."
+        }
+      ]
+    },
+    {
+      "id": "M7",
+      "titulo": "agenda linear fixa global",
+      "rotulo": "lp:thm:critical-fixed-agenda",
+      "estado": "Demonstrado no texto (sem formalização Lean)",
+      "nota": "A agenda fixa usa deslocamento dependente do raio e trata todo 0<q≤∞. A inclusão inversa universal é formalizada.",
+      "lean": [
+        {
+          "nome": "FormalizacaoLp.stratum_subset_besov_conn",
+          "arquivo": "../lean4/formalizacao/Formalizacao/ModuloConn.lean",
+          "nota": " Apoio parcial para esta prova."
+        }
+      ]
+    },
+    {
+      "id": "M8",
+      "titulo": "crescimento ótimo em função do raio",
+      "rotulo": "lp:prop:critical-radius-growth",
+      "estado": "Demonstrado no texto (sem formalização Lean)",
+      "nota": "A cota em função do raio e a obstrução por constantes são analíticas. A estimativa por bola de q finito para a agenda calibrada é um apoio parcial.",
+      "lean": [
+        {
+          "nome": "FormalizacaoCrit3.critical_lq",
+          "arquivo": "../lean4/formalizacao/Formalizacao/AlturaCritical3.lean",
+          "nota": " Apoio parcial para esta prova."
+        }
+      ]
     }
   ]
 }
