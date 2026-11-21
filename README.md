@@ -19,7 +19,7 @@ O artigo caracteriza os espaços de Besov $B^s_{p,q}([0,1])$, com $1\le p<\infty
 - **Jackson racional em $L^p$.** Para $s>1/p$ e $f\in B^s_{p,\infty}$, a construção usa até $n$ folhas e altura no máximo $H$. Quando esses orçamentos são suficientemente grandes, o erro é limitado por $9C_W(p)\,\omega_2(f,n^{-1})_p + 16(\|f\|_\infty+1)/H$. A prova combina projeções afins locais, uma desigualdade de Whitney em partições e quantização nodal em grades alternadas.
 - **Caracterização de Besov.** Para $s>1/p$, a agenda de altura parte de $N^{\max\{1,s\}}$, com correção logarítmica de expoente $\kappa>1/q$ quando $q<\infty$ e $s\ge1$. O controle dos quase-interpolantes permite tratar funções ilimitadas nos demais regimes, com agendas da ordem de $N^{1+1/p-s}$ para $s<1/p$ e de $N$ vezes uma potência de $\log N$ na diagonal $s=1/p$.
 - **Estabilidade para redes ReLU.** A caracterização se transfere a famílias aninhadas que contêm a biblioteca racional após reescalonar linearmente o orçamento. O Teorema 3.3 admite inclusão aproximada em $L^p$ com tolerâncias tais que $(2^{rs}\varepsilon_{2^r})\in\ell^q$.
-- **Cotas uniformes e complexidade em bits.** A seção 6 demonstra cotas uniformes em bolas de Besov, um piso aritmético em $L^p$, um código de árvores livre de prefixo e um critério para agendas de log iterado. Na série de Bertrand, o limiar de convergência é $\gamma q>1$.
+- **Cotas uniformes e complexidade em bits.** A seção 6 demonstra cotas uniformes em bolas de Besov, um piso aritmético em $L^p$, um código de árvores livre de prefixo e um critério para agendas de log iterado. Na série de Bertrand, o limiar de convergência é $\gamma q>1$. A mesma seção prova, no texto, uma cota inferior construtiva da entropia métrica e do comprimento de códigos binários (empacotamento de funções suaves), sem recorrer a wavelets; esses resultados ainda não têm formalização em Lean.
 
 O apêndice do artigo descreve a formalização em Lean 4 e a correspondência entre as demonstrações e as declarações verificadas.
 
@@ -94,7 +94,7 @@ Ainda em `lean4/formalizacao/`, execute:
 lake env lean Formalizacao/Auditoria.lean
 ```
 
-A saída esperada tem 170 linhas, todas com `[propext, Classical.choice, Quot.sound]`. Para comparar com o arquivo versionado na mesma execução, use a forma abaixo. A comparação também detecta declarações ausentes e ocorrências de `sorryAx`.
+A saída esperada tem 201 linhas para 196 declarações distintas e registra somente os axiomas `propext`, `Classical.choice` e `Quot.sound`. Para comparar com o arquivo versionado na mesma execução, use a forma abaixo. A comparação também detecta declarações ausentes e ocorrências de `sorryAx`.
 
 ```bash
 set -o pipefail
@@ -118,7 +118,7 @@ O script verifica os rótulos do TeX, confirma os nomes das declarações com `#
 - Os Teoremas 3.1 e 3.2 estão formalizados nos três regimes, e o Teorema 3.3 cobre a inclusão aproximada. Os módulos `Formalizacao/Low*.lean` tratam $s\le1/p$ com constantes de Jackson que podem depender de $f$.
 - O Lean usa representantes mensuráveis $\mathbb R\to\mathbb R$ e a medida de Lebesgue restrita a $[0,1]$. Os casos com agenda $\widetilde H_{s,\eta}$ assumem $1/p<s<2$.
 - As reduções usam a estimativa de Jackson com constantes que podem depender de $f$. A forma com constantes explícitas $C_0=9C_W(p)$ e $C_1=16$ está em [`hypJpStrong_of_lt`](lean4/formalizacao/Formalizacao/LpJackson4.lean).
-- A auditoria de fidelidade compara os enunciados e registra as escolhas de formalização, incluindo a referência externa usada no resultado de entropia métrica da seção 6. [Consultar a auditoria de fidelidade](mapas/AUDITORIA_FIDELIDADE.md)
+- A auditoria de fidelidade compara os enunciados e registra as escolhas de formalização, incluindo, para o estado anterior ao commit `9951091`, a referência externa usada na entropia métrica da seção 6. A cota inferior de entropia agora tem demonstração própria no artigo (ver a seção de atualização da auditoria). [Consultar a auditoria de fidelidade](mapas/AUDITORIA_FIDELIDADE.md)
 
 ## Licenças e segurança
 

@@ -68,7 +68,7 @@ Os enunciados da Seção 6 que envolvem `ω_2` exigem `s < 2`, como no artigo (`
 | 6.4 | `uniform_quantWeight_zero_not_lt_top` prova divergência para `q` finito, `s ≥ 1` e `κ = 0`. O teto da potência de dois mantém o peso afastado de zero. |
 | 6.5–6.7 | O piso é provado primeiro em `L¹` pela média afim em cada folha. A monotonia de `Lᵖ` na medida de probabilidade dá o piso com a mesma constante. A necessidade de altura é por escala e uniforme na bola. |
 | 6.8–6.9 | A forma da árvore determina os endereços. As magnitudes têm `⌈log₂(H+1)⌉` bits. A cardinalidade é limitada por `2^L`, com `L = 4N(c_H + 1)`. |
-| 6.10 | A ordem da entropia métrica da bola de Besov é citada no artigo como resultado externo. |
+| 6.10 | Estado em `9951091`: a ordem da entropia métrica da bola de Besov era citada como resultado externo. Ver «Atualização posterior». |
 | 6.11–6.13 | A condensação de Cauchy dá as duas equivalências do critério e reduz as séries de Bertrand a uma série de potências. O limiar `γq = 1` é divergente no critério. A igualdade com log-log inclui a diagonal `p = s = 1`, e a estabilidade no regime `s > 1/p` usa as duas transferências existentes. |
 
 ## Achados
@@ -83,3 +83,9 @@ Os enunciados da Seção 6 que envolvem `ω_2` exigem `s < 2`, como no artigo (`
 
 - Aplicadas: (1) no artigo; (2) no Lean (`hs2 : s < 2`). (3) e (5) já estão documentadas no artigo; (4) está formalizada.
 - Esta auditoria não substitui uma leitura humana de ponta a ponta do texto.
+
+## Atualização posterior ao commit `9951091`
+
+- **Cota inferior de entropia e de bits.** `lp:lem:packing`, `lp:prop:entropy-lower` e `lp:cor:bits-lower` são demonstrados no artigo a partir da definição de Besov por diferenças de segunda ordem. A equivalência com wavelets não é necessária para essa cota inferior. A cota superior da entropia não é afirmada.
+- **Cobertura Lean.** Esses resultados **não estão formalizados**. O mapa os lista como «Demonstrado no texto (sem formalização Lean)», sem declarações Lean. As compilações e a auditoria axiomática dos módulos existentes não os certificam.
+- **Whitney.** O texto usa `m=min(k,n−2)`, igual à formalização (`Jcell`, `Iset`).

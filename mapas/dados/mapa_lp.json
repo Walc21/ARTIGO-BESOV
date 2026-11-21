@@ -209,7 +209,7 @@
       "titulo": "estabilidade por inclusão de redes",
       "rotulo": "lp:conj:stability",
       "estado": "Formalizado e compilado",
-      "nota": "As quatro declarações dão a estabilidade por inclusão para as agendas e os regimes do item (i) do Teorema 3.1 ($1/p<s<2$), com constante real $c\\ge1$. O caso $s\\le1/p$ não está formalizado. Para $s\\le1/p$: `conj2_low` e `conj2_diag`.",
+      "nota": "As quatro declarações `FormalizacaoJ.conj2_*` dão a estabilidade por inclusão para as agendas e os regimes do item (i) do Teorema 3.1 ($1/p<s<2$), com constante real $c\\ge1$. `conj2_low` cobre $s<1/p$ e `conj2_diag` cobre $s=1/p$.",
       "lean": [
         {
           "nome": "FormalizacaoLp.Conj2Stability",
@@ -1499,7 +1499,7 @@
       "titulo": "quantização com salto limitado $J$ (Parte V, Lema 4.7 estendido)",
       "rotulo": "lp:lem:nodal-jump",
       "estado": "Formalizado e compilado",
-      "nota": "Corolário de `FormalizacaoJ.nodal_tree`, com as condições `8n ≤ H`, `16(M+1) ≤ H` e `n(J+1) ≤ H`.",
+      "nota": "`quantization_jump` separa os casos $n\\le Q$ e $n>Q$. No segundo, `nodal_tree_coarse` usa paridades alternadas para garantir inclinações inteiras não nulas e controla a altura pelo salto nodal.",
       "lean": [
         {
           "nome": "FormalizacaoAltura.quantization_jump",
@@ -1537,12 +1537,12 @@
       "titulo": "altura linear crítica para $s=1/p$, $p>1$",
       "rotulo": "lp:thm:critical-linear",
       "estado": "Formalizado e compilado (para $0<q<\\infty$)",
-      "nota": "Itens (a)–(d) formalizados com agenda que depende de $B$. O caso $q=\\infty$ e a agenda única para todo $f$ de $\\mathbb B^{1/p}_{p,q}$ não estão formalizados.",
+      "nota": "A agenda crítica usa a constante `Avc p CW`, independente de $q$, e o fator $B+1$. As cotas dos itens (b) e (c) têm constantes uniformes em $B$, no alvo e na escala. O item (d) dá a inclusão direta na bola e a inversa global para $0<q<\\infty$.",
       "lean": [
         {
           "nome": "FormalizacaoCrit.critical_approx",
           "arquivo": "../lean4/formalizacao/Formalizacao/AlturaCritical.lean",
-          "nota": "; item (a)."
+          "nota": "; quantização de $Q_nf$ no item (a), combinada no texto com o erro de quase-interpolação."
         },
         {
           "nome": "FormalizacaoCrit2.critical_level",
@@ -1726,6 +1726,38 @@
           "nota": "; cota inferior com κ/M."
         }
       ]
+    },
+    {
+      "id": "E1",
+      "titulo": "empacotamento de Besov por bumps disjuntos",
+      "rotulo": "lp:lem:packing",
+      "estado": "Demonstrado no texto (sem formalização Lean)",
+      "nota": "Família $f_\\theta$ com norma de Besov $\\le B$, separação em $L^p$ por distância de Hamming e empacotamento binário. Sem declaração Lean correspondente.",
+      "lean": []
+    },
+    {
+      "id": "E2",
+      "titulo": "cota inferior de entropia métrica",
+      "rotulo": "lp:prop:entropy-lower",
+      "estado": "Demonstrado no texto (sem formalização Lean)",
+      "nota": "Vale para $0<\\varepsilon\\le\\varepsilon_0B$, com centros arbitrários em $L^p$. Não afirma cota superior. Sem declaração Lean correspondente.",
+      "lean": []
+    },
+    {
+      "id": "E3",
+      "titulo": "cota inferior de bits",
+      "rotulo": "lp:cor:bits-lower",
+      "estado": "Demonstrado no texto (sem formalização Lean)",
+      "nota": "$L\\ge c_5N-1$ para códigos de comprimento máximo $L$ com erro uniforme $C_BN^{-s}$. Sem declaração Lean correspondente.",
+      "lean": []
+    },
+    {
+      "id": "E4",
+      "titulo": "limites da entropia (observação)",
+      "rotulo": "lp:obs:entropy",
+      "estado": "Demonstrado no texto (sem formalização Lean)",
+      "nota": "Registra que só a cota inferior é demonstrada e que a restrição a $\\varepsilon\\le\\varepsilon_0B$ é indispensável. Sem declaração Lean correspondente.",
+      "lean": []
     }
   ]
 }
