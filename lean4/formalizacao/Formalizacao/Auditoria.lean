@@ -277,3 +277,6 @@ e nunca `sorryAx`. Executar: `lake env lean Formalizacao/Auditoria.lean`.
 #print axioms FormalizacaoLeaf.dfun_geometric_floor
 #print axioms FormalizacaoLeaf.dfun_slope_floor
 #print axioms FormalizacaoLeaf.dfun_arithmetic_floor
+
+-- F3.1: quantização com denominadores diádicos por nó
+#print axioms FormalizacaoAltura.nodal_variable_height
