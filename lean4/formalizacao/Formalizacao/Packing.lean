@@ -8,12 +8,14 @@ import Formalizacao.LpAxioms
 Função-teste: `φB` (de `AlturaFloor`), suave, com suporte em `(1/8, 5/8) ⊂ (0,1)`.
 Para `m ∈ ℕ`, `A ∈ ℝ` e `x ∈ ℝ`, a soma de bumps é `A · Σ_{j<m} φB(m x - j)`.
 
-Esta primeira parte demonstra os fatos combinatórios e pontuais:
+Conteúdo do módulo (todos os resultados demonstrados, sem hipóteses auxiliares):
 
 * `φB`-suporte e `D2 u φ`, a segunda diferença com passo `u`;
 * a identidade `diff2 h (φ(m·-j)) = D2 (m h) φ (m· - j)`;
 * **overlap ≤ 3**: para cada `x`, no máximo três `j < m` têm `D2 u φB (m x - j) ≠ 0`;
-* a desigualdade de potência `|Σ_{j} a_j|^p ≤ 3^{p-1} Σ_{j} |a_j|^p`, para `a_j = D2 u φB (m x - j)`.
+* a desigualdade de potência `|Σ_{j} a_j|^p ≤ 3^{p-1} Σ_{j} |a_j|^p`, para `a_j = D2 u φB (m x - j)`;
+* `exists_K0`: `ω_p(f_m,t) ≤ K0 |A| min{1,(m t)^2}` com `K0` independente de `p`, `m`, `A`, `t`;
+* `exists_Lq` e `packing_norm_le`: normalização `‖f_m‖*_{B^s_{p,q}} ≤ 1`, `0<q≤∞`.
 -/
 
 open scoped ENNReal

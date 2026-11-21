@@ -248,3 +248,32 @@ e nunca `sorryAx`. Executar: `lake env lean Formalizacao/Auditoria.lean`.
 #print axioms FormalizacaoAltura.slope_necessity
 #print axioms FormalizacaoAltura.arithmetic_necessity
 #print axioms FormalizacaoCrit4.critical_radius_ball_and_inclusion
+
+-- F2: definições minimax, empacotamento de bumps e piso pelo número de folhas
+#print axioms FormalizacaoMinimax.aPS_of_lt
+#print axioms FormalizacaoMinimax.aPS_of_mid
+#print axioms FormalizacaoMinimax.aPS_of_gt
+#print axioms FormalizacaoMinimax.aPS_pos
+#print axioms FormalizacaoMinimax.aPS_eq_nuHat
+#print axioms FormalizacaoMinimax.le_Dfun
+#print axioms FormalizacaoMinimax.le_bestError_of_forall
+#print axioms FormalizacaoPacking.overlap_le_three
+#print axioms FormalizacaoPacking.diff2_scaled
+#print axioms FormalizacaoPacking.diff2_Fm_pow_le
+#print axioms FormalizacaoPacking.lint_diff_le
+#print axioms FormalizacaoPacking.Ipow_small_le
+#print axioms FormalizacaoPacking.exists_K0
+#print axioms FormalizacaoPacking.aTerm_le_low
+#print axioms FormalizacaoPacking.aTerm_le_high
+#print axioms FormalizacaoPacking.exists_Lq
+#print axioms FormalizacaoPacking.packing_norm_le
+#print axioms FormalizacaoLeaf.card_splits_le
+#print axioms FormalizacaoLeaf.affine_on_open
+#print axioms FormalizacaoLeaf.exists_good_cells
+#print axioms FormalizacaoLeaf.cell_lower
+#print axioms FormalizacaoLeaf.agg_lower
+#print axioms FormalizacaoLeaf.leaf_dist_lower
+#print axioms FormalizacaoLeaf.leaf_floor_const
+#print axioms FormalizacaoLeaf.dfun_geometric_floor
+#print axioms FormalizacaoLeaf.dfun_slope_floor
+#print axioms FormalizacaoLeaf.dfun_arithmetic_floor

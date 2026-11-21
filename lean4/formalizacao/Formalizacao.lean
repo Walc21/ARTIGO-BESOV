@@ -70,6 +70,9 @@ import Formalizacao.ArithmeticFloor
 import Formalizacao.BinaryBudget
 import Formalizacao.LogLogSchedules
 import Formalizacao.IteratedSchedules
+import Formalizacao.MinimaxDefs
+import Formalizacao.Packing
+import Formalizacao.LeafFloor
 
 /-!
 # Formalização do artigo «Funcional de realização aritmético em `L^p`»
