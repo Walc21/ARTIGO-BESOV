@@ -1499,7 +1499,7 @@
       "titulo": "quantização com salto limitado $J$ (Parte V, Lema 4.7 estendido)",
       "rotulo": "lp:lem:nodal-jump",
       "estado": "Formalizado e compilado",
-      "nota": "Corolário de `FormalizacaoJ.nodal_tree`, com as condições `8n ≤ H`, `16(M+1) ≤ H` e `n(J+1) ≤ H`.",
+      "nota": "`quantization_jump` separa os casos $n\\le Q$ e $n>Q$. No segundo, `nodal_tree_coarse` usa paridades alternadas para garantir inclinações inteiras não nulas e controla a altura pelo salto nodal.",
       "lean": [
         {
           "nome": "FormalizacaoAltura.quantization_jump",
@@ -1537,12 +1537,12 @@
       "titulo": "altura linear crítica para $s=1/p$, $p>1$",
       "rotulo": "lp:thm:critical-linear",
       "estado": "Formalizado e compilado (para $0<q<\\infty$)",
-      "nota": "Itens (a)–(d) formalizados com agenda que depende de $B$. O caso $q=\\infty$ e a agenda única para todo $f$ de $\\mathbb B^{1/p}_{p,q}$ não estão formalizados.",
+      "nota": "A agenda crítica usa a constante `Avc p CW`, independente de $q$, e o fator $B+1$. As cotas dos itens (b) e (c) têm constantes uniformes em $B$, no alvo e na escala. O item (d) dá a inclusão direta na bola e a inversa global para $0<q<\\infty$.",
       "lean": [
         {
           "nome": "FormalizacaoCrit.critical_approx",
           "arquivo": "../lean4/formalizacao/Formalizacao/AlturaCritical.lean",
-          "nota": "; item (a)."
+          "nota": "; quantização de $Q_nf$ no item (a), combinada no texto com o erro de quase-interpolação."
         },
         {
           "nome": "FormalizacaoCrit2.critical_level",
