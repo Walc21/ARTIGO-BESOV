@@ -70,7 +70,7 @@ A representation on $[0,1]$ is obtained by successive dyadic bisections, with on
 
 For a nondecreasing schedule $H\colon\N\to\N$, define
 \begin{equation}
- \Sig{N}=\{0\}\cup\Aclass_{N,H(N)}([0,1]).
+ \Sig{N}=\Sigma_{N,H(N)},\qquad \Sigma_{N,H}=\{0\}\cup\Aclass_{N,H}([0,1]).
  \label{lp:eq:sigma}
 \end{equation}
 With $\nu_s=\max\{1,s\}$, the schedules are
@@ -109,6 +109,13 @@ with the convention $\inf\varnothing=+\infty$. The realization space is
 \end{equation}
 For the family $(\Sig{N})_{N\ge2}$, write $\Rfun{\Library,H}{N}$ and $\Rstr{s}{q}{\Library,H}_p$.
 \end{definicao}
+
+For independent budgets $N,H$, write
+\[
+ e^H_{N,p}(f)=\inf_{g\in\Sigma_{N,H}}\|f-g\|_p,\qquad
+ R_{N,H}(f)_p=\inf_{g\in\Sigma_{N,H}}
+ \bigl(\|f-g\|_p+\wt{g}{N^{-1}}{p}\bigr).
+\]
 
 \begin{definicao}[Nested family containing the library]
 \label{lp:def:network-family}
@@ -369,7 +376,7 @@ The constant $C$ depends only on $p$ and $s$.
 \end{lema}
 
 \begin{proof}
-For a continuous function $v$ that is affine on each cell of a uniform grid of step size $m^{-1}$, norm equivalence on the space of affine functions on one cell, followed by rescaling, gives
+If $v$ is affine on a cell $I$, then $P_Iv=v$. Its absolute value is maximal at an endpoint. Applying \eqref{lp:eq:projection-bounds} at both endpoints gives $\|v\|_{L^\infty(I)}\le4|I|^{-1/p}\|v\|_{L^p(I)}$. On a uniform grid of mesh size $1/m$, this gives the first bound below with $C_p=4$, by taking the maximum over the cells and bounding each local $L^p$ norm by the global one.
 \begin{equation}
  \|v\|_\infty\le C_p m^{1/p}\|v\|_p,\qquad \|v'\|_\infty\le2m\|v\|_\infty,
  \label{lp:eq:nikolskii}
@@ -451,6 +458,27 @@ Let $x=H/(16(M+1))\ge1$, and let $Q$ be the power of two with $x<Q\le2x$. Then $
  |\sigma_j|\le n\bigl(|y_{j+1}-y_j|+1/Q\bigr)\le n(J+1)\le H.
 \end{gather*}
 The opposite parities of $b_j$ and $b_{j+1}$ ensure a nonzero slope. For the midpoint value, the numerator has absolute value at most $4QM+2$ and the denominator is $4Q$, both bounded by $8(M+1)Q\le H$. The slope has height $|\sigma_j|\le H$. The leaf indices satisfy $2\le r+1\le n\le H$ and $j+1\le n$. Hence $g\in\Aclass_{n,H}([0,1])$. Since $u$ and $g$ are affine on each cell, $\|u-g\|_\infty\le\max_j|v_j-y_j|\le1/(2Q)\le8(M+1)/H$.
+\end{proof}
+
+\begin{lema}[Quantization with a dyadic denominator at each node]
+\label{lp:lem:nodal-variable-height}
+Let $n=2^r\ge2$, $J\ge0$, and $y_0,\ldots,y_n\in\R$ satisfy $|y_{j+1}-y_j|\le J$ for $0\le j<n$. Set $w_j=1+J+|y_j|$. If $H$ is an integer and $H\ge\max\{8\max_j w_j,n(J+4)\}$, the interpolant $u$ of the data $(j/n,y_j)$ admits $g\in\Aclass_{n,H}([0,1])$ with
+\[
+ \|u-g\|_1\le\frac{32}{Hn}\sum_{j=0}^n w_j .
+\]
+\end{lema}
+
+\begin{proof}
+Let $Q_j$ be the largest power of two not exceeding $H/(8w_j)$. The height hypothesis gives $Q_j\ge1$, and maximality gives $Q_j>H/(16w_j)$. At even nodes, choose the closest multiple of $1/Q_j$ to $y_j$. At odd nodes, consider the closest multiple and its two immediate neighbors on that grid. At least one of the three differs from the values at both adjacent even nodes, which have already been fixed. Choose one satisfying this condition. The resulting values $v_j$ satisfy $v_j\in Q_j^{-1}\Z$, $v_{j+1}\ne v_j$, and
+\[
+ |v_j-y_j|\le 2/Q_j\le2,\qquad |v_j-y_j|\le32w_j/H.
+\]
+
+Let $g$ be the continuous interpolant of the $v_j$ on the uniform tree. On a leaf with nodes $j,j+1$, set $D=\max\{Q_j,Q_{j+1}\}$ and $w=\min\{w_j,w_{j+1}\}$. Both denominators divide $D$ because they are powers of two, and both are bounded by $H/(8w)$. Write $v_i=b_i/D$ with $b_i\in\Z$ for $i=j,j+1$. Since $\bigl||y_{j+1}|-|y_j|\bigr|\le J$, we have $\max\{|y_j|,|y_{j+1}|\}\le w$. Hence $|b_i|\le D(w+2)\le3Dw$. The midpoint value $(b_j+b_{j+1})/(2D)$ has numerator of magnitude at most $6Dw\le H$ and denominator $2D\le H$.
+
+The slope $n(b_{j+1}-b_j)/D$ is nonzero. If $n\le D$, it can be written as $(b_{j+1}-b_j)/(D/n)$, with numerator bounded by $6Dw$ and integer denominator at most $H$. If $D<n$, the slope is an integer of magnitude at most $n(J+4)\le H$, by the bound of $2$ on each nodal error. Reducing the fractions preserves the bounds. The indices meet the height constraint because $2\le r+1\le n\le H$ and $j+1\le n$. The uniform tree is therefore an admissible representation of $g$.
+
+On $[j/n,(j+1)/n]$, $u-g$ interpolates the signed nodal errors. Its absolute value is bounded by the interpolant of their magnitudes, whose integral is $(|v_j-y_j|+|v_{j+1}-y_{j+1}|)/(2n)$. Summing over the leaves gives an integral at most $n^{-1}\sum_j|v_j-y_j|$, proving the bound.
 \end{proof}
 
 \subsection{Quantization without continuity and Jackson estimates for \texorpdfstring{$s\le1/p$}{s ≤ 1/p}}
@@ -783,7 +811,7 @@ The per-scale rate \eqref{lp:eq:uniform-approx} holds with $\kappa=0$ for every 
 
 \begin{lema}[Uniform nodal jumps]
 \label{lp:lem:critical-jump}
-Let $p>1$ and $0<q\le\infty$, let $f$ satisfy $\|f\|^*_{\Bes{1/p}{p}{q}}\le B$, let $n=2^r\ge2$, and set $\lambda_j=\lambda_j(f)$. For $0\le j<n$,
+Let $p\ge1$ and $0<q\le\infty$, let $f$ satisfy $\|f\|^*_{\Bes{1/p}{p}{q}}\le B$, let $n=2^r\ge2$, and set $\lambda_j=\lambda_j(f)$. For $0\le j<n$,
 \begin{equation}
  |\lambda_{j+1}-\lambda_j|\le\frac{4\,\sup_{[0,1]}|Q_2f|}{n}+\sum_{k=1}^{r-1}\frac{K_k}{n},
  \qquad K_k=8\,(2^{k+1})^{1/p+1}\,18\,C_W\,\wt{f}{2^{-k}}{p}.
@@ -798,7 +826,7 @@ By the telescoping identity $Q_{2^r}f=Q_2f+\sum_{k=1}^{r-1}(Q_{2^{k+1}}f-Q_{2^k}
 
 \begin{teorema}[Critical linear height for $s=1/p$ with $p>1$]
 \label{lp:thm:critical-linear}
-Let $p>1$, $s=1/p$, and $0<q<\infty$. There exist $A=A(p,C_W)\ge1$ and constants $C_2,C_3>0$ depending only on $(p,q,C_W)$ such that for every $B\ge1$ the linear schedule $H_B(N)=\lceil A(B+1)(N+1)\rceil$ satisfies the following properties.
+Let $p>1$, $s=1/p$, and $0<q\le\infty$. There exist $A=A(p,C_W)\ge1$ and constants $C_2,C_3>0$ depending only on $(p,q,C_W)$ such that for every $B\ge1$ the linear schedule $H_B(N)=\lceil A(B+1)(N+1)\rceil$ satisfies the following properties.
 \begin{enumerate}[label=(\alph*)]
  \item For every $f\in\mathbb B^{1/p}_{p,q}(B)$ and $n=2^r\ge2$, there exists $g\in\Aclass_{n,H_B(n)}([0,1])$ with
  \[
@@ -812,18 +840,82 @@ Let $p>1$, $s=1/p$, and $0<q<\infty$. There exist $A=A(p,C_W)\ge1$ and constants
 \end{teorema}
 
 \begin{proof}
-For (a), inequality \eqref{lp:eq:nikolskii} with $m=2$ and the quasi-interpolation bound give $\sup|Q_2f|\le\mathsf B_0(f)\le C_0B$, with $C_0=8\,2^{1/p}(1+9C_W)$. \Cref{lp:lem:critical-jump} bounds the jumps by $J=4C_0B+288C_W2^{1/p}B$. The telescoping sum with $C_p=4$ in \eqref{lp:eq:nikolskii} gives $|\lambda_j|\le M_r$. Set $C_M=C_0+144C_W2^{1/p}+1$ and $C_J=4C_0+288C_W2^{1/p}+1$. Thus $M_r+1\le C_M(B+1)(r+1)$ and $J+1\le C_J(B+1)$. Since $r+1\le n$, with $A=16C_M+C_J+8$ the schedule satisfies $8n\le H$, $16(M_r+1)\le H$ and $n(J+1)\le H$, so \cref{lp:lem:nodal-jump} applies to $Q_nf$. Adding the quasi-interpolation error (\cref{lp:cor:quasi-error}) and the quantization error gives (a). For (b), $\mathscr R\le\omega(f,1/N)+5\|f-g\|_p$ (\cref{lp:prop:transfer}) and $\omega(f,1/N)\le BN^{-1/p}$; the quantization term is at most $C(r+2)2^{-r}\le C'2^{-r/p}$, since $(r+2)2^{-r(1-1/p)}$ is bounded. For (c), the sequence is majorized by two terms: the $\omega$ terms, whose $\ell^q$ norm is at most $B$, and quantization terms dominated by $C(r+2)\rho^r$ with $\rho=2^{1/p-1}<1$, whose $\ell^q$ norm is finite. For (d), the first assertion is item (c), since $\Rstr{1/p}{q}{\Library,H_B}_p$ is defined by the $\ell^q$ norm of $(2^{r/p}\Rfun{\Library,H_B}{2^r}(f)_p)_{r\ge1}$. The reverse inclusion is \cref{lp:cor:inclusion}, which holds for every schedule.
+For (a), inequality \eqref{lp:eq:nikolskii} with $m=2$ and the quasi-interpolation bound give $\sup|Q_2f|\le\mathsf B_0(f)\le C_0B$, with $C_0=8\,2^{1/p}(1+9C_W)$. \Cref{lp:lem:critical-jump} bounds the jumps by $J=4C_0B+288C_W2^{1/p}B$. The telescoping sum with $C_p=4$ in \eqref{lp:eq:nikolskii} gives $|\lambda_j|\le M_r$. Set $C_M=C_0+144C_W2^{1/p}+1$ and $C_J=4C_0+288C_W2^{1/p}+1$. Thus $M_r+1\le C_M(B+1)(r+1)$ and $J+1\le C_J(B+1)$. Since $r+1\le n$, with $A=16C_M+C_J+8$ the schedule satisfies $8n\le H$, $16(M_r+1)\le H$ and $n(J+1)\le H$, so \cref{lp:lem:nodal-jump} applies to $Q_nf$. Adding the quasi-interpolation error (\cref{lp:cor:quasi-error}) and the quantization error gives (a).
+
+By \cref{lp:prop:transfer}, the realization cost is at most $\wt{f}{n^{-1}}{p}+5\|f-g\|_p$. Since $H_B(n)\ge A(B+1)n$ and $M_r+1\le C_M(B+1)(r+1)$, it follows that
+\[
+ 2^{r/p}\Rfun{\Library,H_B}{2^r}(f)_p
+ \le(1+45C_W)\,2^{r/p}\wt{f}{2^{-r}}{p}
+    +C(p,C_W)(r+2)2^{-r(1-1/p)}.
+\]
+The first term has $\ell^q$ norm at most $(1+45C_W)B$. In the second, $\rho=2^{1/p-1}<1$, and $(r+2)\rho^r\le C_{\rho,\sigma}\sigma^r$ for any $\rho<\sigma<1$. This gives the per-scale bound in (b) and the sequence bound in (c). For $0<q<1$, sum the $q$th powers. For $1\le q<\infty$, use the triangle inequality, and for $q=\infty$, take the supremum. Part (c) gives the direct inclusion in (d), and \cref{lp:cor:inclusion} gives the reverse inclusion for any schedule.
+\end{proof}
+
+\begin{proposicao}[Linear height for the approximation error on $B^1_{1,q}$]
+\label{lp:prop:l1-linear-height}
+There exists $C_E\ge1$ such that, for every $0<q\le\infty$, $B\ge1$, $f\in\mathbb B^1_{1,q}(B)$, $n=2^r\ge2$, and integer $H\ge C_E(B+1)n$, there is $g\in\Aclass_{n,H}([0,1])$ with
+\[
+ \|f-g\|_1\le9C_W\wt{f}{n^{-1}}{1}+C_E(B+1)/H.
+\]
+The constant depends only on $C_W$ for $p=1$.
+\end{proposicao}
+
+\begin{proof}
+By \cref{lp:lem:critical-jump} with $p=1$, $|\lambda_{j+1}-\lambda_j|\le J=C_J'B$, since $2^k\wt{f}{2^{-k}}{1}\le B$ and $\|Q_2f\|_\infty\le8\|f\|_1\le8B$. The constant $C_J'$ depends only on $C_W$. By \eqref{lp:eq:projection-bounds}, $|\lambda_j(f)|\le4n\|f\|_{L^1(I_{c(j)})}$. The final cell is used twice and the others once. Therefore
+\[
+ \max_j|\lambda_j(f)|\le4nB,\qquad n^{-1}\sum_{j=0}^n|\lambda_j(f)|\le8\|f\|_1.
+\]
+With $w_j=1+J+|\lambda_j(f)|$, we have $8\max_jw_j\le8(1+C_J'B+4nB)$, $n(J+4)\le n(C_J'B+4)$, and $n^{-1}\sum_jw_j\le2(1+C_J'B)+8B$. Thus $C_E(B+1)n$ covers both conditions of \cref{lp:lem:nodal-variable-height} for sufficiently large $C_E$. The lemma and \cref{lp:cor:quasi-error} give the error bound, with the same constant enlarged to cover the quantization term.
+\end{proof}
+
+\begin{teorema}[A fixed linear schedule on the diagonal]
+\label{lp:thm:critical-fixed-agenda}
+Let $1<p<\infty$ and $0<q\le\infty$. For any fixed constant $A_*>0$, set $H_*(N)=\max\{2,\lceil A_*N\rceil\}$. Then
+\[
+ \Bes{1/p}{p}{q}([0,1])=\Rstr{1/p}{q}{\Library,H_*}_p.
+\]
+\end{teorema}
+
+\begin{proof}
+Fix $f\in\Bes{1/p}{p}{q}$, take $B\ge\max\{1,\|f\|^*\}$, and choose the smallest power of two $d=2^e\ge1$ with $A_*d\ge2A(B+1)$, where $A$ is the constant in \cref{lp:thm:critical-linear}. For $n=2^r\ge2$, we have $A_*dn\ge A(B+1)(n+1)$, so $H_*(dn)\ge H_B(n)$ after taking ceilings. Since $dn\ge n$, an admissible representation for $\Sigma_{n,H_B(n)}$ is also admissible for $\Sigma_{dn,H_*(dn)}$. Zero belongs to both families. The scale decreases from $n^{-1}$ to $(dn)^{-1}$, so monotonicity of the modulus gives
+\[
+ R_{dn,H_*(dn)}(f)_p\le R_{n,H_B(n)}(f)_p.
+\]
+Multiplying by $(dn)^{1/p}$ and shifting the index from $r$ to $r+e$, the tail has norm at most $C_3d^{1/p}(B+1)$ by \cref{lp:thm:critical-linear}.
+
+For the initial indices $1\le j\le e$, use $g=0$, which gives $2^{j/p}R_{2^j,H_*(2^j)}(f)_p\le2^{j/p}\|f\|_p$. For $q<\infty$, summing the $q$th powers gives a norm at most $(1-2^{-q/p})^{-1/q}d^{1/p}\|f\|_p$. For $q=\infty$, the bound is $d^{1/p}\|f\|_p$. If $e=0$, the initial block is empty. Combining the two blocks by summing powers or taking the supremum proves membership in $\ell^q$, including $q<1$. The reverse inclusion is \cref{lp:cor:inclusion}, which holds for any schedule.
+\end{proof}
+
+\begin{proposicao}[Sharp growth in the radius]
+\label{lp:prop:critical-radius-growth}
+Under the conditions of \cref{lp:thm:critical-fixed-agenda}, write
+\[
+ \Xi(f)=\big\|\big(2^{r/p}R_{2^r,H_*(2^r)}(f)_p\big)_{r\ge1}\big\|_{\ell^q}.
+\]
+There exists $C=C(p,q,A_*)>0$ such that $\Xi(f)\le C(1+\|f\|^*)^{1+1/p}$ for every $f\in\Bes{1/p}{p}{q}$. There exist $c,K_0>0$, depending only on $p,A_*$, such that $\Xi(f_K)\ge cK^{1+1/p}$ for $f_K\equiv K$ and $K\ge K_0$. Hence the supremum of $\Xi$ on the ball of radius $B$ is of order $B^{1+1/p}$ for sufficiently large $B$.
+\end{proposicao}
+
+\begin{proof}
+In the proof for the fixed schedule, the two parts of the sequence give $\Xi(f)\le C_{p,q}d^{1/p}(B+1)$. Minimality of $d$ gives $d\le2\max\{1,2A(B+1)/A_*\}$. Taking $B=\max\{1,\|f\|^*\}$ gives the upper bound.
+
+On a leaf $J$, any candidate of height at most $H$ satisfies $|u|,|v|\le H$ for its midpoint value and slope, so $|g(x)|\le H+H|J|/2\le3H/2$. The same bound holds for zero. Since $H_*(M)\le(A_*+1)M$ for $M\ge2$, take $K\ge6(A_*+1)$ and the largest power of two $M\le K/[3(A_*+1)]$. Then $M\ge2$ and $\|g\|_\infty\le K/2$ for every $g\in\Sigma_{M,H_*(M)}$. Thus $R_{M,H_*(M)}(f_K)_p\ge K/2$ and
+\[
+ \Xi(f_K)\ge M^{1/p}K/2\ge \frac{K^{1+1/p}}{2[6(A_*+1)]^{1/p}}.
+\]
+The modulus of $f_K$ vanishes, so $\|f_K\|^*=K$. Taking $K=B$ gives the lower bound on the ball. In particular, uniform linear equivalence between $\|f\|^*$ and $\|f\|_p+\Xi(f)$ fails, since $\Xi(f_K)/\|f_K\|^*$ is unbounded. The reverse bound $\|f\|^*\le C_{p,q}(\|f\|_p+\Xi(f))$ follows from \eqref{lp:eq:inverse}, with the $r=0$ term bounded by $4\|f\|_p$.
 \end{proof}
 
 \begin{observacao}
 \label{lp:obs:critical-scope}
-For $p>1$ and $0<q<\infty$, \cref{lp:thm:critical-linear} permits using $H_B$ in place of $\widehat H^{[B]}_A$ on the ball of radius $B$ at $s=1/p$. The direct inclusion in item (d) starts from that ball. The inclusion of the realization space in Besov holds on all of $L^p$ for any schedule. For global equality on the diagonal, apply item (iii) of \cref{lp:conj:besov} with $\widehat H_{q,\kappa}$, which is already linear for $p>1$, $0<q\le1$, and $\kappa=0$. On the diagonal with $p>1$, extending the linear schedule to $q=\infty$ and proving global equality with a linear schedule for $1<q<\infty$ are outside the scope of this theorem.
+For $p>1$ and $0<q\le\infty$, $H_B$ gives a realization bound calibrated to the radius. The fixed schedule $H_*$ gives equality of sets and uniform bounds on each ball, with the radius dependence in \cref{lp:prop:critical-radius-growth}.
+
+At $p=s=1$, \cref{lp:prop:l1-linear-height} gives the per-scale rate for every $q$. For $q=\infty$, \cref{lp:prop:transfer} gives the sequence bound in the supremum norm with height $\lceil C_E(B+1)(n+1)\rceil$. The same dyadic shift, now with normalization by $dn$, transfers the bound to $H_*$, with zero controlling the initial block. The universal inverse inequality gives global equality also in $B^1_{1,\infty}$. For $q<\infty$ at $p=s=1$, the normalized quantization bound can remain of constant order, and characterization with a linear schedule remains open in this work.
 \end{observacao}
 
 \subsection{Arithmetic lower bound and bit complexity}
 \label{lp:sec:bits}
 
-Write $e^{H}_{N,p}(f)=\inf\{\|f-g\|_p:g\in\{0\}\cup\Aclass_{N,H}([0,1])\}$. For an integer $H\ge1$, let $\mathcal Q_H=\{a/b\in\Q:\height(a/b)\le H\}$.
+For an integer $H\ge1$, let $\mathcal Q_H=\{a/b\in\Q:\height(a/b)\le H\}$.
 
 \begin{proposicao}[Uniform arithmetic lower bound in $L^p$]
 \label{lp:prop:floor}
@@ -1046,7 +1138,7 @@ Let $1\le p<\infty$, $0<s<2$, and $0<q\le\infty$. There exists $c_G=c_G(p,s,q)>0
 \end{proposicao}
 
 \begin{proof}
-Let $\Lambda$ be the constant of \cref{lp:lem:bump}, with $\varphi$ fixed. Take $t=1/H$ and $a=t^{s-1/p}/\Lambda$, and let $f_H=\psi_{a,t}$. By \cref{lp:lem:bump}, $\|f_H\|^*\le\Lambda a t^{1/p-s}=1$. Let $g\in\Sig N$ have schedule $H$. By the last leaf, $g$ is affine on $[1-1/H,1]=[1-t,1]$, and since $f_H=0$ outside $(1-t,1)$, the same lemma gives
+Let $\Lambda$ be the constant of \cref{lp:lem:bump}, with $\varphi$ fixed. Take $t=1/H$ and $a=t^{s-1/p}/\Lambda$, and let $f_H=\psi_{a,t}$. By \cref{lp:lem:bump}, $\|f_H\|^*\le\Lambda a t^{1/p-s}=1$. If $g=0$, it is affine on $[1-t,1]$. Otherwise take any admissible representation and consider its rightmost leaf $J_{k,m}$. Its right endpoint is $1$, so $m=2^k-1$ and the address field of the height gives $H\ge |m|+1=2^k$. Thus $J_{k,2^k-1}=[1-2^{-k},1]\supseteq[1-1/H,1]$. In either case $g$ is affine on $[1-t,1]$, and the local bound in \cref{lp:lem:bump} gives
 \[
  \|f_H-g\|_p\ge\|f_H-g\|_{L^p(1-t,1)}\ge\frac{\kappa_\varphi}{M_\varphi}\,a\,t^{1/p}=\frac{\kappa_\varphi}{M_\varphi\Lambda}\,t^{s}=c_G\,H^{-s},
 \]
@@ -1102,6 +1194,90 @@ The first inequality holds because $\mathscr R_N$ adds $\omega_p(g,1/N)\ge0$ to 
 
 The upper bounds in \cref{lp:thm:uniform} with $\kappa=0$ and in \cref{lp:thm:critical-linear} attain these powers at the dyadic budgets. For fixed $B$, when the upper bound in \cref{lp:tab:schedules} includes $\mathsf L_1^{\theta_q}$, the comparison determines only the power of $N$. Whether that factor is necessary for the per-scale rate and whether further factors are necessary for summability are separate questions. The lower bounds also leave the required height for a fixed target undetermined.
 \end{observacao}
+
+\section{A minimax law for two budgets}
+\label{lp:sec:minimax}
+
+For $N,H\ge2$, on the unit ball of $\Bes{s}{p}{q}$, define
+\[
+ D_{p,s,q}(N,H)=\sup_{\|f\|^*_{\Bes{s}{p}{q}}\le1}\ e^H_{N,p}(f).
+\]
+The two budgets vary independently. The leaf-budget lower bound uses the same target for all heights at a given $N$.
+
+\begin{lema}[Leaf-budget lower bound]
+\label{lp:lem:leaf-budget-floor}
+Let $1\le p<\infty$, $0<s<2$, and $0<q\le\infty$. There exists $c_N=c_N(p,s,q)>0$ such that $D_{p,s,q}(N,H)\ge c_NN^{-s}$ for all integers $N,H\ge2$.
+\end{lema}
+
+\begin{proof}
+Fix a nonzero $\varphi\in C_c^\infty((0,1))$ and extend it by zero. With $m=2N$, use
+\[
+ f_m(x)=b m^{-s}\sum_{j=0}^{m-1}\varphi(mx-j),
+\]
+where $b=1/C_1$ with $C_1$ from \cref{lp:lem:packing} for this $\varphi$. Part (i), with $B=1$ and all bits equal to $1$, gives $\|f_m\|^*\le1$. Indeed, disjoint supports give $\|f_m\|_p=b m^{-s}\|\varphi\|_p$ and $\|f_m''\|_p=b m^{2-s}\|\varphi''\|_p$. The modulus is bounded by $C_2 b m^{-s}\min\{1,(mt)^2\}$. The packing proof sums the $q$th powers of the two geometric bounds around $t=m^{-1}$ or takes the supremum for $q=\infty$, so $b$ is independent of $m$.
+
+A representation with at most $N$ leaves has at most $N-1$ internal boundaries. Each boundary can lie in the interior of at most one test cell $I_j=(j/m,(j+1)/m)$. Thus $g$ is affine in the interior of at least $m-N+1\ge m/2$ test cells. For $g=0$, all cells qualify. On each such cell, $L_j(y)=g((j+y)/m)$ is affine. As in \cref{lp:lem:bump}, integration by parts gives $\int_0^1 L_j\varphi''=0$ and $\int_0^1\varphi\varphi''=-\int_0^1|\varphi'|^2$. With $p'$ conjugate to $p$, including $p'=\infty$ when $p=1$, Hölder's inequality and the change of variable give
+\[
+ \|f_m-g\|_{L^p(I_j)}
+ \ge b m^{-s-1/p}\frac{\int_0^1|\varphi'|^2}{\|\varphi''\|_{L^{p'}(0,1)}} .
+\]
+Summing the $p$th powers over at least $m/2$ cells yields a lower bound of order $m^{-s}$ with a constant independent of the budgets. Take the infimum over $g$ and use $m=2N$.
+\end{proof}
+
+\begin{teorema}[Minimax law in leaves and arithmetic height]
+\label{lp:thm:minimax-nh}
+Let $1\le p<\infty$, $0<s<2$, and $0<q\le\infty$. There are $c,C>0$, depending only on $(p,s,q)$, such that for all integers $N,H\ge2$,
+\begin{equation}
+ c\bigl(N^{-s}+H^{-s/a(p,s)}\bigr)
+ \le D_{p,s,q}(N,H)\le C\bigl(N^{-s}+H^{-s/a(p,s)}\bigr),
+ \label{lp:eq:minimax-nh}
+\end{equation}
+where
+\[
+ a(p,s)=
+ \begin{cases}
+ 1+1/p-s,&0<s<1/p,\\
+ 1,&1/p\le s\le1,\\
+ s,&1<s<2.
+ \end{cases}
+\]
+\end{teorema}
+
+\begin{proof}
+\emph{Lower bounds.} \Cref{lp:lem:leaf-budget-floor} gives the term $N^{-s}$. Below $1/p$, \cref{lp:prop:slope-floor} gives $H^{-s/(1+1/p-s)}$. From $1/p$ to $1$, inclusive, \cref{lp:prop:geom-floor} gives $H^{-s}$. Above $1$, \cref{lp:prop:floor} gives $1/(2H)$ because the constant target $1/(2H)$ has quasi-norm $1/(2H)\le1$. These estimates yield $H^{-s/a(p,s)}$ in each range. The maximum of the two lower bounds is at least half their sum. Each test function is chosen within the minimax supremum and may depend on $N$ or $H$.
+
+\emph{Construction at a dyadic level.} Let $n=2^r\ge2$ and fix $\|f\|^*\le1$. By \cref{lp:cor:quasi-error}, $\|f-Q_nf\|_p\le9C_W n^{-s}$. For $s<1/p$, \cref{lp:lem:sup-bound} bounds the nodal magnitude by $C_0n^{1/p-s}$. With $Q=n$, \cref{lp:lem:nodal-general} requires $H\ge8(C_0+1)n^{1+1/p-s}$ and gives additional error at most $1/(2n)\le n^{-s}/2$.
+
+For $s>1/p$, embedding and projection bound the nodal magnitude by $M=C_1'(p,s)$ on the unit ball. If $s\le1$, take $Q=n$, which requires $H\ge8(M+1)n$. If $s>1$, take the smallest power of two $Q\ge n^s$, so $Q<2n^s$. It suffices that $H\ge16(M+1)n^s$. In both cases, $Q\ge n$ and the additional error is at most $1/(2Q)\le n^{-s}/2$. These are the per-scale choices in \cref{lp:thm:uniform} with $\kappa=0$ in these regimes.
+
+If $s=1/p$ and $p>1$, \cref{lp:thm:critical-linear} with $B=1$ permits $H\ge3An$, since $2A(n+1)\le3An$. The quantization error is bounded by a multiple of $(r+2)/n$, hence by a multiple of $n^{-1/p}$. If $p=s=1$, \cref{lp:prop:l1-linear-height} with $B=1$ permits $H\ge2C_E n$ and gives quantization error $\le2C_E/H\le n^{-1}$. This last estimate holds for every $q$ because it uses the mean absolute nodal value.
+
+Consequently, there are $C_*\ge1$ and $C'>0$, depending only on $(p,s,q)$, such that $H\ge C_*n^{a(p,s)}$ allows us to construct $g\in\Aclass_{n,H}([0,1])$ with $\|f-g\|_p\le C'n^{-s}$.
+
+\emph{Integer budgets.} Write $a=a(p,s)$ and $X=\min\{N,(H/C_*)^{1/a}\}$. If $X\ge2$, take $n=2^{\lfloor\log_2 X\rfloor}$. Then $X/2<n\le X$, so $n\le N$ and $C_*n^a\le H$. The constructed representation is admissible for $(N,H)$ because increasing the budgets preserves its leaves and heights. The error is bounded by
+\[
+ C'n^{-s}\le 2^s C'X^{-s}
+ \le 2^s C'\bigl(N^{-s}+C_*^{s/a}H^{-s/a}\bigr).
+\]
+If $X<2$, then $N\ge2$ implies $1\le 2^s C_*^{s/a}H^{-s/a}$. The zero approximant, with error $\le\|f\|_p\le1$, covers this case. Take the supremum over the ball.
+\end{proof}
+
+\begin{corolario}[Minimax law for realization]
+\label{lp:cor:minimax-realization}
+Under the hypotheses of \cref{lp:thm:minimax-nh}, with constants depending only on $(p,s,q)$,
+\[
+ \sup_{\|f\|^*_{\Bes{s}{p}{q}}\le1}R_{N,H}(f)_p
+ \asymp N^{-s}+H^{-s/a(p,s)}.
+\]
+\end{corolario}
+
+\begin{proof}
+Apply \cref{lp:prop:transfer} to the family $\Sigma_{N,H}$, which contains zero. The lower bound follows from $R_{N,H}(f)_p\ge e^H_{N,p}(f)$. For the upper bound, take $n=2^{\lfloor\log_2N\rfloor}$, so $N/2<n\le N$. Monotonicity of the modulus and the bound on each coefficient in the definition of the ball give
+\[
+ \wt{f}{N^{-1}}{p}\le\wt{f}{n^{-1}}{p}\le n^{-s}\le2^sN^{-s}.
+\]
+Thus $R_{N,H}(f)_p\le 2^sN^{-s}+5e^H_{N,p}(f)$ on the unit ball. Apply \cref{lp:thm:minimax-nh} and take the supremum.
+\end{proof}
 
 \subsection{Iterated-logarithm schedules}
 \label{lp:sec:loglog}

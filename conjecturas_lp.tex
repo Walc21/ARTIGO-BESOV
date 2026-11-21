@@ -98,7 +98,7 @@ Uma representação sobre $[0,1]$ é obtida por bisseções diádicas sucessivas
 
 Para uma agenda não decrescente $H\colon\N\to\N$, definimos
 \begin{equation}
- \Sig{N}=\{0\}\cup\Aclass_{N,H(N)}([0,1]).
+ \Sig{N}=\Sigma_{N,H(N)},\qquad \Sigma_{N,H}=\{0\}\cup\Aclass_{N,H}([0,1]).
  \label{lp:eq:sigma}
 \end{equation}
 Com $\nu_s=\max\{1,s\}$, as agendas utilizadas são
@@ -137,6 +137,13 @@ com a convenção $\inf\varnothing=+\infty$. O espaço de realização é
 \end{equation}
 Para a família $(\Sig{N})_{N\ge2}$, escrevemos $\Rfun{\Library,H}{N}$ e $\Rstr{s}{q}{\Library,H}_p$.
 \end{definicao}
+
+Para orçamentos independentes $N,H$, escrevemos
+\[
+ e^H_{N,p}(f)=\inf_{g\in\Sigma_{N,H}}\|f-g\|_p,\qquad
+ R_{N,H}(f)_p=\inf_{g\in\Sigma_{N,H}}
+ \bigl(\|f-g\|_p+\wt{g}{N^{-1}}{p}\bigr).
+\]
 
 \begin{definicao}[Família aninhada que contém a biblioteca]
 \label{lp:def:network-family}
@@ -397,7 +404,7 @@ A constante $C$ depende apenas de $p$ e $s$.
 \end{lema}
 
 \begin{proof}
-Para uma função $v$ contínua e afim em cada célula de uma malha uniforme de passo $m^{-1}$, a equivalência de normas no espaço das funções afins de uma célula, seguida da mudança de escala, dá
+Se $v$ é afim em uma célula $I$, então $P_Iv=v$. Seu módulo é máximo em um extremo. Aplicando \eqref{lp:eq:projection-bounds} nos dois extremos, obtemos $\|v\|_{L^\infty(I)}\le4|I|^{-1/p}\|v\|_{L^p(I)}$. Na malha uniforme de passo $1/m$, toma-se o máximo sobre as células e majora-se cada norma local pela global, o que dá a primeira cota abaixo com $C_p=4$.
 \begin{equation}
  \|v\|_\infty\le C_p m^{1/p}\|v\|_p,\qquad \|v'\|_\infty\le2m\|v\|_\infty,
  \label{lp:eq:nikolskii}
@@ -479,6 +486,27 @@ Seja $x=H/(16(M+1))\ge1$ e seja $Q$ a potência de dois com $x<Q\le2x$. Então $
  |\sigma_j|\le n\bigl(|y_{j+1}-y_j|+1/Q\bigr)\le n(J+1)\le H.
 \end{gather*}
 A paridade oposta de $b_j$ e $b_{j+1}$ garante a inclinação não nula. No valor central, o numerador tem módulo no máximo $4QM+2$ e o denominador é $4Q$, ambos limitados por $8(M+1)Q\le H$. A inclinação tem altura $|\sigma_j|\le H$. Os índices das folhas satisfazem $2\le r+1\le n\le H$ e $j+1\le n$. Logo $g\in\Aclass_{n,H}([0,1])$. Como $u$ e $g$ são afins em cada célula, $\|u-g\|_\infty\le\max_j|v_j-y_j|\le1/(2Q)\le8(M+1)/H$.
+\end{proof}
+
+\begin{lema}[Quantização com denominadores diádicos por nó]
+\label{lp:lem:nodal-variable-height}
+Sejam $n=2^r\ge2$, $J\ge0$ e $y_0,\ldots,y_n\in\R$ com $|y_{j+1}-y_j|\le J$ para $0\le j<n$. Ponha $w_j=1+J+|y_j|$. Se $H$ é inteiro e $H\ge\max\{8\max_j w_j,n(J+4)\}$, o interpolante $u$ dos dados $(j/n,y_j)$ admite $g\in\Aclass_{n,H}([0,1])$ com
+\[
+ \|u-g\|_1\le\frac{32}{Hn}\sum_{j=0}^n w_j .
+\]
+\end{lema}
+
+\begin{proof}
+Seja $Q_j$ a maior potência de dois não superior a $H/(8w_j)$. A hipótese de altura dá $Q_j\ge1$, e a maximalidade dá $Q_j>H/(16w_j)$. Nos nós pares, escolha o múltiplo de $1/Q_j$ mais próximo de $y_j$. Nos nós ímpares, considere o múltiplo mais próximo e seus dois vizinhos imediatos nessa grade. Pelo menos um dos três difere dos valores dos dois nós pares adjacentes, já fixados. Escolha um deles que satisfaça essa condição. Assim, os valores $v_j$ obtidos satisfazem $v_j\in Q_j^{-1}\Z$, $v_{j+1}\ne v_j$ e
+\[
+ |v_j-y_j|\le 2/Q_j\le2,\qquad |v_j-y_j|\le32w_j/H.
+\]
+
+Seja $g$ o interpolante contínuo dos $v_j$ na árvore uniforme. Em uma folha com nós $j,j+1$, ponha $D=\max\{Q_j,Q_{j+1}\}$ e $w=\min\{w_j,w_{j+1}\}$. Os dois denominadores dividem $D$, por serem potências de dois, e ambos são limitados por $H/(8w)$. Podemos escrever $v_i=b_i/D$ com $b_i\in\Z$ para $i=j,j+1$. Como $\bigl||y_{j+1}|-|y_j|\bigr|\le J$, temos $\max\{|y_j|,|y_{j+1}|\}\le w$. Logo $|b_i|\le D(w+2)\le3Dw$. O valor central $(b_j+b_{j+1})/(2D)$ tem numerador de módulo no máximo $6Dw\le H$ e denominador $2D\le H$.
+
+A inclinação $n(b_{j+1}-b_j)/D$ é não nula. Se $n\le D$, pode-se escrevê-la como $(b_{j+1}-b_j)/(D/n)$, com numerador limitado por $6Dw$ e denominador inteiro no máximo $H$. Se $D<n$, a inclinação é inteira e seu módulo é no máximo $n(J+4)\le H$, pela cota de $2$ em cada erro nodal. A redução das frações preserva as cotas. Os índices também respeitam a altura, pois $2\le r+1\le n\le H$ e $j+1\le n$. Assim, a própria árvore uniforme é uma representação admissível de $g$.
+
+Na célula $[j/n,(j+1)/n]$, $u-g$ interpola os erros nodais com seus sinais. Seu módulo é limitado pela interpolação dos módulos, cuja integral é $(|v_j-y_j|+|v_{j+1}-y_{j+1}|)/(2n)$. Somando sobre as folhas, a integral é no máximo $n^{-1}\sum_j|v_j-y_j|$, o que dá a cota anunciada.
 \end{proof}
 
 \subsection{Quantização sem continuidade e Jackson para \texorpdfstring{$s\le1/p$}{s ≤ 1/p}}
@@ -811,7 +839,7 @@ A taxa por escala \eqref{lp:eq:uniform-approx} vale com $\kappa=0$ para todo $q$
 
 \begin{lema}[Saltos nodais uniformes]
 \label{lp:lem:critical-jump}
-Sejam $p>1$, $0<q\le\infty$ e $f$ com $\|f\|^*_{\Bes{1/p}{p}{q}}\le B$, $n=2^r\ge2$ e $\lambda_j=\lambda_j(f)$. Para $0\le j<n$,
+Sejam $p\ge1$, $0<q\le\infty$ e $f$ com $\|f\|^*_{\Bes{1/p}{p}{q}}\le B$, $n=2^r\ge2$ e $\lambda_j=\lambda_j(f)$. Para $0\le j<n$,
 \begin{equation}
  |\lambda_{j+1}-\lambda_j|\le\frac{4\,\sup_{[0,1]}|Q_2f|}{n}+\sum_{k=1}^{r-1}\frac{K_k}{n},
  \qquad K_k=8\,(2^{k+1})^{1/p+1}\,18\,C_W\,\wt{f}{2^{-k}}{p}.
@@ -826,7 +854,7 @@ Pela telescópica $Q_{2^r}f=Q_2f+\sum_{k=1}^{r-1}(Q_{2^{k+1}}f-Q_{2^k}f)$ e por 
 
 \begin{teorema}[Altura linear crítica para $s=1/p$ com $p>1$]
 \label{lp:thm:critical-linear}
-Sejam $p>1$, $s=1/p$ e $0<q<\infty$. Existem $A=A(p,C_W)\ge1$ e constantes $C_2,C_3>0$ que dependem só de $(p,q,C_W)$, tais que, para todo $B\ge1$, a agenda linear $H_B(N)=\lceil A(B+1)(N+1)\rceil$ satisfaz as seguintes propriedades.
+Sejam $p>1$, $s=1/p$ e $0<q\le\infty$. Existem $A=A(p,C_W)\ge1$ e constantes $C_2,C_3>0$ que dependem só de $(p,q,C_W)$, tais que, para todo $B\ge1$, a agenda linear $H_B(N)=\lceil A(B+1)(N+1)\rceil$ satisfaz as seguintes propriedades.
 \begin{enumerate}[label=(\alph*)]
  \item Para todo $f\in\mathbb B^{1/p}_{p,q}(B)$ e $n=2^r\ge2$, existe $g\in\Aclass_{n,H_B(n)}([0,1])$ com
  \[
@@ -840,18 +868,82 @@ Sejam $p>1$, $s=1/p$ e $0<q<\infty$. Existem $A=A(p,C_W)\ge1$ e constantes $C_2,
 \end{teorema}
 
 \begin{proof}
-Para (a), a desigualdade \eqref{lp:eq:nikolskii} em $m=2$ e a cota de quase-interpolação dão $\sup|Q_2f|\le\mathsf B_0(f)\le C_0B$, com $C_0=8\,2^{1/p}(1+9C_W)$. O \cref{lp:lem:critical-jump} dá saltos $\le J=4C_0B+288C_W2^{1/p}B$. A soma telescópica com $C_p=4$ em \eqref{lp:eq:nikolskii} dá $|\lambda_j|\le M_r$. Tome $C_M=C_0+144C_W2^{1/p}+1$ e $C_J=4C_0+288C_W2^{1/p}+1$. Assim $M_r+1\le C_M(B+1)(r+1)$ e $J+1\le C_J(B+1)$. Como $r+1\le n$, com $A=16C_M+C_J+8$ a agenda satisfaz $8n\le H$, $16(M_r+1)\le H$ e $n(J+1)\le H$, e o \cref{lp:lem:nodal-jump} aplica-se a $Q_nf$. Somando o erro de quase-interpolação (\cref{lp:cor:quasi-error}) e o erro de quantização, obtém-se (a). Para (b), $\mathscr R\le\omega(f,1/N)+5\|f-g\|_p$ (\cref{lp:prop:transfer}), e $\omega(f,1/N)\le BN^{-1/p}$; o termo de quantização é $\le C(r+2)2^{-r}\le C'2^{-r/p}$, pois $(r+2)2^{-r(1-1/p)}$ é limitado. Para (c), a sequência é majorada por uma soma de dois termos: $\omega$-termos em $\ell^q$ com norma $\le B$, e termos de quantização dominados por $C(r+2)\rho^r$ com $\rho=2^{1/p-1}<1$, cuja norma $\ell^q$ é finita. Para (d), a primeira afirmação é o item (c), pois $\Rstr{1/p}{q}{\Library,H_B}_p$ é definido pela norma $\ell^q$ de $(2^{r/p}\Rfun{\Library,H_B}{2^r}(f)_p)_{r\ge1}$. A inclusão reciprocial é o \cref{lp:cor:inclusion}, válido para toda agenda.
+Para (a), a desigualdade \eqref{lp:eq:nikolskii} em $m=2$ e a cota de quase-interpolação dão $\sup|Q_2f|\le\mathsf B_0(f)\le C_0B$, com $C_0=8\,2^{1/p}(1+9C_W)$. O \cref{lp:lem:critical-jump} dá saltos $\le J=4C_0B+288C_W2^{1/p}B$. A soma telescópica com $C_p=4$ em \eqref{lp:eq:nikolskii} dá $|\lambda_j|\le M_r$. Tome $C_M=C_0+144C_W2^{1/p}+1$ e $C_J=4C_0+288C_W2^{1/p}+1$. Assim $M_r+1\le C_M(B+1)(r+1)$ e $J+1\le C_J(B+1)$. Como $r+1\le n$, com $A=16C_M+C_J+8$ a agenda satisfaz $8n\le H$, $16(M_r+1)\le H$ e $n(J+1)\le H$, e o \cref{lp:lem:nodal-jump} aplica-se a $Q_nf$. Somando o erro de quase-interpolação (\cref{lp:cor:quasi-error}) e o erro de quantização, obtém-se (a).
+
+Pela \cref{lp:prop:transfer}, o custo de realização é no máximo $\wt{f}{n^{-1}}{p}+5\|f-g\|_p$. Como $H_B(n)\ge A(B+1)n$ e $M_r+1\le C_M(B+1)(r+1)$, segue
+\[
+ 2^{r/p}\Rfun{\Library,H_B}{2^r}(f)_p
+ \le(1+45C_W)\,2^{r/p}\wt{f}{2^{-r}}{p}
+    +C(p,C_W)(r+2)2^{-r(1-1/p)}.
+\]
+O primeiro termo tem norma $\ell^q$ no máximo $(1+45C_W)B$. No segundo, $\rho=2^{1/p-1}<1$, e $(r+2)\rho^r\le C_{\rho,\sigma}\sigma^r$ para qualquer $\rho<\sigma<1$. Isso dá a estimativa de cada termo em (b) e a de sequência em (c): para $0<q<1$ somamos as potências $q$, para $1\le q<\infty$ usamos a desigualdade triangular e para $q=\infty$ tomamos o supremo. O item (c) dá a inclusão direta de (d) e o \cref{lp:cor:inclusion} dá a inversa para qualquer agenda.
+\end{proof}
+
+\begin{proposicao}[Altura linear para o erro em $B^1_{1,q}$]
+\label{lp:prop:l1-linear-height}
+Existe $C_E\ge1$ tal que, para todo $0<q\le\infty$, $B\ge1$, $f\in\mathbb B^1_{1,q}(B)$, $n=2^r\ge2$ e todo inteiro $H\ge C_E(B+1)n$, há $g\in\Aclass_{n,H}([0,1])$ com
+\[
+ \|f-g\|_1\le9C_W\wt{f}{n^{-1}}{1}+C_E(B+1)/H.
+\]
+A constante depende apenas de $C_W$ para $p=1$.
+\end{proposicao}
+
+\begin{proof}
+O \cref{lp:lem:critical-jump} com $p=1$ dá $|\lambda_{j+1}-\lambda_j|\le J=C_J'B$, pois $2^k\wt{f}{2^{-k}}{1}\le B$ e $\|Q_2f\|_\infty\le8\|f\|_1\le8B$. A constante $C_J'$ depende apenas de $C_W$. Por \eqref{lp:eq:projection-bounds}, $|\lambda_j(f)|\le4n\|f\|_{L^1(I_{c(j)})}$. A última célula é usada duas vezes e as outras, uma vez. Portanto
+\[
+ \max_j|\lambda_j(f)|\le4nB,qquad n^{-1}\sum_{j=0}^n|\lambda_j(f)|\le8\|f\|_1.
+\]
+Com $w_j=1+J+|\lambda_j(f)|$, temos $8\max_jw_j\le8(1+C_J'B+4nB)$, $n(J+4)\le n(C_J'B+4)$ e $n^{-1}\sum_jw_j\le2(1+C_J'B)+8B$. Assim $C_E(B+1)n$ cobre as duas condições do \cref{lp:lem:nodal-variable-height} para $C_E$ suficientemente grande. O lema e o \cref{lp:cor:quasi-error} dão a cota de erro, ampliando a mesma constante para cobrir o termo de quantização.
+\end{proof}
+
+\begin{teorema}[Agenda linear fixa na diagonal]
+\label{lp:thm:critical-fixed-agenda}
+Sejam $1<p<\infty$ e $0<q\le\infty$. Para qualquer constante fixa $A_*>0$, ponha $H_*(N)=\max\{2,\lceil A_*N\rceil\}$. Então
+\[
+ \Bes{1/p}{p}{q}([0,1])=\Rstr{1/p}{q}{\Library,H_*}_p.
+\]
+\end{teorema}
+
+\begin{proof}
+Fixe $f\in\Bes{1/p}{p}{q}$, tome $B\ge\max\{1,\|f\|^*\}$ e escolha a menor potência de dois $d=2^e\ge1$ com $A_*d\ge2A(B+1)$, onde $A$ é a constante do \cref{lp:thm:critical-linear}. Para $n=2^r\ge2$, vale $A_*dn\ge A(B+1)(n+1)$, e, após aplicar o teto, $H_*(dn)\ge H_B(n)$. Como $dn\ge n$, uma representação admissível para $\Sigma_{n,H_B(n)}$ também é admissível para $\Sigma_{dn,H_*(dn)}$. O zero pertence às duas famílias. A escala passa de $n^{-1}$ a $(dn)^{-1}$, de modo que a monotonicidade do módulo dá
+\[
+ R_{dn,H_*(dn)}(f)_p\le R_{n,H_B(n)}(f)_p.
+\]
+Multiplicando por $(dn)^{1/p}$ e reindexando de $r$ para $r+e$, a norma da cauda é limitada por $C_3d^{1/p}(B+1)$ pelo \cref{lp:thm:critical-linear}.
+
+Para os índices iniciais $1\le j\le e$, use $g=0$, que dá $2^{j/p}R_{2^j,H_*(2^j)}(f)_p\le2^{j/p}\|f\|_p$. Para $q<\infty$, a soma das potências $q$ dá norma no máximo $(1-2^{-q/p})^{-1/q}d^{1/p}\|f\|_p$. Para $q=\infty$, a cota é $d^{1/p}\|f\|_p$. Se $e=0$, o bloco é vazio. Unindo as duas partes por soma de potências ou por supremo, a sequência pertence a $\ell^q$, inclusive para $q<1$. A inclusão inversa é o \cref{lp:cor:inclusion}, que vale para qualquer agenda.
+\end{proof}
+
+\begin{proposicao}[Crescimento ótimo em função do raio]
+\label{lp:prop:critical-radius-growth}
+Nas condições do \cref{lp:thm:critical-fixed-agenda}, escreva
+\[
+ \Xi(f)=\big\|\big(2^{r/p}R_{2^r,H_*(2^r)}(f)_p\big)_{r\ge1}\big\|_{\ell^q}.
+\]
+Existe $C=C(p,q,A_*)>0$ tal que $\Xi(f)\le C(1+\|f\|^*)^{1+1/p}$ para todo $f\in\Bes{1/p}{p}{q}$. Existem $c,K_0>0$, dependentes apenas de $p,A_*$, tais que $\Xi(f_K)\ge cK^{1+1/p}$ para $f_K\equiv K$ e $K\ge K_0$. Logo o supremo de $\Xi$ na bola de raio $B$ é da ordem de $B^{1+1/p}$ para $B$ suficientemente grande.
+\end{proposicao}
+
+\begin{proof}
+Na prova da agenda fixa, as duas partes da sequência dão $\Xi(f)\le C_{p,q}d^{1/p}(B+1)$. A minimalidade de $d$ dá $d\le2\max\{1,2A(B+1)/A_*\}$. Com $B=\max\{1,\|f\|^*\}$, segue a cota superior.
+
+Em uma folha $J$, um candidato de altura no máximo $H$ satisfaz $|u|,|v|\le H$ para seu valor central e sua inclinação, logo $|g(x)|\le H+H|J|/2\le3H/2$. A mesma cota vale para o zero. Como $H_*(M)\le(A_*+1)M$ para $M\ge2$, tome $K\ge6(A_*+1)$ e a maior potência de dois $M\le K/[3(A_*+1)]$. Temos $M\ge2$ e $\|g\|_\infty\le K/2$ para todo $g\in\Sigma_{M,H_*(M)}$. Assim $R_{M,H_*(M)}(f_K)_p\ge K/2$ e
+\[
+ \Xi(f_K)\ge M^{1/p}K/2\ge \frac{K^{1+1/p}}{2[6(A_*+1)]^{1/p}}.
+\]
+O módulo de $f_K$ é zero, logo $\|f_K\|^*=K$. Tomar $K=B$ dá a cota inferior sobre a bola. Em particular, a equivalência linear uniforme entre $\|f\|^*$ e $\|f\|_p+\Xi(f)$ é falsa, pois $\Xi(f_K)/\|f_K\|^*$ é ilimitada. A cota inversa $\|f\|^*\le C_{p,q}(\|f\|_p+\Xi(f))$ decorre de \eqref{lp:eq:inverse}, com o termo $r=0$ controlado por $4\|f\|_p$.
 \end{proof}
 
 \begin{observacao}
 \label{lp:obs:critical-scope}
-Para $p>1$ e $0<q<\infty$, o \cref{lp:thm:critical-linear} permite usar $H_B$ em lugar de $\widehat H^{[B]}_A$ na bola de raio $B$ com $s=1/p$. A inclusão direta do item (d) parte dessa bola. A inclusão do estrato em Besov vale em todo $L^p$ para qualquer agenda. Para a igualdade global na diagonal, aplica-se o item (iii) do \cref{lp:conj:besov} com $\widehat H_{q,\kappa}$, que já é linear para $p>1$, $0<q\le1$ e $\kappa=0$. Na diagonal com $p>1$, a extensão da agenda linear a $q=\infty$ e a igualdade global com agenda linear para $1<q<\infty$ ficam fora do alcance deste teorema.
+Para $p>1$ e $0<q\le\infty$, a agenda $H_B$ dá controle de realização calibrado pelo raio. A agenda fixa $H_*$ dá igualdade de conjuntos e controle uniforme em cada bola, com a dependência no raio da \cref{lp:prop:critical-radius-growth}.
+
+No ponto $p=s=1$, a \cref{lp:prop:l1-linear-height} dá a taxa por escala para todo $q$. Para $q=\infty$, \cref{lp:prop:transfer} dá a cota da sequência em supremo com altura $\lceil C_E(B+1)(n+1)\rceil$. O mesmo deslocamento diádico, agora normalizado por $dn$, transfere essa cota para $H_*$, com o bloco inicial controlado pelo zero. A inversa universal dá a igualdade global também em $B^1_{1,\infty}$. Para $q<\infty$ em $p=s=1$, a cota de quantização normalizada pode ficar de ordem constante, e a caracterização com agenda linear permanece em aberto neste trabalho.
 \end{observacao}
 
 \subsection{Piso aritmético e complexidade em bits}
 \label{lp:sec:bits}
 
-Escrevemos $e^{H}_{N,p}(f)=\inf\{\|f-g\|_p:g\in\{0\}\cup\Aclass_{N,H}([0,1])\}$. Para $H\ge1$ inteiro, seja $\mathcal Q_H=\{a/b\in\Q:\height(a/b)\le H\}$.
+Para $H\ge1$ inteiro, seja $\mathcal Q_H=\{a/b\in\Q:\height(a/b)\le H\}$.
 
 \begin{proposicao}[Piso aritmético uniforme em $L^p$]
 \label{lp:prop:floor}
@@ -1074,7 +1166,7 @@ Sejam $1\le p<\infty$, $0<s<2$ e $0<q\le\infty$. Existe $c_G=c_G(p,s,q)>0$ tal q
 \end{proposicao}
 
 \begin{proof}
-Seja $\Lambda$ a constante do \cref{lp:lem:bump}, com $\varphi$ fixo. Tome $t=1/H$ e $a=t^{s-1/p}/\Lambda$, e seja $f_H=\psi_{a,t}$. Pelo \cref{lp:lem:bump}, $\|f_H\|^*\le\Lambda a t^{1/p-s}=1$. Seja $g\in\Sig N$ com agenda $H$. Pela última folha, $g$ é afim em $[1-1/H,1]=[1-t,1]$, e como $f_H=0$ fora de $(1-t,1)$, o mesmo lema dá
+Seja $\Lambda$ a constante do \cref{lp:lem:bump}, com $\varphi$ fixo. Tome $t=1/H$ e $a=t^{s-1/p}/\Lambda$, e seja $f_H=\psi_{a,t}$. Pelo \cref{lp:lem:bump}, $\|f_H\|^*\le\Lambda a t^{1/p-s}=1$. Se $g=0$, a função é afim em $[1-t,1]$. Caso contrário, tome qualquer representação admissível e considere sua folha terminal direita $J_{k,m}$. Seu extremo direito é $1$, logo $m=2^k-1$, e o campo de endereço da altura dá $H\ge |m|+1=2^k$. Portanto $J_{k,2^k-1}=[1-2^{-k},1]\supseteq[1-1/H,1]$. Em ambos os casos, $g$ é afim em $[1-t,1]$, e a cota local do \cref{lp:lem:bump} dá
 \[
  \|f_H-g\|_p\ge\|f_H-g\|_{L^p(1-t,1)}\ge\frac{\kappa_\varphi}{M_\varphi}\,a\,t^{1/p}=\frac{\kappa_\varphi}{M_\varphi\Lambda}\,t^{s}=c_G\,H^{-s},
 \]
@@ -1130,6 +1222,90 @@ A \cref{lp:cor:joint-necessity} determina a potência necessária da altura para
 
 As cotas superiores do \cref{lp:thm:uniform}, com $\kappa=0$, e do \cref{lp:thm:critical-linear} atingem essas potências nos orçamentos diádicos. Para $B$ fixo, quando a cota superior da \cref{lp:tab:schedules} inclui $\mathsf L_1^{\theta_q}$, a comparação determina apenas a potência de $N$. A necessidade desse fator na taxa por escala e a necessidade de fatores adicionais para somabilidade são questões distintas. Os pisos também deixam indeterminada a altura exigida para um alvo fixo.
 \end{observacao}
+
+\section{Lei minimax em dois orçamentos}
+\label{lp:sec:minimax}
+
+Para $N,H\ge2$, na bola unitária de $\Bes{s}{p}{q}$, definimos
+\[
+ D_{p,s,q}(N,H)=\sup_{\|f\|^*_{\Bes{s}{p}{q}}\le1}\ e^H_{N,p}(f).
+\]
+Os dois orçamentos variam independentemente. A cota inferior pelo número de folhas usa o mesmo alvo para todas as alturas de um dado $N$.
+
+\begin{lema}[Piso pelo número de folhas]
+\label{lp:lem:leaf-budget-floor}
+Sejam $1\le p<\infty$, $0<s<2$ e $0<q\le\infty$. Existe $c_N=c_N(p,s,q)>0$ tal que $D_{p,s,q}(N,H)\ge c_NN^{-s}$ para todos os inteiros $N,H\ge2$.
+\end{lema}
+
+\begin{proof}
+Fixe $\varphi\in C_c^\infty((0,1))$ não nula e estenda-a por zero. Com $m=2N$, use
+\[
+ f_m(x)=b m^{-s}\sum_{j=0}^{m-1}\varphi(mx-j),
+\]
+onde $b=1/C_1$, com $C_1$ do \cref{lp:lem:packing} para essa $\varphi$. O item (i), aplicado com $B=1$ e todos os bits iguais a $1$, dá $\|f_m\|^*\le1$. Com efeito, a disjunção dos suportes dá $\|f_m\|_p=b m^{-s}\|\varphi\|_p$ e $\|f_m''\|_p=b m^{2-s}\|\varphi''\|_p$. O módulo é limitado por $C_2 b m^{-s}\min\{1,(mt)^2\}$. A prova de empacotamento soma as potências $q$ dos dois majorantes geométricos em torno de $t=m^{-1}$ ou toma o supremo quando $q=\infty$, de modo que $b$ é independente de $m$.
+
+Uma representação com até $N$ folhas tem no máximo $N-1$ fronteiras internas. Cada fronteira pode cair no interior de no máximo uma célula de teste $I_j=(j/m,(j+1)/m)$. Assim, em pelo menos $m-N+1\ge m/2$ dessas células, $g$ é afim no interior. Se $g=0$, todas servem. Em cada uma, $L_j(y)=g((j+y)/m)$ é afim. Como no \cref{lp:lem:bump}, a integração por partes dá $\int_0^1 L_j\varphi''=0$ e $\int_0^1\varphi\varphi''=-\int_0^1|\varphi'|^2$. Com $p'$ conjugado de $p$, incluindo $p'=\infty$ quando $p=1$, Hölder e a mudança de variável dão
+\[
+ \|f_m-g\|_{L^p(I_j)}
+ \ge b m^{-s-1/p}\frac{\int_0^1|\varphi'|^2}{\|\varphi''\|_{L^{p'}(0,1)}} .
+\]
+Somando as potências $p$ sobre pelo menos $m/2$ células, obtemos uma cota inferior da ordem de $m^{-s}$, com constante independente dos orçamentos. Tome o ínfimo sobre $g$ e use $m=2N$.
+\end{proof}
+
+\begin{teorema}[Lei minimax em folhas e altura aritmética]
+\label{lp:thm:minimax-nh}
+Sejam $1\le p<\infty$, $0<s<2$ e $0<q\le\infty$. Existem $c,C>0$, dependentes apenas de $(p,s,q)$, tais que, para todos os inteiros $N,H\ge2$,
+\begin{equation}
+ c\bigl(N^{-s}+H^{-s/a(p,s)}\bigr)
+ \le D_{p,s,q}(N,H)\le C\bigl(N^{-s}+H^{-s/a(p,s)}\bigr),
+ \label{lp:eq:minimax-nh}
+\end{equation}
+onde
+\[
+ a(p,s)=
+ \begin{cases}
+ 1+1/p-s,&0<s<1/p,\\
+ 1,&1/p\le s\le1,\\
+ s,&1<s<2.
+ \end{cases}
+\]
+\end{teorema}
+
+\begin{proof}
+\emph{Cotas inferiores.} O \cref{lp:lem:leaf-budget-floor} dá o termo $N^{-s}$. Abaixo de $1/p$, o \cref{lp:prop:slope-floor} dá $H^{-s/(1+1/p-s)}$. Entre $1/p$ e $1$, inclusive, o \cref{lp:prop:geom-floor} dá $H^{-s}$. Acima de $1$, o \cref{lp:prop:floor} dá $1/(2H)$, pois o alvo constante $1/(2H)$ tem quase-norma $1/(2H)\le1$. Essas cotas fornecem $H^{-s/a(p,s)}$ em cada faixa. O máximo das duas cotas é pelo menos metade da soma. Cada teste é escolhido dentro do supremo minimax e pode depender de $N$ ou $H$.
+
+\emph{Construção por nível diádico.} Seja $n=2^r\ge2$ e fixe $\|f\|^*\le1$. Pelo \cref{lp:cor:quasi-error}, $\|f-Q_nf\|_p\le9C_W n^{-s}$. Para $s<1/p$, o \cref{lp:lem:sup-bound} limita a amplitude nodal por $C_0n^{1/p-s}$. Com $Q=n$, o \cref{lp:lem:nodal-general} requer $H\ge8(C_0+1)n^{1+1/p-s}$ e dá erro adicional de no máximo $1/(2n)\le n^{-s}/2$.
+
+Para $s>1/p$, a imersão e a projeção limitam a amplitude nodal por $M=C_1'(p,s)$ na bola unitária. Se $s\le1$, tome $Q=n$, que exige $H\ge8(M+1)n$. Se $s>1$, tome a menor potência de dois $Q\ge n^s$, de modo que $Q<2n^s$. Basta $H\ge16(M+1)n^s$. Nos dois casos, $Q\ge n$ e o erro adicional é no máximo $1/(2Q)\le n^{-s}/2$. Essas são as escolhas por escala do \cref{lp:thm:uniform} com $\kappa=0$ nesses regimes.
+
+Se $s=1/p$ e $p>1$, o \cref{lp:thm:critical-linear} com $B=1$ permite $H\ge3An$, pois $2A(n+1)\le3An$. O erro de quantização é da ordem de $(r+2)/n$ e é limitado por um múltiplo de $n^{-1/p}$. Se $p=s=1$, a \cref{lp:prop:l1-linear-height} com $B=1$ permite $H\ge2C_E n$ e dá erro de quantização $\le2C_E/H\le n^{-1}$. Esta última cota vale para todo $q$, pois usa a média dos módulos dos valores nodais.
+
+Portanto há $C_*\ge1$ e $C'>0$, dependentes apenas de $(p,s,q)$, tais que $H\ge C_*n^{a(p,s)}$ permite construir $g\in\Aclass_{n,H}([0,1])$ com $\|f-g\|_p\le C'n^{-s}$.
+
+\emph{Orçamentos inteiros.} Escreva $a=a(p,s)$ e $X=\min\{N,(H/C_*)^{1/a}\}$. Se $X\ge2$, tome $n=2^{\lfloor\log_2 X\rfloor}$. Então $X/2<n\le X$, e $n\le N$, $C_*n^a\le H$. A representação construída é admissível para $(N,H)$, pois aumentar os orçamentos preserva suas folhas e alturas. O erro é limitado por
+\[
+ C'n^{-s}\le 2^s C'X^{-s}
+ \le 2^s C'\bigl(N^{-s}+C_*^{s/a}H^{-s/a}\bigr).
+\]
+Se $X<2$, como $N\ge2$, temos $1\le 2^s C_*^{s/a}H^{-s/a}$. O candidato zero, de erro $\le\|f\|_p\le1$, cobre esse caso. Tome o supremo na bola.
+\end{proof}
+
+\begin{corolario}[Lei minimax para a realização]
+\label{lp:cor:minimax-realization}
+Nas hipóteses do \cref{lp:thm:minimax-nh}, com constantes dependentes apenas de $(p,s,q)$,
+\[
+ \sup_{\|f\|^*_{\Bes{s}{p}{q}}\le1}R_{N,H}(f)_p
+ \asymp N^{-s}+H^{-s/a(p,s)}.
+\]
+\end{corolario}
+
+\begin{proof}
+Aplique a \cref{lp:prop:transfer} à família $\Sigma_{N,H}$, que contém zero. A cota inferior vem de $R_{N,H}(f)_p\ge e^H_{N,p}(f)$. Para a superior, tome $n=2^{\lfloor\log_2N\rfloor}$, de modo que $N/2<n\le N$. A monotonicidade do módulo e a cota de cada coeficiente na definição da bola dão
+\[
+ \wt{f}{N^{-1}}{p}\le\wt{f}{n^{-1}}{p}\le n^{-s}\le2^sN^{-s}.
+\]
+Logo $R_{N,H}(f)_p\le 2^sN^{-s}+5e^H_{N,p}(f)$ na bola unitária. O \cref{lp:thm:minimax-nh} conclui após tomar o supremo.
+\end{proof}
 
 \subsection{Agendas de log iterado}
 \label{lp:sec:loglog}
