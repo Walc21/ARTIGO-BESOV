@@ -1726,6 +1726,38 @@
           "nota": "; cota inferior com κ/M."
         }
       ]
+    },
+    {
+      "id": "E1",
+      "titulo": "empacotamento de Besov por bumps disjuntos",
+      "rotulo": "lp:lem:packing",
+      "estado": "Demonstrado no texto (sem formalização Lean)",
+      "nota": "Família $f_\\theta$ com norma de Besov $\\le B$, separação em $L^p$ por distância de Hamming e empacotamento binário. Sem declaração Lean correspondente.",
+      "lean": []
+    },
+    {
+      "id": "E2",
+      "titulo": "cota inferior de entropia métrica",
+      "rotulo": "lp:prop:entropy-lower",
+      "estado": "Demonstrado no texto (sem formalização Lean)",
+      "nota": "Vale para $0<\\varepsilon\\le\\varepsilon_0B$, com centros arbitrários em $L^p$. Não afirma cota superior. Sem declaração Lean correspondente.",
+      "lean": []
+    },
+    {
+      "id": "E3",
+      "titulo": "cota inferior de bits",
+      "rotulo": "lp:cor:bits-lower",
+      "estado": "Demonstrado no texto (sem formalização Lean)",
+      "nota": "$L\\ge c_5N-1$ para códigos de comprimento máximo $L$ com erro uniforme $C_BN^{-s}$. Sem declaração Lean correspondente.",
+      "lean": []
+    },
+    {
+      "id": "E4",
+      "titulo": "limites da entropia (observação)",
+      "rotulo": "lp:obs:entropy",
+      "estado": "Demonstrado no texto (sem formalização Lean)",
+      "nota": "Registra que só a cota inferior é demonstrada e que a restrição a $\\varepsilon\\le\\varepsilon_0B$ é indispensável. Sem declaração Lean correspondente.",
+      "lean": []
     }
   ]
 }

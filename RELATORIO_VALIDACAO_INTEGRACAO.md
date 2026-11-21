@@ -68,7 +68,7 @@ Os 244 `#print axioms` reproduziram a saída da primeira validação byte a byte
 
 ## Questões matemáticas em aberto
 
-- **Entropia métrica (Observação 6.10).** O expoente `1/s` decorre da especialização `d=1` e `π=p` do Teorema 1 de Birman–Solomyak na prova de Kerkyacharian–Picard. A equivalência das quase-normas utilizadas, a aplicação a `[0,1]` e a passagem da cobertura à cota de bits para qualquer codificação ficam fora da verificação do kernel. O corolário sobre o código explícito cobre a cota superior de `O(N log N)` para raio fixo. A cota inferior de ordem `N` para qualquer codificação usa a estimativa externa. O módulo `RequestProject.Entropy` trata de uma classe diferente em distância uniforme. [Teorema 1 no artigo original](https://www.numdam.org/item/10.1051/ps%3A2003011.pdf)
+- **Entropia métrica (Observação 6.10; estado em `9951091`, superado, ver «Atualização posterior»).** O expoente `1/s` decorre da especialização `d=1` e `π=p` do Teorema 1 de Birman–Solomyak na prova de Kerkyacharian–Picard. A equivalência das quase-normas utilizadas, a aplicação a `[0,1]` e a passagem da cobertura à cota de bits para qualquer codificação ficam fora da verificação do kernel. O corolário sobre o código explícito cobre a cota superior de `O(N log N)` para raio fixo. A cota inferior de ordem `N` para qualquer codificação usa a estimativa externa. O módulo `RequestProject.Entropy` trata de uma classe diferente em distância uniforme. [Teorema 1 no artigo original](https://www.numdam.org/item/10.1051/ps%3A2003011.pdf)
 - **Altura aritmética.** Os pisos para a taxa uniforme por escala na bola exigem altura pelo menos da ordem de `N^(1+1/p−s)` abaixo da diagonal, `N` de `s=1/p` a `s=1` e `N^s` acima de `s=1`. A altura linear crítica cobre `p>1`, `0<q<∞` e uma agenda dependente do raio. Ficam em aberto a agenda linear crítica para `q=∞` com `p>1`, a igualdade global com agenda linear para `p>1` e `1<q<∞` e a altura necessária para um alvo fixo. A necessidade dos fatores logarítmicos para a taxa por escala e para a somabilidade são questões distintas e seguem em aberto nos regimes indicados no texto.
 - **Fidelidade matemática.** O mapa e a auditoria axiomática verificam a cobertura declarada e as dependências do código. A comparação semântica de ponta a ponta entre as demonstrações em Lean e os enunciados e argumentos das duas línguas continua pendente. O apêndice e a [auditoria de fidelidade](mapas/AUDITORIA_FIDELIDADE.md) registram diferenças de representação, hipóteses e dependência das constantes, em especial em Jackson para `s≤1/p`.
 
@@ -126,3 +126,12 @@ git diff --exit-code 1601825 -- 'lean4/formalizacao/*.lean' \
 ```
 
 Gerei `AxiomasMapa.lean` com as cinco importações de `verificar_mapa.py` e um `#print axioms` por nome distinto de `mapas/dados/mapa_lp.json`, na ordem da primeira ocorrência. `AxiomasProjeto.lean` importa os 162 módulos rastreados e agrupa as constantes pelo módulo de origem informado pelo ambiente do Lean. A pasta local ignorada `lean4/formalizacao/.lake/validacao-final/` conserva o relatório anterior e a evidência bruta desta etapa.
+
+## Atualização posterior ao commit `9951091`
+
+Esta seção descreve alterações da árvore de trabalho após a validação acima. A validação histórica de `9951091` permanece como descrita.
+
+- **Entropia métrica.** O artigo passou a conter o Lema de empacotamento de Besov (`lp:lem:packing`), a Proposição de cota inferior de entropia (`lp:prop:entropy-lower`) e o Corolário de cota inferior de bits (`lp:cor:bits-lower`). A prova usa diretamente a definição de Besov por diferenças de segunda ordem e um empacotamento binário do tipo Gilbert–Varshamov. A equivalência com wavelets e o Teorema 1 de Kerkyacharian–Picard não são necessários para essa cota inferior.
+- **Escopo.** A prova estabelece só a cota inferior, para `0<ε≤ε₀B`. A cota superior de `log₂ 𝒩(ε)` e a equivalência bilateral continuam sem demonstração neste artigo.
+- **Whitney.** A parametrização da última célula usa `m=min(k,n−2)`, como em `Formalizacao/Corollary54.lean` (`Jcell`) e `Whitney10.lean` (`Iset`). As constantes não mudaram.
+- **Lean.** Nenhum fonte Lean foi alterado. Os três novos resultados e a cota de bits **não possuem formalização em Lean**. A compilação dos módulos existentes não os certifica.

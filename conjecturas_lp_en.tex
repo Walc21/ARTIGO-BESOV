@@ -281,8 +281,7 @@ There exists $C_W=C_W(p)\ge1$ such that, for $n\ge2$ and $f\in L^p$,
 \end{lema}
 
 \begin{proof}
-Write $J_k=[a,a+8\delta]$ with $\delta=1/(4n)$, and take
-$S_k=[a+\delta,a+7\delta]$. For $|\rho|\le\delta$ and $x\in S_k$, define $W_\rho(x)=f(x+\rho)-2f(x)+f(x-\rho)$. Consider the double average
+Let $m=\min\{k,n-2\}$ and $a=t_m=m/n$, so that $J_k=[a,a+8\delta]$ with $\delta=1/(4n)$. For $k\le n-2$ this is the definition of $J_k$ given above; for $k=n-1$ one has $a=t_{n-2}$ and $J_{n-1}=[t_{n-2},1]=I_{n-2}\cup I_{n-1}$. Take $S_k=[a+\delta,a+7\delta]\subseteq J_k$. For $|\rho|\le\delta$ and $x\in S_k$, define $W_\rho(x)=f(x+\rho)-2f(x)+f(x-\rho)$. Consider the double average
 \[
  g(x)=\delta^{-2}\int_0^\delta\!\!\int_0^\delta
             f(x-\delta+u+v)\dd v\dd u.
@@ -327,7 +326,7 @@ Applying the convexity inequality with $j=2$ to $z=(f-g)+(g-A)$ yields
 \end{multline*}
 where $K_2=M_p2^{p-1}$ and $K_1=36^pK_2+2c_4$.
 
-Each point belongs to at most four intervals $J_k$. For $0<|\rho|\le\delta$, we have $S_k\subseteq[|\rho|,1-|\rho|]$ and $W_\rho(x)=\Delta_{|\rho|}^2f(x-|\rho|)$. Hence
+Each point belongs to at most four intervals $J_k$: at most three with $k\le n-2$ (since $J_k=[t_k,t_{k+2}]$ and $x$ lies in at most three such intervals), plus, when $x\in J_{n-2}=J_{n-1}$, the additional interval $J_{n-1}$. Since $S_k\subseteq J_k$, the same count holds for the sets $S_k$. For $0<|\rho|\le\delta$, we have $S_k\subseteq[|\rho|,1-|\rho|]$ and $W_\rho(x)=\Delta_{|\rho|}^2f(x-|\rho|)$. Hence
 \[
  \sum_k\|W_\rho\|_{L^p(S_k)}^p
  \le4\|\Delta_{|\rho|}^2f\|_{L^p([0,1-2|\rho|])}^p
@@ -893,11 +892,113 @@ and a binary description of length at most $c\,n\,\bigl(\log n+\log(B+1)\bigr)$.
 \Cref{lp:thm:uniform}, with $\kappa=0$, gives $g\in\Aclass_{n,\widehat H(n)}([0,1])$ satisfying the error bound. For $\kappa=0$, we have $\widehat H(n)\le A(B+1)(n+1)^{\hat\nu}\mathsf L(n)^{\theta_q}+1$, with $\hat\nu\le2$ and $\theta_q\le1$. Thus $c_{\widehat H(n)}=O(\log n+\log(B+1))$, with a constant depending only on $(p,s,q)$, and \cref{lp:prop:bits} gives the result.
 \end{proof}
 
+\begin{lema}[Besov packing]
+\label{lp:lem:packing}
+Let $1\le p<\infty$, $0<s<2$, $0<q\le\infty$, and let $\varphi\in C_c^\infty((0,1))$ be nonzero. Put $c_\varphi=\|\varphi\|_p$, $M_\varphi=\|\varphi''\|_p$, $C_2=\max\{4c_\varphi,M_\varphi\}$, $\theta_*=\min\{s,2-s\}$,
+\[
+K_{s,q}=\begin{cases}2^{\theta_*}\Bigl(\sum_{k\in\mathbb Z}2^{-q\theta_*|k|}\Bigr)^{1/q}, & 0<q<\infty,\\[4pt] 1, & q=\infty,\end{cases}
+\qquad
+C_1=c_\varphi+C_2K_{s,q}.
+\]
+For $B>0$, $m\in\N$ and $\theta\in\{0,1\}^m$, define
+\[
+f_\theta(x)=\frac{B}{C_1}\,m^{-s}\sum_{j=0}^{m-1}\theta_j\,\varphi(mx-j).
+\]
+Then:
+\begin{enumerate}[label=(\roman*)]
+\item $\|f_\theta\|^*_{\Bes{s}{p}{q}}\le B$, uniformly in $m$ and $\theta$;
+\item $\|f_\theta-f_\eta\|_p=\dfrac{B}{C_1}\,c_\varphi\,m^{-s-1/p}\,d_H(\theta,\eta)^{1/p}$, where $d_H$ is the Hamming distance;
+\item for every $m\ge1$ there is $\Theta_m\subseteq\{0,1\}^m$ with $|\Theta_m|\ge 2^{m/6}$ and $d_H(\theta,\eta)\ge m/4$ for distinct $\theta,\eta\in\Theta_m$.
+\end{enumerate}
+\end{lema}
+
+\begin{proof}
+Let $a=B/C_1$ and $F=f_\theta$. The supports of $\varphi(m\cdot-j)$ are $(j/m,(j+1)/m)\subset(0,1)$, pairwise disjoint; hence $F$ is a finite sum of compactly supported functions with disjoint supports, $F\in C^\infty$, and $\operatorname{supp}F\subset(0,1)$.
+
+\emph{Norms.} Since $\int\varphi(mx-j)^p\,dx=m^{-1}c_\varphi^p$ and the terms are disjoint,
+\[
+\|F\|_p^p=a^pm^{-sp-1}\,|\theta|\,c_\varphi^p,
+\qquad\text{so}\qquad \|F\|_p\le a\,m^{-s}c_\varphi,
+\]
+because $|\theta|\le m$. Similarly $F''(x)=a\,m^{2-s}\sum_j\theta_j\varphi''(mx-j)$ and $\|F''\|_p\le a\,m^{2-s}M_\varphi$.
+
+\emph{Second differences.} For $0<h\le1/2$ and $x\in\R$, $\Delta_h^2F(x)=\int_0^h\!\int_0^h F''(x+u+v)\,du\,dv$. Minkowski's inequality gives $\|\Delta_h^2F\|_{L^p([0,1-2h])}\le h^2\|F''\|_p$. Also $|\Delta_h^2F|\le|F(x+2h)|+2|F(x+h)|+|F(x)|$, which gives $\|\Delta_h^2F\|_{L^p([0,1-2h])}\le4\|F\|_p$. Hence, for $t>0$,
+\begin{align*}
+\wt{F}{t}{p}&\le\min\{4\|F\|_p,\ \min(t,\tfrac12)^2\|F''\|_p\}\\
+&\le a\,m^{-s}\min\{4c_\varphi,\,M_\varphi(mt)^2\}\le C_2\,a\,m^{-s}\min\{1,(mt)^2\}.
+\end{align*}
+the last inequality because $\min\{4c_\varphi,My\}\le C_2\min\{1,y\}$ for $y\ge0$. The constant $C_2$ does not depend on $m$ or $\theta$.
+
+\emph{Besov norm.} Put $a_r=2^{rs}\wt{F}{2^{-r}}{p}$ for $r\in\N_0$, and $R=\log_2 m$ (real). If $r\le R$, then $m2^{-r}\ge1$ and
+\[
+a_r\le C_2\,a\,2^{rs}m^{-s}=C_2\,a\,2^{-(R-r)s}.
+\]
+If $r\ge R$, then $m2^{-r}\le1$ and
+\[
+a_r\le C_2\,a\,2^{rs}m^{-s}(m2^{-r})^2=C_2\,a\,(m2^{-r})^{2-s}=C_2\,a\,2^{-(r-R)(2-s)}.
+\]
+Thus $a_r\le C_2\,a\,2^{-\theta_*|r-R|}$. The series converges precisely because $\theta_*=\min\{s,2-s\}>0$, that is, for $0<s<2$: at $s=2$ the exponent $2-s$ vanishes, and for $s>2$ the bound on $a_r$ grows with $r$.
+
+For $q=\infty$, $\sup_r a_r\le C_2a$. For $0<q<\infty$ no triangle inequality is used, only the sum of $q$-th powers: $\sum_{r\ge0}a_r^q\le C_2^qa^q\sum_{r\ge0}2^{-q\theta_*|r-R|}$. Write $R=\lfloor R\rfloor+\delta$ with $\delta\in[0,1)$. With $k=r-\lfloor R\rfloor\in\mathbb Z$ (distinct for distinct $r$), $|r-R|=|k-\delta|\ge|k|-1$, so the sum is at most $2^{q\theta_*}\sum_{k\in\mathbb Z}2^{-q\theta_*|k|}$. Hence $\|(a_r)_r\|_{\ell^q}\le C_2\,a\,K_{s,q}$ for all $0<q\le\infty$. Adding $\|F\|_p\le a\,c_\varphi$,
+\[
+\|F\|^*_{\Bes{s}{p}{q}}\le a\,(c_\varphi+C_2K_{s,q})=a\,C_1=B.
+\]
+This proves (i).
+
+\emph{Separation.} $f_\theta-f_\eta=a\,m^{-s}\sum_j(\theta_j-\eta_j)\varphi(mx-j)$ is a sum of terms with disjoint supports and coefficients in $\{-1,0,1\}$. Hence $\|f_\theta-f_\eta\|_p^p=a^pm^{-sp-1}\,d_H(\theta,\eta)\,c_\varphi^p$, which gives (ii).
+
+\emph{Binary packing.} Let $k=\lfloor m/4\rfloor$ and let $\Theta_m\subseteq\{0,1\}^m$ be a maximal subset whose pairwise Hamming distances are at least $k+1$ (it exists since $\{0,1\}^m$ is finite). By maximality, the Hamming balls of radius $k$ centred at $\Theta_m$ cover $\{0,1\}^m$, so $2^m\le|\Theta_m|\,V(m,k)$, where $V(m,k)=\sum_{i\le k}\binom mi$. For $k\ge1$ let $p_0=k/m\le1/4$. Since $p_0/(1-p_0)\le1$, for $i\le k$ we have $p_0^i(1-p_0)^{m-i}\ge(1-p_0)^m(p_0/(1-p_0))^k$, and therefore
+\[
+1\ge\sum_{i\le k}\binom mi p_0^i(1-p_0)^{m-i}\ge V(m,k)\,p_0^k(1-p_0)^{m-k}=V(m,k)\,2^{-mH(p_0)},
+\]
+where $H(p)=-p\log_2p-(1-p)\log_2(1-p)$. Since $H$ is increasing on $[0,1/2]$, $V(m,k)\le2^{mH(1/4)}$, with $H(1/4)\approx0.8113$. So $|\Theta_m|\ge2^{m(1-H(1/4))}\ge2^{m/6}$, because $1-H(1/4)\approx0.1887>1/6$. The minimal distance is $k+1>m/4$; for $k=0$ ($m\le3$) one may take $\Theta_m=\{0,1\}^m$.
+\end{proof}
+
+\begin{proposicao}[Entropy lower bound]
+\label{lp:prop:entropy-lower}
+Let $1\le p<\infty$, $0<s<2$, $0<q\le\infty$, and let $\varphi$ and $C_1$ be as in \cref{lp:lem:packing}. Put $c_3=4^{-1/p}c_\varphi$,
+\[
+\varepsilon_0=\frac{c_3}{2^{s+1}C_1},\qquad c_4=\frac1{12}\Bigl(\frac{c_3}{2C_1}\Bigr)^{1/s}.
+\]
+For $B>0$ and $0<\varepsilon\le\varepsilon_0B$,
+\[
+\log_2\mathcal N\bigl(\varepsilon,\mathbb B^s_{p,q}(B),L^p\bigr)\ \ge\ c_4\Bigl(\frac B\varepsilon\Bigr)^{1/s},
+\]
+where $\mathcal N(\varepsilon,K,L^p)$ is the least number of closed balls of radius $\varepsilon$ in $L^p([0,1])$, with arbitrary centres in $L^p$, covering $K$. The constants depend only on $(p,s,q)$ and on the fixed choice of $\varphi$.
+\end{proposicao}
+
+\begin{proof}
+Let $\Lambda=c_3B/(2C_1\varepsilon)$. The hypothesis $\varepsilon\le\varepsilon_0B$ is equivalent to $\Lambda\ge2^s$. Choose $m=\lceil\Lambda^{1/s}\rceil-1$. Then $m<\Lambda^{1/s}$, that is, $m^s<\Lambda$, and since $\Lambda^{1/s}\ge2$, $m\ge\Lambda^{1/s}-1\ge\Lambda^{1/s}/2\ge1$.
+
+By \cref{lp:lem:packing}, the family $\{f_\theta:\theta\in\Theta_m\}$ lies in $\mathbb B^s_{p,q}(B)$. For distinct $\theta,\eta\in\Theta_m$, parts (ii) and (iii) give
+\[
+\|f_\theta-f_\eta\|_p\ \ge\ \frac B{C_1}\,c_\varphi\,m^{-s-1/p}\Bigl(\frac m4\Bigr)^{1/p}=c_3\,\frac B{C_1}\,m^{-s}\ >\ c_3\frac B{C_1}\cdot\frac1\Lambda=2\varepsilon.
+\]
+A closed ball of radius $\varepsilon$ contains at most one of these points, since two points in it are at distance at most $2\varepsilon$. Hence any covering of $\mathbb B^s_{p,q}(B)$ by balls of radius $\varepsilon$ has at least $|\Theta_m|\ge2^{m/6}$ balls, and
+\[
+\log_2\mathcal N(\varepsilon)\ge\frac m6\ge\frac{\Lambda^{1/s}}{12}=c_4\Bigl(\frac B\varepsilon\Bigr)^{1/s}.\qedhere
+\]
+\end{proof}
+
+\begin{corolario}[Bit lower bound]
+\label{lp:cor:bits-lower}
+Let $1\le p<\infty$, $0<s<2$, $0<q\le\infty$, $B>0$, and $C_B>0$. Put $c_5=c_4(B/C_B)^{1/s}$, where $c_4$ is the constant of \cref{lp:prop:entropy-lower}. Let $N\ge1$ satisfy $C_BN^{-s}\le\varepsilon_0B$, and let $C:\mathbb B^s_{p,q}(B)\to\{0,1\}^{\le L}$ and $D:\{0,1\}^{\le L}\to L^p$ satisfy $\|f-D(C(f))\|_p\le C_BN^{-s}$ for every $f$ in the ball. Then
+\[
+L\ \ge\ c_5\,N-1.
+\]
+The same holds for outputs restricted to a library $\Sigma\subseteq L^p$.
+\end{corolario}
+
+\begin{proof}
+The values of $D$ on the words of length at most $L$ are $2^{L+1}-1$ elements of $L^p$, and the closed balls of radius $C_BN^{-s}$ centred at them cover the ball. Hence $\mathcal N(C_BN^{-s})\le2^{L+1}$. By \cref{lp:prop:entropy-lower} with $\varepsilon=C_BN^{-s}\le\varepsilon_0B$,
+\[
+L+1\ \ge\ \log_2\mathcal N(C_BN^{-s})\ \ge\ c_4\Bigl(\frac{B}{C_BN^{-s}}\Bigr)^{1/s}=c_4\Bigl(\frac B{C_B}\Bigr)^{1/s}N=c_5N.\qedhere
+\]
+\end{proof}
+
 \begin{observacao}
 \label{lp:obs:entropy}
-Let $\mathcal N(\varepsilon)$ be the minimum number of balls of radius $\varepsilon$ in $L^p([0,1])$ that cover $\mathbb B^s_{p,q}(B)$. The Birman--Solomyak theorem \citep[Theorem~1]{lp-kerkyacharianpicard2003}, with dimension $1$ and the same exponent $p$ in the source space and the error norm, gives $\log_2\mathcal N(\varepsilon)\asymp (B/\varepsilon)^{1/s}$ for sufficiently small $\varepsilon/B$ by equivalence of Besov quasi-norms and homogeneity. This holds for $1\le p<\infty$, $0<s<2$, and $0<q\le\infty$.
-
-For fixed $B$ and uniform error $\varepsilon=C_Bn^{-s}$, the outputs of any decoder with maximum length $L$ give a cover with fewer than $2^{L+1}$ centers, hence $L\gtrsim n$. If the outputs may be arbitrary centers in $L^p$, indexing a cover of radius $\varepsilon$ also gives $O(n)$ bits. The explicit format of \cref{lp:cor:bits} uses $O(n\log n)$ bits to reconstruct the library approximants. Its cost is therefore within a factor of at most order $\log n$ of the minimum with unrestricted centers. This length measures the description of an already selected approximant. Part~III of \citet{lp-oliveiravol} (Theorems III.9.1 and III.9.3) addresses \emph{computing} an optimal approximant by dynamic programming for the uniform-norm error.
+\cref{lp:prop:entropy-lower} gives only a lower bound, and only for $0<\varepsilon\le\varepsilon_0B$. We do not prove the upper bound $\log_2\mathcal N(\varepsilon)\lesssim(B/\varepsilon)^{1/s}$, so we do not assert a two-sided equivalence. The restriction $\varepsilon\le\varepsilon_0B$ is indispensable: for $\varepsilon\ge B$ one has $\mathcal N(\varepsilon)=1$, since $\|f\|_p\le\|f\|^*_{\Bes{s}{p}{q}}\le B$ on the ball, so no positive lower bound of the form $c(B/\varepsilon)^{1/s}$ can hold for all $\varepsilon>0$. The Birman--Solomyak results cited through \citet[Theorem~1]{lp-kerkyacharianpicard2003} concern balls defined by wavelet expansions; applying them to the space defined here depends on a norm equivalence that the present proof does not use and that this text does not verify.
 \end{observacao}
 
 \subsection{Geometric and slope floors, necessity, and transfer}
