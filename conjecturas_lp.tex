@@ -467,7 +467,16 @@ então existe $g\in\Aclass_{n,H}([0,1])$ tal que $\|u-g\|_\infty\le 8(M+1)/H$, e
 \end{lema}
 
 \begin{proof}
-A construção do \cref{lp:lem:nodal-general} usa as alturas das folhas, a cota dos valores nodais e a condição $2^r(|y_{j+1}-y_j|+16(M+1)/H)\le H$ sobre os saltos. As hipóteses dão essa condição: $2^r\cdot16(M+1)/H\le2^r$ e $2^r(J+1)\le H$. A altura da última folha e os endereços são controlados por $n\le H$ e $r+1\le H$. O erro é o da quantização, $8(M+1)/H$.
+Seja $x=H/(16(M+1))\ge1$ e seja $Q$ a potência de dois com $x\le Q<2x$. Então $1/(2Q)\le 8(M+1)/H$ e $8(M+1)Q<H$. Distinguimos dois casos, conforme $n\le Q$ ou $n>Q$.
+
+\emph{Caso $n\le Q$.} Como $H\ge8(M+1)Q$, o \cref{lp:lem:nodal-general} aplica-se com esse $Q$ e dá $g\in\Aclass_{n,H}([0,1])$ com $\|u-g\|_\infty\le1/(2Q)\le8(M+1)/H$.
+
+\emph{Caso $n>Q$.} Como $n$ e $Q$ são potências de dois, $n\ge2Q$ e $n/(2Q)$ é inteiro. Seja $b_j\in\mathbb Z$ o inteiro mais próximo de $2Qy_j$ (em caso de empate, o menor), e ponha $v_j=b_j/(2Q)$. Então $|v_j-y_j|\le1/(4Q)$ e $|b_j|\le2QM+\tfrac12$. Seja $g$ o interpolante afim por células dos dados $(j/n,v_j)$ na árvore diádica completa de profundidade $r$. Na célula $j$, $g$ vale $v_j$ no extremo esquerdo e tem inclinação
+\[
+ \sigma_j=n(v_{j+1}-v_j)=\frac{n}{2Q}\,(b_{j+1}-b_j)\in\mathbb Z,
+ \qquad |\sigma_j|\le n\bigl(|y_{j+1}-y_j|+\tfrac1{2Q}\bigr)\le n(J+1)\le H.
+\]
+Quanto às alturas dos coeficientes, $v_j$ tem denominador $2Q\le H$ e numerador de módulo $\le2QM+\tfrac12\le H$, e $\sigma_j$ é um inteiro de módulo $\le H$. Os endereços das folhas usam profundidade $\le r$, com $r+1\le n\le H$. Logo $g\in\Aclass_{n,H}([0,1])$. Como $u$ e $g$ são afins em cada célula, $\|u-g\|_\infty\le\max_j|v_j-y_j|\le1/(4Q)\le8(M+1)/H$.
 \end{proof}
 
 \subsection{Quantização sem continuidade e Jackson para \texorpdfstring{$s\le1/p$}{s ≤ 1/p}}
@@ -824,17 +833,17 @@ Sejam $p>1$, $s=1/p$ e $0<q<\infty$. Existe $A\ge1$, dependendo só de $(p,C_W)$
  em que $\mathsf B_0(f)\le C_0B$ é o termo de primeiro nível da cota em sup dos quase-interpolantes.
  \item Existe $C_2=C_2(p,q,C_W)$ tal que $\Rfun{\Library,H_B}{n}(f)_p\le C_2(B+1)\,n^{-1/p}$ para todo $n=2^r\ge2$.
  \item Existe $C_3=C_3(p,q,C_W)$ tal que $\big\|\big(2^{r/p}\Rfun{\Library,H_B}{2^r}(f)_p\big)_{r\ge1}\big\|_{\ell^q}\le C_3(B+1)$.
- \item $f\in\mathbb B^{1/p}_{p,q}$ se e somente se $f\in\Rstr{1/p}{q}{\Library,H_B}_p$.
+ \item Se $\|f\|^*_{\Bes{1/p}{p}{q}}\le B$, então $f\in\Rstr{1/p}{q}{\Library,H_B}_p$. Reciprocamente, $\Rstr{1/p}{q}{\Library,H_B}_p\subseteq\Bes{1/p}{p}{q}$ para toda $f\in L^p$. Assim, a bola de raio $B$ de $\Bes{1/p}{p}{q}$ está contida em $\Rstr{1/p}{q}{\Library,H_B}_p$, que está contido em $\Bes{1/p}{p}{q}$.
 \end{enumerate}
 \end{teorema}
 
 \begin{proof}
-Para (a), o \cref{lp:lem:critical-jump} dá saltos $\le J=4C_0B+288C_W2^{1/p}B$ e a cota em sup dá $|\lambda_j|\le M_r$. Com $A\ge\max\{16C_M,C_J,8\}$ (constantes que dependem só de $(p,C_W)$), a agenda satisfaz $8n\le H$, $16(M_r+1)\le H$ e $n(J+1)\le H$, e o \cref{lp:lem:nodal-jump} aplica-se a $Q_nf$. Somando o erro de quase-interpolação (\cref{lp:cor:quasi-error}) e o erro de quantização, obtém-se (a). Para (b), $\mathscr R\le\omega(f,1/N)+5\|f-g\|_p$ (\cref{lp:prop:transfer}), e $\omega(f,1/N)\le BN^{-1/p}$; o termo de quantização é $\le C(r+2)2^{-r}\le C'2^{-r/p}$, pois $(r+2)2^{-r(1-1/p)}$ é limitado. Para (c), a sequência é majorada por uma soma de dois termos: $\omega$-termos em $\ell^q$ com norma $\le B$, e termos de quantização dominados por $C(r+2)\rho^r$ com $\rho=2^{1/p-1}<1$, cuja norma $\ell^q$ é finita. Para (d), uma implicação é a inclusão de Besov (\cref{lp:cor:inclusion}); a outra segue de (c).
+Para (a), o \cref{lp:lem:critical-jump} dá saltos $\le J=4C_0B+288C_W2^{1/p}B$ e a cota em sup dá $|\lambda_j|\le M_r$. Com $A\ge\max\{16C_M,C_J,8\}$ (constantes que dependem só de $(p,C_W)$), a agenda satisfaz $8n\le H$, $16(M_r+1)\le H$ e $n(J+1)\le H$, e o \cref{lp:lem:nodal-jump} aplica-se a $Q_nf$. Somando o erro de quase-interpolação (\cref{lp:cor:quasi-error}) e o erro de quantização, obtém-se (a). Para (b), $\mathscr R\le\omega(f,1/N)+5\|f-g\|_p$ (\cref{lp:prop:transfer}), e $\omega(f,1/N)\le BN^{-1/p}$; o termo de quantização é $\le C(r+2)2^{-r}\le C'2^{-r/p}$, pois $(r+2)2^{-r(1-1/p)}$ é limitado. Para (c), a sequência é majorada por uma soma de dois termos: $\omega$-termos em $\ell^q$ com norma $\le B$, e termos de quantização dominados por $C(r+2)\rho^r$ com $\rho=2^{1/p-1}<1$, cuja norma $\ell^q$ é finita. Para (d), a primeira afirmação é o item (c), pois $\Rstr{1/p}{q}{\Library,H_B}_p$ é definido pela norma $\ell^q$ de $(2^{r/p}\Rfun{\Library,H_B}{2^r}(f)_p)_{r\ge1}$. A inclusão reciprocial é o \cref{lp:cor:inclusion}, válido para toda agenda.
 \end{proof}
 
 \begin{observacao}
 \label{lp:obs:critical-scope}
-A agenda do \cref{lp:thm:critical-linear} depende de $B$ pelo fator $(B+1)$. Para $p>1$ e $s=1/p$, ela dá a ordem linear $N$ sem fator logarítmico, o que substitui a agenda logarítmica do \cref{lp:thm:besov-conditional} nesse regime, e a agenda linear pode ser usada em lugar de $\widehat H^{[B]}_A$ com a mesma taxa. A verificação formal cobre $0<q<\infty$ e a caracterização (d) com agenda que depende de $B$. O caso $q=\infty$ e uma agenda única para todas as funções de $\mathbb B^{1/p}_{p,q}$ não estão incluídos nas verificações desta versão.
+A agenda do \cref{lp:thm:critical-linear} depende de $B$ pelo fator $(B+1)$. O item (d) não afirma que $\Rstr{1/p}{q}{\Library,H_B}_p$ coincida com $\Bes{1/p}{p}{q}$ para uma agenda fixa: a inclusão $\Bes{1/p}{p}{q}\cap\{\|f\|^*\le B\}\subseteq\Rstr{1/p}{q}{\Library,H_B}_p$ vale apenas na bola de raio $B$, enquanto a inclusão reversa vale para toda agenda. Para $p>1$ e $s=1/p$, a agenda linear dá a ordem $N$ sem fator logarítmico, o que substitui a agenda logarítmica do \cref{lp:thm:besov-conditional} nesse regime, e pode ser usada em lugar de $\widehat H^{[B]}_A$ com a mesma taxa. A verificação formal cobre $0<q<\infty$ e o item (d) com agenda que depende de $B$. O caso $q=\infty$ e uma agenda única para todas as funções de $\mathbb B^{1/p}_{p,q}$ não estão incluídos nas verificações desta versão.
 \end{observacao}
 
 \subsection{Piso aritmético e complexidade em bits}
@@ -919,6 +928,28 @@ A entropia métrica da bola unitária de $\Bes{s}{p}{q}$ em $L^p([0,1])$ tem ord
 
 Os pisos a seguir completam a \cref{lp:prop:floor}. Eles valem para a biblioteca completa $\Sig N$, não apenas para o piso aritmético, e as constantes dependem só de $(p,s,q)$.
 
+\begin{lema}[Escala de um bump]
+\label{lp:lem:bump}
+Sejam $1\le p<\infty$, $0<s<2$ e $0<q\le\infty$. Fixe $\varphi\in C^\infty_c((1/8,5/8))$ com $\varphi=1$ em $[1/4,1/2]$, e ponha $M_\varphi=\sup|\varphi''|$ e $\kappa_\varphi=\int_0^1(\varphi')^2>0$. Existe $\Lambda\ge1$, dependendo só de $(p,s,q,\varphi)$, tal que, para $a\in\mathbb R$ e $0<t\le1$, a função $\psi_{a,t}(x)=a\,\varphi\bigl((x-1+t)/t\bigr)$ satisfaz
+\[
+ \|\psi_{a,t}\|^*_{\Bes sp q}\le\Lambda\,|a|\,t^{1/p-s}.
+\]
+Além disso, para $a\ge0$, $0<t\le1$ e toda função afim $\ell$,
+\[
+ \|\psi_{a,t}-\ell\|_{L^p(1-t,1)}\ge\frac{\kappa_\varphi}{M_\varphi}\,a\,t^{1/p}.
+\]
+\end{lema}
+
+\begin{proof}
+Para a norma, $\|\psi_{a,t}\|_p=|a|t^{1/p}\|\varphi\|_p$, e $\psi_{a,t}''=a\,t^{-2}\varphi''(\cdot)$. A fórmula $\Delta_h^2\psi(x)=\int_0^h\!\int_0^h\psi''(x+u+v)\,du\,dv$, a desigualdade de Minkowski e a subaditividade dão
+\[
+ \wt{\psi_{a,t}}{h}{p}\le|a|t^{1/p}\,\Omega(h/t),\qquad \Omega(u)=\min\{4\|\varphi\|_p,\;u^2\|\varphi''\|_p\}.
+\]
+Para $h_r=2^{-r}$ e $u_r=h_r/t$, temos $|a|t^{1/p}2^{rs}=|a|t^{1/p-s}\,u_r^{-s}$, logo $2^{rs}\wt{\psi_{a,t}}{h_r}{p}\le|a|t^{1/p-s}\,u_r^{-s}\Omega(u_r)$. Os valores $u_r$ crescem por fatores de $2$, de modo que $\sum_{u_r\ge1}u_r^{-sq}\le(1-2^{-sq})^{-1}$ e $\sum_{u_r<1}u_r^{(2-s)q}\le(1-2^{-(2-s)q})^{-1}$, finitas porque $0<s<2$. Assim a sequência tem norma $\ell^q$ limitada por $|a|t^{1/p-s}K_1$, com $K_1$ dependendo só de $(p,s,q,\varphi)$ (para $q=\infty$, o supremo). Como $\|\psi_{a,t}\|_p\le|a|t^{1/p-s}\|\varphi\|_p$, basta tomar $\Lambda=\max\{1,\|\varphi\|_p+K_1\}$.
+
+Para a segunda desigualdade, seja $L(y)=\ell(1-t+ty)$, afim. Integrando por partes, com $\varphi(0)=\varphi(1)=\varphi'(0)=\varphi'(1)=0$, obtemos $\int_0^1\varphi\,\varphi''=-\kappa_\varphi$ e $\int_0^1 L\,\varphi''=0$. Logo $a\kappa_\varphi\le M_\varphi\int_0^1|a\varphi(y)-L(y)|\,dy$. Pela substituição $x=1-t+ty$, $\int_{1-t}^1|\psi_{a,t}-\ell|\,dx=t\int_0^1|a\varphi-L|\,dy\ge t\,a\kappa_\varphi/M_\varphi$. Como o intervalo $(1-t,1)$ tem comprimento $t$, a desigualdade de Hölder dá $\int_{1-t}^1|h|\le t^{1-1/p}\|h\|_{L^p(1-t,1)}$, e portanto $\|\psi_{a,t}-\ell\|_{L^p(1-t,1)}\ge t^{1/p-1}\cdot t\,a\kappa_\varphi/M_\varphi=\frac{\kappa_\varphi}{M_\varphi}a\,t^{1/p}$.
+\end{proof}
+
 \begin{proposicao}[Piso geométrico]
 \label{lp:prop:geom-floor}
 Sejam $1\le p<\infty$, $0<s<2$ e $0<q\le\infty$. Existe $c_G=c_G(p,s,q)>0$ tal que, para todo inteiro $H\ge2$, existe $f_H$ mensurável com $\|f_H\|^*_{\Bes sp q}\le1$ e
@@ -928,7 +959,11 @@ Sejam $1\le p<\infty$, $0<s<2$ e $0<q\le\infty$. Existe $c_G=c_G(p,s,q)>0$ tal q
 \end{proposicao}
 
 \begin{proof}
-Fixe um bump $\varphi\in C^\infty_c(1/8,5/8)$ com $\varphi=1$ em $[1/4,1/2]$. Tome $t=1/H$ e $f_H(x)=a\,\varphi((x-(1-t))/t)$ com $a=c\,t^{s-1/p}$, onde $c$ depende só de $(p,s,q)$. A cota de norma de Besov da função escalada dá $\|f_H\|^*\le1$. Pela última folha, todo $g\in\Sig N$ é afim em $[1-1/H,1]$. Para tal $g$, a integração por partes com $\varphi''$ dá $a\kappa\le M\int_0^1|a\varphi-(\alpha+\beta y)|\,dy$, com $\kappa=\int(\varphi')^2>0$. Isso fornece $\|f_H-g\|_p\ge c_G H^{-s}$.
+Seja $\Lambda$ a constante do \cref{lp:lem:bump}, com $\varphi$ fixo. Tome $t=1/H$ e $a=t^{s-1/p}/\Lambda$, e seja $f_H=\psi_{a,t}$. Pelo \cref{lp:lem:bump}, $\|f_H\|^*\le\Lambda a t^{1/p-s}=1$. Seja $g\in\Sig N$ com agenda $H$. Pela última folha, $g$ é afim em $[1-1/H,1]=[1-t,1]$, e como $f_H=0$ fora de $(1-t,1)$, o mesmo lema dá
+\[
+ \|f_H-g\|_p\ge\|f_H-g\|_{L^p(1-t,1)}\ge\frac{\kappa_\varphi}{M_\varphi}\,a\,t^{1/p}=\frac{\kappa_\varphi}{M_\varphi\Lambda}\,t^{s}=c_G\,H^{-s},
+\]
+com $c_G=\kappa_\varphi/(M_\varphi\Lambda)$, que depende só de $(p,s,q)$.
 \end{proof}
 
 \begin{proposicao}[Piso por inclinação]
@@ -947,13 +982,13 @@ Use o mesmo bump, agora em $x_0=1/4$, com escala $t=(c/(2H))^{1/(1+\delta)}$, $\
 \label{lp:cor:joint-necessity}
 Sejam $1\le p<\infty$, $0<s<2$, $0<q\le\infty$, $C>0$, $N\ge1$ e uma agenda $H$ com $H(N)\ge2$. Suponha que, para todo $f$ mensurável com $\|f\|^*_{\Bes sp q}\le1$,
 \[
- \Rfun{\Library,H}{N}(f)_p\le C\,N^{-s}.
+ e^{H(N)}_{N,p}(f)\le C\,N^{-s}.
 \]
-Então $H(N)\ge(c_G/C)^{1/s}N$. Se $s\le1/p$, então $H(N)\ge(c_L/C)^{1/\beta}N^{1+1/p-s}$. Em particular, $H(N)\ge N^s/(2C)$ pelo \cref{lp:cor:floor}. As mesmas conclusões valem com $e^{H(N)}_{N,p}$ no lugar de $\mathscr R$, pois $e\le\mathscr R$ pela \cref{lp:prop:transfer}.
+Então $H(N)\ge(c_G/C)^{1/s}N$. Se $s\le1/p$, então $H(N)\ge(c_L/C)^{1/\beta}N^{1+1/p-s}$. Além disso, $H(N)\ge N^s/(2C)$. Se a hipótese for feita com $\mathscr R$ no lugar de $e$, ela implica a hipótese acima, porque $e\le\mathscr R$ pela \cref{lp:prop:transfer}; logo as mesmas conclusões valem.
 \end{corolario}
 
 \begin{proof}
-Aplique o piso da proposição correspondente com a agenda constante $H(N)$: o ínfimo sobre $\Sig N$ é pelo menos $c_GH(N)^{-s}$ (ou $c_LH(N)^{-\beta}$), e a hipótese dá $c_GH(N)^{-s}\le CN^{-s}$. Resolvendo, $(c_G/C)N^{s}\le H(N)^s$. Para o piso aritmético, $f\equiv1/(2H)$ tem norma $\le1$ e $e\ge1/(2H)$.
+Seja $H=H(N)$. Pela \cref{lp:prop:geom-floor}, existe $f_H$ com $\|f_H\|^*\le1$ tal que $\|f_H-g\|_p\ge c_GH^{-s}$ para todo $g\in\{0\}\cup\Aclass_{N,H}([0,1])$, o conjunto do ínfimo que define $e^H_{N,p}$. Como $0$ é afim e cada $g\in\Aclass_{N,H}([0,1])$ é afim em $[1-1/H,1]$ pela última folha, a proposição se aplica a esse conjunto. Logo $c_GH^{-s}\le e^H_{N,p}(f_H)\le CN^{-s}$, o que dá $H^s\ge(c_G/C)N^s$. Se $s\le1/p$, a \cref{lp:prop:slope-floor} dá $c_LH^{-\beta}\le CN^{-s}$, isto é, $H\ge(c_L/C)^{1/\beta}N^{s/\beta}$, com $s/\beta=1+1/p-s$. Para a última desigualdade, $f\equiv1/(2H)$ tem $\|f\|^*=1/(2H)\le1$, e pela \cref{lp:prop:floor} $e^H_{N,p}(f)\ge1/(2H)$; logo $1/(2H)\le CN^{-s}$.
 \end{proof}
 
 \begin{proposicao}[Transferência exata entre erro e realização]
@@ -1108,13 +1143,13 @@ Log-log e estabilidade & \leanname{conj1_loglog}, \leanname{conj2_loglog}, \lean
 A \cref{lp:tab:critical-lean} lista as declarações Lean dos resultados desta seção, em \code{FormalizacaoAltura}, \code{FormalizacaoCrit}, \code{FormalizacaoCrit2} e \code{FormalizacaoCrit3}.
 
 \begin{leantable}{Declarações Lean dos pisos, da necessidade e da altura crítica}{lp:tab:critical-lean}{Resultado}{Declarações Lean}
-Quantização com salto limitado & \leanname{quantization_jump} \\
+Quantização com salto limitado & \leanname{quantization_jump}, \leanname{nodal_tree_gen}, \leanname{nodal_tree_coarse} \\
 Saltos nodais uniformes & \leanname{nodal_jump} \\
-Piso geométrico & \leanname{geometric_floor}, \leanname{geometric_dist_lower}, \leanname{L1_affine_lower}, \leanname{terminal_affine} \\
+Escala do bump e piso geométrico & \leanname{besovNorm_bumpS_le}, \leanname{geometric_dist_lower}, \leanname{geometric_floor}, \leanname{L1_affine_lower}, \leanname{terminal_affine} \\
 Piso por inclinação & \leanname{slope_floor}, \leanname{two_interval_pointwise}, \leanname{slope_dist_lower} \\
 Necessidade conjunta & \leanname{geometric_necessity}, \leanname{slope_necessity}, \leanname{arithmetic_necessity}, \leanname{geometric_necessity_realP}, \leanname{slope_necessity_realP}, \leanname{arithmetic_necessity_realP} \\
 Transferência & \leanname{bestError_le_realP}, \leanname{realP_le_bestError_add} \\
-Altura linear crítica & \leanname{critical_approx}, \leanname{critical_level}, \leanname{critical_lq}, \leanname{critical_rate}, \leanname{critical_char_radius} \\
+Altura linear crítica & \leanname{critical_approx}, \leanname{critical_level}, \leanname{critical_lq}, \leanname{critical_rate}, \leanname{critical_char_radius}, \leanname{critical_radius_ball_and_inclusion} \\
 \end{leantable}
 
 \subsection{Reprodução da verificação}
@@ -1124,7 +1159,7 @@ Na raiz do projeto Lean, a compilação e a auditoria são executadas por
 lake build Formalizacao
 lake env lean Formalizacao/Auditoria.lean
 \end{verbatim}
-A auditoria examina 194 declarações distintas e registra somente \code{propext}, \code{Classical.choice} e \code{Quot.sound}. A saída está em \code{lean4/formalizacao/auditoria_axiomas.txt}. O mapa \code{mapas/MAPA_TEX_LEAN.md} aponta os nomes qualificados e os arquivos de origem. Na raiz do artigo, \texttt{python3 mapas/verificar\_mapa.py} confere os rótulos TeX e os nomes Lean.
+A auditoria examina 201 declarações distintas e registra somente \code{propext}, \code{Classical.choice} e \code{Quot.sound}. A saída está em \code{lean4/formalizacao/auditoria_axiomas.txt}. O mapa \code{mapas/MAPA_TEX_LEAN.md} aponta os nomes qualificados e os arquivos de origem. Na raiz do artigo, \texttt{python3 mapas/verificar\_mapa.py} confere os rótulos TeX e os nomes Lean.
 
 \ifbesovabnt\else\articlereferences\fi
 \end{document}

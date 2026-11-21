@@ -241,3 +241,10 @@ e nunca `sorryAx`. Executar: `lake env lean Formalizacao/Auditoria.lean`.
 #print axioms FormalizacaoCrit3.critical_lq
 #print axioms FormalizacaoCrit3.critical_rate
 #print axioms FormalizacaoCrit3.critical_char_radius
+#print axioms FormalizacaoAltura.quantization_jump
+#print axioms FormalizacaoJ.nodal_tree_coarse
+#print axioms FormalizacaoAltura.geometric_floor
+#print axioms FormalizacaoAltura.geometric_necessity
+#print axioms FormalizacaoAltura.slope_necessity
+#print axioms FormalizacaoAltura.arithmetic_necessity
+#print axioms FormalizacaoCrit4.critical_radius_ball_and_inclusion
