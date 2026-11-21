@@ -15,8 +15,8 @@ pp.unicode.fun = true
 
 [[lean_lib]]
 name = "RequestProject"
-globs = ["RequestProject", "RequestProject.+"]
+globs = ["RequestProject.+"]
 
 [[lean_lib]]
 name = "Pendencias"
-globs = ["Pendencias", "Pendencias.+"]
+globs = ["Pendencias.+"]

@@ -209,7 +209,7 @@
       "titulo": "estabilidade por inclusão de redes",
       "rotulo": "lp:conj:stability",
       "estado": "Formalizado e compilado",
-      "nota": "As quatro declarações dão a estabilidade por inclusão para as agendas e os regimes do item (i) do Teorema 3.1 ($1/p<s<2$), com constante real $c\\ge1$. O caso $s\\le1/p$ não está formalizado. Para $s\\le1/p$: `conj2_low` e `conj2_diag`.",
+      "nota": "As quatro declarações `FormalizacaoJ.conj2_*` dão a estabilidade por inclusão para as agendas e os regimes do item (i) do Teorema 3.1 ($1/p<s<2$), com constante real $c\\ge1$. `conj2_low` cobre $s<1/p$ e `conj2_diag` cobre $s=1/p$.",
       "lean": [
         {
           "nome": "FormalizacaoLp.Conj2Stability",

@@ -94,7 +94,7 @@ Ainda em `lean4/formalizacao/`, execute:
 lake env lean Formalizacao/Auditoria.lean
 ```
 
-A saída esperada tem 170 linhas, todas com `[propext, Classical.choice, Quot.sound]`. Para comparar com o arquivo versionado na mesma execução, use a forma abaixo. A comparação também detecta declarações ausentes e ocorrências de `sorryAx`.
+A saída esperada tem 201 linhas para 196 declarações distintas e registra somente os axiomas `propext`, `Classical.choice` e `Quot.sound`. Para comparar com o arquivo versionado na mesma execução, use a forma abaixo. A comparação também detecta declarações ausentes e ocorrências de `sorryAx`.
 
 ```bash
 set -o pipefail

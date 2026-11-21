@@ -1148,7 +1148,7 @@ Estabilidade aproximada ($s>1/p$) & \leanname{conj2_approx_endpoint}, \leanname{
 Estabilidade aproximada ($s\le1/p$) & \leanname{besov_subset_stratum_low_approx}, \leanname{conj2_approx_low}, \leanname{conj2_approx_diag} \\
 \end{leantable}
 
-\par\Needspace{14\baselineskip}
+\par\ifbesovabnt\Needspace{8\baselineskip}\else\Needspace{14\baselineskip}\fi
 \Cref{lp:tab:uniform-lean} localiza as declarações para as extensões da \cref{lp:sec:uniform}.
 
 \begin{leantable}{Declarações Lean para as extensões da Seção~6}{lp:tab:uniform-lean}{Resultado}{Declarações Lean}
@@ -1163,7 +1163,7 @@ Log-log e estabilidade & \leanname{conj1_loglog}, \leanname{conj2_loglog}, \lean
 \subsection{Pisos, necessidade e altura crítica}
 \label{lp:sec:lean-floors}
 
-A \cref{lp:tab:critical-lean} lista as declarações Lean dos resultados desta seção, em \code{FormalizacaoAltura}, \code{FormalizacaoCrit}, \code{FormalizacaoCrit2} e \code{FormalizacaoCrit3}.
+\Cref{lp:tab:critical-lean} lista as declarações Lean dos resultados desta seção, em \code{FormalizacaoAltura}, \code{FormalizacaoCrit}, \code{FormalizacaoCrit2} e \code{FormalizacaoCrit3}.
 
 \begin{leantable}{Declarações Lean dos pisos, da necessidade e da altura crítica}{lp:tab:critical-lean}{Resultado}{Declarações Lean}
 Quantização com salto limitado & \leanname{quantization_jump}, \leanname{nodal_tree_gen}, \leanname{nodal_tree_coarse} \\
