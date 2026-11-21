@@ -8,52 +8,55 @@
 \input{conjecturas_lp_citacoes.tex}
 
 \hypersetup{
-  pdftitle={Caracterização dos espaços de Besov em Lp por realização com altura aritmética controlada},
-  pdfsubject={Teoremas de Jackson, espaços de Besov e estabilidade por inclusão de redes ReLU},
+  pdftitle={Lei minimax para aproximação de Besov com folhas diádicas e altura aritmética},
+  pdfsubject={Orçamentos independentes de folhas e altura na aproximação de Besov},
   pdfkeywords={espaços de Besov, aproximação em Lp, altura aritmética, funcional de realização, redes ReLU}
 }
 
+\newcommand{\besovResumo}{%
+Estudamos a aproximação em $L^p([0,1])$ por funções contínuas e afins por partes com coeficientes racionais. Impomos dois orçamentos independentes, o número $N$ de folhas diádicas e a altura aritmética $H$. Para $1\le p<\infty$, $0<s<2$ e $0<q\le\infty$, o erro minimax na bola unitária de Besov tem ordem $N^{-s}+H^{-s/a(p,s)}$, onde $a(p,s)=1+1/p-s$ abaixo de $s=1/p$, $a(p,s)=1$ de $s=1/p$ até $s=1$ e $a(p,s)=s$ acima de $s=1$. As cotas inferiores valem para árvores adaptativas. As superiores usam malhas uniformes, projeções afins locais e quantização nodal. Em $p=s=1$, denominadores diádicos que variam por nó eliminam a perda logarítmica no erro por escala. A mesma lei vale para o funcional de realização. Na diagonal $p>1$, $s=1/p$, qualquer agenda linear de prefator positivo caracteriza globalmente o espaço de Besov por realização, inclusive para $q=\infty$. Sob essa agenda, a cota uniforme na bola de raio $B$ cresce como $B^{1+1/p}$ para $B$ grande.}
+\newcommand{\besovAbstract}{%
+We study approximation in $L^p([0,1])$ by continuous piecewise affine functions with rational coefficients. The number $N$ of dyadic leaves and the arithmetic height $H$ are independent budgets. For $1\le p<\infty$, $0<s<2$, and $0<q\le\infty$, the minimax error on the unit Besov ball is of order $N^{-s}+H^{-s/a(p,s)}$, where $a(p,s)=1+1/p-s$ below $s=1/p$, $a(p,s)=1$ from $s=1/p$ to $s=1$, and $a(p,s)=s$ above $s=1$. The lower bounds hold for adaptive trees. The upper bounds use uniform grids, local affine projections, and nodal quantization. At $p=s=1$, dyadic denominators that vary by node remove the logarithmic loss in the per-scale error. The same law holds for the realization functional. On the diagonal $p>1$, $s=1/p$, any linear schedule with positive prefactor yields a global realization characterization of the Besov space, including $q=\infty$. Under this schedule, the uniform bound on the ball of radius $B$ grows as $B^{1+1/p}$ for large $B$.}
+
 \begin{document}
-\articletitle{Caracterização dos espaços de Besov em \texorpdfstring{$L^p$}{Lp} por~realização com altura aritmética controlada}
+\articletitle{Lei minimax para aproximação de Besov com folhas diádicas e altura aritmética}
   {Pesquisador independente\ifbesovabnt
      \ifdefempty{\besovcontact}{}{\enspace\textperiodcentered\enspace\besovcontact}\fi}
-  {19 de novembro de 2026}
-  {A Realization Characterization of Besov Spaces in \texorpdfstring{$L^p$}{Lp} with Controlled Arithmetic Height}
+  {21 de novembro de 2026}
+  {A Minimax Law for Besov Approximation with Dyadic Leaves and Arithmetic Height}
 
 \ifbesovabnt
-\articleabstract{portuguese}{Resumo}{%
-Caracterizamos os espaços de Besov $B^s_{p,q}([0,1])$, com $1\le p<\infty$, $0<s<2$ e $0<q\le\infty$, pela somabilidade diádica de um funcional que combina erro em $L^p$ e suavidade de segunda ordem. Os aproximantes são funções contínuas e afins por partes, com coeficientes racionais e limites simultâneos para o número de folhas da partição diádica e a altura aritmética. A estimativa direta combina projeções afins locais, uma desigualdade de Whitney e quantização nodal. Para $s<1/p$, basta uma altura da ordem de $N^{1+1/p-s}$. Para $p>1$, $s=1/p$ e $0<q<\infty$, uma agenda de altura da ordem de $(B+1)N$ dá somabilidade uniforme na bola de raio $B\ge1$ e caracteriza a pertinência ao espaço de realização nessa bola. A caracterização global sob as agendas gerais se transfere a famílias aninhadas de redes ReLU que incluem a biblioteca racional após reescalonamento linear do orçamento ou a aproximam com tolerância somável na escala de Besov. Para a taxa uniforme $N^{-s}$ por escala, os pisos de erro determinam a potência ótima da altura. Agendas de log iterado melhoram as condições suficientes de somabilidade nos regimes estudados. Em cada bola de raio fixo, o código explícito da biblioteca atinge a taxa de erro em $L^p$ com $O(N\log N)$ bits, ante uma cota inferior de entropia de ordem $N$.}
-{Palavras-chave}{espaços de Besov; funcional de realização; altura aritmética; teorema de Jackson; redes ReLU.}
+\articleabstract{portuguese}{Resumo}{\besovResumo}
+{Palavras-chave}{espaços de Besov; aproximação minimax; altura aritmética; funcional de realização.}
 
-\articleabstract{english}{Abstract}{%
-We characterize the Besov spaces $B^s_{p,q}([0,1])$, for $1\le p<\infty$, $0<s<2$, and $0<q\le\infty$, by the dyadic summability of a functional combining $L^p$ approximation error and second-order smoothness. The approximants are continuous piecewise affine functions with rational coefficients and simultaneous bounds on the number of leaves of the dyadic partition and on arithmetic height. The direct estimate combines local affine projections, a Whitney inequality, and nodal quantization. For $s<1/p$, height of order $N^{1+1/p-s}$ suffices. For $p>1$, $s=1/p$, and $0<q<\infty$, a height schedule of order $(B+1)N$ gives uniform summability on the ball of radius $B\ge1$ and characterizes membership in the realization space on that ball. Under the general schedules, the global characterization extends to nested ReLU network families that contain the rational library after a linear budget rescaling or approximate it with a tolerance that is summable on the Besov scale. For the uniform per-scale rate $N^{-s}$, lower bounds on the error determine the optimal power of the height. Iterated-logarithm schedules improve sufficient summability conditions in the regimes studied. On each ball of fixed radius, the explicit library code attains the $L^p$ error rate with $O(N\log N)$ bits, compared with an entropy lower bound of order $N$.}
-{Keywords}{Besov spaces; realization functional; arithmetic height; Jackson theorem; ReLU networks.}
+\articleabstract{english}{Abstract}{\besovAbstract}
+{Keywords}{Besov spaces; minimax approximation; arithmetic height; realization functional.}
 
 \medskip\noindent{\small
-Versão de 19 de novembro de 2026.\par\noindent
+Versão de 21 de novembro de 2026.\par\noindent
 \ifdefempty{\besovsubmitted}{}{Submissão: \besovsubmitted.\par}%
 \ifdefempty{\besovaccepted}{}{Aprovação: \besovaccepted.\par}%
 \par}
 \else
-\articleabstract{portuguese}{Resumo}{%
-Caracterizamos os espaços de Besov $B^s_{p,q}([0,1])$, com $1\le p<\infty$, $0<s<2$ e $0<q\le\infty$, pela somabilidade diádica de um funcional que combina erro em $L^p$ e suavidade de segunda ordem. Os aproximantes são funções contínuas e afins por partes, com coeficientes racionais e limites simultâneos para o número de folhas da partição diádica e a altura aritmética. A estimativa direta combina projeções afins locais, uma desigualdade de Whitney e quantização nodal. Para $s<1/p$, basta uma altura da ordem de $N^{1+1/p-s}$. Para $p>1$, $s=1/p$ e $0<q<\infty$, uma agenda de altura da ordem de $(B+1)N$ dá somabilidade uniforme na bola de raio $B\ge1$ e caracteriza a pertinência ao espaço de realização nessa bola. A caracterização global sob as agendas gerais se transfere a famílias aninhadas de redes ReLU que incluem a biblioteca racional após reescalonamento linear do orçamento ou a aproximam com tolerância somável na escala de Besov. Para a taxa uniforme $N^{-s}$ por escala, os pisos de erro determinam a potência ótima da altura. Agendas de log iterado melhoram as condições suficientes de somabilidade nos regimes estudados. Em cada bola de raio fixo, o código explícito da biblioteca atinge a taxa de erro em $L^p$ com $O(N\log N)$ bits, ante uma cota inferior de entropia de ordem $N$.}
-{Palavras-chave}{Espaços de Besov, funcional de realização, altura aritmética, teorema de Jackson, redes ReLU.}
+\articleabstract{portuguese}{Resumo}{\besovResumo}
+{Palavras-chave}{Espaços de Besov, aproximação minimax, altura aritmética, funcional de realização.}
 
-\articleabstract{english}{Abstract}{%
-We characterize the Besov spaces $B^s_{p,q}([0,1])$, for $1\le p<\infty$, $0<s<2$, and $0<q\le\infty$, by the dyadic summability of a functional combining $L^p$ approximation error and second-order smoothness. The approximants are continuous piecewise affine functions with rational coefficients and simultaneous bounds on the number of leaves of the dyadic partition and on arithmetic height. The direct estimate combines local affine projections, a Whitney inequality, and nodal quantization. For $s<1/p$, height of order $N^{1+1/p-s}$ suffices. For $p>1$, $s=1/p$, and $0<q<\infty$, a height schedule of order $(B+1)N$ gives uniform summability on the ball of radius $B\ge1$ and characterizes membership in the realization space on that ball. Under the general schedules, the global characterization extends to nested ReLU network families that contain the rational library after a linear budget rescaling or approximate it with a tolerance that is summable on the Besov scale. For the uniform per-scale rate $N^{-s}$, lower bounds on the error determine the optimal power of the height. Iterated-logarithm schedules improve sufficient summability conditions in the regimes studied. On each ball of fixed radius, the explicit library code attains the $L^p$ error rate with $O(N\log N)$ bits, compared with an entropy lower bound of order $N$.}
-{Keywords}{Besov spaces, realization functional, arithmetic height, Jackson theorem, ReLU networks.}
+\articleabstract{english}{Abstract}{\besovAbstract}
+{Keywords}{Besov spaces, minimax approximation, arithmetic height, realization functional.}
 \fi
 
 \section{Introdução}
 \label{lp:sec:intro}
 
-A teoria da aproximação caracteriza a regularidade de Besov por meio de erros associados a famílias de aproximantes, entre elas os espaços de splines e as classes de funções racionais \citep{artigo_1-devore1998,artigo_2-devorepopov1988,artigo_2-devorepopov1988b,artigo_2-petrushev1988,lp-petrushevpopov1987}. A caracterização aqui apresentada se distingue desses antecedentes pela restrição simultânea sobre a altura aritmética dos coeficientes, incorporada ao funcional de realização e quantificada pelas agendas de altura. Os funcionais de realização incorporam ao erro de aproximação uma medida de suavidade do aproximante \citep{lp-ditzian2007,artigo_2-hristovivanov1990,lp-kolomoitsev2019}. As estimativas para aproximação de classes de Besov por redes de unidades lineares retificadas (ReLU) vinculam essa regularidade ao orçamento das redes \citep{lp-ali2020,artigo_1-devore2021,lp-siegel2023,lp-yang2024}.
+Consideramos a aproximação de alvos em $\Bes{s}{p}{q}([0,1])$ por funções contínuas e afins por partes em árvores diádicas. O orçamento $N$ limita o número de folhas. O orçamento $H$ limita a altura dos valores centrais, das inclinações racionais e dos endereços das folhas. O \cref{lp:thm:minimax-nh} determina o erro de pior caso na bola unitária quando os dois orçamentos variam independentemente. O erro tem ordem $N^{-s}+H^{-s/a(p,s)}$, e $a(p,s)$ é a potência ótima da altura para a taxa uniforme $N^{-s}$. O \cref{lp:cor:minimax-realization} dá a mesma lei quando se soma ao erro o módulo de segunda ordem do aproximante na escala $N^{-1}$.
 
-O orçamento de aproximação controla o número de folhas da árvore diádica e a altura dos racionais que definem os segmentos afins. Para cada orçamento $N$ e agenda $H$, o funcional de realização minimiza a soma do erro em $L^p$ e do módulo de segunda ordem do aproximante na escala $N^{-1}$. Sob as agendas e os regimes de parâmetros do \cref{lp:conj:besov}, a somabilidade diádica do funcional caracteriza $B^s_{p,q}([0,1])$. A inclusão da biblioteca racional em uma família aninhada de redes, com ampliação linear de $N$, preserva o espaço caracterizado; o mesmo ocorre sob inclusão aproximada em $L^p$ com tolerância $\varepsilon_N$ somável na escala de Besov. Esses resultados estendem à norma $L^p$ a caracterização uniforme e o teorema de estabilidade da Parte~IV de \citet{lp-oliveiravol}. A \cref{lp:sec:uniform} acrescenta cotas uniformes sobre bolas, o piso aritmético e a complexidade em bits dos aproximantes, e agendas de log iterado.
+Para a cota inferior, testamos a capacidade de resolver $2N$ bumps e usamos três restrições impostas pela altura. Elas limitam os valores centrais admissíveis, a resolução da folha terminal direita e as inclinações. Essas provas abrangem as árvores adaptativas. Para a cota superior, usamos malhas uniformes e projeções afins locais, o que permite trabalhar com alvos definidos apenas quase em toda parte. Abaixo de $s=1/p$, a amplitude nodal determina o custo aritmético adicional. Na diagonal, os saltos entre nós são limitados. Em $p=s=1$, escolhemos um denominador diádico em cada nó e controlamos o erro em $L^1$ pela média dos valores nodais em módulo. A aritmética de cada folha usa um denominador comum aos seus dois extremos. Esta construção elimina a perda logarítmica na taxa por escala.
 
-O módulo de segunda ordem controla o erro do quase-interpolante construído com projeções afins locais. A quantização de seus valores nodais produz o aproximante racional. Acima de $s=1/p$, a cota de Jackson para um alvo fixo tem termo de quantização $O(H^{-1})$ sob as hipóteses do \cref{lp:hyp:jackson}. Para $0<s<1/p$, a cota em sup dos quase-interpolantes leva à altura $N^{1+1/p-s}$. Na diagonal $s=1/p$, o \cref{lp:conj:besov} dá uma agenda global da forma $N[\log(eN)]^{\theta_q+\kappa}$, com as condições de seu item (iii). Para $p>1$ e $0<q<\infty$, o controle dos saltos nodais permite usar $H_B(N)\asymp(B+1)N$ na bola de raio $B\ge1$ pelo \cref{lp:thm:critical-linear}. A desigualdade inversa vale para qualquer família de aproximantes em $L^p$.
+A aproximação de Besov por splines e funções racionais tem antecedentes clássicos \citep{artigo_1-devore1998,artigo_2-devorepopov1988,artigo_2-devorepopov1988b,artigo_2-petrushev1988,lp-petrushevpopov1987}. Os funcionais de realização acrescentam ao erro uma medida de suavidade do aproximante \citep{lp-ditzian2007,artigo_2-hristovivanov1990,lp-kolomoitsev2019}. A Parte~IV de \citet{lp-oliveiravol} já estabelece Jackson racional em norma uniforme com denominador comum, um piso aritmético e a caracterização por realização sob agendas de altura. Aqui, a norma $L^p$ exige controle dos erros locais por soma e permite explorar o controle médio na quantização do caso $p=s=1$. Estimativas para redes de unidades lineares retificadas (ReLU) fornecem o contexto para a transferência da caracterização \citep{lp-ali2020,artigo_1-devore2021,lp-siegel2023,lp-yang2024}.
 
-A \cref{lp:cor:joint-necessity} fixa uma escala $N$ e uma constante de erro $C$ comum a toda a bola unitária. Para a taxa $CN^{-s}$, a altura deve ser pelo menos da ordem de $N^{1+1/p-s}$ se $s<1/p$, de $N$ se $1/p\le s\le1$ e de $N^s$ se $1<s<2$. As cotas superiores por escala atingem essas potências, com fatores logarítmicos em alguns casos da diagonal. A somabilidade entre escalas tem condições suficientes próprias, reunidas na \cref{lp:tab:schedules}.
+Sob as agendas do \cref{lp:conj:besov}, a somabilidade diádica do funcional caracteriza $\Bes{s}{p}{q}$. Em $p>1$, $s=1/p$, o controle dos saltos dá primeiro uma agenda de ordem $(B+1)N$ na bola de raio $B$. Um deslocamento diádico permite usar qualquer agenda fixa $H_*(N)=\max\{2,\lceil A_*N\rceil\}$ com $A_*>0$ em todo o espaço, para $0<q\le\infty$. A igualdade de conjuntos é acompanhada de uma cota ótima de ordem $B^{1+1/p}$ para a norma da sequência em bolas grandes. Funções constantes impedem uma comparação linear uniforme com a quase-norma de Besov. Em $p=s=1$, para $q<\infty$, permanece a questão de somabilidade sob agenda linear.
+
+A caracterização se transfere a famílias aninhadas de redes que contêm a biblioteca racional após ampliação linear do orçamento ou a aproximam em $L^p$ com tolerância somável na escala de Besov. As cotas de codificação e a estimativa inferior de entropia são reunidas na \cref{lp:sec:bits}.
 
 \section{Espaços de Besov e biblioteca racional}
 \label{lp:sec:defs}
@@ -85,6 +88,20 @@ Para $0<s<2$ e $0<q\le\infty$, adotamos a caracterização diádica de Besov
  \label{lp:eq:besov-p}
 \end{equation}
 Para $q=\infty$, usa-se o supremo. Para $s>1/p$, o \cref{lp:lem:embedding} fornece o representante contínuo de cada classe de Besov, usado nas avaliações pontuais. Para $s\le1/p$, a construção usa médias locais e dispensa avaliações pontuais de $f$.
+
+\begin{lema}[Propriedades do módulo]
+\label{lp:lem:modulus}
+Para $f,g\in L^p$ e $t>0$,
+\[
+ \wt{f+g}{t}{p}\le\wt{f}{t}{p}+\wt{g}{t}{p},
+ \qquad \wt{g}{t}{p}\le4\|g\|_p.
+\]
+Além disso, $t\mapsto\wt{f}{t}{p}$ é não decrescente.
+\end{lema}
+
+\begin{proof}
+A primeira desigualdade decorre da linearidade de $\Delta_h^2$ e de Minkowski para cada $h$ admissível. Para a segunda, cada translação $x\mapsto x+jh$, $j\in\{0,1,2\}$, leva $[0,1-2h]$ a um subintervalo de $[0,1]$. A soma dos módulos dos coeficientes da diferença é $4$. A monotonicidade segue da inclusão dos conjuntos sobre os quais se toma o supremo em \eqref{lp:eq:modulus-p}.
+\end{proof}
 
 \subsection{Altura aritmética e funcional de realização}
 
@@ -163,70 +180,6 @@ Mais geralmente, para uma sequência $(\varepsilon_N)_{N\ge1}$ em $[0,\infty)$, 
  \label{lp:eq:approx-contains}
 \end{equation}
 \end{definicao}
-
-\section{Caracterização de Besov e estabilidade}
-\label{lp:sec:statements}
-
-\begin{teorema}[Caracterização por realização aritmética]
-\label{lp:conj:besov}
-Sejam $1\le p<\infty$ e $0<s<2$.
-\begin{enumerate}[label=(\roman*)]
-\item Se $s>1/p$, valem as seguintes igualdades em $L^p([0,1])$:
-\begin{align}
- \Bes{s}{p}{\infty}
- &=\Rstr{s}{\infty}{\Library,H_{s,0}}_p,
- &&\label{lp:eq:conj-endpoint}\\
- \Bes{s}{p}{q}
- &=\Rstr{s}{q}{\Library,H_{s,0}}_p,
- &&0<q<\infty,\quad s<1,\label{lp:eq:conj-subcritical}\\
- \Bes{s}{p}{q}
- &=\Rstr{s}{q}{\Library,H_{s,\kappa}}_p,
- &&0<q<\infty,\quad s\ge1,\quad\kappa>1/q,\label{lp:eq:conj-critical}\\
- \Bes{s}{p}{q}
- &=\Rstr{s}{q}{\Library,\widetilde H_{s,\eta}}_p,
- &&0<q<\infty,\quad\eta>0.
- \label{lp:eq:besov-tilde}
-\end{align}
-\item Se $0<s<1/p$ e $0<q\le\infty$, então
-\begin{equation}
- \Bes{s}{p}{q}=\Rstr{s}{q}{\Library,\widehat H_{s}}_p.
- \label{lp:eq:conj-low}
-\end{equation}
-\item Se $s=1/p$, $0<q\le\infty$ e $\kappa\ge0$, com $\kappa>1/q$ quando $p=1$ e $q<\infty$, então
-\begin{equation}
- \Bes{s}{p}{q}=\Rstr{s}{q}{\Library,\widehat H_{q,\kappa}}_p.
- \label{lp:eq:conj-diag}
-\end{equation}
-\end{enumerate}
-\end{teorema}
-
-\begin{teorema}[Estabilidade por inclusão de redes]
-\label{lp:conj:stability}
-Sejam $p,s,q,H$ como em qualquer dos casos do \cref{lp:conj:besov}. Se $\mathcal N$ satisfaz \eqref{lp:eq:nesting} e \eqref{lp:eq:contains} para algum $c\ge1$, então
-\begin{equation}
- \Bes{s}{p}{q}=\Rstr{s}{q}{\mathcal N}_p.
- \label{lp:eq:network-realization-p}
-\end{equation}
-\end{teorema}
-
-\begin{teorema}[Estabilidade por inclusão aproximada]
-\label{lp:thm:approx-stability}
-Sejam $p,s,q,H$ como em qualquer dos casos do \cref{lp:conj:besov}. Se $\mathcal N$ satisfaz \eqref{lp:eq:nesting} e \eqref{lp:eq:approx-contains} para algum $c\ge1$ e uma sequência $(\varepsilon_N)_{N\ge1}$ em $[0,\infty)$ tal que
-\begin{equation}
- \big(2^{rs}\varepsilon_{2^r}\big)_{r\ge1}\in\ell^q,
- \label{lp:eq:approx-summable}
-\end{equation}
-então $\Bes{s}{p}{q}=\Rstr{s}{q}{\mathcal N}_p$.
-\end{teorema}
-
-Para uma família de redes ReLU, a inclusão \eqref{lp:eq:contains} é uma condição sobre as funções realizadas. Por exemplo, uma função afim por partes com nós internos $t_1<\cdots<t_{m-1}$ e inclinações consecutivas $\beta_1,\ldots,\beta_m$ admite em $[0,1]$ a representação
-\[
- g(x)=g(0)+\beta_1 x+\sum_{j=1}^{m-1}(\beta_{j+1}-\beta_j)(x-t_j)_+,
- \qquad u_+=\max\{u,0\}.
-\]
-Como $x=x_+$ em $[0,1]$, a expressão é realizável por uma camada oculta de largura no máximo $m$. Assim, as classes de funções realizadas por redes de uma camada oculta e largura no máximo $N$ contêm $\Sig{N}$ com $c=1$. O \cref{lp:thm:approx-stability} estende essa estabilidade a arquiteturas que reproduzem a biblioteca apenas com precisão controlada em $L^p$, desde que a tolerância satisfaça \eqref{lp:eq:approx-summable}. Verificar essa tolerância para uma arquitetura concreta, como redes com pesos quantizados, é uma questão à parte, que o texto não trata.
-
-Nas agendas dos itens (ii) e (iii), a cota dos valores nodais envolve $n^{1/p-s}$ abaixo da diagonal e $(\log n)^{\theta_q}$ na diagonal. O expoente $\theta_q$ registra esse controle dos valores. O expoente adicional $\kappa$ é usado na diagonal $p=s=1$ para somar a cota do erro de quantização quando $q<\infty$. A \cref{lp:sec:ball} trata das agendas uniformes em bolas de raio fixo.
 
 \section{Jackson racional com altura controlada}
 \label{lp:sec:program}
@@ -564,24 +517,510 @@ Então há $g\in\Aclass_{n,H}([0,1])$ com
 Ponha $y_j=\lambda_j(f)$ e $M=\|Q_nf\|_\infty$. Pelo \cref{lp:lem:sup-bound}, $|y_j|\le M\le C_0S\Lambda_n$. Como $C_0\ge1$ e $\Lambda_n\ge1$, vale $8(M+1)Q\le8C_0(S+1)\Lambda_nQ\le H$. O \cref{lp:lem:nodal-general}, aplicado a $u=Q_nf$, dá $g\in\Aclass_{n,H}([0,1])$ com $\|Q_nf-g\|_\infty\le1/(2Q)$. A desigualdade triangular, \eqref{lp:eq:quasi-error} e a normalização da medida de $[0,1]$ dão \eqref{lp:eq:jackson-low}.
 \end{proof}
 
-\section{Demonstração dos teoremas de caracterização e estabilidade}
-\label{lp:sec:proved}
+\subsection{Cotas uniformes sobre bolas de Besov}
+\label{lp:sec:ball}
+\label{lp:sec:uniform}
 
-\subsection{Estimativa inversa}
+Para $B\ge1$, escrevemos $\mathbb B^s_{p,q}(B)=\{f\in L^p:\|f\|^*_{\Bes{s}{p}{q}}\le B\}$. No \cref{lp:conj:besov}, a agenda é a mesma para todas as funções, e a prova pode usar limiares que dependem de $f$. Aqui, fixados $(p,s,q)$, as cotas valem desde $n=2$ para toda a bola, e a agenda inclui o fator $B+1$. Ponha $\mathsf L(N)=\log(eN)$ e $\theta_q=\max\{0,1-1/q\}$, com $\theta_\infty=1$.
 
-\begin{lema}[Propriedades do módulo]
-\label{lp:lem:modulus}
-Para $f,g\in L^p$ e $t>0$,
-\[
- \wt{f+g}{t}{p}\le\wt{f}{t}{p}+\wt{g}{t}{p},
- \qquad \wt{g}{t}{p}\le4\|g\|_p.
-\]
-Além disso, $t\mapsto\wt{f}{t}{p}$ é não decrescente.
+\begin{definicao}[Dados de regime]
+\label{lp:def:regime}
+Sejam $1\le p<\infty$, $0<s<2$, $0<q\le\infty$ e $\kappa\ge0$. Para $n=2^r\ge2$, definimos os pares $(\nu',\kappa')$ e $(\hat\nu,\hat\kappa)$ e o fator $\Lambda_n$ por meio da \cref{lp:tab:regime}.
+\begin{table}[H]
+\caption{Parâmetros para cada regime de regularidade}
+\label{lp:tab:regime}
+\small\tablecolors
+\begin{tabularx}{\linewidth}{l*{3}{>{\centering\arraybackslash}X}}
+\toprule
+\tablehead{Regime} & \tablehead{$(\nu\prime,\kappa\prime)$} & \tablehead{$(\hat\nu,\hat\kappa)$} & \tablehead{$\Lambda_n$} \\
+\midrule
+$s>1/p$ & $(\nu_s,\kappa)$ & $(\nu_s,\kappa)$ & $1$ \\
+$s<1/p$ & $(1,0)$ & $(1+1/p-s,0)$ & $n^{1/p-s}$ \\
+$s=1/p$ & $(1,\kappa)$ & $(1,\theta_q+\kappa)$ & $r^{\theta_q}$ \\
+\bottomrule
+\end{tabularx}\par
+\tablecredit
+\end{table}
+Dizemos que $(p,s,q,\kappa)$ é \emph{admissível} quando $\kappa>1/q$ sempre que $q<\infty$ e $s\ge1$. Para $B\ge1$ e $A\ge1$, a \emph{agenda uniforme} é
+\begin{equation}
+ \widehat H^{[B]}_{A}(N)=\Bigl\lceil A\,(B+1)\,(N+1)^{\hat\nu}\,\mathsf L(N)^{\hat\kappa}\Bigr\rceil .
+ \label{lp:eq:uniform-schedule}
+\end{equation}
+\end{definicao}
+
+\begin{lema}[Altura e quantização uniformes]
+\label{lp:lem:uniform-height}
+Sejam $1\le p<\infty$, $0<s<2$, $0<q\le\infty$ e $\kappa\ge0$. Para $n=2^r\ge2$, seja $Q(n)$ a menor potência de dois com $Q(n)\ge n^{\nu'}\mathsf L(n)^{\kappa'}$. Existe $C_*\ge1$, dependendo só de $(p,s,q)$, tal que:
+\begin{enumerate}[label=(\alph*)]
+ \item $n\le Q(n)\le2n^{\nu'}\mathsf L(n)^{\kappa'}$, $\ 1/Q(n)\le n^{-s}$ e $\Lambda_nQ(n)\le4n^{\hat\nu}\mathsf L(n)^{\hat\kappa}$;
+ \item se $f\in\mathbb B^s_{p,q}(B)$, então $\max_{0\le j\le n}|\lambda_j(f)|\le C_*B\Lambda_n$ para todo $n=2^r\ge2$;
+ \item se $(p,s,q,\kappa)$ é admissível, então $\big(2^{rs}/Q(2^r)\big)_{r\ge1}\in\ell^q$, com norma limitada por uma constante $c_2$ que depende só de $(p,s,q,\kappa)$.
+\end{enumerate}
 \end{lema}
 
 \begin{proof}
-A primeira desigualdade decorre da linearidade de $\Delta_h^2$ e de Minkowski para cada $h$ admissível. Para a segunda, cada translação $x\mapsto x+jh$, $j\in\{0,1,2\}$, leva $[0,1-2h]$ a um subintervalo de $[0,1]$. A soma dos módulos dos coeficientes da diferença é $4$. A monotonicidade segue da inclusão dos conjuntos sobre os quais se toma o supremo em \eqref{lp:eq:modulus-p}.
+(a) Como $\nu'\ge1$ e $\mathsf L(n)\ge1$, vale $n^{\nu'}\mathsf L(n)^{\kappa'}\ge n$, e a menor potência de dois não inferior a $x\ge1$ é menor que $2x$. Além disso, $\nu'\ge s$: para $s>1/p$, $\nu_s\ge s$; para $s\le1/p$, $\nu'=1\ge s$. Logo $1/Q(n)\le n^{-s}$. Para a última cota, se $s>1/p$, então $\Lambda_nQ(n)\le2n^{\nu_s}\mathsf L(n)^\kappa$. Se $s<1/p$, então $Q(n)=n$ e $\Lambda_nQ(n)=n^{1+1/p-s}$. Se $s=1/p$, então $\mathsf L(n)=1+r\log2\ge r\log2$ e $1/\log2<2$ dão $r^{\theta_q}\le2^{\theta_q}\mathsf L(n)^{\theta_q}$, de modo que $\Lambda_nQ(n)\le2^{\theta_q+1}n\,\mathsf L(n)^{\theta_q+\kappa}\le4n\,\mathsf L(n)^{\theta_q+\kappa}$.
+
+(b) Se $s>1/p$, o \cref{lp:lem:embedding} dá $\|F\|_\infty\le C_E\|f\|^*_{\Bes{s}{p}{\infty}}\le C_EB$ para o representante contínuo $F$, pois a norma em $\ell^\infty$ não excede a norma em $\ell^q$. O \cref{lp:lem:quasi}(c) dá $|\lambda_j(f)|=|\lambda_j(F)|\le2C_EB$. Se $s\le1/p$, o \cref{lp:lem:sup-bound} dá $|\lambda_j(f)|\le C_0B\Lambda_n$. Basta tomar $C_*=\max\{2C_E,C_0,1\}$.
+
+(c) Por (a), $w_n=n^s/Q(n)\le n^{s-\nu'}\mathsf L(n)^{-\kappa'}$. Se $q=\infty$, então $w_n\le1$. Se $q<\infty$ e $s<1$, então $\nu'=1$ e $w_{2^r}\le2^{-r(1-s)}$, que pertence a $\ell^q$. Se $q<\infty$ e $s\ge1$, então $\kappa>1/q$ por admissibilidade, $\nu'=s$ e $\kappa'=\kappa$, de modo que $w_{2^r}\le(1+r\log2)^{-\kappa}$, que pertence a $\ell^q$ porque $\kappa q>1$.
 \end{proof}
+
+\begin{teorema}[Cotas uniformes sobre bolas]
+\label{lp:thm:uniform}
+Sejam $1\le p<\infty$, $0<s<2$, $0<q\le\infty$ e $\kappa\ge0$, e sejam $C_*$ e $c_2$ como no \cref{lp:lem:uniform-height}. Ponha $A=32(C_*+1)$ e $\widehat H=\widehat H^{[B]}_{A}$. Então, para todo $B\ge1$, todo $f\in\mathbb B^s_{p,q}(B)$ e todo $n=2^r\ge2$, existe $g\in\Aclass_{n,\widehat H(n)}([0,1])\subseteq\Sig{n}$, com agenda $\widehat H$, tal que
+\begin{equation}
+ \|f-g\|_p\le9C_W\,\wt{f}{n^{-1}}{p}+\frac1{2Q(n)}\le(9C_WB+1)\,n^{-s}.
+ \label{lp:eq:uniform-approx}
+\end{equation}
+Se, além disso, $(p,s,q,\kappa)$ é admissível, existe $C=C(p,s,q,\kappa)$ tal que
+\begin{equation}
+ \sup_{f\in\mathbb B^s_{p,q}(B)}\Big\|\big(2^{rs}\Rfun{\Library,\widehat H}{2^r}(f)_p\big)_{r\ge1}\Big\|_{\ell^q}\le C\,(B+1).
+ \label{lp:eq:uniform-rate}
+\end{equation}
+\end{teorema}
+
+\begin{proof}
+Fixe $f\in\mathbb B^s_{p,q}(B)$ e $n=2^r\ge2$. Ponha $M=C_*B\Lambda_n$ e $Q=Q(n)$. Pelo \cref{lp:lem:uniform-height}(b), $|\lambda_j(f)|\le M$ para $0\le j\le n$. Como $\Lambda_n\ge1$, o item (a) do mesmo lema dá
+\[
+ 8(M+1)Q\le8(C_*B+1)\Lambda_nQ\le32(C_*+1)(B+1)\,n^{\hat\nu}\mathsf L(n)^{\hat\kappa}\le\widehat H(n).
+\]
+Como $Q\ge n$, o \cref{lp:lem:nodal-general} aplicado a $y_j=\lambda_j(f)$ dá $g\in\Aclass_{n,\widehat H(n)}([0,1])$ com $\|Q_nf-g\|_\infty\le1/(2Q)$. Pelo \cref{lp:cor:quasi-error}, $\|f-g\|_p\le9C_W\,\wt{f}{n^{-1}}{p}+1/(2Q)$. Por \eqref{lp:eq:besov-p}, $\wt{f}{n^{-1}}{p}\le Bn^{-s}$, e por (a), $1/(2Q)\le n^{-s}/2$. Isso prova \eqref{lp:eq:uniform-approx}.
+
+Para \eqref{lp:eq:uniform-rate}, o \cref{lp:lem:modulus} dá $\wt{g}{n^{-1}}{p}\le\wt{f}{n^{-1}}{p}+4\|f-g\|_p$, de modo que, como na prova da \cref{lp:thm:besov-conditional},
+\[
+ \Rfun{\Library,\widehat H}{n}(f)_p\le(1+45C_W)\,\wt{f}{n^{-1}}{p}+\frac52\,\frac1{Q(n)}.
+\]
+Multiplicando por $n^s=2^{rs}$ e tomando a norma de $\ell^q$ em $r\ge1$, o primeiro termo contribui com no máximo $(1+45C_W)B$ por \eqref{lp:eq:besov-p}, e o segundo, com no máximo $\tfrac52c_2$ pelo \cref{lp:lem:uniform-height}(c). A desigualdade triangular em $\ell^q$ tem constante $2^{(1/q-1)_+}$, que não depende de $B$. Isso dá \eqref{lp:eq:uniform-rate}.
+\end{proof}
+
+\begin{observacao}
+\label{lp:obs:uniform-q}
+A taxa por escala \eqref{lp:eq:uniform-approx} vale com $\kappa=0$ para todo $q$. Na diagonal $s=1/p$, a agenda \eqref{lp:eq:uniform-schedule} ainda inclui $\mathsf L(N)^{\theta_q}$ para controlar os valores nodais. Quando $s\ge1$ e $q<\infty$, o fator adicional $\mathsf L(N)^\kappa$ com $\kappa>1/q$ torna a cota de quantização somável. Com $\kappa=0$, o peso $2^{rs}/Q(2^r)$ fica entre $1/2$ e $1$, portanto essa majoração não dá \eqref{lp:eq:uniform-rate}.
+\end{observacao}
+
+\subsection{Estimativas críticas sobre bolas}
+
+\begin{lema}[Saltos nodais uniformes]
+\label{lp:lem:critical-jump}
+Sejam $p\ge1$, $0<q\le\infty$ e $f$ com $\|f\|^*_{\Bes{1/p}{p}{q}}\le B$, $n=2^r\ge2$ e $\lambda_j=\lambda_j(f)$. Para $0\le j<n$,
+\begin{equation}
+ |\lambda_{j+1}-\lambda_j|\le\frac{4\,\sup_{[0,1]}|Q_2f|}{n}+\sum_{k=1}^{r-1}\frac{K_k}{n},
+ \qquad K_k=8\,(2^{k+1})^{1/p+1}\,18\,C_W\,\wt{f}{2^{-k}}{p}.
+ \label{lp:eq:critical-jump}
+\end{equation}
+Além disso, $K_k\le 144\,C_W\,2^{1/p}\,2^{k+1}\,B$ e $\sum_{k=1}^{r-1}K_k/n\le 288\,C_W\,2^{1/p}B$.
+\end{lema}
+
+\begin{proof}
+Pela telescópica $Q_{2^r}f=Q_2f+\sum_{k=1}^{r-1}(Q_{2^{k+1}}f-Q_{2^k}f)$ e por $\lambda_j=Q_{2^r}f(j/n)$, a diferença $\lambda_{j+1}-\lambda_j$ é a soma das diferenças dos termos. Cada termo é afim em células de comprimento $1/2$ (para $Q_2f$) ou $2^{-(k+1)}$ (para as diferenças), e o intervalo $[j/n,(j+1)/n]$ está contido em uma dessas células. Aplicando \eqref{lp:eq:projection-bounds} a uma função afim na própria célula, pode-se tomar $C_p=4$ em \eqref{lp:eq:nikolskii}. Assim, para $m=2^{k+1}$, a inclinação de $v_k=Q_{2^{k+1}}f-Q_{2^k}f$ é limitada por $8m^{1/p+1}\|v_k\|_p\le K_k$, pela cota de quase-interpolação nos dois níveis. A inclinação de $Q_2f$ é limitada por $4\sup|Q_2f|$. A desigualdade $2^{k/p}\wt f{2^{-k}}p\le B$ dá a segunda parte.
+\end{proof}
+
+\begin{teorema}[Altura linear crítica para $s=1/p$ com $p>1$]
+\label{lp:thm:critical-linear}
+Sejam $p>1$, $s=1/p$ e $0<q\le\infty$. Existem $A=A(p,C_W)\ge1$ e constantes $C_2,C_3>0$ que dependem só de $(p,q,C_W)$, tais que, para todo $B\ge1$, a agenda linear $H_B(N)=\lceil A(B+1)(N+1)\rceil$ satisfaz as seguintes propriedades.
+\begin{enumerate}[label=(\alph*)]
+ \item Para todo $f\in\mathbb B^{1/p}_{p,q}(B)$ e $n=2^r\ge2$, existe $g\in\Aclass_{n,H_B(n)}([0,1])$ com
+ \[
+  \|f-g\|_p\le 9C_W\,\wt{f}{n^{-1}}{p}+\frac{8(M_r+1)}{H_B(n)},\qquad M_r=\mathsf B_0(f)+144\,C_W\,2^{1/p}\,B\,r,
+ \]
+ em que $\mathsf B_0(f)=8\,2^{1/p}(\|f\|_p+9C_W\wt{f}{1/2}{p})$.
+ \item Para todo $f\in\mathbb B^{1/p}_{p,q}(B)$ e $n=2^r\ge2$, vale $\Rfun{\Library,H_B}{n}(f)_p\le C_2(B+1)\,n^{-1/p}$.
+ \item Para todo $f\in\mathbb B^{1/p}_{p,q}(B)$, vale $\big\|\big(2^{r/p}\Rfun{\Library,H_B}{2^r}(f)_p\big)_{r\ge1}\big\|_{\ell^q}\le C_3(B+1)$.
+ \item Se $\|f\|^*_{\Bes{1/p}{p}{q}}\le B$, então $f\in\Rstr{1/p}{q}{\Library,H_B}_p$. Reciprocamente, $\Rstr{1/p}{q}{\Library,H_B}_p\subseteq\Bes{1/p}{p}{q}$ para toda $f\in L^p$. Assim, a bola de raio $B$ de $\Bes{1/p}{p}{q}$ está contida em $\Rstr{1/p}{q}{\Library,H_B}_p$, que está contido em $\Bes{1/p}{p}{q}$.
+\end{enumerate}
+\end{teorema}
+
+\begin{proof}
+Para (a), a desigualdade \eqref{lp:eq:nikolskii} em $m=2$ e a cota de quase-interpolação dão $\sup|Q_2f|\le\mathsf B_0(f)\le C_0B$, com $C_0=8\,2^{1/p}(1+9C_W)$. O \cref{lp:lem:critical-jump} dá saltos $\le J=4C_0B+288C_W2^{1/p}B$. A soma telescópica com $C_p=4$ em \eqref{lp:eq:nikolskii} dá $|\lambda_j|\le M_r$. Tome $C_M=C_0+144C_W2^{1/p}+1$ e $C_J=4C_0+288C_W2^{1/p}+1$. Assim $M_r+1\le C_M(B+1)(r+1)$ e $J+1\le C_J(B+1)$. Como $r+1\le n$, com $A=16C_M+C_J+8$ a agenda satisfaz $8n\le H$, $16(M_r+1)\le H$ e $n(J+1)\le H$, e o \cref{lp:lem:nodal-jump} aplica-se a $Q_nf$. Somando o erro de quase-interpolação (\cref{lp:cor:quasi-error}) e o erro de quantização, obtém-se (a).
+
+Pela \cref{lp:prop:transfer}, o custo de realização é no máximo $\wt{f}{n^{-1}}{p}+5\|f-g\|_p$. Como $H_B(n)\ge A(B+1)n$ e $M_r+1\le C_M(B+1)(r+1)$, segue
+\[
+ 2^{r/p}\Rfun{\Library,H_B}{2^r}(f)_p
+ \le(1+45C_W)\,2^{r/p}\wt{f}{2^{-r}}{p}
+    +C(p,C_W)(r+2)2^{-r(1-1/p)}.
+\]
+O primeiro termo tem norma $\ell^q$ no máximo $(1+45C_W)B$. No segundo, $\rho=2^{1/p-1}<1$, e $(r+2)\rho^r\le C_{\rho,\sigma}\sigma^r$ para qualquer $\rho<\sigma<1$. Isso dá a estimativa de cada termo em (b) e a de sequência em (c): para $0<q<1$ somamos as potências $q$, para $1\le q<\infty$ usamos a desigualdade triangular e para $q=\infty$ tomamos o supremo. O item (c) dá a inclusão direta de (d) e o \cref{lp:cor:inclusion} dá a inversa para qualquer agenda.
+\end{proof}
+
+\begin{proposicao}[Altura linear para o erro em $B^1_{1,q}$]
+\label{lp:prop:l1-linear-height}
+Existe $C_E\ge1$ tal que, para todo $0<q\le\infty$, $B\ge1$, $f\in\mathbb B^1_{1,q}(B)$, $n=2^r\ge2$ e todo inteiro $H\ge C_E(B+1)n$, há $g\in\Aclass_{n,H}([0,1])$ com
+\[
+ \|f-g\|_1\le9C_W\wt{f}{n^{-1}}{1}+C_E(B+1)/H.
+\]
+A constante depende apenas de $C_W$ para $p=1$.
+\end{proposicao}
+
+\begin{proof}
+O \cref{lp:lem:critical-jump} com $p=1$ dá $|\lambda_{j+1}-\lambda_j|\le J=C_J'B$, pois $2^k\wt{f}{2^{-k}}{1}\le B$ e $\|Q_2f\|_\infty\le8\|f\|_1\le8B$. A constante $C_J'$ depende apenas de $C_W$. Por \eqref{lp:eq:projection-bounds}, $|\lambda_j(f)|\le4n\|f\|_{L^1(I_{c(j)})}$. A última célula é usada duas vezes e as outras, uma vez. Portanto
+\[
+ \max_j|\lambda_j(f)|\le4nB,\qquad n^{-1}\sum_{j=0}^n|\lambda_j(f)|\le8\|f\|_1.
+\]
+Com $w_j=1+J+|\lambda_j(f)|$, temos $8\max_jw_j\le8(1+C_J'B+4nB)$, $n(J+4)\le n(C_J'B+4)$ e $n^{-1}\sum_jw_j\le2(1+C_J'B)+8B$. Assim $C_E(B+1)n$ cobre as duas condições do \cref{lp:lem:nodal-variable-height} para $C_E$ suficientemente grande. O lema e o \cref{lp:cor:quasi-error} dão a cota de erro, ampliando a mesma constante para cobrir o termo de quantização.
+\end{proof}
+
+\section{Cotas inferiores para a biblioteca diádica}
+\label{lp:sec:floors}
+
+As cotas desta seção valem para todas as árvores diádicas admissíveis. As três restrições de altura atuam nos valores centrais, no endereço da folha terminal direita e nas inclinações.
+
+Para $H\ge1$ inteiro, seja $\mathcal Q_H=\{a/b\in\Q:\height(a/b)\le H\}$.
+
+\begin{proposicao}[Piso aritmético uniforme em $L^p$]
+\label{lp:prop:floor}
+Sejam $H\ge1$ inteiro, $a_H=1/(2H)$ e $f_H\equiv a_H$ em $[0,1]$. Então $\mathrm{dist}(a_H,\mathcal Q_H)=1/(2H)$ e, para todo $N\ge1$ e todo $g\in\{0\}\cup\Aclass_{N,H}([0,1])$,
+\begin{equation}
+ \|f_H-g\|_p\ge\frac1{2H}.
+ \label{lp:eq:floor}
+\end{equation}
+Em particular, $e^{H}_{N,p}(f_H)\ge1/(2H)$ para todo $N$.
+\end{proposicao}
+
+\begin{proof}
+Todo racional positivo de $\mathcal Q_H$ tem numerador inteiro positivo e denominador no máximo $H$, logo é pelo menos $1/H$, e dista de $a_H$ ao menos $1/(2H)$. Os racionais não positivos distam de $a_H$ ao menos $a_H=1/(2H)$, e $0\in\mathcal Q_H$ realiza essa distância.
+
+Para $g=0$, $\|f_H\|_p=a_H$. Seja $g\in\Aclass_{N,H}([0,1])$ e seja $J$ uma folha da representação, com $g(x)=y_0+s(x-x_J)$ em $J$, onde $x_J$ é o centro de $J$ e $\height(y_0)\le H$. Como $g$ é afim, $\int_Jg=|J|\,y_0$. A desigualdade de Jensen para a função convexa $t\mapsto|t|^p$ dá
+\[
+ \int_J|f_H-g|^p\ge|J|\Bigl|\frac1{|J|}\int_J(f_H-g)\Bigr|^p=|J|\,|a_H-y_0|^p\ge|J|\,(2H)^{-p},
+\]
+pois $y_0\in\mathcal Q_H$. As folhas têm interiores disjuntos e união $[0,1]$. Somando, $\|f_H-g\|_p^p\ge(2H)^{-p}$.
+\end{proof}
+
+\begin{corolario}[Necessidade do expoente aritmético]
+\label{lp:cor:floor}
+Sejam $s>0$, $C>0$ e uma agenda $H$ com $H(N)\ge2$. Suponha que, para algum $N\ge2$,
+\[
+ \sup_{f\in\mathbb B^s_{p,q}(1)}\Rfun{\Library,H}{N}(f)_p\le C\,N^{-s}.
+\]
+Então $H(N)\ge N^s/(2C)$.
+\end{corolario}
+
+\begin{proof}
+Como $H(N)\ge2$, a constante $f\equiv a_{H(N)}$ tem $a_{H(N)}\le1/4$, e portanto $\|f\|^*_{\Bes{s}{p}{q}}=a_{H(N)}\le1$, pois seu módulo de segunda ordem é nulo. Para todo $g\in\Sig{N}$, $\|f-g\|_p+\wt{g}{N^{-1}}{p}\ge\|f-g\|_p\ge1/(2H(N))$ pela \cref{lp:prop:floor}. Logo $1/(2H(N))\le CN^{-s}$.
+\end{proof}
+
+\begin{observacao}
+\label{lp:obs:floor}
+Sejam $s\ge1$ com $s>1/p$ e $\kappa=0$. Pela prova do \cref{lp:thm:uniform}, para $n=2^r$ vale
+\[
+ \sup_{f\in\mathbb B^s_{p,q}(B)}\Rfun{\Library,\widehat H}{n}(f)_p
+ \le\bigl((1+45C_W)B+\tfrac52\bigr)n^{-s},
+\]
+com $\widehat H(N)\asymp(B+1)N^s$. O \cref{lp:cor:floor} dá a potência necessária nessa faixa para a taxa uniforme por escala. Para $s<1$, o piso geométrico é mais forte que o aritmético, e para $s<1/p$ o piso por inclinação melhora ainda essa cota. O \cref{lp:cor:joint-necessity} aplica os três pisos à biblioteca inteira, incluindo as partições adaptativas.
+\end{observacao}
+
+\begin{lema}[Escala de um bump]
+\label{lp:lem:bump}
+Sejam $1\le p<\infty$, $0<s<2$ e $0<q\le\infty$. Fixe $\varphi\in C^\infty_c((1/8,5/8))$ com $\varphi=1$ em $[1/4,1/2]$, e ponha $M_\varphi=\sup|\varphi''|$ e $\kappa_\varphi=\int_0^1(\varphi')^2>0$. Existe $\Lambda\ge1$, dependendo só de $(p,s,q,\varphi)$, tal que, para $a\in\mathbb R$ e $0<t\le1$, a função $\psi_{a,t}(x)=a\,\varphi\bigl((x-1+t)/t\bigr)$ satisfaz
+\[
+ \|\psi_{a,t}\|^*_{\Bes sp q}\le\Lambda\,|a|\,t^{1/p-s}.
+\]
+Além disso, para $a\ge0$, $0<t\le1$ e toda função afim $\ell$,
+\[
+ \|\psi_{a,t}-\ell\|_{L^p(1-t,1)}\ge\frac{\kappa_\varphi}{M_\varphi}\,a\,t^{1/p}.
+\]
+\end{lema}
+
+\begin{proof}
+Para a norma, $\|\psi_{a,t}\|_p=|a|t^{1/p}\|\varphi\|_p$, e $\psi_{a,t}''=a\,t^{-2}\varphi''(\cdot)$. A fórmula $\Delta_h^2\psi(x)=\int_0^h\!\int_0^h\psi''(x+u+v)\,du\,dv$, a desigualdade de Minkowski e a subaditividade dão
+\[
+ \wt{\psi_{a,t}}{h}{p}\le|a|t^{1/p}\,\Omega(h/t),\qquad \Omega(u)=\min\{4\|\varphi\|_p,\;u^2\|\varphi''\|_p\}.
+\]
+Para $h_r=2^{-r}$ e $u_r=h_r/t$, temos $|a|t^{1/p}2^{rs}=|a|t^{1/p-s}\,u_r^{-s}$, logo
+\[
+ 2^{rs}\wt{\psi_{a,t}}{h_r}{p}\le|a|t^{1/p-s}\,u_r^{-s}\Omega(u_r).
+\]
+Como $u_{r+1}=u_r/2$, para $q<\infty$ obtemos as cotas geométricas
+\[
+ \sum_{u_r\ge1}u_r^{-sq}\le(1-2^{-sq})^{-1},
+ \qquad \sum_{u_r<1}u_r^{(2-s)q}\le(1-2^{-(2-s)q})^{-1}.
+\]
+Ambas são finitas porque $0<s<2$. Para $q=\infty$, usa-se que $u^{-s}\Omega(u)$ é limitada. Assim a sequência tem norma $\ell^q$ limitada por $|a|t^{1/p-s}K_1$, com $K_1$ dependendo só de $(p,s,q,\varphi)$. Como $\|\psi_{a,t}\|_p\le|a|t^{1/p-s}\|\varphi\|_p$, basta tomar $\Lambda=\max\{1,\|\varphi\|_p+K_1\}$.
+
+Para a segunda desigualdade, seja $L(y)=\ell(1-t+ty)$, afim. Integrando por partes, com $\varphi(0)=\varphi(1)=\varphi'(0)=\varphi'(1)=0$, obtemos $\int_0^1\varphi\,\varphi''=-\kappa_\varphi$ e $\int_0^1 L\,\varphi''=0$. Logo $a\kappa_\varphi\le M_\varphi\int_0^1|a\varphi(y)-L(y)|\,dy$. Pela substituição $x=1-t+ty$, $\int_{1-t}^1|\psi_{a,t}-\ell|\,dx=t\int_0^1|a\varphi-L|\,dy\ge t\,a\kappa_\varphi/M_\varphi$. Como o intervalo $(1-t,1)$ tem comprimento $t$, a desigualdade de Hölder dá $\int_{1-t}^1|h|\le t^{1-1/p}\|h\|_{L^p(1-t,1)}$, e portanto $\|\psi_{a,t}-\ell\|_{L^p(1-t,1)}\ge t^{1/p-1}\cdot t\,a\kappa_\varphi/M_\varphi=\frac{\kappa_\varphi}{M_\varphi}a\,t^{1/p}$.
+\end{proof}
+
+\begin{proposicao}[Piso geométrico]
+\label{lp:prop:geom-floor}
+Sejam $1\le p<\infty$, $0<s<2$ e $0<q\le\infty$. Existe $c_G=c_G(p,s,q)>0$ tal que, para todo inteiro $H\ge2$, existe $f_H$ mensurável com $\|f_H\|^*_{\Bes sp q}\le1$ e
+\[
+ \|f_H-g\|_p\ge c_G\,H^{-s}\qquad \forall N\ge1,\quad \forall g\in\Sigma_{N,H}.
+\]
+\end{proposicao}
+
+\begin{proof}
+Seja $\Lambda$ a constante do \cref{lp:lem:bump}, com $\varphi$ fixo. Tome $t=1/H$ e $a=t^{s-1/p}/\Lambda$, e seja $f_H=\psi_{a,t}$. Pelo \cref{lp:lem:bump}, $\|f_H\|^*\le\Lambda a t^{1/p-s}=1$. Se $g=0$, a função é afim em $[1-t,1]$. Caso contrário, tome qualquer representação admissível e considere sua folha terminal direita $J_{k,m}$. Seu extremo direito é $1$, logo $m=2^k-1$, e o campo de endereço da altura dá $H\ge |m|+1=2^k$. Portanto $J_{k,2^k-1}=[1-2^{-k},1]\supseteq[1-1/H,1]$. Em ambos os casos, $g$ é afim em $[1-t,1]$, e a cota local do \cref{lp:lem:bump} dá
+\[
+ \|f_H-g\|_p\ge\|f_H-g\|_{L^p(1-t,1)}\ge\frac{\kappa_\varphi}{M_\varphi}\,a\,t^{1/p}=\frac{\kappa_\varphi}{M_\varphi\Lambda}\,t^{s}=c_G\,H^{-s},
+\]
+com $c_G=\kappa_\varphi/(M_\varphi\Lambda)$, que depende só de $(p,s,q)$.
+\end{proof}
+
+\begin{proposicao}[Piso por inclinação]
+\label{lp:prop:slope-floor}
+Sejam $1\le p<\infty$, $0<s\le1/p$ e $0<q\le\infty$, e ponha $\beta=s/(1+1/p-s)$. Existe $c_L=c_L(p,s,q)>0$ tal que, para todo inteiro $H\ge2$, existe $f_H$ mensurável com $\|f_H\|^*_{\Bes sp q}\le1$ e
+\[
+ \|f_H-g\|_p\ge c_L\,H^{-\beta}\qquad\text{para todo }N\ge1\text{ e todo }g\in\Sig N\text{ com agenda }H.
+\]
+\end{proposicao}
+
+\begin{proof}
+Ponha $\delta=1/p-s$ e $c=\min\{\Lambda^{-1},2^{-(1+\delta)}\}$, com $\Lambda$ do \cref{lp:lem:bump}. Tome $t=(c/(2H))^{1/(1+\delta)}\le1/2$, $a=c\,t^{-\delta}$ e $f_H(x)=a\varphi((x-1/4)/t)$. O suporte fica em $(0,1)$. As cotas de $\|f_H\|_p$ e do módulo no \cref{lp:lem:bump} valem com a mesma constante para esse suporte transladado, pois usam as normas de $\varphi$ e $\varphi''$. Assim $\|f_H\|^*\le\Lambda a t^\delta\le1$.
+
+As funções $g$ são $H$-Lipschitz em $[0,1]$. Para $x$ em $I=[1/4+t/4,1/4+t/2]$, temos $f_H(x)=a$ e $f_H(x+t)=0$. Como $Ht=a/2$, segue $|f_H-g|(x)+|f_H-g|(x+t)\ge a/2$. Os intervalos $I$ e $I+t$ são disjuntos e estão em $[0,1]$. Por convexidade, a soma das potências $p$ dos dois erros é ao menos $2^{1-p}(a/2)^p$. Integrando em $I$, de comprimento $t/4$, obtemos
+\[
+ \|f_H-g\|_p\ge 2^{-2-1/p}a\,t^{1/p}
+ =2^{-2-1/p}c(c/2)^\beta H^{-\beta}.
+\]
+\end{proof}
+
+\begin{corolario}[Necessidade conjunta]
+\label{lp:cor:joint-necessity}
+Sejam $1\le p<\infty$, $0<s<2$, $0<q\le\infty$, $C>0$, $N\ge1$ e uma agenda $H$ com $H(N)\ge2$. Suponha que, para todo $f$ mensurável com $\|f\|^*_{\Bes sp q}\le1$,
+\[
+ e^{H(N)}_{N,p}(f)\le C\,N^{-s}.
+\]
+Então $H(N)\ge(c_G/C)^{1/s}N$. Se $s\le1/p$, então $H(N)\ge(c_L/C)^{1/\beta}N^{1+1/p-s}$. Além disso, $H(N)\ge N^s/(2C)$. Se a hipótese for feita com $\mathscr R$ no lugar de $e$, ela implica a hipótese acima, porque $e\le\mathscr R$ pela \cref{lp:prop:transfer}; logo as mesmas conclusões valem.
+\end{corolario}
+
+\begin{proof}
+Seja $H=H(N)$. Pela \cref{lp:prop:geom-floor}, existe $f_H$ com $\|f_H\|^*\le1$ tal que $\|f_H-g\|_p\ge c_GH^{-s}$ para todo $g\in\{0\}\cup\Aclass_{N,H}([0,1])$, o conjunto do ínfimo que define $e^H_{N,p}$. Como $0$ é afim e cada $g\in\Aclass_{N,H}([0,1])$ é afim em $[1-1/H,1]$ pela última folha, a proposição se aplica a esse conjunto. Logo $c_GH^{-s}\le e^H_{N,p}(f_H)\le CN^{-s}$, o que dá $H^s\ge(c_G/C)N^s$. Se $s\le1/p$, a \cref{lp:prop:slope-floor} dá $c_LH^{-\beta}\le CN^{-s}$, isto é, $H\ge(c_L/C)^{1/\beta}N^{s/\beta}$, com $s/\beta=1+1/p-s$. Para a última desigualdade, $f\equiv1/(2H)$ tem $\|f\|^*=1/(2H)\le1$, e pela \cref{lp:prop:floor} $e^H_{N,p}(f)\ge1/(2H)$; logo $1/(2H)\le CN^{-s}$.
+\end{proof}
+
+\begin{lema}[Empacotamento de Besov]
+\label{lp:lem:packing}
+Sejam $1\le p<\infty$, $0<s<2$, $0<q\le\infty$ e $\varphi\in C_c^\infty((0,1))$ não nula. Ponha $c_\varphi=\|\varphi\|_p$, $M_\varphi=\|\varphi''\|_p$, $C_2=\max\{4c_\varphi,M_\varphi\}$, $\theta_*=\min\{s,2-s\}$,
+\[
+K_{s,q}=\begin{cases}2^{\theta_*}\Bigl(\sum_{k\in\mathbb Z}2^{-q\theta_*|k|}\Bigr)^{1/q}, & 0<q<\infty,\\[4pt] 1, & q=\infty,\end{cases}
+\qquad
+C_1=c_\varphi+C_2K_{s,q}.
+\]
+Para $B>0$, $m\in\N$ e $\theta\in\{0,1\}^m$, defina
+\[
+f_\theta(x)=\frac{B}{C_1}\,m^{-s}\sum_{j=0}^{m-1}\theta_j\,\varphi(mx-j).
+\]
+Então:
+\begin{enumerate}[label=(\roman*)]
+\item $\|f_\theta\|^*_{\Bes{s}{p}{q}}\le B$, uniformemente em $m$ e $\theta$;
+\item $\|f_\theta-f_\eta\|_p=\dfrac{B}{C_1}\,c_\varphi\,m^{-s-1/p}\,d_H(\theta,\eta)^{1/p}$, em que $d_H$ é a distância de Hamming;
+\item para todo $m\ge1$ existe $\Theta_m\subseteq\{0,1\}^m$ com $|\Theta_m|\ge 2^{m/6}$ e $d_H(\theta,\eta)\ge m/4$ para $\theta\ne\eta$ em $\Theta_m$.
+\end{enumerate}
+\end{lema}
+
+\begin{proof}
+Seja $a=B/C_1$ e $F=f_\theta$. Os suportes de $\varphi(m\cdot-j)$ são $(j/m,(j+1)/m)\subset(0,1)$, dois a dois disjuntos; por isso $F$ é uma soma finita de funções de suporte compacto disjunto, $F\in C^\infty$ e $\operatorname{supp}F\subset(0,1)$.
+
+\emph{Normas.} Como $\int|\varphi(mx-j)|^p\,dx=m^{-1}c_\varphi^p$ e as parcelas são disjuntas,
+\[
+\|F\|_p^p=a^pm^{-sp-1}\,|\theta|\,c_\varphi^p,
+\qquad\text{logo}\qquad \|F\|_p\le a\,m^{-s}c_\varphi,
+\]
+pois $|\theta|\le m$. Analogamente $F''(x)=a\,m^{2-s}\sum_j\theta_j\varphi''(mx-j)$ e $\|F''\|_p\le a\,m^{2-s}M_\varphi$.
+
+\emph{Segundas diferenças.} Para $0<h\le1/2$ e $x\in\R$, $\Delta_h^2F(x)=\int_0^h\!\int_0^h F''(x+u+v)\,du\,dv$. A desigualdade de Minkowski dá $\|\Delta_h^2F\|_{L^p([0,1-2h])}\le h^2\|F''\|_p$. Além disso $|\Delta_h^2F|\le|F(x+2h)|+2|F(x+h)|+|F(x)|$, o que dá $\|\Delta_h^2F\|_{L^p([0,1-2h])}\le4\|F\|_p$. Assim, para $t>0$,
+\begin{align*}
+\wt{F}{t}{p}&\le\min\{4\|F\|_p,\ \min(t,\tfrac12)^2\|F''\|_p\}\\
+&\le a\,m^{-s}\min\{4c_\varphi,\,M_\varphi(mt)^2\}\le C_2\,a\,m^{-s}\min\{1,(mt)^2\}.
+\end{align*}
+a última desigualdade porque $\min\{4c_\varphi,My\}\le C_2\min\{1,y\}$ para $y\ge0$. A constante $C_2$ independe de $m$ e de $\theta$.
+
+\emph{Norma de Besov.} Ponha $a_r=2^{rs}\wt{F}{2^{-r}}{p}$ para $r\in\N_0$ e $R=\log_2 m$ (real). Se $r\le R$, então $m2^{-r}\ge1$ e
+\[
+a_r\le C_2\,a\,2^{rs}m^{-s}=C_2\,a\,2^{-(R-r)s}.
+\]
+Se $r\ge R$, então $m2^{-r}\le1$ e
+\[
+a_r\le C_2\,a\,2^{rs}m^{-s}(m2^{-r})^2=C_2\,a\,(m2^{-r})^{2-s}=C_2\,a\,2^{-(r-R)(2-s)}.
+\]
+Portanto $a_r\le C_2\,a\,2^{-\theta_*|r-R|}$. A série converge exatamente pela positividade de $\theta_*=\min\{s,2-s\}$, isto é, para $0<s<2$: para $s=2$ o expoente $2-s$ se anula e para $s>2$ a cota de $a_r$ passa a crescer em $r$.
+
+Para $q=\infty$, $\sup_r a_r\le C_2a$. Para $0<q<\infty$ não usamos desigualdade triangular, apenas a soma de potências $q$: $\sum_{r\ge0}a_r^q\le C_2^qa^q\sum_{r\ge0}2^{-q\theta_*|r-R|}$. Escreva $R=\lfloor R\rfloor+\delta$ com $\delta\in[0,1)$. Com $k=r-\lfloor R\rfloor\in\mathbb Z$ (valores distintos para $r$ distintos), $|r-R|=|k-\delta|\ge|k|-1$, de modo que a soma é no máximo $2^{q\theta_*}\sum_{k\in\mathbb Z}2^{-q\theta_*|k|}$. Logo $\|(a_r)_r\|_{\ell^q}\le C_2\,a\,K_{s,q}$ para todo $0<q\le\infty$. Somando com $\|F\|_p\le a\,c_\varphi$,
+\[
+\|F\|^*_{\Bes{s}{p}{q}}\le a\,(c_\varphi+C_2K_{s,q})=a\,C_1=B.
+\]
+Isto prova (i).
+
+\emph{Separação.} $f_\theta-f_\eta=a\,m^{-s}\sum_j(\theta_j-\eta_j)\varphi(mx-j)$ é soma de parcelas com suportes disjuntos e coeficientes em $\{-1,0,1\}$. Logo $\|f_\theta-f_\eta\|_p^p=a^pm^{-sp-1}\,d_H(\theta,\eta)\,c_\varphi^p$, o que dá (ii).
+
+\emph{Empacotamento binário.} Seja $k=\lfloor m/4\rfloor$ e $\Theta_m\subseteq\{0,1\}^m$ um subconjunto maximal com distâncias de Hamming $\ge k+1$ duas a duas (existe, pois $\{0,1\}^m$ é finito). Pela maximalidade, as bolas de Hamming de raio $k$ centradas em $\Theta_m$ cobrem $\{0,1\}^m$, logo $2^m\le|\Theta_m|\,V(m,k)$, com $V(m,k)=\sum_{i\le k}\binom mi$. Para $k\ge1$ seja $p_0=k/m\le1/4$. Como $p_0/(1-p_0)\le1$, para $i\le k$ tem-se $p_0^i(1-p_0)^{m-i}\ge(1-p_0)^m\,(p_0/(1-p_0))^k$, e portanto
+\[
+1\ge\sum_{i\le k}\binom mi p_0^i(1-p_0)^{m-i}\ge V(m,k)\,p_0^k(1-p_0)^{m-k}=V(m,k)\,2^{-mH(p_0)},
+\]
+com $H(p)=-p\log_2p-(1-p)\log_2(1-p)$. Como $H$ é crescente em $[0,1/2]$, $V(m,k)\le2^{mH(1/4)}$, com $H(1/4)\approx0{,}8113$. Assim $|\Theta_m|\ge2^{m(1-H(1/4))}\ge2^{m/6}$, pois $1-H(1/4)\approx0{,}1887>1/6$. A distância mínima é $k+1>m/4$; para $k=0$ ($m\le3$) vale $|\Theta_m|=2^m$ trivialmente.
+\end{proof}
+
+\section{Lei minimax em dois orçamentos}
+\label{lp:sec:minimax}
+
+Para $N,H\ge2$, na bola unitária de $\Bes{s}{p}{q}$, definimos
+\[
+ D_{p,s,q}(N,H)=\sup_{\|f\|^*_{\Bes{s}{p}{q}}\le1}\ e^H_{N,p}(f).
+\]
+Os dois orçamentos variam independentemente. A cota inferior pelo número de folhas usa o mesmo alvo para todas as alturas de um dado $N$.
+
+\begin{lema}[Piso pelo número de folhas]
+\label{lp:lem:leaf-budget-floor}
+Sejam $1\le p<\infty$, $0<s<2$ e $0<q\le\infty$. Existe $c_{\mathrm{leaf}}=c_{\mathrm{leaf}}(p,s,q)>0$ tal que $D_{p,s,q}(N,H)\ge c_{\mathrm{leaf}}N^{-s}$ para todos os inteiros $N,H\ge2$.
+\end{lema}
+
+\begin{proof}
+Fixe $\varphi\in C_c^\infty((0,1))$ não nula e estenda-a por zero. Com $m=2N$, use
+\[
+ f_m(x)=b m^{-s}\sum_{j=0}^{m-1}\varphi(mx-j),
+\]
+onde $b=1/C_1$, com $C_1$ do \cref{lp:lem:packing} para essa $\varphi$. O item (i), aplicado com $B=1$ e todos os bits iguais a $1$, dá $\|f_m\|^*\le1$. Com efeito, a disjunção dos suportes dá $\|f_m\|_p=b m^{-s}\|\varphi\|_p$ e $\|f_m''\|_p=b m^{2-s}\|\varphi''\|_p$. O módulo é limitado por $C_2 b m^{-s}\min\{1,(mt)^2\}$. A prova de empacotamento soma as potências $q$ dos dois majorantes geométricos em torno de $t=m^{-1}$ ou toma o supremo quando $q=\infty$, de modo que $b$ é independente de $m$.
+
+Uma representação com até $N$ folhas tem no máximo $N-1$ fronteiras internas. Cada fronteira pode cair no interior de no máximo uma célula de teste $I_j=(j/m,(j+1)/m)$. Assim, em pelo menos $m-N+1\ge m/2$ dessas células, $g$ é afim no interior. Se $g=0$, todas servem. Em cada uma, $L_j(y)=g((j+y)/m)$ é afim. Como no \cref{lp:lem:bump}, a integração por partes dá $\int_0^1 L_j\varphi''=0$ e $\int_0^1\varphi\varphi''=-\int_0^1|\varphi'|^2$. Com $p'$ conjugado de $p$, incluindo $p'=\infty$ quando $p=1$, Hölder e a mudança de variável dão
+\[
+ \|f_m-g\|_{L^p(I_j)}
+ \ge b m^{-s-1/p}\frac{\int_0^1|\varphi'|^2}{\|\varphi''\|_{L^{p'}(0,1)}} .
+\]
+Somando as potências $p$ sobre pelo menos $m/2$ células, obtemos uma cota inferior da ordem de $m^{-s}$, com constante independente dos orçamentos. Tome o ínfimo sobre $g$ e use $m=2N$.
+\end{proof}
+
+\Needspace{12\baselineskip}
+\begin{teorema}[Lei minimax em folhas e altura aritmética]
+\label{lp:thm:minimax-nh}
+Sejam $1\le p<\infty$, $0<s<2$ e $0<q\le\infty$. Existem $c,C>0$, dependentes apenas de $(p,s,q)$, tais que, para todos os inteiros $N,H\ge2$,
+\begin{equation}
+ c\bigl(N^{-s}+H^{-s/a(p,s)}\bigr)
+ \le D_{p,s,q}(N,H)\le C\bigl(N^{-s}+H^{-s/a(p,s)}\bigr),
+ \label{lp:eq:minimax-nh}
+\end{equation}
+onde
+\[
+ a(p,s)=
+ \begin{cases}
+ 1+1/p-s,&0<s<1/p,\\
+ 1,&1/p\le s\le1,\\
+ s,&1<s<2.
+ \end{cases}
+\]
+\end{teorema}
+
+\begin{proof}
+\emph{Cotas inferiores.} O \cref{lp:lem:leaf-budget-floor} dá o termo $N^{-s}$. Abaixo de $1/p$, o \cref{lp:prop:slope-floor} dá $H^{-s/(1+1/p-s)}$. Entre $1/p$ e $1$, inclusive, o \cref{lp:prop:geom-floor} dá $H^{-s}$. Acima de $1$, o \cref{lp:prop:floor} dá $1/(2H)$, pois o alvo constante $1/(2H)$ tem quase-norma $1/(2H)\le1$. Essas cotas fornecem $H^{-s/a(p,s)}$ em cada faixa. O máximo das duas cotas é pelo menos metade da soma. Cada teste é escolhido dentro do supremo minimax e pode depender de $N$ ou $H$.
+
+\emph{Construção por nível diádico.} Seja $n=2^r\ge2$ e fixe $\|f\|^*\le1$. Pelo \cref{lp:cor:quasi-error}, $\|f-Q_nf\|_p\le9C_W n^{-s}$. Para $s<1/p$, o \cref{lp:lem:sup-bound} limita a amplitude nodal por $C_0n^{1/p-s}$. Com $Q=n$, o \cref{lp:lem:nodal-general} requer $H\ge8(C_0+1)n^{1+1/p-s}$ e dá erro adicional de no máximo $1/(2n)\le n^{-s}/2$.
+
+Para $s>1/p$, a imersão e a projeção limitam a amplitude nodal por $M=C_1'(p,s)$ na bola unitária. Se $s\le1$, tome $Q=n$, que exige $H\ge8(M+1)n$. Se $s>1$, tome a menor potência de dois $Q\ge n^s$, de modo que $Q<2n^s$. Basta $H\ge16(M+1)n^s$. Nos dois casos, $Q\ge n$ e o erro adicional é no máximo $1/(2Q)\le n^{-s}/2$. Essas são as escolhas por escala do \cref{lp:thm:uniform} com $\kappa=0$ nesses regimes.
+
+Se $s=1/p$ e $p>1$, o \cref{lp:thm:critical-linear} com $B=1$ permite $H\ge3An$, pois $2A(n+1)\le3An$. O erro de quantização é da ordem de $(r+2)/n$ e é limitado por um múltiplo de $n^{-1/p}$. Se $p=s=1$, a \cref{lp:prop:l1-linear-height} com $B=1$ permite $H\ge2C_E n$ e dá erro de quantização $\le2C_E/H\le n^{-1}$. Esta última cota vale para todo $q$, pois usa a média dos módulos dos valores nodais.
+
+Portanto há $C_*\ge1$ e $C'>0$, dependentes apenas de $(p,s,q)$, tais que $H\ge C_*n^{a(p,s)}$ permite construir $g\in\Aclass_{n,H}([0,1])$ com $\|f-g\|_p\le C'n^{-s}$.
+
+\emph{Orçamentos inteiros.} Escreva $a=a(p,s)$ e $X=\min\{N,(H/C_*)^{1/a}\}$. Se $X\ge2$, tome $n=2^{\lfloor\log_2 X\rfloor}$. Então $X/2<n\le X$, e $n\le N$, $C_*n^a\le H$. A representação construída é admissível para $(N,H)$, pois aumentar os orçamentos preserva suas folhas e alturas. O erro é limitado por
+\[
+ C'n^{-s}\le 2^s C'X^{-s}
+ \le 2^s C'\bigl(N^{-s}+C_*^{s/a}H^{-s/a}\bigr).
+\]
+Se $X<2$, como $N\ge2$, temos $1\le 2^s C_*^{s/a}H^{-s/a}$. O candidato zero, de erro $\le\|f\|_p\le1$, cobre esse caso. Tome o supremo na bola.
+\end{proof}
+
+\begin{proposicao}[Transferência exata entre erro e realização]
+\label{lp:prop:transfer}
+Sejam $1\le p<\infty$, $G_N$ famílias de funções mensuráveis e $f$ mensurável. Com $e_N(f)=\inf_{g\in G_N}\|f-g\|_p$ e $\mathscr R_N(f)=\inf_{g\in G_N}\{\|f-g\|_p+\omega_p(g,1/N)\}$,
+\[
+ e_N(f)\le\mathscr R_N(f)\le\omega_p(f,1/N)+5\,e_N(f).
+\]
+\end{proposicao}
+
+\begin{proof}
+A primeira desigualdade vale porque $\mathscr R_N$ soma $\omega_p(g,1/N)\ge0$ a cada termo do ínfimo. Para a segunda, se $g\in G_N$, então $\omega_p(g,1/N)\le\omega_p(f,1/N)+4\|f-g\|_p$ pela subaditividade de $\omega_p$ e pela cota $\omega_p(h,t)\le4\|h\|_p$. Logo $\mathscr R_N(f)\le\omega_p(f,1/N)+5\|f-g\|_p$ para todo $g$, e o ínfimo sobre $g$ dá a cota.
+\end{proof}
+
+\begin{corolario}[Lei minimax para a realização]
+\label{lp:cor:minimax-realization}
+Nas hipóteses do \cref{lp:thm:minimax-nh}, com constantes dependentes apenas de $(p,s,q)$,
+\[
+ \sup_{\|f\|^*_{\Bes{s}{p}{q}}\le1}R_{N,H}(f)_p
+ \asymp N^{-s}+H^{-s/a(p,s)}.
+\]
+\end{corolario}
+
+\begin{proof}
+Aplique a \cref{lp:prop:transfer} à família $\Sigma_{N,H}$, que contém zero. A cota inferior vem de $R_{N,H}(f)_p\ge e^H_{N,p}(f)$. Para a superior, tome $n=2^{\lfloor\log_2N\rfloor}$, de modo que $N/2<n\le N$. A monotonicidade do módulo e a cota de cada coeficiente na definição da bola dão
+\[
+ \wt{f}{N^{-1}}{p}\le\wt{f}{n^{-1}}{p}\le n^{-s}\le2^sN^{-s}.
+\]
+Logo $R_{N,H}(f)_p\le 2^sN^{-s}+5e^H_{N,p}(f)$ na bola unitária. O \cref{lp:thm:minimax-nh} conclui após tomar o supremo.
+\end{proof}
+
+\begin{observacao}
+\label{lp:obs:floor-closure}
+A \cref{lp:cor:joint-necessity} determina a potência necessária da altura para a taxa uniforme por escala $CN^{-s}$ sobre a bola unitária, tanto para o melhor erro em $L^p$ quanto para a realização. O piso por inclinação dá $H(N)\gtrsim N^{1+1/p-s}$ se $s<1/p$, o geométrico dá $H(N)\gtrsim N$ se $1/p\le s\le1$ e o aritmético dá $H(N)\gtrsim N^s$ se $1<s<2$. As constantes dessas cotas dependem de $(p,s,q,C)$. O alvo de teste pode variar com $H(N)$, e uma cota uniforme para uma bola de raio $B\ge1$ implica a mesma necessidade porque a bola contém a unitária.
+
+Os \cref{lp:thm:minimax-nh,lp:cor:minimax-realization} atingem as potências nas taxas por escala. A somabilidade entre escalas tem condições próprias. Os alvos das cotas inferiores podem variar com os orçamentos.
+\end{observacao}
+
+\section{Caracterização de Besov e estabilidade}
+\label{lp:sec:statements}
+
+\begin{teorema}[Caracterização por realização aritmética]
+\label{lp:conj:besov}
+Sejam $1\le p<\infty$ e $0<s<2$.
+\begin{enumerate}[label=(\roman*)]
+\item Se $s>1/p$, valem as seguintes igualdades em $L^p([0,1])$:
+\begin{align}
+ \Bes{s}{p}{\infty}
+ &=\Rstr{s}{\infty}{\Library,H_{s,0}}_p,
+ &&\label{lp:eq:conj-endpoint}\\
+ \Bes{s}{p}{q}
+ &=\Rstr{s}{q}{\Library,H_{s,0}}_p,
+ &&0<q<\infty,\quad s<1,\label{lp:eq:conj-subcritical}\\
+ \Bes{s}{p}{q}
+ &=\Rstr{s}{q}{\Library,H_{s,\kappa}}_p,
+ &&0<q<\infty,\quad s\ge1,\quad\kappa>1/q,\label{lp:eq:conj-critical}\\
+ \Bes{s}{p}{q}
+ &=\Rstr{s}{q}{\Library,\widetilde H_{s,\eta}}_p,
+ &&0<q<\infty,\quad\eta>0.
+ \label{lp:eq:besov-tilde}
+\end{align}
+\item Se $0<s<1/p$ e $0<q\le\infty$, então
+\begin{equation}
+ \Bes{s}{p}{q}=\Rstr{s}{q}{\Library,\widehat H_{s}}_p.
+ \label{lp:eq:conj-low}
+\end{equation}
+\item Se $s=1/p$, $0<q\le\infty$ e $\kappa\ge0$, com $\kappa>1/q$ quando $p=1$ e $q<\infty$, então
+\begin{equation}
+ \Bes{s}{p}{q}=\Rstr{s}{q}{\Library,\widehat H_{q,\kappa}}_p.
+ \label{lp:eq:conj-diag}
+\end{equation}
+\end{enumerate}
+\end{teorema}
+
+\begin{teorema}[Estabilidade por inclusão de redes]
+\label{lp:conj:stability}
+Sejam $p,s,q,H$ como em qualquer dos casos do \cref{lp:conj:besov}. Se $\mathcal N$ satisfaz \eqref{lp:eq:nesting} e \eqref{lp:eq:contains} para algum $c\ge1$, então
+\begin{equation}
+ \Bes{s}{p}{q}=\Rstr{s}{q}{\mathcal N}_p.
+ \label{lp:eq:network-realization-p}
+\end{equation}
+\end{teorema}
+
+\begin{teorema}[Estabilidade por inclusão aproximada]
+\label{lp:thm:approx-stability}
+Sejam $p,s,q,H$ como em qualquer dos casos do \cref{lp:conj:besov}. Se $\mathcal N$ satisfaz \eqref{lp:eq:nesting} e \eqref{lp:eq:approx-contains} para algum $c\ge1$ e uma sequência $(\varepsilon_N)_{N\ge1}$ em $[0,\infty)$ tal que
+\begin{equation}
+ \big(2^{rs}\varepsilon_{2^r}\big)_{r\ge1}\in\ell^q,
+ \label{lp:eq:approx-summable}
+\end{equation}
+então $\Bes{s}{p}{q}=\Rstr{s}{q}{\mathcal N}_p$.
+\end{teorema}
+
+Para uma família de redes ReLU, a inclusão \eqref{lp:eq:contains} é uma condição sobre as funções realizadas. Por exemplo, uma função afim por partes com nós internos $t_1<\cdots<t_{m-1}$ e inclinações consecutivas $\beta_1,\ldots,\beta_m$ admite em $[0,1]$ a representação
+\[
+ g(x)=g(0)+\beta_1 x+\sum_{j=1}^{m-1}(\beta_{j+1}-\beta_j)(x-t_j)_+,
+ \qquad u_+=\max\{u,0\}.
+\]
+Como $x=x_+$ em $[0,1]$, a expressão é realizável por uma camada oculta de largura no máximo $m$. Assim, as classes de funções realizadas por redes de uma camada oculta e largura no máximo $N$ contêm $\Sig{N}$ com $c=1$. O \cref{lp:thm:approx-stability} estende essa estabilidade a arquiteturas que reproduzem a biblioteca apenas com precisão controlada em $L^p$, desde que a tolerância satisfaça \eqref{lp:eq:approx-summable}. Verificar essa tolerância para uma arquitetura concreta, como redes com pesos quantizados, é uma questão à parte, que o texto não trata.
+
+Nas agendas dos itens (ii) e (iii), a cota dos valores nodais envolve $n^{1/p-s}$ abaixo da diagonal e $(\log n)^{\theta_q}$ na diagonal. O expoente $\theta_q$ registra esse controle dos valores. O expoente adicional $\kappa$ é usado na diagonal $p=s=1$ para somar a cota do erro de quantização quando $q<\infty$. A \cref{lp:sec:ball} trata das agendas uniformes em bolas de raio fixo.
+
+\subsection{Estimativa inversa}
+
+\label{lp:sec:proved}
 
 \begin{proposicao}[Desigualdade inversa de realização]
 \label{lp:prop:inverse}
@@ -751,150 +1190,7 @@ A primeira parcela pertence a $\ell^q$ pelo mesmo argumento da \cref{lp:thm:low-
 Se $s>1/p$, o critério \eqref{lp:eq:summability} vale para as agendas do \cref{lp:conj:besov} e a \cref{lp:thm:approx-transfer} dá $\Bes{s}{p}{q}\subseteq\Rstr{s}{q}{\mathcal N}_p$. Se $s\le1/p$, essa inclusão é a \cref{lp:thm:low-approx-transfer}. Em ambos os casos, a inclusão inversa segue do \cref{lp:cor:inclusion}.
 \end{proof}
 
-\section{Cotas uniformes, complexidade em bits e agendas de log iterado}
-\label{lp:sec:uniform}
-
-Esta seção reúne quatro complementos formalizados em Lean (ver a \cref{lp:sec:lean}): cotas uniformes sobre bolas de Besov com uma única agenda (\cref{lp:sec:ball}), o piso aritmético e a complexidade em bits dos aproximantes (\cref{lp:sec:bits}) e a redução do fator logarítmico crítico por logaritmos iterados (\cref{lp:sec:loglog}). As demonstrações usam o \cref{lp:lem:nodal-general}, o \cref{lp:lem:sup-bound} e o critério de somabilidade da \cref{lp:thm:besov-conditional}. O ponto de partida é a versão em norma uniforme desses resultados na Parte~IV de \citet{lp-oliveiravol}, com a imersão contínua e a cota em sup dos quase-interpolantes substituindo ali a norma supremo.
-
-\subsection{Cotas uniformes sobre bolas de Besov}
-\label{lp:sec:ball}
-
-Para $B\ge1$, escrevemos $\mathbb B^s_{p,q}(B)=\{f\in L^p:\|f\|^*_{\Bes{s}{p}{q}}\le B\}$. No \cref{lp:conj:besov}, a agenda é a mesma para todas as funções, e a prova pode usar limiares que dependem de $f$. Aqui, fixados $(p,s,q)$, as cotas valem desde $n=2$ para toda a bola, e a agenda inclui o fator $B+1$. Ponha $\mathsf L(N)=\log(eN)$ e $\theta_q=\max\{0,1-1/q\}$, com $\theta_\infty=1$.
-
-\begin{definicao}[Dados de regime]
-\label{lp:def:regime}
-Sejam $1\le p<\infty$, $0<s<2$, $0<q\le\infty$ e $\kappa\ge0$. Para $n=2^r\ge2$, definimos os pares $(\nu',\kappa')$ e $(\hat\nu,\hat\kappa)$ e o fator $\Lambda_n$ por meio da \cref{lp:tab:regime}.
-\begin{table}[H]
-\caption{Parâmetros para cada regime de regularidade}
-\label{lp:tab:regime}
-\small\tablecolors
-\begin{tabularx}{\linewidth}{l*{3}{>{\centering\arraybackslash}X}}
-\toprule
-\tablehead{Regime} & \tablehead{$(\nu\prime,\kappa\prime)$} & \tablehead{$(\hat\nu,\hat\kappa)$} & \tablehead{$\Lambda_n$} \\
-\midrule
-$s>1/p$ & $(\nu_s,\kappa)$ & $(\nu_s,\kappa)$ & $1$ \\
-$s<1/p$ & $(1,0)$ & $(1+1/p-s,0)$ & $n^{1/p-s}$ \\
-$s=1/p$ & $(1,\kappa)$ & $(1,\theta_q+\kappa)$ & $r^{\theta_q}$ \\
-\bottomrule
-\end{tabularx}\par
-\tablecredit
-\end{table}
-Dizemos que $(p,s,q,\kappa)$ é \emph{admissível} quando $\kappa>1/q$ sempre que $q<\infty$ e $s\ge1$. Para $B\ge1$ e $A\ge1$, a \emph{agenda uniforme} é
-\begin{equation}
- \widehat H^{[B]}_{A}(N)=\Bigl\lceil A\,(B+1)\,(N+1)^{\hat\nu}\,\mathsf L(N)^{\hat\kappa}\Bigr\rceil .
- \label{lp:eq:uniform-schedule}
-\end{equation}
-\end{definicao}
-
-\begin{lema}[Altura e quantização uniformes]
-\label{lp:lem:uniform-height}
-Sejam $1\le p<\infty$, $0<s<2$, $0<q\le\infty$ e $\kappa\ge0$. Para $n=2^r\ge2$, seja $Q(n)$ a menor potência de dois com $Q(n)\ge n^{\nu'}\mathsf L(n)^{\kappa'}$. Existe $C_*\ge1$, dependendo só de $(p,s,q)$, tal que:
-\begin{enumerate}[label=(\alph*)]
- \item $n\le Q(n)\le2n^{\nu'}\mathsf L(n)^{\kappa'}$, $\ 1/Q(n)\le n^{-s}$ e $\Lambda_nQ(n)\le4n^{\hat\nu}\mathsf L(n)^{\hat\kappa}$;
- \item se $f\in\mathbb B^s_{p,q}(B)$, então $\max_{0\le j\le n}|\lambda_j(f)|\le C_*B\Lambda_n$ para todo $n=2^r\ge2$;
- \item se $(p,s,q,\kappa)$ é admissível, então $\big(2^{rs}/Q(2^r)\big)_{r\ge1}\in\ell^q$, com norma limitada por uma constante $c_2$ que depende só de $(p,s,q,\kappa)$.
-\end{enumerate}
-\end{lema}
-
-\begin{proof}
-(a) Como $\nu'\ge1$ e $\mathsf L(n)\ge1$, vale $n^{\nu'}\mathsf L(n)^{\kappa'}\ge n$, e a menor potência de dois não inferior a $x\ge1$ é menor que $2x$. Além disso, $\nu'\ge s$: para $s>1/p$, $\nu_s\ge s$; para $s\le1/p$, $\nu'=1\ge s$. Logo $1/Q(n)\le n^{-s}$. Para a última cota, se $s>1/p$, então $\Lambda_nQ(n)\le2n^{\nu_s}\mathsf L(n)^\kappa$. Se $s<1/p$, então $Q(n)=n$ e $\Lambda_nQ(n)=n^{1+1/p-s}$. Se $s=1/p$, então $\mathsf L(n)=1+r\log2\ge r\log2$ e $1/\log2<2$ dão $r^{\theta_q}\le2^{\theta_q}\mathsf L(n)^{\theta_q}$, de modo que $\Lambda_nQ(n)\le2^{\theta_q+1}n\,\mathsf L(n)^{\theta_q+\kappa}\le4n\,\mathsf L(n)^{\theta_q+\kappa}$.
-
-(b) Se $s>1/p$, o \cref{lp:lem:embedding} dá $\|F\|_\infty\le C_E\|f\|^*_{\Bes{s}{p}{\infty}}\le C_EB$ para o representante contínuo $F$, pois a norma em $\ell^\infty$ não excede a norma em $\ell^q$. O \cref{lp:lem:quasi}(c) dá $|\lambda_j(f)|=|\lambda_j(F)|\le2C_EB$. Se $s\le1/p$, o \cref{lp:lem:sup-bound} dá $|\lambda_j(f)|\le C_0B\Lambda_n$. Basta tomar $C_*=\max\{2C_E,C_0,1\}$.
-
-(c) Por (a), $w_n=n^s/Q(n)\le n^{s-\nu'}\mathsf L(n)^{-\kappa'}$. Se $q=\infty$, então $w_n\le1$. Se $q<\infty$ e $s<1$, então $\nu'=1$ e $w_{2^r}\le2^{-r(1-s)}$, que pertence a $\ell^q$. Se $q<\infty$ e $s\ge1$, então $\kappa>1/q$ por admissibilidade, $\nu'=s$ e $\kappa'=\kappa$, de modo que $w_{2^r}\le(1+r\log2)^{-\kappa}$, que pertence a $\ell^q$ porque $\kappa q>1$.
-\end{proof}
-
-\begin{teorema}[Cotas uniformes sobre bolas]
-\label{lp:thm:uniform}
-Sejam $1\le p<\infty$, $0<s<2$, $0<q\le\infty$ e $\kappa\ge0$, e sejam $C_*$ e $c_2$ como no \cref{lp:lem:uniform-height}. Ponha $A=32(C_*+1)$ e $\widehat H=\widehat H^{[B]}_{A}$. Então, para todo $B\ge1$, todo $f\in\mathbb B^s_{p,q}(B)$ e todo $n=2^r\ge2$, existe $g\in\Aclass_{n,\widehat H(n)}([0,1])\subseteq\Sig{n}$, com agenda $\widehat H$, tal que
-\begin{equation}
- \|f-g\|_p\le9C_W\,\wt{f}{n^{-1}}{p}+\frac1{2Q(n)}\le(9C_WB+1)\,n^{-s}.
- \label{lp:eq:uniform-approx}
-\end{equation}
-Se, além disso, $(p,s,q,\kappa)$ é admissível, existe $C=C(p,s,q,\kappa)$ tal que
-\begin{equation}
- \sup_{f\in\mathbb B^s_{p,q}(B)}\Big\|\big(2^{rs}\Rfun{\Library,\widehat H}{2^r}(f)_p\big)_{r\ge1}\Big\|_{\ell^q}\le C\,(B+1).
- \label{lp:eq:uniform-rate}
-\end{equation}
-\end{teorema}
-
-\begin{proof}
-Fixe $f\in\mathbb B^s_{p,q}(B)$ e $n=2^r\ge2$. Ponha $M=C_*B\Lambda_n$ e $Q=Q(n)$. Pelo \cref{lp:lem:uniform-height}(b), $|\lambda_j(f)|\le M$ para $0\le j\le n$. Como $\Lambda_n\ge1$, o item (a) do mesmo lema dá
-\[
- 8(M+1)Q\le8(C_*B+1)\Lambda_nQ\le32(C_*+1)(B+1)\,n^{\hat\nu}\mathsf L(n)^{\hat\kappa}\le\widehat H(n).
-\]
-Como $Q\ge n$, o \cref{lp:lem:nodal-general} aplicado a $y_j=\lambda_j(f)$ dá $g\in\Aclass_{n,\widehat H(n)}([0,1])$ com $\|Q_nf-g\|_\infty\le1/(2Q)$. Pelo \cref{lp:cor:quasi-error}, $\|f-g\|_p\le9C_W\,\wt{f}{n^{-1}}{p}+1/(2Q)$. Por \eqref{lp:eq:besov-p}, $\wt{f}{n^{-1}}{p}\le Bn^{-s}$, e por (a), $1/(2Q)\le n^{-s}/2$. Isso prova \eqref{lp:eq:uniform-approx}.
-
-Para \eqref{lp:eq:uniform-rate}, o \cref{lp:lem:modulus} dá $\wt{g}{n^{-1}}{p}\le\wt{f}{n^{-1}}{p}+4\|f-g\|_p$, de modo que, como na prova da \cref{lp:thm:besov-conditional},
-\[
- \Rfun{\Library,\widehat H}{n}(f)_p\le(1+45C_W)\,\wt{f}{n^{-1}}{p}+\frac52\,\frac1{Q(n)}.
-\]
-Multiplicando por $n^s=2^{rs}$ e tomando a norma de $\ell^q$ em $r\ge1$, o primeiro termo contribui com no máximo $(1+45C_W)B$ por \eqref{lp:eq:besov-p}, e o segundo, com no máximo $\tfrac52c_2$ pelo \cref{lp:lem:uniform-height}(c). A desigualdade triangular em $\ell^q$ tem constante $2^{(1/q-1)_+}$, que não depende de $B$. Isso dá \eqref{lp:eq:uniform-rate}.
-\end{proof}
-
-\begin{observacao}
-\label{lp:obs:uniform-q}
-A taxa por escala \eqref{lp:eq:uniform-approx} vale com $\kappa=0$ para todo $q$. Na diagonal $s=1/p$, a agenda \eqref{lp:eq:uniform-schedule} ainda inclui $\mathsf L(N)^{\theta_q}$ para controlar os valores nodais. Quando $s\ge1$ e $q<\infty$, o fator adicional $\mathsf L(N)^\kappa$ com $\kappa>1/q$ torna a cota de quantização somável. Com $\kappa=0$, o peso $2^{rs}/Q(2^r)$ fica entre $1/2$ e $1$, portanto essa majoração não dá \eqref{lp:eq:uniform-rate}.
-\end{observacao}
-
-\begin{lema}[Saltos nodais uniformes]
-\label{lp:lem:critical-jump}
-Sejam $p\ge1$, $0<q\le\infty$ e $f$ com $\|f\|^*_{\Bes{1/p}{p}{q}}\le B$, $n=2^r\ge2$ e $\lambda_j=\lambda_j(f)$. Para $0\le j<n$,
-\begin{equation}
- |\lambda_{j+1}-\lambda_j|\le\frac{4\,\sup_{[0,1]}|Q_2f|}{n}+\sum_{k=1}^{r-1}\frac{K_k}{n},
- \qquad K_k=8\,(2^{k+1})^{1/p+1}\,18\,C_W\,\wt{f}{2^{-k}}{p}.
- \label{lp:eq:critical-jump}
-\end{equation}
-Além disso, $K_k\le 144\,C_W\,2^{1/p}\,2^{k+1}\,B$ e $\sum_{k=1}^{r-1}K_k/n\le 288\,C_W\,2^{1/p}B$.
-\end{lema}
-
-\begin{proof}
-Pela telescópica $Q_{2^r}f=Q_2f+\sum_{k=1}^{r-1}(Q_{2^{k+1}}f-Q_{2^k}f)$ e por $\lambda_j=Q_{2^r}f(j/n)$, a diferença $\lambda_{j+1}-\lambda_j$ é a soma das diferenças dos termos. Cada termo é afim em células de comprimento $1/2$ (para $Q_2f$) ou $2^{-(k+1)}$ (para as diferenças), e o intervalo $[j/n,(j+1)/n]$ está contido em uma dessas células. Aplicando \eqref{lp:eq:projection-bounds} a uma função afim na própria célula, pode-se tomar $C_p=4$ em \eqref{lp:eq:nikolskii}. Assim, para $m=2^{k+1}$, a inclinação de $v_k=Q_{2^{k+1}}f-Q_{2^k}f$ é limitada por $8m^{1/p+1}\|v_k\|_p\le K_k$, pela cota de quase-interpolação nos dois níveis. A inclinação de $Q_2f$ é limitada por $4\sup|Q_2f|$. A desigualdade $2^{k/p}\wt f{2^{-k}}p\le B$ dá a segunda parte.
-\end{proof}
-
-\begin{teorema}[Altura linear crítica para $s=1/p$ com $p>1$]
-\label{lp:thm:critical-linear}
-Sejam $p>1$, $s=1/p$ e $0<q\le\infty$. Existem $A=A(p,C_W)\ge1$ e constantes $C_2,C_3>0$ que dependem só de $(p,q,C_W)$, tais que, para todo $B\ge1$, a agenda linear $H_B(N)=\lceil A(B+1)(N+1)\rceil$ satisfaz as seguintes propriedades.
-\begin{enumerate}[label=(\alph*)]
- \item Para todo $f\in\mathbb B^{1/p}_{p,q}(B)$ e $n=2^r\ge2$, existe $g\in\Aclass_{n,H_B(n)}([0,1])$ com
- \[
-  \|f-g\|_p\le 9C_W\,\wt{f}{n^{-1}}{p}+\frac{8(M_r+1)}{H_B(n)},\qquad M_r=\mathsf B_0(f)+144\,C_W\,2^{1/p}\,B\,r,
- \]
- em que $\mathsf B_0(f)=8\,2^{1/p}(\|f\|_p+9C_W\wt{f}{1/2}{p})$.
- \item Para todo $f\in\mathbb B^{1/p}_{p,q}(B)$ e $n=2^r\ge2$, vale $\Rfun{\Library,H_B}{n}(f)_p\le C_2(B+1)\,n^{-1/p}$.
- \item Para todo $f\in\mathbb B^{1/p}_{p,q}(B)$, vale $\big\|\big(2^{r/p}\Rfun{\Library,H_B}{2^r}(f)_p\big)_{r\ge1}\big\|_{\ell^q}\le C_3(B+1)$.
- \item Se $\|f\|^*_{\Bes{1/p}{p}{q}}\le B$, então $f\in\Rstr{1/p}{q}{\Library,H_B}_p$. Reciprocamente, $\Rstr{1/p}{q}{\Library,H_B}_p\subseteq\Bes{1/p}{p}{q}$ para toda $f\in L^p$. Assim, a bola de raio $B$ de $\Bes{1/p}{p}{q}$ está contida em $\Rstr{1/p}{q}{\Library,H_B}_p$, que está contido em $\Bes{1/p}{p}{q}$.
-\end{enumerate}
-\end{teorema}
-
-\begin{proof}
-Para (a), a desigualdade \eqref{lp:eq:nikolskii} em $m=2$ e a cota de quase-interpolação dão $\sup|Q_2f|\le\mathsf B_0(f)\le C_0B$, com $C_0=8\,2^{1/p}(1+9C_W)$. O \cref{lp:lem:critical-jump} dá saltos $\le J=4C_0B+288C_W2^{1/p}B$. A soma telescópica com $C_p=4$ em \eqref{lp:eq:nikolskii} dá $|\lambda_j|\le M_r$. Tome $C_M=C_0+144C_W2^{1/p}+1$ e $C_J=4C_0+288C_W2^{1/p}+1$. Assim $M_r+1\le C_M(B+1)(r+1)$ e $J+1\le C_J(B+1)$. Como $r+1\le n$, com $A=16C_M+C_J+8$ a agenda satisfaz $8n\le H$, $16(M_r+1)\le H$ e $n(J+1)\le H$, e o \cref{lp:lem:nodal-jump} aplica-se a $Q_nf$. Somando o erro de quase-interpolação (\cref{lp:cor:quasi-error}) e o erro de quantização, obtém-se (a).
-
-Pela \cref{lp:prop:transfer}, o custo de realização é no máximo $\wt{f}{n^{-1}}{p}+5\|f-g\|_p$. Como $H_B(n)\ge A(B+1)n$ e $M_r+1\le C_M(B+1)(r+1)$, segue
-\[
- 2^{r/p}\Rfun{\Library,H_B}{2^r}(f)_p
- \le(1+45C_W)\,2^{r/p}\wt{f}{2^{-r}}{p}
-    +C(p,C_W)(r+2)2^{-r(1-1/p)}.
-\]
-O primeiro termo tem norma $\ell^q$ no máximo $(1+45C_W)B$. No segundo, $\rho=2^{1/p-1}<1$, e $(r+2)\rho^r\le C_{\rho,\sigma}\sigma^r$ para qualquer $\rho<\sigma<1$. Isso dá a estimativa de cada termo em (b) e a de sequência em (c): para $0<q<1$ somamos as potências $q$, para $1\le q<\infty$ usamos a desigualdade triangular e para $q=\infty$ tomamos o supremo. O item (c) dá a inclusão direta de (d) e o \cref{lp:cor:inclusion} dá a inversa para qualquer agenda.
-\end{proof}
-
-\begin{proposicao}[Altura linear para o erro em $B^1_{1,q}$]
-\label{lp:prop:l1-linear-height}
-Existe $C_E\ge1$ tal que, para todo $0<q\le\infty$, $B\ge1$, $f\in\mathbb B^1_{1,q}(B)$, $n=2^r\ge2$ e todo inteiro $H\ge C_E(B+1)n$, há $g\in\Aclass_{n,H}([0,1])$ com
-\[
- \|f-g\|_1\le9C_W\wt{f}{n^{-1}}{1}+C_E(B+1)/H.
-\]
-A constante depende apenas de $C_W$ para $p=1$.
-\end{proposicao}
-
-\begin{proof}
-O \cref{lp:lem:critical-jump} com $p=1$ dá $|\lambda_{j+1}-\lambda_j|\le J=C_J'B$, pois $2^k\wt{f}{2^{-k}}{1}\le B$ e $\|Q_2f\|_\infty\le8\|f\|_1\le8B$. A constante $C_J'$ depende apenas de $C_W$. Por \eqref{lp:eq:projection-bounds}, $|\lambda_j(f)|\le4n\|f\|_{L^1(I_{c(j)})}$. A última célula é usada duas vezes e as outras, uma vez. Portanto
-\[
- \max_j|\lambda_j(f)|\le4nB,qquad n^{-1}\sum_{j=0}^n|\lambda_j(f)|\le8\|f\|_1.
-\]
-Com $w_j=1+J+|\lambda_j(f)|$, temos $8\max_jw_j\le8(1+C_J'B+4nB)$, $n(J+4)\le n(C_J'B+4)$ e $n^{-1}\sum_jw_j\le2(1+C_J'B)+8B$. Assim $C_E(B+1)n$ cobre as duas condições do \cref{lp:lem:nodal-variable-height} para $C_E$ suficientemente grande. O lema e o \cref{lp:cor:quasi-error} dão a cota de erro, ampliando a mesma constante para cobrir o termo de quantização.
-\end{proof}
+\section{Agendas de altura e dependência no raio}
 
 \begin{teorema}[Agenda linear fixa na diagonal]
 \label{lp:thm:critical-fixed-agenda}
@@ -939,373 +1235,6 @@ Para $p>1$ e $0<q\le\infty$, a agenda $H_B$ dá controle de realização calibra
 
 No ponto $p=s=1$, a \cref{lp:prop:l1-linear-height} dá a taxa por escala para todo $q$. Para $q=\infty$, \cref{lp:prop:transfer} dá a cota da sequência em supremo com altura $\lceil C_E(B+1)(n+1)\rceil$. O mesmo deslocamento diádico, agora normalizado por $dn$, transfere essa cota para $H_*$, com o bloco inicial controlado pelo zero. A inversa universal dá a igualdade global também em $B^1_{1,\infty}$. Para $q<\infty$ em $p=s=1$, a cota de quantização normalizada pode ficar de ordem constante, e a caracterização com agenda linear permanece em aberto neste trabalho.
 \end{observacao}
-
-\subsection{Piso aritmético e complexidade em bits}
-\label{lp:sec:bits}
-
-Para $H\ge1$ inteiro, seja $\mathcal Q_H=\{a/b\in\Q:\height(a/b)\le H\}$.
-
-\begin{proposicao}[Piso aritmético uniforme em $L^p$]
-\label{lp:prop:floor}
-Sejam $H\ge1$ inteiro, $a_H=1/(2H)$ e $f_H\equiv a_H$ em $[0,1]$. Então $\mathrm{dist}(a_H,\mathcal Q_H)=1/(2H)$ e, para todo $N\ge1$ e todo $g\in\{0\}\cup\Aclass_{N,H}([0,1])$,
-\begin{equation}
- \|f_H-g\|_p\ge\frac1{2H}.
- \label{lp:eq:floor}
-\end{equation}
-Em particular, $e^{H}_{N,p}(f_H)\ge1/(2H)$ para todo $N$.
-\end{proposicao}
-
-\begin{proof}
-Todo racional positivo de $\mathcal Q_H$ tem numerador inteiro positivo e denominador no máximo $H$, logo é pelo menos $1/H$, e dista de $a_H$ ao menos $1/(2H)$. Os racionais não positivos distam de $a_H$ ao menos $a_H=1/(2H)$, e $0\in\mathcal Q_H$ realiza essa distância.
-
-Para $g=0$, $\|f_H\|_p=a_H$. Seja $g\in\Aclass_{N,H}([0,1])$ e seja $J$ uma folha da representação, com $g(x)=y_0+s(x-x_J)$ em $J$, onde $x_J$ é o centro de $J$ e $\height(y_0)\le H$. Como $g$ é afim, $\int_Jg=|J|\,y_0$. A desigualdade de Jensen para a função convexa $t\mapsto|t|^p$ dá
-\[
- \int_J|f_H-g|^p\ge|J|\Bigl|\frac1{|J|}\int_J(f_H-g)\Bigr|^p=|J|\,|a_H-y_0|^p\ge|J|\,(2H)^{-p},
-\]
-pois $y_0\in\mathcal Q_H$. As folhas têm interiores disjuntos e união $[0,1]$. Somando, $\|f_H-g\|_p^p\ge(2H)^{-p}$.
-\end{proof}
-
-\begin{corolario}[Necessidade do expoente aritmético]
-\label{lp:cor:floor}
-Sejam $s>0$, $C>0$ e uma agenda $H$ com $H(N)\ge2$. Suponha que, para algum $N\ge2$,
-\[
- \sup_{f\in\mathbb B^s_{p,q}(1)}\Rfun{\Library,H}{N}(f)_p\le C\,N^{-s}.
-\]
-Então $H(N)\ge N^s/(2C)$.
-\end{corolario}
-
-\begin{proof}
-Como $H(N)\ge2$, a constante $f\equiv a_{H(N)}$ tem $a_{H(N)}\le1/4$, e portanto $\|f\|^*_{\Bes{s}{p}{q}}=a_{H(N)}\le1$, pois seu módulo de segunda ordem é nulo. Para todo $g\in\Sig{N}$, $\|f-g\|_p+\wt{g}{N^{-1}}{p}\ge\|f-g\|_p\ge1/(2H(N))$ pela \cref{lp:prop:floor}. Logo $1/(2H(N))\le CN^{-s}$.
-\end{proof}
-
-\begin{observacao}
-\label{lp:obs:floor}
-Sejam $s\ge1$ com $s>1/p$ e $\kappa=0$. Pela prova do \cref{lp:thm:uniform}, para $n=2^r$ vale
-\[
- \sup_{f\in\mathbb B^s_{p,q}(B)}\Rfun{\Library,\widehat H}{n}(f)_p
- \le\bigl((1+45C_W)B+\tfrac52\bigr)n^{-s},
-\]
-com $\widehat H(N)\asymp(B+1)N^s$. O \cref{lp:cor:floor} dá a potência necessária nessa faixa para a taxa uniforme por escala. Para $s<1$, o piso geométrico é mais forte que o aritmético, e para $s<1/p$ o piso por inclinação melhora ainda essa cota. O \cref{lp:cor:joint-necessity} aplica os três pisos à biblioteca inteira, incluindo as partições adaptativas.
-\end{observacao}
-
-Para a codificação binária, o orçamento de altura $H$ é conhecido pelo codificador e pelo decodificador. Um bit indica $g=0$ ou $g\ne0$. Para $g\ne0$, escolhe-se uma representação admissível. A forma da árvore, em pré-ordem, usa um bit por nó para distinguir folha de nó interno e determina o par $(k,m)$ de cada folha. Cada folha traz as duas coordenadas racionais $(y_0,s)$, com sinal, numerador e denominador.
-
-\begin{proposicao}[Bits de $\Aclass_{N,H}$]
-\label{lp:prop:bits}
-Sejam $N\ge1$ e $H\ge2$ inteiros e $c_H=\lceil\log_2(H+1)\rceil$. Toda $g\in\{0\}\cup\Aclass_{N,H}([0,1])$ admite uma descrição binária livre de prefixo com no máximo $4N(c_H+1)$ bits. Em particular, $\log_2\#\bigl(\{0\}\cup\Aclass_{N,H}([0,1])\bigr)\le4N(c_H+1)$.
-\end{proposicao}
-
-\begin{proof}
-Uma coordenada $a/b$ reduzida, com $b>0$ e $\height(a/b)\le H$, tem $|a|\le H<2^{c_H}$ e $1\le b\le H<2^{c_H}$. Ela usa então $2c_H+1$ bits, com um de sinal e $c_H$ para cada inteiro, em comprimento fixo. Uma folha usa $4c_H+2$ bits. Uma árvore com $N'\le N$ folhas tem $2N'-1$ nós. O comprimento total é, portanto, no máximo $1+(2N-1)+N(4c_H+2)=4N(c_H+1)$. A forma da árvore em pré-ordem é livre de prefixo, e o número de folhas, que ela determina, fixa o comprimento do restante. Escolhida uma descrição por função, completar cada palavra com zeros até $L=4N(c_H+1)$ preserva a injetividade, pois duas palavras com o mesmo preenchimento seriam comparáveis por prefixo. Há $2^L$ palavras desse comprimento.
-\end{proof}
-
-\begin{corolario}[Taxa e bits sobre bolas]
-\label{lp:cor:bits}
-Sejam $1\le p<\infty$, $0<s<2$, $0<q\le\infty$ e $\widehat H=\widehat H^{[B]}_{A}$ com $\kappa=0$ e $A$ como no \cref{lp:thm:uniform}. Existe $c=c(p,s,q)$ tal que, para todo $B\ge1$, todo $f\in\mathbb B^s_{p,q}(B)$ e todo $n=2^r\ge2$, há $g\in\Sig{n}$ com
-\[
- \|f-g\|_p\le(9C_WB+1)\,n^{-s}
-\]
-e descrição binária de comprimento no máximo $c\,n\,\bigl(\log n+\log(B+1)\bigr)$.
-\end{corolario}
-
-\begin{proof}
-O \cref{lp:thm:uniform}, com $\kappa=0$, fornece $g\in\Aclass_{n,\widehat H(n)}([0,1])$ satisfazendo a cota de erro. Para $\kappa=0$, vale $\widehat H(n)\le A(B+1)(n+1)^{\hat\nu}\mathsf L(n)^{\theta_q}+1$, com $\hat\nu\le2$ e $\theta_q\le1$. Logo $c_{\widehat H(n)}=O(\log n+\log(B+1))$, com constante dependente apenas de $(p,s,q)$, e a \cref{lp:prop:bits} conclui.
-\end{proof}
-
-\begin{lema}[Empacotamento de Besov]
-\label{lp:lem:packing}
-Sejam $1\le p<\infty$, $0<s<2$, $0<q\le\infty$ e $\varphi\in C_c^\infty((0,1))$ não nula. Ponha $c_\varphi=\|\varphi\|_p$, $M_\varphi=\|\varphi''\|_p$, $C_2=\max\{4c_\varphi,M_\varphi\}$, $\theta_*=\min\{s,2-s\}$,
-\[
-K_{s,q}=\begin{cases}2^{\theta_*}\Bigl(\sum_{k\in\mathbb Z}2^{-q\theta_*|k|}\Bigr)^{1/q}, & 0<q<\infty,\\[4pt] 1, & q=\infty,\end{cases}
-\qquad
-C_1=c_\varphi+C_2K_{s,q}.
-\]
-Para $B>0$, $m\in\N$ e $\theta\in\{0,1\}^m$, defina
-\[
-f_\theta(x)=\frac{B}{C_1}\,m^{-s}\sum_{j=0}^{m-1}\theta_j\,\varphi(mx-j).
-\]
-Então:
-\begin{enumerate}[label=(\roman*)]
-\item $\|f_\theta\|^*_{\Bes{s}{p}{q}}\le B$, uniformemente em $m$ e $\theta$;
-\item $\|f_\theta-f_\eta\|_p=\dfrac{B}{C_1}\,c_\varphi\,m^{-s-1/p}\,d_H(\theta,\eta)^{1/p}$, em que $d_H$ é a distância de Hamming;
-\item para todo $m\ge1$ existe $\Theta_m\subseteq\{0,1\}^m$ com $|\Theta_m|\ge 2^{m/6}$ e $d_H(\theta,\eta)\ge m/4$ para $\theta\ne\eta$ em $\Theta_m$.
-\end{enumerate}
-\end{lema}
-
-\begin{proof}
-Seja $a=B/C_1$ e $F=f_\theta$. Os suportes de $\varphi(m\cdot-j)$ são $(j/m,(j+1)/m)\subset(0,1)$, dois a dois disjuntos; por isso $F$ é uma soma finita de funções de suporte compacto disjunto, $F\in C^\infty$ e $\operatorname{supp}F\subset(0,1)$.
-
-\emph{Normas.} Como $\int|\varphi(mx-j)|^p\,dx=m^{-1}c_\varphi^p$ e as parcelas são disjuntas,
-\[
-\|F\|_p^p=a^pm^{-sp-1}\,|\theta|\,c_\varphi^p,
-\qquad\text{logo}\qquad \|F\|_p\le a\,m^{-s}c_\varphi,
-\]
-pois $|\theta|\le m$. Analogamente $F''(x)=a\,m^{2-s}\sum_j\theta_j\varphi''(mx-j)$ e $\|F''\|_p\le a\,m^{2-s}M_\varphi$.
-
-\emph{Segundas diferenças.} Para $0<h\le1/2$ e $x\in\R$, $\Delta_h^2F(x)=\int_0^h\!\int_0^h F''(x+u+v)\,du\,dv$. A desigualdade de Minkowski dá $\|\Delta_h^2F\|_{L^p([0,1-2h])}\le h^2\|F''\|_p$. Além disso $|\Delta_h^2F|\le|F(x+2h)|+2|F(x+h)|+|F(x)|$, o que dá $\|\Delta_h^2F\|_{L^p([0,1-2h])}\le4\|F\|_p$. Assim, para $t>0$,
-\begin{align*}
-\wt{F}{t}{p}&\le\min\{4\|F\|_p,\ \min(t,\tfrac12)^2\|F''\|_p\}\\
-&\le a\,m^{-s}\min\{4c_\varphi,\,M_\varphi(mt)^2\}\le C_2\,a\,m^{-s}\min\{1,(mt)^2\}.
-\end{align*}
-a última desigualdade porque $\min\{4c_\varphi,My\}\le C_2\min\{1,y\}$ para $y\ge0$. A constante $C_2$ independe de $m$ e de $\theta$.
-
-\emph{Norma de Besov.} Ponha $a_r=2^{rs}\wt{F}{2^{-r}}{p}$ para $r\in\N_0$ e $R=\log_2 m$ (real). Se $r\le R$, então $m2^{-r}\ge1$ e
-\[
-a_r\le C_2\,a\,2^{rs}m^{-s}=C_2\,a\,2^{-(R-r)s}.
-\]
-Se $r\ge R$, então $m2^{-r}\le1$ e
-\[
-a_r\le C_2\,a\,2^{rs}m^{-s}(m2^{-r})^2=C_2\,a\,(m2^{-r})^{2-s}=C_2\,a\,2^{-(r-R)(2-s)}.
-\]
-Portanto $a_r\le C_2\,a\,2^{-\theta_*|r-R|}$. A série converge exatamente pela positividade de $\theta_*=\min\{s,2-s\}$, isto é, para $0<s<2$: para $s=2$ o expoente $2-s$ se anula e para $s>2$ a cota de $a_r$ passa a crescer em $r$.
-
-Para $q=\infty$, $\sup_r a_r\le C_2a$. Para $0<q<\infty$ não usamos desigualdade triangular, apenas a soma de potências $q$: $\sum_{r\ge0}a_r^q\le C_2^qa^q\sum_{r\ge0}2^{-q\theta_*|r-R|}$. Escreva $R=\lfloor R\rfloor+\delta$ com $\delta\in[0,1)$. Com $k=r-\lfloor R\rfloor\in\mathbb Z$ (valores distintos para $r$ distintos), $|r-R|=|k-\delta|\ge|k|-1$, de modo que a soma é no máximo $2^{q\theta_*}\sum_{k\in\mathbb Z}2^{-q\theta_*|k|}$. Logo $\|(a_r)_r\|_{\ell^q}\le C_2\,a\,K_{s,q}$ para todo $0<q\le\infty$. Somando com $\|F\|_p\le a\,c_\varphi$,
-\[
-\|F\|^*_{\Bes{s}{p}{q}}\le a\,(c_\varphi+C_2K_{s,q})=a\,C_1=B.
-\]
-Isto prova (i).
-
-\emph{Separação.} $f_\theta-f_\eta=a\,m^{-s}\sum_j(\theta_j-\eta_j)\varphi(mx-j)$ é soma de parcelas com suportes disjuntos e coeficientes em $\{-1,0,1\}$. Logo $\|f_\theta-f_\eta\|_p^p=a^pm^{-sp-1}\,d_H(\theta,\eta)\,c_\varphi^p$, o que dá (ii).
-
-\emph{Empacotamento binário.} Seja $k=\lfloor m/4\rfloor$ e $\Theta_m\subseteq\{0,1\}^m$ um subconjunto maximal com distâncias de Hamming $\ge k+1$ duas a duas (existe, pois $\{0,1\}^m$ é finito). Pela maximalidade, as bolas de Hamming de raio $k$ centradas em $\Theta_m$ cobrem $\{0,1\}^m$, logo $2^m\le|\Theta_m|\,V(m,k)$, com $V(m,k)=\sum_{i\le k}\binom mi$. Para $k\ge1$ seja $p_0=k/m\le1/4$. Como $p_0/(1-p_0)\le1$, para $i\le k$ tem-se $p_0^i(1-p_0)^{m-i}\ge(1-p_0)^m\,(p_0/(1-p_0))^k$, e portanto
-\[
-1\ge\sum_{i\le k}\binom mi p_0^i(1-p_0)^{m-i}\ge V(m,k)\,p_0^k(1-p_0)^{m-k}=V(m,k)\,2^{-mH(p_0)},
-\]
-com $H(p)=-p\log_2p-(1-p)\log_2(1-p)$. Como $H$ é crescente em $[0,1/2]$, $V(m,k)\le2^{mH(1/4)}$, com $H(1/4)\approx0{,}8113$. Assim $|\Theta_m|\ge2^{m(1-H(1/4))}\ge2^{m/6}$, pois $1-H(1/4)\approx0{,}1887>1/6$. A distância mínima é $k+1>m/4$; para $k=0$ ($m\le3$) vale $|\Theta_m|=2^m$ trivialmente.
-\end{proof}
-
-\begin{proposicao}[Cota inferior de entropia]
-\label{lp:prop:entropy-lower}
-Sejam $1\le p<\infty$, $0<s<2$, $0<q\le\infty$, $\varphi$ e $C_1$ como no \cref{lp:lem:packing}. Ponha $c_3=4^{-1/p}c_\varphi$,
-\[
-\varepsilon_0=\frac{c_3}{2^{s+1}C_1},\qquad c_4=\frac1{12}\Bigl(\frac{c_3}{2C_1}\Bigr)^{1/s}.
-\]
-Para $B>0$ e $0<\varepsilon\le\varepsilon_0B$,
-\[
-\log_2\mathcal N\bigl(\varepsilon,\mathbb B^s_{p,q}(B),L^p\bigr)\ \ge\ c_4\Bigl(\frac B\varepsilon\Bigr)^{1/s},
-\]
-em que $\mathcal N(\varepsilon,K,L^p)$ é o menor número de bolas fechadas de raio $\varepsilon$ em $L^p([0,1])$, com centros arbitrários em $L^p$, que cobrem $K$. As constantes dependem apenas de $(p,s,q)$ e da escolha fixa de $\varphi$.
-\end{proposicao}
-
-\begin{proof}
-Seja $\Lambda=c_3B/(2C_1\varepsilon)$. A hipótese $\varepsilon\le\varepsilon_0B$ equivale a $\Lambda\ge2^s$. Escolha $m=\lceil\Lambda^{1/s}\rceil-1$. Então $m<\Lambda^{1/s}$, isto é, $m^s<\Lambda$, e, como $\Lambda^{1/s}\ge2$, $m\ge\Lambda^{1/s}-1\ge\Lambda^{1/s}/2\ge1$.
-
-Pelo \cref{lp:lem:packing}, a família $\{f_\theta:\theta\in\Theta_m\}$ está em $\mathbb B^s_{p,q}(B)$. Para $\theta\ne\eta$ em $\Theta_m$, pelas partes (ii) e (iii),
-\[
-\|f_\theta-f_\eta\|_p\ \ge\ \frac B{C_1}\,c_\varphi\,m^{-s-1/p}\Bigl(\frac m4\Bigr)^{1/p}=c_3\,\frac B{C_1}\,m^{-s}\ >\ c_3\frac B{C_1}\cdot\frac1\Lambda=2\varepsilon.
-\]
-Uma bola fechada de raio $\varepsilon$ contém no máximo um ponto de $\{f_\theta\}$, pois dois pontos nela distam no máximo $2\varepsilon$. Logo qualquer cobertura de $\mathbb B^s_{p,q}(B)$ por bolas de raio $\varepsilon$ tem pelo menos $|\Theta_m|\ge2^{m/6}$ bolas, e
-\[
-\log_2\mathcal N(\varepsilon)\ge\frac m6\ge\frac{\Lambda^{1/s}}{12}=c_4\Bigl(\frac B\varepsilon\Bigr)^{1/s}.\qedhere
-\]
-\end{proof}
-
-\begin{corolario}[Cota inferior de bits]
-\label{lp:cor:bits-lower}
-Sejam $1\le p<\infty$, $0<s<2$, $0<q\le\infty$, $B>0$ e $C_B>0$. Ponha $c_5=c_4(B/C_B)^{1/s}$, em que $c_4$ é a constante do \cref{lp:prop:entropy-lower}. Se $N\ge1$ satisfaz $C_BN^{-s}\le\varepsilon_0B$ e $C:\mathbb B^s_{p,q}(B)\to\{0,1\}^{\le L}$, $D:\{0,1\}^{\le L}\to L^p$ são tais que $\|f-D(C(f))\|_p\le C_BN^{-s}$ para todo $f$ na bola, então
-\[
-L\ \ge\ c_5\,N-1.
-\]
-O mesmo vale para saídas restritas a uma biblioteca $\Sigma\subseteq L^p$.
-\end{corolario}
-
-\begin{proof}
-Os valores de $D$ sobre as palavras de comprimento no máximo $L$ são $2^{L+1}-1$ elementos de $L^p$, e as bolas fechadas de raio $C_BN^{-s}$ centradas neles cobrem a bola. Logo $\mathcal N(C_BN^{-s})\le2^{L+1}$. Pela \cref{lp:prop:entropy-lower} com $\varepsilon=C_BN^{-s}\le\varepsilon_0B$,
-\[
-L+1\ \ge\ \log_2\mathcal N(C_BN^{-s})\ \ge\ c_4\Bigl(\frac{B}{C_BN^{-s}}\Bigr)^{1/s}=c_4\Bigl(\frac B{C_B}\Bigr)^{1/s}N=c_5N.\qedhere
-\]
-\end{proof}
-
-\begin{observacao}
-\label{lp:obs:entropy}
-A \cref{lp:prop:entropy-lower} estabelece somente uma cota inferior, e apenas para $0<\varepsilon\le\varepsilon_0B$. Não demonstramos a cota superior $\log_2\mathcal N(\varepsilon)\lesssim(B/\varepsilon)^{1/s}$; por isso não afirmamos uma equivalência bilateral. A restrição a $\varepsilon\le\varepsilon_0B$ é indispensável: para $\varepsilon\ge B$ tem-se $\mathcal N(\varepsilon)=1$, pois $\|f\|_p\le\|f\|^*_{\Bes{s}{p}{q}}\le B$ na bola, de modo que nenhuma cota inferior positiva da forma $c(B/\varepsilon)^{1/s}$ vale para todo $\varepsilon>0$. Os resultados de Birman–Solomyak citados por \citet[Teorema~1]{lp-kerkyacharianpicard2003} tratam bolas definidas por expansões em wavelets; sua aplicação ao espaço definido aqui depende de uma equivalência de normas que não é usada na presente demonstração e que não foi verificada neste texto.
-\end{observacao}
-
-\subsection{Pisos geométrico e de inclinação, necessidade e transferência}
-\label{lp:sec:floors}
-
-Os pisos a seguir completam a \cref{lp:prop:floor}. Eles valem para a biblioteca completa $\Sig N$, não apenas para o piso aritmético, e as constantes dependem só de $(p,s,q)$.
-
-\begin{lema}[Escala de um bump]
-\label{lp:lem:bump}
-Sejam $1\le p<\infty$, $0<s<2$ e $0<q\le\infty$. Fixe $\varphi\in C^\infty_c((1/8,5/8))$ com $\varphi=1$ em $[1/4,1/2]$, e ponha $M_\varphi=\sup|\varphi''|$ e $\kappa_\varphi=\int_0^1(\varphi')^2>0$. Existe $\Lambda\ge1$, dependendo só de $(p,s,q,\varphi)$, tal que, para $a\in\mathbb R$ e $0<t\le1$, a função $\psi_{a,t}(x)=a\,\varphi\bigl((x-1+t)/t\bigr)$ satisfaz
-\[
- \|\psi_{a,t}\|^*_{\Bes sp q}\le\Lambda\,|a|\,t^{1/p-s}.
-\]
-Além disso, para $a\ge0$, $0<t\le1$ e toda função afim $\ell$,
-\[
- \|\psi_{a,t}-\ell\|_{L^p(1-t,1)}\ge\frac{\kappa_\varphi}{M_\varphi}\,a\,t^{1/p}.
-\]
-\end{lema}
-
-\begin{proof}
-Para a norma, $\|\psi_{a,t}\|_p=|a|t^{1/p}\|\varphi\|_p$, e $\psi_{a,t}''=a\,t^{-2}\varphi''(\cdot)$. A fórmula $\Delta_h^2\psi(x)=\int_0^h\!\int_0^h\psi''(x+u+v)\,du\,dv$, a desigualdade de Minkowski e a subaditividade dão
-\[
- \wt{\psi_{a,t}}{h}{p}\le|a|t^{1/p}\,\Omega(h/t),\qquad \Omega(u)=\min\{4\|\varphi\|_p,\;u^2\|\varphi''\|_p\}.
-\]
-Para $h_r=2^{-r}$ e $u_r=h_r/t$, temos $|a|t^{1/p}2^{rs}=|a|t^{1/p-s}\,u_r^{-s}$, logo
-\[
- 2^{rs}\wt{\psi_{a,t}}{h_r}{p}\le|a|t^{1/p-s}\,u_r^{-s}\Omega(u_r).
-\]
-Como $u_{r+1}=u_r/2$, para $q<\infty$ obtemos as cotas geométricas
-\[
- \sum_{u_r\ge1}u_r^{-sq}\le(1-2^{-sq})^{-1},
- \qquad \sum_{u_r<1}u_r^{(2-s)q}\le(1-2^{-(2-s)q})^{-1}.
-\]
-Ambas são finitas porque $0<s<2$. Para $q=\infty$, usa-se que $u^{-s}\Omega(u)$ é limitada. Assim a sequência tem norma $\ell^q$ limitada por $|a|t^{1/p-s}K_1$, com $K_1$ dependendo só de $(p,s,q,\varphi)$. Como $\|\psi_{a,t}\|_p\le|a|t^{1/p-s}\|\varphi\|_p$, basta tomar $\Lambda=\max\{1,\|\varphi\|_p+K_1\}$.
-
-Para a segunda desigualdade, seja $L(y)=\ell(1-t+ty)$, afim. Integrando por partes, com $\varphi(0)=\varphi(1)=\varphi'(0)=\varphi'(1)=0$, obtemos $\int_0^1\varphi\,\varphi''=-\kappa_\varphi$ e $\int_0^1 L\,\varphi''=0$. Logo $a\kappa_\varphi\le M_\varphi\int_0^1|a\varphi(y)-L(y)|\,dy$. Pela substituição $x=1-t+ty$, $\int_{1-t}^1|\psi_{a,t}-\ell|\,dx=t\int_0^1|a\varphi-L|\,dy\ge t\,a\kappa_\varphi/M_\varphi$. Como o intervalo $(1-t,1)$ tem comprimento $t$, a desigualdade de Hölder dá $\int_{1-t}^1|h|\le t^{1-1/p}\|h\|_{L^p(1-t,1)}$, e portanto $\|\psi_{a,t}-\ell\|_{L^p(1-t,1)}\ge t^{1/p-1}\cdot t\,a\kappa_\varphi/M_\varphi=\frac{\kappa_\varphi}{M_\varphi}a\,t^{1/p}$.
-\end{proof}
-
-\begin{proposicao}[Piso geométrico]
-\label{lp:prop:geom-floor}
-Sejam $1\le p<\infty$, $0<s<2$ e $0<q\le\infty$. Existe $c_G=c_G(p,s,q)>0$ tal que, para todo inteiro $H\ge2$, existe $f_H$ mensurável com $\|f_H\|^*_{\Bes sp q}\le1$ e
-\[
- \|f_H-g\|_p\ge c_G\,H^{-s}\qquad\text{para todo }N\ge1\text{ e todo }g\in\Sig N\text{ com agenda }H.
-\]
-\end{proposicao}
-
-\begin{proof}
-Seja $\Lambda$ a constante do \cref{lp:lem:bump}, com $\varphi$ fixo. Tome $t=1/H$ e $a=t^{s-1/p}/\Lambda$, e seja $f_H=\psi_{a,t}$. Pelo \cref{lp:lem:bump}, $\|f_H\|^*\le\Lambda a t^{1/p-s}=1$. Se $g=0$, a função é afim em $[1-t,1]$. Caso contrário, tome qualquer representação admissível e considere sua folha terminal direita $J_{k,m}$. Seu extremo direito é $1$, logo $m=2^k-1$, e o campo de endereço da altura dá $H\ge |m|+1=2^k$. Portanto $J_{k,2^k-1}=[1-2^{-k},1]\supseteq[1-1/H,1]$. Em ambos os casos, $g$ é afim em $[1-t,1]$, e a cota local do \cref{lp:lem:bump} dá
-\[
- \|f_H-g\|_p\ge\|f_H-g\|_{L^p(1-t,1)}\ge\frac{\kappa_\varphi}{M_\varphi}\,a\,t^{1/p}=\frac{\kappa_\varphi}{M_\varphi\Lambda}\,t^{s}=c_G\,H^{-s},
-\]
-com $c_G=\kappa_\varphi/(M_\varphi\Lambda)$, que depende só de $(p,s,q)$.
-\end{proof}
-
-\begin{proposicao}[Piso por inclinação]
-\label{lp:prop:slope-floor}
-Sejam $1\le p<\infty$, $0<s\le1/p$ e $0<q\le\infty$, e ponha $\beta=s/(1+1/p-s)$. Existe $c_L=c_L(p,s,q)>0$ tal que, para todo inteiro $H\ge2$, existe $f_H$ mensurável com $\|f_H\|^*_{\Bes sp q}\le1$ e
-\[
- \|f_H-g\|_p\ge c_L\,H^{-\beta}\qquad\text{para todo }N\ge1\text{ e todo }g\in\Sig N\text{ com agenda }H.
-\]
-\end{proposicao}
-
-\begin{proof}
-Ponha $\delta=1/p-s$ e $c=\min\{\Lambda^{-1},2^{-(1+\delta)}\}$, com $\Lambda$ do \cref{lp:lem:bump}. Tome $t=(c/(2H))^{1/(1+\delta)}\le1/2$, $a=c\,t^{-\delta}$ e $f_H(x)=a\varphi((x-1/4)/t)$. O suporte fica em $(0,1)$. As cotas de $\|f_H\|_p$ e do módulo no \cref{lp:lem:bump} valem com a mesma constante para esse suporte transladado, pois usam as normas de $\varphi$ e $\varphi''$. Assim $\|f_H\|^*\le\Lambda a t^\delta\le1$.
-
-As funções $g$ são $H$-Lipschitz em $[0,1]$. Para $x$ em $I=[1/4+t/4,1/4+t/2]$, temos $f_H(x)=a$ e $f_H(x+t)=0$. Como $Ht=a/2$, segue $|f_H-g|(x)+|f_H-g|(x+t)\ge a/2$. Os intervalos $I$ e $I+t$ são disjuntos e estão em $[0,1]$. Por convexidade, a soma das potências $p$ dos dois erros é ao menos $2^{1-p}(a/2)^p$. Integrando em $I$, de comprimento $t/4$, obtemos
-\[
- \|f_H-g\|_p\ge 2^{-2-1/p}a\,t^{1/p}
- =2^{-2-1/p}c(c/2)^\beta H^{-\beta}.
-\]
-\end{proof}
-
-\begin{corolario}[Necessidade conjunta]
-\label{lp:cor:joint-necessity}
-Sejam $1\le p<\infty$, $0<s<2$, $0<q\le\infty$, $C>0$, $N\ge1$ e uma agenda $H$ com $H(N)\ge2$. Suponha que, para todo $f$ mensurável com $\|f\|^*_{\Bes sp q}\le1$,
-\[
- e^{H(N)}_{N,p}(f)\le C\,N^{-s}.
-\]
-Então $H(N)\ge(c_G/C)^{1/s}N$. Se $s\le1/p$, então $H(N)\ge(c_L/C)^{1/\beta}N^{1+1/p-s}$. Além disso, $H(N)\ge N^s/(2C)$. Se a hipótese for feita com $\mathscr R$ no lugar de $e$, ela implica a hipótese acima, porque $e\le\mathscr R$ pela \cref{lp:prop:transfer}; logo as mesmas conclusões valem.
-\end{corolario}
-
-\begin{proof}
-Seja $H=H(N)$. Pela \cref{lp:prop:geom-floor}, existe $f_H$ com $\|f_H\|^*\le1$ tal que $\|f_H-g\|_p\ge c_GH^{-s}$ para todo $g\in\{0\}\cup\Aclass_{N,H}([0,1])$, o conjunto do ínfimo que define $e^H_{N,p}$. Como $0$ é afim e cada $g\in\Aclass_{N,H}([0,1])$ é afim em $[1-1/H,1]$ pela última folha, a proposição se aplica a esse conjunto. Logo $c_GH^{-s}\le e^H_{N,p}(f_H)\le CN^{-s}$, o que dá $H^s\ge(c_G/C)N^s$. Se $s\le1/p$, a \cref{lp:prop:slope-floor} dá $c_LH^{-\beta}\le CN^{-s}$, isto é, $H\ge(c_L/C)^{1/\beta}N^{s/\beta}$, com $s/\beta=1+1/p-s$. Para a última desigualdade, $f\equiv1/(2H)$ tem $\|f\|^*=1/(2H)\le1$, e pela \cref{lp:prop:floor} $e^H_{N,p}(f)\ge1/(2H)$; logo $1/(2H)\le CN^{-s}$.
-\end{proof}
-
-\begin{proposicao}[Transferência exata entre erro e realização]
-\label{lp:prop:transfer}
-Sejam $1\le p<\infty$, $G_N$ famílias de funções mensuráveis e $f$ mensurável. Com $e_N(f)=\inf_{g\in G_N}\|f-g\|_p$ e $\mathscr R_N(f)=\inf_{g\in G_N}\{\|f-g\|_p+\omega_p(g,1/N)\}$,
-\[
- e_N(f)\le\mathscr R_N(f)\le\omega_p(f,1/N)+5\,e_N(f).
-\]
-\end{proposicao}
-
-\begin{proof}
-A primeira desigualdade vale porque $\mathscr R_N$ soma $\omega_p(g,1/N)\ge0$ a cada termo do ínfimo. Para a segunda, se $g\in G_N$, então $\omega_p(g,1/N)\le\omega_p(f,1/N)+4\|f-g\|_p$ pela subaditividade de $\omega_p$ e pela cota $\omega_p(h,t)\le4\|h\|_p$. Logo $\mathscr R_N(f)\le\omega_p(f,1/N)+5\|f-g\|_p$ para todo $g$, e o ínfimo sobre $g$ dá a cota.
-\end{proof}
-
-\begin{observacao}
-\label{lp:obs:floor-closure}
-A \cref{lp:cor:joint-necessity} determina a potência necessária da altura para a taxa uniforme por escala $CN^{-s}$ sobre a bola unitária, tanto para o melhor erro em $L^p$ quanto para a realização. O piso por inclinação dá $H(N)\gtrsim N^{1+1/p-s}$ se $s<1/p$, o geométrico dá $H(N)\gtrsim N$ se $1/p\le s\le1$ e o aritmético dá $H(N)\gtrsim N^s$ se $1<s<2$. As constantes dessas cotas dependem de $(p,s,q,C)$. O alvo de teste pode variar com $H(N)$, e uma cota uniforme para uma bola de raio $B\ge1$ implica a mesma necessidade porque a bola contém a unitária.
-
-As cotas superiores do \cref{lp:thm:uniform}, com $\kappa=0$, e do \cref{lp:thm:critical-linear} atingem essas potências nos orçamentos diádicos. Para $B$ fixo, quando a cota superior da \cref{lp:tab:schedules} inclui $\mathsf L_1^{\theta_q}$, a comparação determina apenas a potência de $N$. A necessidade desse fator na taxa por escala e a necessidade de fatores adicionais para somabilidade são questões distintas. Os pisos também deixam indeterminada a altura exigida para um alvo fixo.
-\end{observacao}
-
-\section{Lei minimax em dois orçamentos}
-\label{lp:sec:minimax}
-
-Para $N,H\ge2$, na bola unitária de $\Bes{s}{p}{q}$, definimos
-\[
- D_{p,s,q}(N,H)=\sup_{\|f\|^*_{\Bes{s}{p}{q}}\le1}\ e^H_{N,p}(f).
-\]
-Os dois orçamentos variam independentemente. A cota inferior pelo número de folhas usa o mesmo alvo para todas as alturas de um dado $N$.
-
-\begin{lema}[Piso pelo número de folhas]
-\label{lp:lem:leaf-budget-floor}
-Sejam $1\le p<\infty$, $0<s<2$ e $0<q\le\infty$. Existe $c_N=c_N(p,s,q)>0$ tal que $D_{p,s,q}(N,H)\ge c_NN^{-s}$ para todos os inteiros $N,H\ge2$.
-\end{lema}
-
-\begin{proof}
-Fixe $\varphi\in C_c^\infty((0,1))$ não nula e estenda-a por zero. Com $m=2N$, use
-\[
- f_m(x)=b m^{-s}\sum_{j=0}^{m-1}\varphi(mx-j),
-\]
-onde $b=1/C_1$, com $C_1$ do \cref{lp:lem:packing} para essa $\varphi$. O item (i), aplicado com $B=1$ e todos os bits iguais a $1$, dá $\|f_m\|^*\le1$. Com efeito, a disjunção dos suportes dá $\|f_m\|_p=b m^{-s}\|\varphi\|_p$ e $\|f_m''\|_p=b m^{2-s}\|\varphi''\|_p$. O módulo é limitado por $C_2 b m^{-s}\min\{1,(mt)^2\}$. A prova de empacotamento soma as potências $q$ dos dois majorantes geométricos em torno de $t=m^{-1}$ ou toma o supremo quando $q=\infty$, de modo que $b$ é independente de $m$.
-
-Uma representação com até $N$ folhas tem no máximo $N-1$ fronteiras internas. Cada fronteira pode cair no interior de no máximo uma célula de teste $I_j=(j/m,(j+1)/m)$. Assim, em pelo menos $m-N+1\ge m/2$ dessas células, $g$ é afim no interior. Se $g=0$, todas servem. Em cada uma, $L_j(y)=g((j+y)/m)$ é afim. Como no \cref{lp:lem:bump}, a integração por partes dá $\int_0^1 L_j\varphi''=0$ e $\int_0^1\varphi\varphi''=-\int_0^1|\varphi'|^2$. Com $p'$ conjugado de $p$, incluindo $p'=\infty$ quando $p=1$, Hölder e a mudança de variável dão
-\[
- \|f_m-g\|_{L^p(I_j)}
- \ge b m^{-s-1/p}\frac{\int_0^1|\varphi'|^2}{\|\varphi''\|_{L^{p'}(0,1)}} .
-\]
-Somando as potências $p$ sobre pelo menos $m/2$ células, obtemos uma cota inferior da ordem de $m^{-s}$, com constante independente dos orçamentos. Tome o ínfimo sobre $g$ e use $m=2N$.
-\end{proof}
-
-\begin{teorema}[Lei minimax em folhas e altura aritmética]
-\label{lp:thm:minimax-nh}
-Sejam $1\le p<\infty$, $0<s<2$ e $0<q\le\infty$. Existem $c,C>0$, dependentes apenas de $(p,s,q)$, tais que, para todos os inteiros $N,H\ge2$,
-\begin{equation}
- c\bigl(N^{-s}+H^{-s/a(p,s)}\bigr)
- \le D_{p,s,q}(N,H)\le C\bigl(N^{-s}+H^{-s/a(p,s)}\bigr),
- \label{lp:eq:minimax-nh}
-\end{equation}
-onde
-\[
- a(p,s)=
- \begin{cases}
- 1+1/p-s,&0<s<1/p,\\
- 1,&1/p\le s\le1,\\
- s,&1<s<2.
- \end{cases}
-\]
-\end{teorema}
-
-\begin{proof}
-\emph{Cotas inferiores.} O \cref{lp:lem:leaf-budget-floor} dá o termo $N^{-s}$. Abaixo de $1/p$, o \cref{lp:prop:slope-floor} dá $H^{-s/(1+1/p-s)}$. Entre $1/p$ e $1$, inclusive, o \cref{lp:prop:geom-floor} dá $H^{-s}$. Acima de $1$, o \cref{lp:prop:floor} dá $1/(2H)$, pois o alvo constante $1/(2H)$ tem quase-norma $1/(2H)\le1$. Essas cotas fornecem $H^{-s/a(p,s)}$ em cada faixa. O máximo das duas cotas é pelo menos metade da soma. Cada teste é escolhido dentro do supremo minimax e pode depender de $N$ ou $H$.
-
-\emph{Construção por nível diádico.} Seja $n=2^r\ge2$ e fixe $\|f\|^*\le1$. Pelo \cref{lp:cor:quasi-error}, $\|f-Q_nf\|_p\le9C_W n^{-s}$. Para $s<1/p$, o \cref{lp:lem:sup-bound} limita a amplitude nodal por $C_0n^{1/p-s}$. Com $Q=n$, o \cref{lp:lem:nodal-general} requer $H\ge8(C_0+1)n^{1+1/p-s}$ e dá erro adicional de no máximo $1/(2n)\le n^{-s}/2$.
-
-Para $s>1/p$, a imersão e a projeção limitam a amplitude nodal por $M=C_1'(p,s)$ na bola unitária. Se $s\le1$, tome $Q=n$, que exige $H\ge8(M+1)n$. Se $s>1$, tome a menor potência de dois $Q\ge n^s$, de modo que $Q<2n^s$. Basta $H\ge16(M+1)n^s$. Nos dois casos, $Q\ge n$ e o erro adicional é no máximo $1/(2Q)\le n^{-s}/2$. Essas são as escolhas por escala do \cref{lp:thm:uniform} com $\kappa=0$ nesses regimes.
-
-Se $s=1/p$ e $p>1$, o \cref{lp:thm:critical-linear} com $B=1$ permite $H\ge3An$, pois $2A(n+1)\le3An$. O erro de quantização é da ordem de $(r+2)/n$ e é limitado por um múltiplo de $n^{-1/p}$. Se $p=s=1$, a \cref{lp:prop:l1-linear-height} com $B=1$ permite $H\ge2C_E n$ e dá erro de quantização $\le2C_E/H\le n^{-1}$. Esta última cota vale para todo $q$, pois usa a média dos módulos dos valores nodais.
-
-Portanto há $C_*\ge1$ e $C'>0$, dependentes apenas de $(p,s,q)$, tais que $H\ge C_*n^{a(p,s)}$ permite construir $g\in\Aclass_{n,H}([0,1])$ com $\|f-g\|_p\le C'n^{-s}$.
-
-\emph{Orçamentos inteiros.} Escreva $a=a(p,s)$ e $X=\min\{N,(H/C_*)^{1/a}\}$. Se $X\ge2$, tome $n=2^{\lfloor\log_2 X\rfloor}$. Então $X/2<n\le X$, e $n\le N$, $C_*n^a\le H$. A representação construída é admissível para $(N,H)$, pois aumentar os orçamentos preserva suas folhas e alturas. O erro é limitado por
-\[
- C'n^{-s}\le 2^s C'X^{-s}
- \le 2^s C'\bigl(N^{-s}+C_*^{s/a}H^{-s/a}\bigr).
-\]
-Se $X<2$, como $N\ge2$, temos $1\le 2^s C_*^{s/a}H^{-s/a}$. O candidato zero, de erro $\le\|f\|_p\le1$, cobre esse caso. Tome o supremo na bola.
-\end{proof}
-
-\begin{corolario}[Lei minimax para a realização]
-\label{lp:cor:minimax-realization}
-Nas hipóteses do \cref{lp:thm:minimax-nh}, com constantes dependentes apenas de $(p,s,q)$,
-\[
- \sup_{\|f\|^*_{\Bes{s}{p}{q}}\le1}R_{N,H}(f)_p
- \asymp N^{-s}+H^{-s/a(p,s)}.
-\]
-\end{corolario}
-
-\begin{proof}
-Aplique a \cref{lp:prop:transfer} à família $\Sigma_{N,H}$, que contém zero. A cota inferior vem de $R_{N,H}(f)_p\ge e^H_{N,p}(f)$. Para a superior, tome $n=2^{\lfloor\log_2N\rfloor}$, de modo que $N/2<n\le N$. A monotonicidade do módulo e a cota de cada coeficiente na definição da bola dão
-\[
- \wt{f}{N^{-1}}{p}\le\wt{f}{n^{-1}}{p}\le n^{-s}\le2^sN^{-s}.
-\]
-Logo $R_{N,H}(f)_p\le 2^sN^{-s}+5e^H_{N,p}(f)$ na bola unitária. O \cref{lp:thm:minimax-nh} conclui após tomar o supremo.
-\end{proof}
 
 \subsection{Agendas de log iterado}
 \label{lp:sec:loglog}
@@ -1367,9 +1296,9 @@ A \cref{lp:tab:schedules} reúne as agendas suficientes para a taxa uniforme nos
 \tablehead{Regularidade} & \tablehead{Índice $q$} & \tablehead{Taxa $N^{-s}$ na bola} & \tablehead{Realização em $\ell^q$} \\
 \midrule
 $0<s<1/p$ & $0<q\le\infty$ & $N^{1+1/p-s}$ & $N^{1+1/p-s}$ \\
-$s=1/p$, $p>1$ & $0<q<\infty$ & $N$ & $N$ na bola ou $N\mathsf L_1^{\theta_q}$ global \\
-$s=1/p$ & $q=\infty$ & $N\mathsf L_1$ & $N\mathsf L_1$ \\
-$s=p=1$ & $0<q<\infty$ & $N\mathsf L_1^{\theta_q}$ & $N\mathsf L_1^{\theta_q+\kappa}$, $\kappa>1/q$ \\
+$s=1/p$, $p>1$ & $0<q\le\infty$ & $N$ & $N$ (global) \\
+$s=p=1$ & $q=\infty$ & $N$ & $N$ (global) \\
+$s=p=1$ & $0<q<\infty$ & $N$ & $N\mathsf L_1^{\theta_q+\kappa}$, $\kappa>1/q$ \\
 $1/p<s<1$ & $0<q\le\infty$ & $N$ & $N$ \\
 $1\le s<2$, $s>1/p$ & $q=\infty$ & $N^s$ & $N^s$ \\
 $1\le s<2$, $s>1/p$ & $0<q<\infty$ & $N^s$ & $N^s\mathsf L_1^\kappa$, $\kappa>1/q$ \\
@@ -1378,15 +1307,90 @@ $1\le s<2$, $s>1/p$ & $0<q<\infty$ & $N^s$ & $N^s\mathsf L_1^\kappa$, $\kappa>1/
 \par\raggedright
 \tablecredit
 \par\smallskip\noindent
-A taxa na bola usa $B\ge1$ e o fator $B+1$ na altura, incluindo a entrada linear na última coluna. As demais entradas dessa coluna são agendas de caracterização global. Os prefatores são os dos teoremas correspondentes. Na diagonal, $\theta_q$ vem do controle dos valores nodais. Para $s\ge1$ e $q<\infty$, pode-se substituir $\mathsf L_1^\kappa$ por $\mathsf L_1^{1/q}\mathsf L_2^\gamma$ com $\gamma>1/q$. Para $s>1/p$ e $q<\infty$, $\widetilde H_{s,\eta}$ com $\eta>0$ também dá a caracterização global.
+A taxa na bola usa $B\ge1$ e um prefator de altura proporcional a $B+1$. A última coluna dá agendas globais. Para $s\ge1$ e $q<\infty$, pode-se substituir $\mathsf L_1^\kappa$ nessa coluna por $\mathsf L_1^{1/q}\mathsf L_2^\gamma$ com $\gamma>1/q$. Para $s>1/p$ e $q<\infty$, $\widetilde H_{s,\eta}$ com $\eta>0$ também dá a caracterização global.
 \end{table}
 
+\section{Codificação e entropia}
+\label{lp:sec:bits}
+
+Para a codificação binária, o orçamento de altura $H$ é conhecido pelo codificador e pelo decodificador. Um bit indica $g=0$ ou $g\ne0$. Para $g\ne0$, escolhe-se uma representação admissível. A forma da árvore, em pré-ordem, usa um bit por nó para distinguir folha de nó interno e determina o par $(k,m)$ de cada folha. Cada folha traz as duas coordenadas racionais $(y_0,s)$, com sinal, numerador e denominador.
+
+\begin{proposicao}[Bits de $\Aclass_{N,H}$]
+\label{lp:prop:bits}
+Sejam $N\ge1$ e $H\ge2$ inteiros e $c_H=\lceil\log_2(H+1)\rceil$. Toda $g\in\{0\}\cup\Aclass_{N,H}([0,1])$ admite uma descrição binária livre de prefixo com no máximo $4N(c_H+1)$ bits. Em particular, $\log_2\#\bigl(\{0\}\cup\Aclass_{N,H}([0,1])\bigr)\le4N(c_H+1)$.
+\end{proposicao}
+
+\begin{proof}
+Uma coordenada $a/b$ reduzida, com $b>0$ e $\height(a/b)\le H$, tem $|a|\le H<2^{c_H}$ e $1\le b\le H<2^{c_H}$. Ela usa então $2c_H+1$ bits, com um de sinal e $c_H$ para cada inteiro, em comprimento fixo. Uma folha usa $4c_H+2$ bits. Uma árvore com $N'\le N$ folhas tem $2N'-1$ nós. O comprimento total é, portanto, no máximo $1+(2N-1)+N(4c_H+2)=4N(c_H+1)$. A forma da árvore em pré-ordem é livre de prefixo, e o número de folhas, que ela determina, fixa o comprimento do restante. Escolhida uma descrição por função, completar cada palavra com zeros até $L=4N(c_H+1)$ preserva a injetividade, pois duas palavras com o mesmo preenchimento seriam comparáveis por prefixo. Há $2^L$ palavras desse comprimento.
+\end{proof}
+
+\begin{corolario}[Taxa e bits sobre bolas]
+\label{lp:cor:bits}
+Sejam $1\le p<\infty$, $0<s<2$, $0<q\le\infty$ e $\widehat H=\widehat H^{[B]}_{A}$ com $\kappa=0$ e $A$ como no \cref{lp:thm:uniform}. Existe $c=c(p,s,q)$ tal que, para todo $B\ge1$, todo $f\in\mathbb B^s_{p,q}(B)$ e todo $n=2^r\ge2$, há $g\in\Sig{n}$ com
+\[
+ \|f-g\|_p\le(9C_WB+1)\,n^{-s}
+\]
+e descrição binária de comprimento no máximo $c\,n\,\bigl(\log n+\log(B+1)\bigr)$.
+\end{corolario}
+
+\begin{proof}
+O \cref{lp:thm:uniform}, com $\kappa=0$, fornece $g\in\Aclass_{n,\widehat H(n)}([0,1])$ satisfazendo a cota de erro. Para $\kappa=0$, vale $\widehat H(n)\le A(B+1)(n+1)^{\hat\nu}\mathsf L(n)^{\theta_q}+1$, com $\hat\nu\le2$ e $\theta_q\le1$. Logo $c_{\widehat H(n)}=O(\log n+\log(B+1))$, com constante dependente apenas de $(p,s,q)$, e a \cref{lp:prop:bits} conclui.
+\end{proof}
+
+\begin{proposicao}[Cota inferior de entropia]
+\label{lp:prop:entropy-lower}
+Sejam $1\le p<\infty$, $0<s<2$, $0<q\le\infty$, $\varphi$ e $C_1$ como no \cref{lp:lem:packing}. Ponha $c_3=4^{-1/p}c_\varphi$,
+\[
+\varepsilon_0=\frac{c_3}{2^{s+1}C_1},\qquad c_4=\frac1{12}\Bigl(\frac{c_3}{2C_1}\Bigr)^{1/s}.
+\]
+Para $B>0$ e $0<\varepsilon\le\varepsilon_0B$,
+\[
+\log_2\mathcal N\bigl(\varepsilon,\mathbb B^s_{p,q}(B),L^p\bigr)\ \ge\ c_4\Bigl(\frac B\varepsilon\Bigr)^{1/s},
+\]
+em que $\mathcal N(\varepsilon,K,L^p)$ é o menor número de bolas fechadas de raio $\varepsilon$ em $L^p([0,1])$, com centros arbitrários em $L^p$, que cobrem $K$. As constantes dependem apenas de $(p,s,q)$ e da escolha fixa de $\varphi$.
+\end{proposicao}
+
+\begin{proof}
+Seja $\Lambda=c_3B/(2C_1\varepsilon)$. A hipótese $\varepsilon\le\varepsilon_0B$ equivale a $\Lambda\ge2^s$. Escolha $m=\lceil\Lambda^{1/s}\rceil-1$. Então $m<\Lambda^{1/s}$, isto é, $m^s<\Lambda$, e, como $\Lambda^{1/s}\ge2$, $m\ge\Lambda^{1/s}-1\ge\Lambda^{1/s}/2\ge1$.
+
+Pelo \cref{lp:lem:packing}, a família $\{f_\theta:\theta\in\Theta_m\}$ está em $\mathbb B^s_{p,q}(B)$. Para $\theta\ne\eta$ em $\Theta_m$, pelas partes (ii) e (iii),
+\[
+\|f_\theta-f_\eta\|_p\ \ge\ \frac B{C_1}\,c_\varphi\,m^{-s-1/p}\Bigl(\frac m4\Bigr)^{1/p}=c_3\,\frac B{C_1}\,m^{-s}\ >\ c_3\frac B{C_1}\cdot\frac1\Lambda=2\varepsilon.
+\]
+Uma bola fechada de raio $\varepsilon$ contém no máximo um ponto de $\{f_\theta\}$, pois dois pontos nela distam no máximo $2\varepsilon$. Logo qualquer cobertura de $\mathbb B^s_{p,q}(B)$ por bolas de raio $\varepsilon$ tem pelo menos $|\Theta_m|\ge2^{m/6}$ bolas, e
+\[
+\log_2\mathcal N(\varepsilon)\ge\frac m6\ge\frac{\Lambda^{1/s}}{12}=c_4\Bigl(\frac B\varepsilon\Bigr)^{1/s}.\qedhere
+\]
+\end{proof}
+
+\begin{corolario}[Cota inferior de bits]
+\label{lp:cor:bits-lower}
+Sejam $1\le p<\infty$, $0<s<2$, $0<q\le\infty$, $B>0$ e $C_B>0$. Ponha $c_5=c_4(B/C_B)^{1/s}$, em que $c_4$ é a constante do \cref{lp:prop:entropy-lower}. Se $N\ge1$ satisfaz $C_BN^{-s}\le\varepsilon_0B$ e $C:\mathbb B^s_{p,q}(B)\to\{0,1\}^{\le L}$, $D:\{0,1\}^{\le L}\to L^p$ são tais que $\|f-D(C(f))\|_p\le C_BN^{-s}$ para todo $f$ na bola, então
+\[
+L\ \ge\ c_5\,N-1.
+\]
+O mesmo vale para saídas restritas a uma biblioteca $\Sigma\subseteq L^p$.
+\end{corolario}
+
+\begin{proof}
+Os valores de $D$ sobre as palavras de comprimento no máximo $L$ são $2^{L+1}-1$ elementos de $L^p$, e as bolas fechadas de raio $C_BN^{-s}$ centradas neles cobrem a bola. Logo $\mathcal N(C_BN^{-s})\le2^{L+1}$. Pela \cref{lp:prop:entropy-lower} com $\varepsilon=C_BN^{-s}\le\varepsilon_0B$,
+\[
+L+1\ \ge\ \log_2\mathcal N(C_BN^{-s})\ \ge\ c_4\Bigl(\frac{B}{C_BN^{-s}}\Bigr)^{1/s}=c_4\Bigl(\frac B{C_B}\Bigr)^{1/s}N=c_5N.\qedhere
+\]
+\end{proof}
+
+\begin{observacao}
+\label{lp:obs:entropy}
+A \cref{lp:prop:entropy-lower} estabelece somente uma cota inferior, e apenas para $0<\varepsilon\le\varepsilon_0B$. Não demonstramos a cota superior $\log_2\mathcal N(\varepsilon)\lesssim(B/\varepsilon)^{1/s}$; por isso não afirmamos uma equivalência bilateral. A restrição a $\varepsilon\le\varepsilon_0B$ é indispensável: para $\varepsilon\ge B$ tem-se $\mathcal N(\varepsilon)=1$, pois $\|f\|_p\le\|f\|^*_{\Bes{s}{p}{q}}\le B$ na bola, de modo que nenhuma cota inferior positiva da forma $c(B/\varepsilon)^{1/s}$ vale para todo $\varepsilon>0$. Os resultados de Birman–Solomyak citados por \citet[Teorema~1]{lp-kerkyacharianpicard2003} tratam bolas definidas por expansões em wavelets; sua aplicação ao espaço definido aqui depende de uma equivalência de normas que não é usada na presente demonstração e que não foi verificada neste texto.
+\end{observacao}
+
 \section{Considerações finais}
-A somabilidade diádica do funcional de realização caracteriza os espaços de Besov estudados sob os orçamentos simultâneos de folhas e altura aritmética. A estimativa de Jackson fornece a inclusão direta em cada regime de regularidade, e a desigualdade inversa decorre das propriedades do módulo de suavidade. A caracterização se transfere a famílias aninhadas de redes ReLU sob inclusão exata ou aproximada, com o controle de tolerância enunciado no \cref{lp:thm:approx-stability}.
+O \cref{lp:thm:minimax-nh} determina o erro na bola unitária em função de $N$ e $H$ em toda a faixa $1\le p<\infty$, $0<s<2$ e $0<q\le\infty$. Os pisos valem para a biblioteca adaptativa e a cota superior usa uma malha uniforme. No ponto $p=s=1$, a escolha de denominadores por nó dá altura linear para a taxa $N^{-1}$. O \cref{lp:cor:minimax-realization} estende a lei ao funcional de realização.
 
-Para a taxa uniforme $N^{-s}$ por escala, os pisos e as cotas superiores fixam a potência da altura em toda a faixa $0<s<2$. A potência é $1+1/p-s$ abaixo da diagonal, $1$ de $s=1/p$ até $s=1$ e $s$ acima de $1$. Na diagonal com $p>1$ e $0<q<\infty$, a agenda linear $H_B$ também dá a cota uniforme em $\ell^q$ e a caracterização na bola de raio $B$. Nos demais casos em que as agendas suficientes incluem logaritmos, os pisos deixam em aberto se esses fatores são necessários. As agendas de log iterado refinam as condições suficientes de somabilidade.
+Na diagonal $p>1$, a agenda linear fixa dá igualdade de conjuntos para todo $q$. A \cref{lp:prop:critical-radius-growth} estabelece os limites do controle quantitativo sob essa agenda. Em $p=s=1$, $q<\infty$, a caracterização sob agenda linear permanece em aberto. As agendas de log iterado são alternativas suficientes para a somabilidade nos regimes da \cref{lp:sec:loglog}. Os pisos minimax testam o pior caso em cada escala e deixam em aberto exigências aritméticas para um alvo fixo.
 
-Para raio fixo, a codificação explícita dos aproximantes tem comprimento máximo $O(N\log N)$ na taxa uniforme em $L^p$. A entropia da bola dá uma cota inferior de ordem $N$ para qualquer codificação com o mesmo erro uniforme.
+A caracterização se transfere a redes ReLU sob as hipóteses de inclusão exata ou aproximada do \cref{lp:conj:stability,lp:thm:approx-stability}. Para raio fixo, o código explícito usa $O(N\log N)$ bits na taxa uniforme em $L^p$, e a entropia da bola dá uma cota inferior de ordem $N$.
+
 \ifbesovabnt
 \articlereferences
 \fi
@@ -1395,7 +1399,7 @@ Para raio fixo, a codificação explícita dos aproximantes tem comprimento máx
 \section{Formalização das demonstrações em Lean 4}
 \label{lp:sec:lean}
 
-O projeto \code{lean4/formalizacao} verifica, com Lean 4.28.0 e Mathlib v4.28.0 \citep{lp-mathlib,lp-lean4}, o \cref{lp:conj:besov}, nos itens (i), (ii) e (iii), o \cref{lp:conj:stability} e o \cref{lp:thm:approx-stability}. A desigualdade inversa é demonstrada para módulos a valores em $[0,\infty]$ e especializada a $L^p$. A prova direta combina Whitney, quase-interpolação, imersão contínua (regime $s>1/p$), cota em sup dos quase-interpolantes (regime $s\le1/p$) e construção da árvore diádica quantizada. A estimativa de Jackson resultante é aplicada às agendas dos itens (i), (ii) e (iii) do \cref{lp:conj:besov} e às escalas deslocadas dos \cref{lp:conj:stability,lp:thm:approx-stability}. A formalização inclui as cotas uniformes sobre bolas, o piso aritmético, as descrições binárias e as agendas de log iterado da \cref{lp:sec:uniform}.
+O projeto \code{lean4/formalizacao} verifica, com Lean 4.28.0 e Mathlib v4.28.0 \citep{lp-mathlib,lp-lean4}, o \cref{lp:conj:besov}, nos itens (i), (ii) e (iii), o \cref{lp:conj:stability} e o \cref{lp:thm:approx-stability}. A desigualdade inversa é demonstrada para módulos a valores em $[0,\infty]$ e especializada a $L^p$. A prova direta combina Whitney, quase-interpolação, imersão contínua (regime $s>1/p$), cota em sup dos quase-interpolantes (regime $s\le1/p$) e construção da árvore diádica quantizada. A estimativa de Jackson resultante é aplicada às agendas dos itens (i), (ii) e (iii) do \cref{lp:conj:besov} e às escalas deslocadas dos \cref{lp:conj:stability,lp:thm:approx-stability}. A formalização inclui as cotas uniformes sobre bolas, o piso aritmético, as descrições binárias e as agendas de log iterado da \cref{lp:sec:loglog}.
 
 \subsection{Representação dos objetos e dos teoremas}
 \label{lp:sec:fidelity}
@@ -1426,9 +1430,9 @@ Estabilidade aproximada ($s\le1/p$) & \leanname{besov_subset_stratum_low_approx}
 \end{leantable}
 
 \par\ifbesovabnt\Needspace{8\baselineskip}\else\Needspace{14\baselineskip}\fi
-\Cref{lp:tab:uniform-lean} localiza as declarações para as extensões da \cref{lp:sec:uniform}.
+\Cref{lp:tab:uniform-lean} localiza as declarações para cotas uniformes, o piso aritmético, codificação e agendas.
 
-\begin{leantable}{Declarações Lean para as extensões da Seção~6}{lp:tab:uniform-lean}{Resultado}{Declarações Lean}
+\begin{leantable}{Declarações Lean para cotas uniformes, piso aritmético, codificação e agendas}{lp:tab:uniform-lean}{Resultado}{Declarações Lean}
 Quantização e cotas uniformes & \leanname{uniform_height_quantization}, \leanname{lam_bound_unif}, \leanname{uniform_quantWeight_lt_top}, \leanname{uniform_besov_ball} \\
 Piso aritmético em $L^p$ & \leanname{arithmetic_floor_lp}, \leanname{arithmetic_floor_bestError}, \leanname{arithmetic_height_necessary} \\
 Código binário e taxa & \leanname{boundedLibrary_code}, \leanname{boundedLibrary_log_card}, \leanname{uniform_rate_bits} \\
@@ -1451,6 +1455,8 @@ Necessidade conjunta & \leanname{geometric_necessity}, \leanname{slope_necessity
 Transferência & \leanname{bestError_le_realP}, \leanname{realP_le_bestError_add} \\
 Altura linear crítica & \leanname{critical_approx}, \leanname{critical_level}, \leanname{critical_lq}, \leanname{critical_rate}, \leanname{critical_char_radius}, \leanname{critical_radius_ball_and_inclusion} \\
 \end{leantable}
+
+O piso geométrico e a desigualdade de transferência estão cobertos pelas declarações da tabela. A reprodução afim e as estimativas nos extremos sustentam a escolha $C_p=4$. As declarações críticas por nível usam uma cota dos coeficientes do módulo sem parâmetro $q$. Os resultados Lean de sequência e caracterização na bola para $H_B$ exigem $q<\infty$. A extensão a $q=\infty$, a aplicação da estimativa de saltos a $p=1$, o quantizador com denominador por nó, as duas leis minimax, a agenda linear fixa e o crescimento ótimo no raio são demonstrados no artigo. Esses novos enunciados ainda carecem de certificação em Lean.
 
 \subsection{Reprodução da verificação}
 

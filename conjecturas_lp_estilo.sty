@@ -291,7 +291,11 @@
   \ifbesovabnt
     \setlength{\parskip}{\baselineskip}%
   \else
-    \small\setlength{\parskip}{4pt plus 1pt}%
+    \ifbesovenglish
+      \small\setlength{\parskip}{4pt plus 1pt}%
+    \else
+      \footnotesize\setlength{\parskip}{3pt plus 1pt}%
+    \fi
   \fi
   \input{conjecturas_lp_referencias.tex}%
   \par\endgroup
