@@ -19,11 +19,16 @@ BLOCOS = (
     ("teorema", "lp:thm:critical-linear"),
     ("lema", "lp:lem:nodal-variable-height"),
     ("proposicao", "lp:prop:l1-linear-height"),
+    ("corolario", "lp:cor:floor"),
+    ("corolario", "lp:cor:joint-necessity"),
+    ("lema", "lp:lem:packing"),
     ("lema", "lp:lem:leaf-budget-floor"),
     ("teorema", "lp:thm:minimax-nh"),
+    ("proposicao", "lp:prop:transfer"),
     ("corolario", "lp:cor:minimax-realization"),
     ("teorema", "lp:thm:critical-fixed-agenda"),
     ("proposicao", "lp:prop:critical-radius-growth"),
+    ("corolario", "lp:cor:bits-lower"),
 )
 
 
@@ -73,6 +78,31 @@ class EdicoesTest(unittest.TestCase):
         self.assertIn(r"\PassOptionsToPackage{abnt}{conjecturas_lp_estilo}", ABNT)
         self.assertEqual(re.findall(r"\\input\{([^}]+)\}", ABNT), ["conjecturas_lp.tex"])
         self.assertEqual(rotulos(ABNT), [])
+
+    def test_dominios_corrigidos(self):
+        enunciados = (
+            ("proposicao", "prop:transfer", (r"$N\ge2$", r"$G_N\subseteq L^p$", r"$f\in L^p$")),
+            ("corolario", "cor:floor", (r"$0<s<2$",)),
+            ("corolario", "cor:joint-necessity", (r"$N\ge1$", r"$N\ge2$,", r"$R_{N,H(N)}(f)_p")),
+            ("lema", "lem:packing", (r"$m\ge1$",)),
+        )
+        for edicao, fonte in (("PT", PT), ("EN", EN)):
+            for ambiente, rotulo, hipoteses in enunciados:
+                with self.subTest(rotulo=rotulo, edicao=edicao):
+                    inicio = fonte.index(r"\label{lp:" + rotulo + "}")
+                    fim = fonte.index(r"\end{" + ambiente + "}", inicio)
+                    enunciado = fonte[inicio:fim].split(r"\begin{enumerate}", 1)[0]
+                    for hipotese in hipoteses:
+                        self.assertIn(hipotese, enunciado)
+
+    def test_contagem_da_imagem_do_decodificador(self):
+        for fonte in (PT, EN):
+            inicio = fonte.index(r"\label{lp:cor:bits-lower}")
+            fim = fonte.index(r"\end{proof}", inicio)
+            trecho = fonte[inicio:fim]
+            self.assertIn(r"\sum_{\ell=0}^L2^\ell=2^{L+1}-1", trecho)
+            self.assertIn(r"\mathcal N(C_BN^{-s})\le|\operatorname{Im}D|\le2^{L+1}-1", trecho)
+            self.assertIn(r"c_5\,N-1", trecho)
 
 
 if __name__ == "__main__":

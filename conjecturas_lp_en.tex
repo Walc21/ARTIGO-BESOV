@@ -126,7 +126,7 @@ with the convention $\inf\varnothing=+\infty$. The realization space is
 For the family $(\Sig{N})_{N\ge2}$, write $\Rfun{\Library,H}{N}$ and $\Rstr{s}{q}{\Library,H}_p$.
 \end{definicao}
 
-For independent budgets $N,H$, write
+For $f\in L^p$ and independent budgets $N,H$, the best error for $N\ge1$ and the realization functional for $N\ge2$ are given by
 \[
  e^H_{N,p}(f)=\inf_{g\in\Sigma_{N,H}}\|f-g\|_p,\qquad
  R_{N,H}(f)_p=\inf_{g\in\Sigma_{N,H}}
@@ -492,7 +492,7 @@ Set $y_j=\lambda_j(f)$ and $M=\|Q_nf\|_\infty$. By \cref{lp:lem:sup-bound}, $|y_
 \label{lp:sec:ball}
 \label{lp:sec:uniform}
 
-For $B\ge1$, write $\mathbb B^s_{p,q}(B)=\{f\in L^p:\|f\|^*_{\Bes{s}{p}{q}}\le B\}$. In \cref{lp:conj:besov}, the same schedule is used for all functions, and the proof may use thresholds that depend on $f$. Here, for fixed $(p,s,q)$, the bounds hold from $n=2$ onward throughout the ball, and the schedule includes a factor $B+1$. Set $\mathsf L(N)=\log(eN)$ and $\theta_q=\max\{0,1-1/q\}$, with $\theta_\infty=1$.
+For $B>0$, write $\mathbb B^s_{p,q}(B)=\{f\in L^p:\|f\|^*_{\Bes{s}{p}{q}}\le B\}$. In \cref{lp:conj:besov}, the same schedule is used for all functions, and the proof may use thresholds that depend on $f$. Here, for fixed $(p,s,q)$ and $B\ge1$, the bounds hold from $n=2$ onward throughout the ball, and the schedule includes a factor $B+1$. Set $\mathsf L(N)=\log(eN)$ and $\theta_q=\max\{0,1-1/q\}$, with $\theta_\infty=1$.
 
 \begin{definicao}[Parameters for each regime]
 \label{lp:def:regime}
@@ -660,7 +660,7 @@ because $y_0\in\mathcal Q_H$. The leaves have disjoint interiors and union $[0,1
 
 \begin{corolario}[Necessity of the arithmetic exponent]
 \label{lp:cor:floor}
-Let $s>0$, $C>0$, and let $H$ be a schedule with $H(N)\ge2$. Suppose that for some $N\ge2$,
+Let $1\le p<\infty$, $0<s<2$, $0<q\le\infty$, $C>0$, and let $H$ be a schedule. Suppose that for some $N\ge2$ with $H(N)\ge2$,
 \[
  \sup_{f\in\mathbb B^s_{p,q}(1)}\Rfun{\Library,H}{N}(f)_p\le C\,N^{-s}.
 \]
@@ -673,7 +673,7 @@ Since $H(N)\ge2$, the constant function $f\equiv a_{H(N)}$ has $a_{H(N)}\le1/4$ 
 
 \begin{observacao}
 \label{lp:obs:floor}
-Let $s\ge1$ with $s>1/p$, and let $\kappa=0$. The proof of \cref{lp:thm:uniform} gives, for $n=2^r$,
+Let $1\le s<2$ with $s>1/p$, $B\ge1$, and $\kappa=0$. The proof of \cref{lp:thm:uniform} gives, for $n=2^r\ge2$,
 \[
  \sup_{f\in\mathbb B^s_{p,q}(B)}\Rfun{\Library,\widehat H}{n}(f)_p
  \le\bigl((1+45C_W)B+\tfrac52\bigr)n^{-s},
@@ -748,11 +748,11 @@ The functions $g$ are $H$-Lipschitz on $[0,1]$. For $x$ in $I=[1/4+t/4,1/4+t/2]$
 
 \begin{corolario}[Joint necessity]
 \label{lp:cor:joint-necessity}
-Let $1\le p<\infty$, $0<s<2$, $0<q\le\infty$, $C>0$, $N\ge1$, and a schedule $H$ with $H(N)\ge2$. Suppose that, for every measurable $f$ with $\|f\|^*_{\Bes sp q}\le1$,
+Let $1\le p<\infty$, $0<s<2$, $0<q\le\infty$, $C>0$, $N\ge1$, and a schedule $H$ with $H(N)\ge2$. Suppose that, for every $f\in\mathbb B^s_{p,q}(1)$,
 \[
  e^{H(N)}_{N,p}(f)\le C\,N^{-s}.
 \]
-Then $H(N)\ge(c_G/C)^{1/s}N$. If $s\le1/p$, then $H(N)\ge(c_L/C)^{1/\beta}N^{1+1/p-s}$. Moreover, $H(N)\ge N^s/(2C)$. If the hypothesis is stated with $\mathscr R$ in place of $e$, it implies the hypothesis above, because $e\le\mathscr R$ by \cref{lp:prop:transfer}; hence the same conclusions hold.
+Then $H(N)\ge(c_G/C)^{1/s}N$. If $s\le1/p$, then $H(N)\ge(c_L/C)^{1/\beta}N^{1+1/p-s}$. Moreover, $H(N)\ge N^s/(2C)$. For $N\ge2$, the same conclusions follow from the assumption $R_{N,H(N)}(f)_p\le CN^{-s}$ for every $f$ in the ball, since $e^{H(N)}_{N,p}(f)\le R_{N,H(N)}(f)_p$ by \cref{lp:prop:transfer}.
 \end{corolario}
 
 \begin{proof}
@@ -767,7 +767,7 @@ K_{s,q}=\begin{cases}2^{\theta_*}\Bigl(\sum_{k\in\mathbb Z}2^{-q\theta_*|k|}\Big
 \qquad
 C_1=c_\varphi+C_2K_{s,q}.
 \]
-For $B>0$, $m\in\N$ and $\theta\in\{0,1\}^m$, define
+For $B>0$, $m\in\N$ with $m\ge1$, and $\theta\in\{0,1\}^m$, define
 \[
 f_\theta(x)=\frac{B}{C_1}\,m^{-s}\sum_{j=0}^{m-1}\theta_j\,\varphi(mx-j).
 \]
@@ -780,12 +780,12 @@ Then:
 \end{lema}
 
 \begin{proof}
-Let $a=B/C_1$ and $F=f_\theta$. The supports of $\varphi(m\cdot-j)$ are $(j/m,(j+1)/m)\subset(0,1)$, pairwise disjoint; hence $F$ is a finite sum of compactly supported functions with disjoint supports, $F\in C^\infty$, and $\operatorname{supp}F\subset(0,1)$.
+Let $a=B/C_1$ and $F=f_\theta$. Extend $\varphi$ by zero to $\R$. The support of $\varphi(m\cdot-j)$ is compact and contained in the interior $(j/m,(j+1)/m)$ of its cell. Since these interiors are disjoint, $F$ is a finite sum of smooth functions with disjoint compact supports and $\operatorname{supp}F\subset(0,1)$.
 
 \emph{Norms.} Since $\int|\varphi(mx-j)|^p\,dx=m^{-1}c_\varphi^p$ and the terms are disjoint,
 \[
-\|F\|_p^p=a^pm^{-sp-1}\,|\theta|\,c_\varphi^p,
-\qquad\text{so}\qquad \|F\|_p\le a\,m^{-s}c_\varphi,
+\|F\|_p^p=a^pm^{-sp-1}\,|\theta|\,c_\varphi^p
+\quad\Longrightarrow\quad \|F\|_p\le a\,m^{-s}c_\varphi,
 \]
 because $|\theta|\le m$. Similarly $F''(x)=a\,m^{2-s}\sum_j\theta_j\varphi''(mx-j)$ and $\|F''\|_p\le a\,m^{2-s}M_\varphi$.
 
@@ -794,7 +794,7 @@ because $|\theta|\le m$. Similarly $F''(x)=a\,m^{2-s}\sum_j\theta_j\varphi''(mx-
 \wt{F}{t}{p}&\le\min\{4\|F\|_p,\ \min(t,\tfrac12)^2\|F''\|_p\}\\
 &\le a\,m^{-s}\min\{4c_\varphi,\,M_\varphi(mt)^2\}\le C_2\,a\,m^{-s}\min\{1,(mt)^2\}.
 \end{align*}
-the last inequality because $\min\{4c_\varphi,My\}\le C_2\min\{1,y\}$ for $y\ge0$. The constant $C_2$ does not depend on $m$ or $\theta$.
+The last inequality uses $\min\{4c_\varphi,M_\varphi y\}\le C_2\min\{1,y\}$ for $y\ge0$. The constant $C_2$ is independent of $m$ and $\theta$.
 
 \emph{Besov norm.} Put $a_r=2^{rs}\wt{F}{2^{-r}}{p}$ for $r\in\N_0$, and $R=\log_2 m$ (real). If $r\le R$, then $m2^{-r}\ge1$ and
 \[
@@ -818,7 +818,7 @@ This proves (i).
 \[
 1\ge\sum_{i\le k}\binom mi p_0^i(1-p_0)^{m-i}\ge V(m,k)\,p_0^k(1-p_0)^{m-k}=V(m,k)\,2^{-mH(p_0)},
 \]
-where $H(p)=-p\log_2p-(1-p)\log_2(1-p)$. Since $H$ is increasing on $[0,1/2]$, $V(m,k)\le2^{mH(1/4)}$, with $H(1/4)\approx0.8113$. So $|\Theta_m|\ge2^{m(1-H(1/4))}\ge2^{m/6}$, because $1-H(1/4)\approx0.1887>1/6$. The minimal distance is $k+1>m/4$; for $k=0$ ($m\le3$) one may take $\Theta_m=\{0,1\}^m$.
+where $H(p)=-p\log_2p-(1-p)\log_2(1-p)$. Since $H$ is increasing on $[0,1/2]$, $V(m,k)\le2^{mH(1/4)}$. The inequality $3^9>2^{14}$ gives $H(1/4)=2-\frac34\log_2 3<5/6$. Thus $|\Theta_m|\ge2^{m(1-H(1/4))}\ge2^{m/6}$. The minimum distance is at least $k+1>m/4$. For $k=0$ ($1\le m\le3$), take $\Theta_m=\{0,1\}^m$.
 \end{proof}
 
 \section{A minimax law for two budgets}
@@ -891,14 +891,14 @@ If $X<2$, then $N\ge2$ implies $1\le 2^s C_*^{s/a}H^{-s/a}$. The zero approximan
 
 \begin{proposicao}[Exact transfer between error and realization]
 \label{lp:prop:transfer}
-Let $1\le p<\infty$, let $G_N$ be families of measurable functions, and let $f$ be measurable. With $e_N(f)=\inf_{g\in G_N}\|f-g\|_p$ and $\mathscr R_N(f)=\inf_{g\in G_N}\{\|f-g\|_p+\omega_p(g,1/N)\}$,
+Let $1\le p<\infty$, $N\ge2$, $G_N\subseteq L^p$, and $f\in L^p$. With $e_N(f)=\inf_{g\in G_N}\|f-g\|_p$ and $\mathscr R_N(f)=\inf_{g\in G_N}\{\|f-g\|_p+\wt{g}{N^{-1}}{p}\}$, we have
 \[
- e_N(f)\le\mathscr R_N(f)\le\omega_p(f,1/N)+5\,e_N(f).
+ e_N(f)\le\mathscr R_N(f)\le\wt{f}{N^{-1}}{p}+5\,e_N(f).
 \]
 \end{proposicao}
 
 \begin{proof}
-The first inequality holds because $\mathscr R_N$ adds $\omega_p(g,1/N)\ge0$ to each term of the infimum. For the second, if $g\in G_N$, then $\omega_p(g,1/N)\le\omega_p(f,1/N)+4\|f-g\|_p$ by the subadditivity of $\omega_p$ and the bound $\omega_p(h,t)\le4\|h\|_p$. Hence $\mathscr R_N(f)\le\omega_p(f,1/N)+5\|f-g\|_p$ for every $g$, and the infimum over $g$ gives the bound.
+If $G_N=\varnothing$, both infima are $+\infty$ by the convention in \cref{lp:def:realization}, and the inequalities hold in $[0,+\infty]$. Otherwise the infima are finite by \cref{lp:lem:modulus}. Nonnegativity of the modulus gives $e_N(f)\le\mathscr R_N(f)$. For every $g\in G_N$, the same lemma applied to $g=f+(g-f)$ gives $\wt{g}{N^{-1}}{p}\le\wt{f}{N^{-1}}{p}+4\|f-g\|_p$. For each $\delta>0$, choose $g\in G_N$ with $\|f-g\|_p<e_N(f)+\delta$. Then $\mathscr R_N(f)\le\wt{f}{N^{-1}}{p}+5(e_N(f)+\delta)$, and the limit $\delta\downarrow0$ gives the bound.
 \end{proof}
 
 \begin{corolario}[Minimax law for realization]
@@ -1335,7 +1335,7 @@ A closed ball of radius $\varepsilon$ contains at most one of these points, sinc
 
 \begin{corolario}[Bit lower bound]
 \label{lp:cor:bits-lower}
-Let $1\le p<\infty$, $0<s<2$, $0<q\le\infty$, $B>0$, and $C_B>0$. Put $c_5=c_4(B/C_B)^{1/s}$, where $c_4$ is the constant of \cref{lp:prop:entropy-lower}. Let $N\ge1$ satisfy $C_BN^{-s}\le\varepsilon_0B$, and let $C:\mathbb B^s_{p,q}(B)\to\{0,1\}^{\le L}$ and $D:\{0,1\}^{\le L}\to L^p$ satisfy $\|f-D(C(f))\|_p\le C_BN^{-s}$ for every $f$ in the ball. Then
+Let $1\le p<\infty$, $0<s<2$, $0<q\le\infty$, $B>0$, $C_B>0$, and let $L\ge0$ be an integer. Put $c_5=c_4(B/C_B)^{1/s}$, where $c_4$ is the constant of \cref{lp:prop:entropy-lower}. Let $N\ge1$ satisfy $C_BN^{-s}\le\varepsilon_0B$, and let $C:\mathbb B^s_{p,q}(B)\to\{0,1\}^{\le L}$ and $D:\{0,1\}^{\le L}\to L^p$ satisfy $\|f-D(C(f))\|_p\le C_BN^{-s}$ for every $f$ in the ball. Then
 \[
 L\ \ge\ c_5\,N-1.
 \]
@@ -1343,7 +1343,7 @@ The same holds for outputs restricted to a library $\Sigma\subseteq L^p$.
 \end{corolario}
 
 \begin{proof}
-The values of $D$ on the words of length at most $L$ are $2^{L+1}-1$ elements of $L^p$, and the closed balls of radius $C_BN^{-s}$ centred at them cover the ball. Hence $\mathcal N(C_BN^{-s})\le2^{L+1}$. By \cref{lp:prop:entropy-lower} with $\varepsilon=C_BN^{-s}\le\varepsilon_0B$,
+The domain of $D$ contains $\sum_{\ell=0}^L2^\ell=2^{L+1}-1$ words, including the empty word. Thus $|\operatorname{Im}D|\le2^{L+1}-1$, since distinct words can decode to the same output. The closed balls of radius $C_BN^{-s}$ centred at these outputs cover $\mathbb B^s_{p,q}(B)$. Hence $\mathcal N(C_BN^{-s})\le|\operatorname{Im}D|\le2^{L+1}-1<2^{L+1}$. By \cref{lp:prop:entropy-lower} with $\varepsilon=C_BN^{-s}\le\varepsilon_0B$,
 \[
 L+1\ \ge\ \log_2\mathcal N(C_BN^{-s})\ \ge\ c_4\Bigl(\frac{B}{C_BN^{-s}}\Bigr)^{1/s}=c_4\Bigl(\frac B{C_B}\Bigr)^{1/s}N=c_5N.\qedhere
 \]
@@ -1351,7 +1351,7 @@ L+1\ \ge\ \log_2\mathcal N(C_BN^{-s})\ \ge\ c_4\Bigl(\frac{B}{C_BN^{-s}}\Bigr)^{
 
 \begin{observacao}
 \label{lp:obs:entropy}
-\cref{lp:prop:entropy-lower} gives only a lower bound, and only for $0<\varepsilon\le\varepsilon_0B$. We do not prove the upper bound $\log_2\mathcal N(\varepsilon)\lesssim(B/\varepsilon)^{1/s}$, so we do not assert a two-sided equivalence. The restriction $\varepsilon\le\varepsilon_0B$ is indispensable: for $\varepsilon\ge B$ one has $\mathcal N(\varepsilon)=1$, since $\|f\|_p\le\|f\|^*_{\Bes{s}{p}{q}}\le B$ on the ball, so no positive lower bound of the form $c(B/\varepsilon)^{1/s}$ can hold for all $\varepsilon>0$. The Birman--Solomyak results cited through \citet[Theorem~1]{lp-kerkyacharianpicard2003} concern balls defined by wavelet expansions; applying them to the space defined here depends on a norm equivalence that the present proof does not use and that this text does not verify.
+\Cref{lp:prop:entropy-lower} proves the lower bound for $0<\varepsilon\le\varepsilon_0B$. This cutoff ensures the choice of $m$ and the strict separation used in the packing proof. The intermediate scales $\varepsilon_0B<\varepsilon<B$ lie outside the proposition's stated range. For $\varepsilon\ge B$, the single closed ball centred at zero covers the class because $\|f\|_p\le\|f\|^*_{\Bes{s}{p}{q}}\le B$. Thus $\mathcal N(\varepsilon)=1$, which rules out a positive lower bound of the form $c(B/\varepsilon)^{1/s}$ for all $\varepsilon>0$. The upper bound $\log_2\mathcal N(\varepsilon)\lesssim(B/\varepsilon)^{1/s}$ and the two-sided equivalence lie outside the proved result. The Birman--Solomyak results cited through \citet[Theorem~1]{lp-kerkyacharianpicard2003} concern balls defined by wavelet expansions; applying them to the space defined here depends on a norm equivalence that the present proof does not use and that this text does not verify.
 \end{observacao}
 
 \section{Concluding remarks}

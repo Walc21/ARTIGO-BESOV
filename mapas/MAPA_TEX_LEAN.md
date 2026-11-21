@@ -414,7 +414,7 @@ Estado: **Formalizado e compilado**. A distância racional é exata. A integral 
 
 Texto: [conjecturas_lp.tex:691](../conjecturas_lp.tex); rótulo `lp:cor:floor`.
 
-Estado: **Formalizado e compilado**. A função constante de teste pertence à bola unitária. A cota de realização em `uniform_besov_ball` com $\kappa=0$ fornece a direção suficiente da Observação 6.7 quando $s\ge1$ e $s>1/p$.
+Estado: **Formalizado e compilado**. A função constante de teste pertence à bola unitária. O corolário usa $0<s<2$ e $N\ge2$. A declaração de necessidade em Lean admite $N\ge1$ para qualquer $s\in\mathbb R$. A cota de realização em `uniform_besov_ball` com $\kappa=0$ fornece a direção suficiente da observação quando $1\le s<2$, $s>1/p$ e $B\ge1$.
 
 - [`FormalizacaoFloor.arithmetic_height_necessary`](../lean4/formalizacao/Formalizacao/ArithmeticFloor.lean) — linha 168.
 - [`FormalizacaoLow.uniform_besov_ball`](../lean4/formalizacao/Formalizacao/UnifTheorem.lean) — linha 409.
@@ -583,7 +583,7 @@ Estado: **Formalizado e compilado**. Dois intervalos disjuntos, convexidade em $
 
 Texto: [conjecturas_lp.tex:779](../conjecturas_lp.tex); rótulo `lp:cor:joint-necessity`.
 
-Estado: **Formalizado e compilado**. Versões com erro em `AlturaNecessity.lean` e com realização em `AlturaTransfer.lean`.
+Estado: **Formalizado e compilado**. No texto, o melhor erro vale para $N\ge1$ e a variante com realização para $N\ge2$. As versões com realização em `AlturaTransfer.lean` usam o funcional estendido de Lean, em que $N\ge1$ é admissível.
 
 - [`FormalizacaoAltura.geometric_necessity`](../lean4/formalizacao/Formalizacao/AlturaNecessity.lean) — linha 85.
 - [`FormalizacaoAltura.slope_necessity`](../lean4/formalizacao/Formalizacao/AlturaNecessity.lean) — linha 108.
@@ -596,7 +596,7 @@ Estado: **Formalizado e compilado**. Versões com erro em `AlturaNecessity.lean`
 
 Texto: [conjecturas_lp.tex:922](../conjecturas_lp.tex); rótulo `lp:prop:transfer`.
 
-Estado: **Formalizado e compilado**. A cota inferior `e ≤ R` e a superior `R ≤ ω + 5e` (ínfimo sobre os membros de `G_N`).
+Estado: **Formalizado e compilado**. As duas desigualdades são provadas em Lean com valores em $[0,+\infty]$. A proposição do manuscrito as usa para $N\ge2$, $f\in L^p$ e $G_N\subseteq L^p$, com $+\infty$ para os ínfimos da família vazia.
 
 - [`FormalizacaoAltura.bestError_le_realP`](../lean4/formalizacao/Formalizacao/AlturaTransfer.lean) — linha 22.
 - [`FormalizacaoAltura.realP_le_bestError_add`](../lean4/formalizacao/Formalizacao/AlturaTransfer.lean) — linha 55.
@@ -644,7 +644,7 @@ Estado: **Demonstrado no texto (sem formalização Lean)**. $L\ge c_5N-1$ para c
 
 Texto: [conjecturas_lp.tex:1383](../conjecturas_lp.tex); rótulo `lp:obs:entropy`.
 
-Estado: **Demonstrado no texto (sem formalização Lean)**. Registra que só a cota inferior é demonstrada e que a restrição a $\varepsilon\le\varepsilon_0B$ é indispensável. Sem declaração Lean correspondente.
+Estado: **Demonstrado no texto (sem formalização Lean)**. O corte $\varepsilon_0B$ é suficiente para a prova por empacotamento. Para $\varepsilon\ge B$, a cobertura usa uma bola de centro zero. As escalas intermediárias ficam fora do enunciado da cota inferior.
 
 ### M1 — constante 4 na desigualdade de Nikolskii
 

@@ -1184,7 +1184,7 @@
       "titulo": "necessidade da altura para a taxa uniforme",
       "rotulo": "lp:cor:floor",
       "estado": "Formalizado e compilado",
-      "nota": "A função constante de teste pertence à bola unitária. A cota de realização em `uniform_besov_ball` com $\\kappa=0$ fornece a direção suficiente da Observação 6.7 quando $s\\ge1$ e $s>1/p$.",
+      "nota": "A função constante de teste pertence à bola unitária. O corolário usa $0<s<2$ e $N\\ge2$. A declaração de necessidade em Lean admite $N\\ge1$ para qualquer $s\\in\\mathbb R$. A cota de realização em `uniform_besov_ball` com $\\kappa=0$ fornece a direção suficiente da observação quando $1\\le s<2$, $s>1/p$ e $B\\ge1$.",
       "lean": [
         {
           "nome": "FormalizacaoFloor.arithmetic_height_necessary",
@@ -1639,7 +1639,7 @@
       "titulo": "necessidade conjunta (erro e realização)",
       "rotulo": "lp:cor:joint-necessity",
       "estado": "Formalizado e compilado",
-      "nota": "Versões com erro em `AlturaNecessity.lean` e com realização em `AlturaTransfer.lean`.",
+      "nota": "No texto, o melhor erro vale para $N\\ge1$ e a variante com realização para $N\\ge2$. As versões com realização em `AlturaTransfer.lean` usam o funcional estendido de Lean, em que $N\\ge1$ é admissível.",
       "lean": [
         {
           "nome": "FormalizacaoAltura.geometric_necessity",
@@ -1678,7 +1678,7 @@
       "titulo": "transferência exata entre erro e realização",
       "rotulo": "lp:prop:transfer",
       "estado": "Formalizado e compilado",
-      "nota": "A cota inferior `e ≤ R` e a superior `R ≤ ω + 5e` (ínfimo sobre os membros de `G_N`).",
+      "nota": "As duas desigualdades são provadas em Lean com valores em $[0,+\\infty]$. A proposição do manuscrito as usa para $N\\ge2$, $f\\in L^p$ e $G_N\\subseteq L^p$, com $+\\infty$ para os ínfimos da família vazia.",
       "lean": [
         {
           "nome": "FormalizacaoAltura.bestError_le_realP",
@@ -1756,7 +1756,7 @@
       "titulo": "limites da entropia (observação)",
       "rotulo": "lp:obs:entropy",
       "estado": "Demonstrado no texto (sem formalização Lean)",
-      "nota": "Registra que só a cota inferior é demonstrada e que a restrição a $\\varepsilon\\le\\varepsilon_0B$ é indispensável. Sem declaração Lean correspondente.",
+      "nota": "O corte $\\varepsilon_0B$ é suficiente para a prova por empacotamento. Para $\\varepsilon\\ge B$, a cobertura usa uma bola de centro zero. As escalas intermediárias ficam fora do enunciado da cota inferior.",
       "lean": []
     },
     {

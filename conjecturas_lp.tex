@@ -155,7 +155,7 @@ com a convenção $\inf\varnothing=+\infty$. O espaço de realização é
 Para a família $(\Sig{N})_{N\ge2}$, escrevemos $\Rfun{\Library,H}{N}$ e $\Rstr{s}{q}{\Library,H}_p$.
 \end{definicao}
 
-Para orçamentos independentes $N,H$, escrevemos
+Para $f\in L^p$ e orçamentos independentes $N,H$, o melhor erro para $N\ge1$ e o funcional de realização para $N\ge2$ são dados por
 \[
  e^H_{N,p}(f)=\inf_{g\in\Sigma_{N,H}}\|f-g\|_p,\qquad
  R_{N,H}(f)_p=\inf_{g\in\Sigma_{N,H}}
@@ -521,7 +521,7 @@ Ponha $y_j=\lambda_j(f)$ e $M=\|Q_nf\|_\infty$. Pelo \cref{lp:lem:sup-bound}, $|
 \label{lp:sec:ball}
 \label{lp:sec:uniform}
 
-Para $B\ge1$, escrevemos $\mathbb B^s_{p,q}(B)=\{f\in L^p:\|f\|^*_{\Bes{s}{p}{q}}\le B\}$. No \cref{lp:conj:besov}, a agenda é a mesma para todas as funções, e a prova pode usar limiares que dependem de $f$. Aqui, fixados $(p,s,q)$, as cotas valem desde $n=2$ para toda a bola, e a agenda inclui o fator $B+1$. Ponha $\mathsf L(N)=\log(eN)$ e $\theta_q=\max\{0,1-1/q\}$, com $\theta_\infty=1$.
+Para $B>0$, escrevemos $\mathbb B^s_{p,q}(B)=\{f\in L^p:\|f\|^*_{\Bes{s}{p}{q}}\le B\}$. No \cref{lp:conj:besov}, a agenda é a mesma para todas as funções, e a prova pode usar limiares que dependem de $f$. Aqui, fixados $(p,s,q)$ e $B\ge1$, as cotas valem desde $n=2$ para toda a bola, e a agenda inclui o fator $B+1$. Ponha $\mathsf L(N)=\log(eN)$ e $\theta_q=\max\{0,1-1/q\}$, com $\theta_\infty=1$.
 
 \begin{definicao}[Dados de regime]
 \label{lp:def:regime}
@@ -689,7 +689,7 @@ pois $y_0\in\mathcal Q_H$. As folhas têm interiores disjuntos e união $[0,1]$.
 
 \begin{corolario}[Necessidade do expoente aritmético]
 \label{lp:cor:floor}
-Sejam $s>0$, $C>0$ e uma agenda $H$ com $H(N)\ge2$. Suponha que, para algum $N\ge2$,
+Sejam $1\le p<\infty$, $0<s<2$, $0<q\le\infty$, $C>0$ e uma agenda $H$. Suponha que, para algum $N\ge2$ com $H(N)\ge2$,
 \[
  \sup_{f\in\mathbb B^s_{p,q}(1)}\Rfun{\Library,H}{N}(f)_p\le C\,N^{-s}.
 \]
@@ -702,7 +702,7 @@ Como $H(N)\ge2$, a constante $f\equiv a_{H(N)}$ tem $a_{H(N)}\le1/4$, e portanto
 
 \begin{observacao}
 \label{lp:obs:floor}
-Sejam $s\ge1$ com $s>1/p$ e $\kappa=0$. Pela prova do \cref{lp:thm:uniform}, para $n=2^r$ vale
+Sejam $1\le s<2$ com $s>1/p$, $B\ge1$ e $\kappa=0$. Pela prova do \cref{lp:thm:uniform}, para $n=2^r\ge2$ vale
 \[
  \sup_{f\in\mathbb B^s_{p,q}(B)}\Rfun{\Library,\widehat H}{n}(f)_p
  \le\bigl((1+45C_W)B+\tfrac52\bigr)n^{-s},
@@ -777,11 +777,11 @@ As funções $g$ são $H$-Lipschitz em $[0,1]$. Para $x$ em $I=[1/4+t/4,1/4+t/2]
 
 \begin{corolario}[Necessidade conjunta]
 \label{lp:cor:joint-necessity}
-Sejam $1\le p<\infty$, $0<s<2$, $0<q\le\infty$, $C>0$, $N\ge1$ e uma agenda $H$ com $H(N)\ge2$. Suponha que, para todo $f$ mensurável com $\|f\|^*_{\Bes sp q}\le1$,
+Sejam $1\le p<\infty$, $0<s<2$, $0<q\le\infty$, $C>0$, $N\ge1$ e uma agenda $H$ com $H(N)\ge2$. Suponha que, para todo $f\in\mathbb B^s_{p,q}(1)$,
 \[
  e^{H(N)}_{N,p}(f)\le C\,N^{-s}.
 \]
-Então $H(N)\ge(c_G/C)^{1/s}N$. Se $s\le1/p$, então $H(N)\ge(c_L/C)^{1/\beta}N^{1+1/p-s}$. Além disso, $H(N)\ge N^s/(2C)$. Se a hipótese for feita com $\mathscr R$ no lugar de $e$, ela implica a hipótese acima, porque $e\le\mathscr R$ pela \cref{lp:prop:transfer}; logo as mesmas conclusões valem.
+Então $H(N)\ge(c_G/C)^{1/s}N$. Se $s\le1/p$, então $H(N)\ge(c_L/C)^{1/\beta}N^{1+1/p-s}$. Além disso, $H(N)\ge N^s/(2C)$. Para $N\ge2$, as mesmas conclusões seguem da hipótese $R_{N,H(N)}(f)_p\le CN^{-s}$ para todo $f$ na bola, pois $e^{H(N)}_{N,p}(f)\le R_{N,H(N)}(f)_p$ pela \cref{lp:prop:transfer}.
 \end{corolario}
 
 \begin{proof}
@@ -796,7 +796,7 @@ K_{s,q}=\begin{cases}2^{\theta_*}\Bigl(\sum_{k\in\mathbb Z}2^{-q\theta_*|k|}\Big
 \qquad
 C_1=c_\varphi+C_2K_{s,q}.
 \]
-Para $B>0$, $m\in\N$ e $\theta\in\{0,1\}^m$, defina
+Para $B>0$, $m\in\N$ com $m\ge1$ e $\theta\in\{0,1\}^m$, defina
 \[
 f_\theta(x)=\frac{B}{C_1}\,m^{-s}\sum_{j=0}^{m-1}\theta_j\,\varphi(mx-j).
 \]
@@ -809,12 +809,12 @@ Então:
 \end{lema}
 
 \begin{proof}
-Seja $a=B/C_1$ e $F=f_\theta$. Os suportes de $\varphi(m\cdot-j)$ são $(j/m,(j+1)/m)\subset(0,1)$, dois a dois disjuntos; por isso $F$ é uma soma finita de funções de suporte compacto disjunto, $F\in C^\infty$ e $\operatorname{supp}F\subset(0,1)$.
+Seja $a=B/C_1$ e $F=f_\theta$. Estenda $\varphi$ por zero a $\R$. O suporte de $\varphi(m\cdot-j)$ é compacto e está contido no interior $(j/m,(j+1)/m)$ da respectiva célula. Como esses interiores são disjuntos, $F$ é uma soma finita de funções suaves com suportes compactos disjuntos e $\operatorname{supp}F\subset(0,1)$.
 
 \emph{Normas.} Como $\int|\varphi(mx-j)|^p\,dx=m^{-1}c_\varphi^p$ e as parcelas são disjuntas,
 \[
-\|F\|_p^p=a^pm^{-sp-1}\,|\theta|\,c_\varphi^p,
-\qquad\text{logo}\qquad \|F\|_p\le a\,m^{-s}c_\varphi,
+\|F\|_p^p=a^pm^{-sp-1}\,|\theta|\,c_\varphi^p
+\quad\Longrightarrow\quad \|F\|_p\le a\,m^{-s}c_\varphi,
 \]
 pois $|\theta|\le m$. Analogamente $F''(x)=a\,m^{2-s}\sum_j\theta_j\varphi''(mx-j)$ e $\|F''\|_p\le a\,m^{2-s}M_\varphi$.
 
@@ -823,7 +823,7 @@ pois $|\theta|\le m$. Analogamente $F''(x)=a\,m^{2-s}\sum_j\theta_j\varphi''(mx-
 \wt{F}{t}{p}&\le\min\{4\|F\|_p,\ \min(t,\tfrac12)^2\|F''\|_p\}\\
 &\le a\,m^{-s}\min\{4c_\varphi,\,M_\varphi(mt)^2\}\le C_2\,a\,m^{-s}\min\{1,(mt)^2\}.
 \end{align*}
-a última desigualdade porque $\min\{4c_\varphi,My\}\le C_2\min\{1,y\}$ para $y\ge0$. A constante $C_2$ independe de $m$ e de $\theta$.
+A última desigualdade usa $\min\{4c_\varphi,M_\varphi y\}\le C_2\min\{1,y\}$ para $y\ge0$. A constante $C_2$ independe de $m$ e de $\theta$.
 
 \emph{Norma de Besov.} Ponha $a_r=2^{rs}\wt{F}{2^{-r}}{p}$ para $r\in\N_0$ e $R=\log_2 m$ (real). Se $r\le R$, então $m2^{-r}\ge1$ e
 \[
@@ -847,7 +847,7 @@ Isto prova (i).
 \[
 1\ge\sum_{i\le k}\binom mi p_0^i(1-p_0)^{m-i}\ge V(m,k)\,p_0^k(1-p_0)^{m-k}=V(m,k)\,2^{-mH(p_0)},
 \]
-com $H(p)=-p\log_2p-(1-p)\log_2(1-p)$. Como $H$ é crescente em $[0,1/2]$, $V(m,k)\le2^{mH(1/4)}$, com $H(1/4)\approx0{,}8113$. Assim $|\Theta_m|\ge2^{m(1-H(1/4))}\ge2^{m/6}$, pois $1-H(1/4)\approx0{,}1887>1/6$. A distância mínima é $k+1>m/4$; para $k=0$ ($m\le3$) vale $|\Theta_m|=2^m$ trivialmente.
+com $H(p)=-p\log_2p-(1-p)\log_2(1-p)$. Como $H$ é crescente em $[0,1/2]$, $V(m,k)\le2^{mH(1/4)}$. De $3^9>2^{14}$ segue $H(1/4)=2-\frac34\log_2 3<5/6$. Assim $|\Theta_m|\ge2^{m(1-H(1/4))}\ge2^{m/6}$. A distância mínima é pelo menos $k+1>m/4$. Para $k=0$ ($1\le m\le3$), tome $\Theta_m=\{0,1\}^m$.
 \end{proof}
 
 \section{Lei minimax em dois orçamentos}
@@ -920,14 +920,14 @@ Se $X<2$, como $N\ge2$, temos $1\le 2^s C_*^{s/a}H^{-s/a}$. O candidato zero, de
 
 \begin{proposicao}[Transferência exata entre erro e realização]
 \label{lp:prop:transfer}
-Sejam $1\le p<\infty$, $G_N$ famílias de funções mensuráveis e $f$ mensurável. Com $e_N(f)=\inf_{g\in G_N}\|f-g\|_p$ e $\mathscr R_N(f)=\inf_{g\in G_N}\{\|f-g\|_p+\omega_p(g,1/N)\}$,
+Sejam $1\le p<\infty$, $N\ge2$, $G_N\subseteq L^p$ e $f\in L^p$. Com $e_N(f)=\inf_{g\in G_N}\|f-g\|_p$ e $\mathscr R_N(f)=\inf_{g\in G_N}\{\|f-g\|_p+\wt{g}{N^{-1}}{p}\}$, vale
 \[
- e_N(f)\le\mathscr R_N(f)\le\omega_p(f,1/N)+5\,e_N(f).
+ e_N(f)\le\mathscr R_N(f)\le\wt{f}{N^{-1}}{p}+5\,e_N(f).
 \]
 \end{proposicao}
 
 \begin{proof}
-A primeira desigualdade vale porque $\mathscr R_N$ soma $\omega_p(g,1/N)\ge0$ a cada termo do ínfimo. Para a segunda, se $g\in G_N$, então $\omega_p(g,1/N)\le\omega_p(f,1/N)+4\|f-g\|_p$ pela subaditividade de $\omega_p$ e pela cota $\omega_p(h,t)\le4\|h\|_p$. Logo $\mathscr R_N(f)\le\omega_p(f,1/N)+5\|f-g\|_p$ para todo $g$, e o ínfimo sobre $g$ dá a cota.
+Se $G_N=\varnothing$, ambos os ínfimos são $+\infty$ pela convenção da \cref{lp:def:realization}, e as desigualdades valem em $[0,+\infty]$. Caso contrário, os ínfimos são finitos pelo \cref{lp:lem:modulus}. A não negatividade do módulo dá $e_N(f)\le\mathscr R_N(f)$. Para todo $g\in G_N$, o mesmo lema aplicado a $g=f+(g-f)$ dá $\wt{g}{N^{-1}}{p}\le\wt{f}{N^{-1}}{p}+4\|f-g\|_p$. Para cada $\delta>0$, escolha $g\in G_N$ com $\|f-g\|_p<e_N(f)+\delta$. Assim $\mathscr R_N(f)\le\wt{f}{N^{-1}}{p}+5(e_N(f)+\delta)$, e o limite $\delta\downarrow0$ dá a cota.
 \end{proof}
 
 \begin{corolario}[Lei minimax para a realização]
@@ -1365,7 +1365,7 @@ Uma bola fechada de raio $\varepsilon$ contém no máximo um ponto de $\{f_\thet
 
 \begin{corolario}[Cota inferior de bits]
 \label{lp:cor:bits-lower}
-Sejam $1\le p<\infty$, $0<s<2$, $0<q\le\infty$, $B>0$ e $C_B>0$. Ponha $c_5=c_4(B/C_B)^{1/s}$, em que $c_4$ é a constante do \cref{lp:prop:entropy-lower}. Se $N\ge1$ satisfaz $C_BN^{-s}\le\varepsilon_0B$ e $C:\mathbb B^s_{p,q}(B)\to\{0,1\}^{\le L}$, $D:\{0,1\}^{\le L}\to L^p$ são tais que $\|f-D(C(f))\|_p\le C_BN^{-s}$ para todo $f$ na bola, então
+Sejam $1\le p<\infty$, $0<s<2$, $0<q\le\infty$, $B>0$, $C_B>0$ e um inteiro $L\ge0$. Ponha $c_5=c_4(B/C_B)^{1/s}$, em que $c_4$ é a constante do \cref{lp:prop:entropy-lower}. Se $N\ge1$ satisfaz $C_BN^{-s}\le\varepsilon_0B$ e $C:\mathbb B^s_{p,q}(B)\to\{0,1\}^{\le L}$, $D:\{0,1\}^{\le L}\to L^p$ são tais que $\|f-D(C(f))\|_p\le C_BN^{-s}$ para todo $f$ na bola, então
 \[
 L\ \ge\ c_5\,N-1.
 \]
@@ -1373,7 +1373,7 @@ O mesmo vale para saídas restritas a uma biblioteca $\Sigma\subseteq L^p$.
 \end{corolario}
 
 \begin{proof}
-Os valores de $D$ sobre as palavras de comprimento no máximo $L$ são $2^{L+1}-1$ elementos de $L^p$, e as bolas fechadas de raio $C_BN^{-s}$ centradas neles cobrem a bola. Logo $\mathcal N(C_BN^{-s})\le2^{L+1}$. Pela \cref{lp:prop:entropy-lower} com $\varepsilon=C_BN^{-s}\le\varepsilon_0B$,
+O domínio de $D$ contém $\sum_{\ell=0}^L2^\ell=2^{L+1}-1$ palavras, incluindo a palavra vazia. Logo $|\operatorname{Im}D|\le2^{L+1}-1$, pois palavras distintas podem produzir a mesma saída. As bolas fechadas de raio $C_BN^{-s}$ centradas nessas saídas cobrem $\mathbb B^s_{p,q}(B)$. Assim $\mathcal N(C_BN^{-s})\le|\operatorname{Im}D|\le2^{L+1}-1<2^{L+1}$. Pela \cref{lp:prop:entropy-lower} com $\varepsilon=C_BN^{-s}\le\varepsilon_0B$,
 \[
 L+1\ \ge\ \log_2\mathcal N(C_BN^{-s})\ \ge\ c_4\Bigl(\frac{B}{C_BN^{-s}}\Bigr)^{1/s}=c_4\Bigl(\frac B{C_B}\Bigr)^{1/s}N=c_5N.\qedhere
 \]
@@ -1381,7 +1381,7 @@ L+1\ \ge\ \log_2\mathcal N(C_BN^{-s})\ \ge\ c_4\Bigl(\frac{B}{C_BN^{-s}}\Bigr)^{
 
 \begin{observacao}
 \label{lp:obs:entropy}
-A \cref{lp:prop:entropy-lower} estabelece somente uma cota inferior, e apenas para $0<\varepsilon\le\varepsilon_0B$. Não demonstramos a cota superior $\log_2\mathcal N(\varepsilon)\lesssim(B/\varepsilon)^{1/s}$; por isso não afirmamos uma equivalência bilateral. A restrição a $\varepsilon\le\varepsilon_0B$ é indispensável: para $\varepsilon\ge B$ tem-se $\mathcal N(\varepsilon)=1$, pois $\|f\|_p\le\|f\|^*_{\Bes{s}{p}{q}}\le B$ na bola, de modo que nenhuma cota inferior positiva da forma $c(B/\varepsilon)^{1/s}$ vale para todo $\varepsilon>0$. Os resultados de Birman–Solomyak citados por \citet[Teorema~1]{lp-kerkyacharianpicard2003} tratam bolas definidas por expansões em wavelets; sua aplicação ao espaço definido aqui depende de uma equivalência de normas que não é usada na presente demonstração e que não foi verificada neste texto.
+A \cref{lp:prop:entropy-lower} demonstra a cota inferior para $0<\varepsilon\le\varepsilon_0B$. Esse corte garante a escolha de $m$ e a separação estrita usadas na prova por empacotamento. As escalas intermediárias $\varepsilon_0B<\varepsilon<B$ ficam fora do enunciado da proposição. Para $\varepsilon\ge B$, a bola fechada centrada em zero cobre a classe, pois $\|f\|_p\le\|f\|^*_{\Bes{s}{p}{q}}\le B$. Assim $\mathcal N(\varepsilon)=1$, o que impede uma cota inferior positiva da forma $c(B/\varepsilon)^{1/s}$ para todo $\varepsilon>0$. A cota superior $\log_2\mathcal N(\varepsilon)\lesssim(B/\varepsilon)^{1/s}$ e a equivalência bilateral ficam fora do resultado demonstrado. Os resultados de Birman–Solomyak citados por \citet[Teorema~1]{lp-kerkyacharianpicard2003} tratam bolas definidas por expansões em wavelets; sua aplicação ao espaço definido aqui depende de uma equivalência de normas que não é usada na presente demonstração e que não foi verificada neste texto.
 \end{observacao}
 
 \section{Considerações finais}
