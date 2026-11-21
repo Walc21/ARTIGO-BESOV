@@ -292,3 +292,7 @@ e nunca `sorryAx`. Executar: `lake env lean Formalizacao/Auditoria.lean`.
 #print axioms FormalizacaoMinimax.upper_bound_dyadic
 #print axioms FormalizacaoMinimax.exists_dyadic_scale
 #print axioms FormalizacaoMinimax.upper_bound_NH
+
+-- F5: composição da cota inferior e Teorema 5.2
+#print axioms FormalizacaoMinimax.lower_bound_NH
+#print axioms FormalizacaoMinimax.minimax_nh

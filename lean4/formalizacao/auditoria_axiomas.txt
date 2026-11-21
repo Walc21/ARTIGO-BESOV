@@ -235,3 +235,5 @@
 'FormalizacaoMinimax.upper_bound_dyadic' depends on axioms: [propext, Classical.choice, Quot.sound]
 'FormalizacaoMinimax.exists_dyadic_scale' depends on axioms: [propext, Classical.choice, Quot.sound]
 'FormalizacaoMinimax.upper_bound_NH' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FormalizacaoMinimax.lower_bound_NH' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FormalizacaoMinimax.minimax_nh' depends on axioms: [propext, Classical.choice, Quot.sound]

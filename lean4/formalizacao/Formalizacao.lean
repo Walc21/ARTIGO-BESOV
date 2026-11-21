@@ -76,6 +76,7 @@ import Formalizacao.LeafFloor
 import Formalizacao.NodalVariable
 import Formalizacao.L1LinearHeight
 import Formalizacao.MinimaxUpper
+import Formalizacao.MinimaxFinal
 
 /-!
 # Formalização do artigo «Funcional de realização aritmético em `L^p`»

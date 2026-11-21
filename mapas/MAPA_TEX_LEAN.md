@@ -547,10 +547,11 @@ Estado: **Apoio Lean (salto com hipóteses por célula)**. A soma telescópica a
 
 Texto: [conjecturas_lp.tex:622](../conjecturas_lp.tex); rótulo `lp:thm:critical-linear`.
 
-Estado: **Formalizado para q finito, extensão analítica a q infinito**. A agenda crítica usa a constante `Avc p CW`, independente de q, e o fator B+1. As declarações por nível usam controle de cada coeficiente do módulo, sem introduzir q. As estimativas em sequência e a inclusão direta na bola exigem `q ≠ ⊤` no Lean. O texto também prova o caso q infinito.
+Estado: **Formalizado para q finito, extensão analítica a q infinito**. A agenda crítica usa `Avc p CW`, independente de q, e o fator B+1. A F4 prova a cota de aproximação em Lᵖ por escala na bola unitária, também para q infinito. As declarações de realização e somabilidade listadas nos itens (b)–(d) exigem q finito.
 
 - [`FormalizacaoCrit.critical_approx`](../lean4/formalizacao/Formalizacao/AlturaCritical.lean) — linha 266.; quantização de $Q_nf$ no item (a), combinada no texto com o erro de quase-interpolação.
 - [`FormalizacaoCrit2.critical_level`](../lean4/formalizacao/Formalizacao/AlturaCritical2.lean) — linha 135.; cota de realização por nível.
+- [`FormalizacaoMinimax.critical_upper_dyadic`](../lean4/formalizacao/Formalizacao/MinimaxUpper.lean) — linha 64. Cota de aproximação na bola unitária para todo q > 0.
 - [`FormalizacaoCrit3.critical_lq`](../lean4/formalizacao/Formalizacao/AlturaCritical3.lean) — linha 311.; item (c).
 - [`FormalizacaoCrit3.critical_rate`](../lean4/formalizacao/Formalizacao/AlturaCritical3.lean) — linha 514.; item (b).
 - [`FormalizacaoCrit3.critical_char_radius`](../lean4/formalizacao/Formalizacao/AlturaCritical3.lean) — linha 556.; item (d).
@@ -659,33 +660,37 @@ Estado: **Justificação analítica com apoio Lean**. A especialização a funç
 
 Texto: [conjecturas_lp.tex:865](../conjecturas_lp.tex); rótulo `lp:lem:leaf-budget-floor`.
 
-Estado: **Demonstrado no texto (sem formalização Lean)**. A contagem das células de teste livres de fronteiras e o argumento com 2N bumps são analíticos. O teste de distância a funções afins em uma célula oferece apoio parcial.
+Estado: **Formalizado e compilado**. A prova conta as células de teste livres de fronteiras e usa 2N bumps.
 
-- [`FormalizacaoAltura.L1_affine_lower`](../lean4/formalizacao/Formalizacao/AlturaFloor.lean) — linha 144. Apoio parcial para esta prova.
+- [`FormalizacaoLeaf.leaf_floor_const`](../lean4/formalizacao/Formalizacao/LeafFloor.lean) — linha 433.
 
 ### M3 — quantização com denominador por nó
 
 Texto: [conjecturas_lp.tex:447](../conjecturas_lp.tex); rótulo `lp:lem:nodal-variable-height`.
 
-Estado: **Demonstrado no texto (sem formalização Lean)**. A quantização variável usa um denominador comum por folha e duas exclusões nos nós ímpares. A declaração de denominador comum em toda a malha cobre a construção anterior.
+Estado: **Formalizado e compilado**. A quantização usa grades diádicas por nó e denominador comum por folha. A soma dos erros nodais controla o erro em L¹.
+
+- [`FormalizacaoAltura.nodal_variable_height`](../lean4/formalizacao/Formalizacao/NodalVariable.lean) — linha 295.
 
 ### M4 — altura linear em B¹₁,q por escala
 
 Texto: [conjecturas_lp.tex:649](../conjecturas_lp.tex); rótulo `lp:prop:l1-linear-height`.
 
-Estado: **Demonstrado no texto (sem formalização Lean)**. A média dos módulos dos valores nodais e o novo lema de quantização dão a cota em p=s=1. A declaração citada controla a soma dos saltos sob hipóteses por célula.
+Estado: **Formalizado e compilado**. A média dos módulos dos valores nodais controla o erro com altura linear para todo q > 0.
 
-- [`FormalizacaoCrit.nodal_jump`](../lean4/formalizacao/Formalizacao/AlturaCritical.lean) — linha 82. Apoio parcial para esta prova.
+- [`FormalizacaoAltura.l1_linear_height`](../lean4/formalizacao/Formalizacao/L1LinearHeight.lean) — linha 149.
 
 ### M5 — lei minimax conjunta em N e H
 
 Texto: [conjecturas_lp.tex:886](../conjecturas_lp.tex); rótulo `lp:thm:minimax-nh`.
 
-Estado: **Demonstrado no texto (sem formalização Lean)**. A equivalência conjunta combina o piso em folhas com os três pisos de altura e as construções por escala. O enunciado final, com supremo sobre a bola e ambos os orçamentos livres, é analítico.
+Estado: **Formalizado e compilado**. A cota superior usa escalas diádicas e a passagem para orçamentos independentes. A cota inferior combina o piso de folhas e os três pisos de altura no supremo sobre a bola.
 
-- [`FormalizacaoAltura.geometric_floor`](../lean4/formalizacao/Formalizacao/AlturaFloor.lean) — linha 363. Apoio parcial para esta prova.
-- [`FormalizacaoAltura.slope_floor`](../lean4/formalizacao/Formalizacao/AlturaSlope.lean) — linha 250. Apoio parcial para esta prova.
-- [`FormalizacaoFloor.arithmetic_floor_bestError`](../lean4/formalizacao/Formalizacao/ArithmeticFloor.lean) — linha 148. Apoio parcial para esta prova.
+- [`FormalizacaoMinimax.minimax_nh`](../lean4/formalizacao/Formalizacao/MinimaxFinal.lean) — linha 64. Enunciado completo.
+- [`FormalizacaoMinimax.lower_bound_NH`](../lean4/formalizacao/Formalizacao/MinimaxFinal.lean) — linha 35. Cota inferior.
+- [`FormalizacaoMinimax.upper_bound_NH`](../lean4/formalizacao/Formalizacao/MinimaxUpper.lean) — linha 212. Cota superior.
+- [`FormalizacaoMinimax.aPS`](../lean4/formalizacao/Formalizacao/MinimaxDefs.lean) — linha 22. Expoente da altura.
+- [`FormalizacaoMinimax.Dfun`](../lean4/formalizacao/Formalizacao/MinimaxDefs.lean) — linha 28. Funcional minimax em Lᵖ.
 
 ### M6 — lei minimax do funcional de realização
 
@@ -716,8 +721,8 @@ Estado: **Demonstrado no texto (sem formalização Lean)**. A cota em função d
 
 | Estado | Entradas |
 |---|---|
-| Formalizado e compilado | 39 |
-| Demonstrado no texto (sem formalização Lean) | 11 |
+| Formalizado e compilado | 43 |
+| Demonstrado no texto (sem formalização Lean) | 7 |
 | Formalizado (definição) | 6 |
 | Formalizado e compilado, condicional a $J_p$ | 3 |
 | Apoio Lean (salto com hipóteses por célula) | 1 |
