@@ -550,7 +550,7 @@ Texto: [conjecturas_lp.tex:622](../conjecturas_lp.tex); rótulo `lp:thm:critical
 Estado: **Formalizado para q finito, extensão analítica a q infinito**. A agenda crítica usa a constante `Avc p CW`, independente de q, e o fator B+1. As declarações por nível usam controle de cada coeficiente do módulo, sem introduzir q. As estimativas em sequência e a inclusão direta na bola exigem `q ≠ ⊤` no Lean. O texto também prova o caso q infinito.
 
 - [`FormalizacaoCrit.critical_approx`](../lean4/formalizacao/Formalizacao/AlturaCritical.lean) — linha 266.; quantização de $Q_nf$ no item (a), combinada no texto com o erro de quase-interpolação.
-- [`FormalizacaoCrit2.critical_level`](../lean4/formalizacao/Formalizacao/AlturaCritical2.lean) — linha 90.; cota de realização por nível.
+- [`FormalizacaoCrit2.critical_level`](../lean4/formalizacao/Formalizacao/AlturaCritical2.lean) — linha 135.; cota de realização por nível.
 - [`FormalizacaoCrit3.critical_lq`](../lean4/formalizacao/Formalizacao/AlturaCritical3.lean) — linha 311.; item (c).
 - [`FormalizacaoCrit3.critical_rate`](../lean4/formalizacao/Formalizacao/AlturaCritical3.lean) — linha 514.; item (b).
 - [`FormalizacaoCrit3.critical_char_radius`](../lean4/formalizacao/Formalizacao/AlturaCritical3.lean) — linha 556.; item (d).

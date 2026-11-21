@@ -85,6 +85,51 @@ lemma B0_le {p CW B : ℝ} (hp : 1 ≤ p) (hCW : 0 ≤ CW) {f : ℝ → ℝ} (hf
       ≤ 8 * (2 : ℝ) ^ (1 / p) * (B + 9 * CW * B) := mul_le_mul_of_nonneg_left (by linarith) (by positivity)
     _ = 8 * (2 : ℝ) ^ (1 / p) * (1 + 9 * CW) * B := by ring
 
+/-- Erro em `L^p` do aproximante construído por `critical_approx`. -/
+theorem critical_dist {p CW : ℝ} (hp : 1 < p) (hW : FormalizacaoCor.WhitneyLp p CW)
+    (hCW : 0 ≤ CW) {f : ℝ → ℝ} (hf : Measurable f) (hfi : IntegrableOn f (Icc 0 1))
+    (hfin : Np p f (Icc 0 1) < ⊤) {B : ℝ} (hB : 0 ≤ B)
+    (hWB : ∀ k : ℕ, 1 ≤ k → (2 : ℝ) ^ ((k : ℝ) * (1 / p)) * Wr p f (2 ^ k) ≤ B)
+    {r : ℕ} (hr : 1 ≤ r) {H : ℕ}
+    (hH1 : 8 * (2 : ℝ) ^ r ≤ H)
+    (hH2 : 16 * (B0 p CW f + 144 * CW * (2 : ℝ) ^ (1 / p) * B * r + 1) ≤ H)
+    (hH3 : (2 : ℝ) ^ r * (4 * B0 p CW f + 288 * CW * (2 : ℝ) ^ (1 / p) * B + 1) ≤ H) :
+    ∃ T : LTree, AdmNH (2 ^ r) H T ∧
+      distP (ENNReal.ofReal p) f (T.eval 0 0) ≤
+        9 * ENNReal.ofReal CW * wtP (ENNReal.ofReal p) (1 / ((2 ^ r : ℕ) : ℝ)) f +
+          ENNReal.ofReal (8 * (B0 p CW f + 144 * CW * (2 : ℝ) ^ (1 / p) * B * r + 1) / H) := by
+  obtain ⟨T, hT, hbound⟩ := critical_approx hp hW hCW hf hfi hfin hB hWB hr hH1 hH2 hH3
+  have hTmem : T.eval 0 0 ∈ Pendencias.Agenda.Sigma (fun _ ↦ H) (2 ^ r) := by
+    simp only [Pendencias.Agenda.Sigma, Set.mem_setOf_eq]
+    exact Or.inr ⟨T, hT, rfl⟩
+  have hTm : Measurable (T.eval 0 0) := FormalizacaoLp.measurable_sigma hTmem
+  have hp1' : (1 : ℝ≥0∞) ≤ ENNReal.ofReal p := ENNReal.one_le_ofReal.mpr hp.le
+  have hn2 : 2 ≤ 2 ^ r := by
+    calc 2 = 2 ^ 1 := by norm_num
+      _ ≤ 2 ^ r := Nat.pow_le_pow_right (by norm_num) hr
+  have hQq := FormalizacaoCor.quasi_error hp.le hW hn2 hf hfi hfin
+  have hQc : Continuous (Q (2 ^ r) f) := FormalizacaoL55.Q_continuous (2 ^ r) f
+  refine ⟨T, hT, ?_⟩
+  unfold distP
+  have hsplit : f - T.eval 0 0 = (fun x ↦ f x - Q (2 ^ r) f x) +
+      (fun x ↦ Q (2 ^ r) f x - T.eval 0 0 x) := by
+    funext x
+    simp only [Pi.add_apply, Pi.sub_apply]
+    ring
+  rw [hsplit]
+  have hm1 : AEStronglyMeasurable (fun x ↦ f x - Q (2 ^ r) f x) (volume.restrict (Icc 0 1)) :=
+    (hf.sub hQc.measurable).aestronglyMeasurable
+  have hm2 : AEStronglyMeasurable (fun x ↦ Q (2 ^ r) f x - T.eval 0 0 x)
+      (volume.restrict (Icc 0 1)) :=
+    (hQc.measurable.sub hTm).aestronglyMeasurable
+  refine (eLpNorm_add_le hm1 hm2 hp1').trans (add_le_add hQq ?_)
+  refine (eLpNorm_le_of_ae_bound
+    (C := 8 * (B0 p CW f + 144 * CW * (2 : ℝ) ^ (1 / p) * B * r + 1) / H) ?_).trans ?_
+  · filter_upwards [ae_restrict_mem measurableSet_Icc] with x hx
+    rw [Real.norm_eq_abs]
+    exact hbound x hx
+  · simp [Real.volume_Icc]
+
 /-- **Cota de realização de um nível crítico.** Para `H` com as três condições de
 `critical_approx`, `R_N^H(f) ≤ ω + 5(9 C_W ω + 8(M+1)/H)` com `ω = ω_p(f,1/N)`, `N = 2^r`. -/
 theorem critical_level {p CW : ℝ} (hp : 1 < p) (hW : FormalizacaoCor.WhitneyLp p CW)
@@ -95,43 +140,18 @@ theorem critical_level {p CW : ℝ} (hp : 1 < p) (hW : FormalizacaoCor.WhitneyLp
     (hH1 : 8 * (2 : ℝ) ^ r ≤ H)
     (hH2 : 16 * (B0 p CW f + 144 * CW * (2 : ℝ) ^ (1 / p) * B * r + 1) ≤ H)
     (hH3 : (2 : ℝ) ^ r * (4 * B0 p CW f + 288 * CW * (2 : ℝ) ^ (1 / p) * B + 1) ≤ H) :
-    realP (ENNReal.ofReal p) (fun M => Pendencias.Agenda.Sigma (fun _ => H) M) (2 ^ r) f ≤
+    realP (ENNReal.ofReal p) (fun M ↦ Pendencias.Agenda.Sigma (fun _ ↦ H) M) (2 ^ r) f ≤
       wtP (ENNReal.ofReal p) (1 / ((2 ^ r : ℕ) : ℝ)) f +
         5 * (9 * ENNReal.ofReal CW * wtP (ENNReal.ofReal p) (1 / ((2 ^ r : ℕ) : ℝ)) f +
           ENNReal.ofReal (8 * (B0 p CW f + 144 * CW * (2 : ℝ) ^ (1 / p) * B * r + 1) / H)) := by
-  obtain ⟨T, hT, hbound⟩ := critical_approx hp hW hCW hf hfi hfin hB hWB hr hH1 hH2 hH3
-  have hTmem : T.eval 0 0 ∈ Pendencias.Agenda.Sigma (fun _ => H) (2 ^ r) := by
+  obtain ⟨T, hT, hdist⟩ := critical_dist hp hW hCW hf hfi hfin hB hWB hr hH1 hH2 hH3
+  have hTmem : T.eval 0 0 ∈ Pendencias.Agenda.Sigma (fun _ ↦ H) (2 ^ r) := by
     simp only [Pendencias.Agenda.Sigma, Set.mem_setOf_eq]
     exact Or.inr ⟨T, hT, rfl⟩
   have hTm : Measurable (T.eval 0 0) := FormalizacaoLp.measurable_sigma hTmem
   have hp1' : (1 : ℝ≥0∞) ≤ ENNReal.ofReal p := ENNReal.one_le_ofReal.mpr hp.le
-  have hr' := FormalizacaoAltura.realP_le_of_member hp1' (fun M => Pendencias.Agenda.Sigma (fun _ => H) M) (2 ^ r)
+  have hr' := FormalizacaoAltura.realP_le_of_member hp1' (fun M ↦ Pendencias.Agenda.Sigma (fun _ ↦ H) M) (2 ^ r)
     hf hTmem hTm
-  have hn2 : 2 ≤ 2 ^ r := by
-    calc 2 = 2 ^ 1 := by norm_num
-      _ ≤ 2 ^ r := Nat.pow_le_pow_right (by norm_num) hr
-  have hQq := FormalizacaoCor.quasi_error hp.le hW hn2 hf hfi hfin
-  have hQc : Continuous (Q (2 ^ r) f) := FormalizacaoL55.Q_continuous (2 ^ r) f
-  have hdist : distP (ENNReal.ofReal p) f (T.eval 0 0) ≤
-      9 * ENNReal.ofReal CW * wtP (ENNReal.ofReal p) (1 / ((2 ^ r : ℕ) : ℝ)) f +
-        ENNReal.ofReal (8 * (B0 p CW f + 144 * CW * (2 : ℝ) ^ (1 / p) * B * r + 1) / H) := by
-    unfold distP
-    have hsplit : f - T.eval 0 0 = (fun x => f x - Q (2 ^ r) f x) +
-        (fun x => Q (2 ^ r) f x - T.eval 0 0 x) := by
-      funext x; simp only [Pi.add_apply, Pi.sub_apply]; ring
-    rw [hsplit]
-    have hm1 : AEStronglyMeasurable (fun x => f x - Q (2 ^ r) f x) (volume.restrict (Icc 0 1)) :=
-      (hf.sub hQc.measurable).aestronglyMeasurable
-    have hm2 : AEStronglyMeasurable (fun x => Q (2 ^ r) f x - T.eval 0 0 x)
-        (volume.restrict (Icc 0 1)) :=
-      (hQc.measurable.sub hTm).aestronglyMeasurable
-    refine (eLpNorm_add_le hm1 hm2 hp1').trans (add_le_add hQq ?_)
-    refine (eLpNorm_le_of_ae_bound (C := 8 * (B0 p CW f + 144 * CW * (2 : ℝ) ^ (1 / p) * B * r + 1) / H)
-      ?_).trans ?_
-    · filter_upwards [ae_restrict_mem measurableSet_Icc] with x hx
-      rw [Real.norm_eq_abs]
-      exact hbound x hx
-    · simp [Real.volume_Icc]
   refine hr'.trans ?_
   exact add_le_add le_rfl (mul_le_mul_left' hdist 5)
 

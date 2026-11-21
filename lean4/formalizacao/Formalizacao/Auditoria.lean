@@ -283,3 +283,12 @@ e nunca `sorryAx`. Executar: `lake env lean Formalizacao/Auditoria.lean`.
 
 -- F3.2: altura linear no caso p = s = 1
 #print axioms FormalizacaoAltura.l1_linear_height
+
+-- F4: altura linear crítica, escala diádica e cota superior em dois orçamentos
+#print axioms FormalizacaoCrit2.critical_dist
+#print axioms FormalizacaoMinimax.classNH_mono
+#print axioms FormalizacaoMinimax.sigma_const_mono
+#print axioms FormalizacaoMinimax.critical_upper_dyadic
+#print axioms FormalizacaoMinimax.upper_bound_dyadic
+#print axioms FormalizacaoMinimax.exists_dyadic_scale
+#print axioms FormalizacaoMinimax.upper_bound_NH
