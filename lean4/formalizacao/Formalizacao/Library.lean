@@ -3,10 +3,10 @@ import Formalizacao.LpDefs
 /-!
 # Mensurabilidade da biblioteca `Σ_N` e inclusão `A_{N,H} ⊆ Σ_N`
 
-Os elementos de `Σ_N = Pendencias.Agenda.Sigma H N` são `0` ou `T.eval 0 0` para uma árvore
-`T`. Não precisamos da continuidade (que não está formalizada na Parte IV): basta a
-mensurabilidade, que segue por indução na árvore, porque `eval` é definido por casos
-`if x < c then … else …` sobre folhas afins.
+Os elementos de `Σ_N = Pendencias.Agenda.Sigma H N` são `0` ou `T.eval 0 0` para uma árvore `T`.
+A mensurabilidade segue por indução, pois `eval` é definido por casos sobre folhas afins.
+Na biblioteca admissível, `Artigo.LTree.WF` impõe a colagem e `Artigo.LTree.eval_leaf`
+trata folhas fechadas. `FormalizacaoAltura.classNH_lipschitz` implica continuidade em `[0,1]`.
 -/
 
 open MeasureTheory Set

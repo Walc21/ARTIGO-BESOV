@@ -1,0 +1,354 @@
+✔ [8026/8140] Built Formalizacao.Kernel (35s)
+✔ [8027/8140] Built Pendencias.Extensao (35s)
+⚠ [8028/8140] Built Formalizacao.QuasiLocal (36s)
+warning: Formalizacao/QuasiLocal.lean:69:15: This simp argument is unused:
+  id
+
+Hint: Omit it from the simp argument list.
+  simp only [i̵d̵,̵ ̵Nat.cast_ofNat]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Formalizacao/QuasiLocal.lean:109:15: This simp argument is unused:
+  id
+
+Hint: Omit it from the simp argument list.
+  simp only [i̵d̵,̵ ̵Nat.cast_ofNat]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Formalizacao/QuasiLocal.lean:139:47: unused variable `hkm`
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Formalizacao/QuasiLocal.lean:209:52: This simp argument is unused:
+  Pi.mul_apply
+
+Hint: Omit it from the simp argument list.
+  simp only [hF, id, Pi.sub_apply, P̵i̵.̵m̵u̵l̵_̵a̵p̵p̵l̵y̵,̵ ̵Pi.pow_apply]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Formalizacao/QuasiLocal.lean:266:52: This simp argument is unused:
+  Pi.mul_apply
+
+Hint: Omit it from the simp argument list.
+  simp only [hG, id, Pi.sub_apply, P̵i̵.̵m̵u̵l̵_̵a̵p̵p̵l̵y̵,̵ ̵Pi.pow_apply]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+✔ [8029/8140] Built RequestProject.Sawtooth (40s)
+⚠ [8030/8140] Built Formalizacao.ModuloENN (15s)
+warning: Formalizacao/ModuloENN.lean:83:30: `mul_le_mul_left'` has been deprecated: Use `mul_le_mul_right` instead
+warning: Formalizacao/ModuloENN.lean:126:10: `mul_le_mul_left'` has been deprecated: Use `mul_le_mul_right` instead
+✔ [8031/8140] Built Formalizacao.Modulo (15s)
+⚠ [8032/8140] Built RequestProject.Indexing (22s)
+warning: RequestProject/Indexing.lean:314:13: `Finset.filter_card_add_filter_neg_card_eq_card` has been deprecated: Use `Finset.card_filter_add_card_filter_not` instead
+warning: RequestProject/Indexing.lean:345:0: automatically included section variable(s) unused in theorem `Artigo.shell_mono`:
+  [DecidableEq α]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [DecidableEq α] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: RequestProject/Indexing.lean:348:0: automatically included section variable(s) unused in theorem `Artigo.lvl_le_of_lt`:
+  [DecidableEq α]
+  hS
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [DecidableEq α] hS in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+✔ [8033/8140] Built RequestProject.Interp (23s)
+⚠ [8034/8140] Built Formalizacao.QuasiGrid (11s)
+warning: Formalizacao/QuasiGrid.lean:48:25: unused variable `hn`
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+✔ [8035/8140] Built RequestProject.Atoms (14s)
+⚠ [8036/8140] Built Formalizacao.LocalError (10s)
+warning: Formalizacao/LocalError.lean:166:81: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: Formalizacao/LocalError.lean:275:19: `mul_le_mul_left'` has been deprecated: Use `mul_le_mul_right` instead
+warning: Formalizacao/LocalError.lean:280:19: `mul_le_mul_left'` has been deprecated: Use `mul_le_mul_right` instead
+warning: Formalizacao/LocalError.lean:179:5: unused variable `hfin0`
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+✔ [8037/8140] Built RequestProject.Trees (12s)
+✔ [8038/8140] Built Formalizacao.Lemma52d (11s)
+✔ [8039/8140] Built RequestProject.Addresses (17s)
+✔ [8040/8140] Built RequestProject.Uniform (15s)
+✔ [8041/8140] Built RequestProject.Coding (11s)
+✔ [8042/8140] Built RequestProject.Dyadic (18s)
+✔ [8043/8140] Built RequestProject.DyadicTools (12s)
+⚠ [8044/8140] Built RequestProject.Formats (16s)
+warning: RequestProject/Formats.lean:476:34: unused variable `hH`
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+✔ [8045/8140] Built RequestProject.DyadicExact (6.9s)
+✔ [8046/8140] Built RequestProject.Serialization (7.6s)
+✔ [8047/8140] Built Pendencias.LeiExata (9.1s)
+✔ [8048/8140] Built RequestProject.DyadicPhase (10s)
+✔ [8049/8140] Built RequestProject.Catalog (15s)
+✔ [8050/8140] Built RequestProject.DyadicEnvelope (23s)
+✔ [8051/8140] Built RequestProject.JointBudget (49s)
+✔ [8052/8140] Built Pendencias.Agenda (8.7s)
+✔ [8053/8140] Built RequestProject.EntropyLower (13s)
+✔ [8054/8140] Built RequestProject.Codebook (9.7s)
+✔ [8055/8140] Built RequestProject.Entropy (14s)
+✔ [8056/8140] Built RequestProject.Codecs (6.0s)
+✔ [8057/8140] Built Pendencias.Ponte (7.7s)
+✔ [8058/8140] Built Pendencias.Endpoint (7.0s)
+⚠ [8059/8140] Built Pendencias.Taxa (6.0s)
+warning: Pendencias/Taxa.lean:110:15: `mul_le_mul_left'` has been deprecated: Use `mul_le_mul_right` instead
+warning: Pendencias/Taxa.lean:112:8: `mul_le_mul_left'` has been deprecated: Use `mul_le_mul_right` instead
+warning: Pendencias/Taxa.lean:224:16: `mul_le_mul_left'` has been deprecated: Use `mul_le_mul_right` instead
+⚠ [8060/8140] Built Pendencias.Inversa (12s)
+warning: Pendencias/Inversa.lean:203:27: `mul_le_mul_left'` has been deprecated: Use `mul_le_mul_right` instead
+warning: Pendencias/Inversa.lean:230:8: `mul_le_mul_left'` has been deprecated: Use `mul_le_mul_right` instead
+warning: Pendencias/Inversa.lean:412:59: `mul_le_mul_left'` has been deprecated: Use `mul_le_mul_right` instead
+✔ [8061/8140] Built Pendencias.Jackson (24s)
+✔ [8062/8140] Built Pendencias.Direta (10s)
+✔ [8063/8140] Built Pendencias.Realizacao (8.6s)
+✔ [8064/8140] Built Formalizacao.LpDefs (6.9s)
+⚠ [8065/8140] Built Formalizacao.ModuloInf (7.6s)
+warning: Formalizacao/ModuloInf.lean:49:16: unused variable `s`
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Formalizacao/ModuloInf.lean:49:18: unused variable `t`
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+✔ [8066/8140] Built Formalizacao.Library (9.3s)
+✔ [8067/8140] Built Formalizacao.LowSum (10s)
+⚠ [8068/8140] Built Formalizacao.Corollary54 (14s)
+warning: Formalizacao/Corollary54.lean:149:27: `mul_le_mul_left'` has been deprecated: Use `mul_le_mul_right` instead
+⚠ [8069/8140] Built Formalizacao.LpAxioms (8.9s)
+warning: Formalizacao/LpAxioms.lean:75:24: unused variable `y`
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+⚠ [8070/8140] Built Formalizacao.Whitney0 (9.3s)
+warning: Formalizacao/Whitney0.lean:16:53: unused variable `hS`
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+✔ [8071/8140] Built Formalizacao.Embedding (12s)
+⚠ [8072/8140] Built Formalizacao.LqLemmas (27s)
+warning: Formalizacao/LqLemmas.lean:19:28: unused variable `hq`
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Formalizacao/LqLemmas.lean:50:46: `mul_le_mul_left'` has been deprecated: Use `mul_le_mul_right` instead
+warning: Formalizacao/LqLemmas.lean:87:43: `mul_le_mul_left'` has been deprecated: Use `mul_le_mul_right` instead
+warning: Formalizacao/LqLemmas.lean:156:32: unused variable `hq`
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+⚠ [8073/8140] Built Formalizacao.ModuloConn (11s)
+warning: Formalizacao/ModuloConn.lean:24:19: unused variable `f`
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Formalizacao/ModuloConn.lean:24:21: unused variable `g`
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Formalizacao/ModuloConn.lean:26:19: unused variable `f`
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+⚠ [8074/8140] Built Formalizacao.Whitney1 (14s)
+warning: Formalizacao/Whitney1.lean:159:79: unused variable `hlo`
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+⚠ [8075/8140] Built Formalizacao.AlturaLq (17s)
+warning: Formalizacao/AlturaLq.lean:18:59: unused variable `hc`
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+⚠ [8076/8140] Built Formalizacao.Lemma55 (18s)
+warning: Formalizacao/Lemma55.lean:87:36: unused variable `hN`
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Formalizacao/Lemma55.lean:154:81: unused variable `hCW`
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+⚠ [8077/8140] Built Formalizacao.UnifLq (18s)
+warning: Formalizacao/UnifLq.lean:24:27: `mul_le_mul_left'` has been deprecated: Use `mul_le_mul_right` instead
+warning: Formalizacao/UnifLq.lean:64:10: `mul_le_mul_left'` has been deprecated: Use `mul_le_mul_right` instead
+warning: Formalizacao/UnifLq.lean:39:23: This simp argument is unused:
+  if_pos rfl
+
+Hint: Omit it from the simp argument list.
+  simp only [lqNorm,̵ ̵i̵f̵_̵p̵o̵s̵ ̵r̵f̵l̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+⚠ [8078/8140] Built Formalizacao.Schedules (17s)
+warning: Formalizacao/Schedules.lean:45:43: unused variable `hsa`
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+✔ [8079/8140] Built Formalizacao.Whitney2 (14s)
+✔ [8080/8140] Built Formalizacao.Lemma55b (14s)
+✔ [8081/8140] Built Formalizacao.LowWeights (12s)
+⚠ [8082/8140] Built Formalizacao.Reductions (16s)
+warning: Formalizacao/Reductions.lean:62:52: `mul_le_mul_left'` has been deprecated: Use `mul_le_mul_right` instead
+warning: Formalizacao/Reductions.lean:108:52: `mul_le_mul_left'` has been deprecated: Use `mul_le_mul_right` instead
+warning: Formalizacao/Reductions.lean:208:10: `mul_le_mul_left'` has been deprecated: Use `mul_le_mul_right` instead
+✔ [8083/8140] Built Formalizacao.Whitney3 (15s)
+⚠ [8084/8140] Built Formalizacao.Lemma55c (20s)
+warning: Formalizacao/Lemma55c.lean:123:80: unused variable `hCW`
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Formalizacao/Lemma55c.lean:354:12: `mul_le_mul_left'` has been deprecated: Use `mul_le_mul_right` instead
+warning: Formalizacao/Lemma55c.lean:354:30: `mul_le_mul_left'` has been deprecated: Use `mul_le_mul_right` instead
+✔ [8085/8140] Built Formalizacao.Theorems (17s)
+⚠ [8086/8140] Built Formalizacao.Stability (28s)
+warning: Formalizacao/Stability.lean:170:10: `mul_le_mul_left'` has been deprecated: Use `mul_le_mul_right` instead
+warning: Formalizacao/Stability.lean:39:13: unused variable `hc`
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Formalizacao/Stability.lean:341:30: unused variable `f`
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Formalizacao/Stability.lean:346:30: unused variable `f`
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Formalizacao/Stability.lean:353:30: unused variable `f`
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Formalizacao/Stability.lean:359:30: unused variable `f`
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+⚠ [8087/8140] Built Formalizacao.Lemma55d (38s)
+warning: Formalizacao/Lemma55d.lean:30:80: unused variable `hCW`
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Formalizacao/Lemma55d.lean:73:5: unused variable `hs`
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+⚠ [8088/8140] Built Formalizacao.Whitney4 (48s)
+warning: Formalizacao/Whitney4.lean:94:8: `mul_le_mul_left'` has been deprecated: Use `mul_le_mul_right` instead
+warning: Formalizacao/Whitney4.lean:98:14: `mul_le_mul_left'` has been deprecated: Use `mul_le_mul_right` instead
+warning: Formalizacao/Whitney4.lean:98:32: `mul_le_mul_left'` has been deprecated: Use `mul_le_mul_right` instead
+warning: Formalizacao/Whitney4.lean:152:9: `mul_le_mul_left'` has been deprecated: Use `mul_le_mul_right` instead
+✔ [8089/8140] Built Formalizacao.Whitney5 (15s)
+✔ [8090/8140] Built Formalizacao.Lemma55e (26s)
+✔ [8091/8140] Built Formalizacao.Whitney6 (8.2s)
+⚠ [8092/8140] Built Formalizacao.Whitney7 (8.8s)
+warning: Formalizacao/Whitney7.lean:27:9: `mul_le_mul_left'` has been deprecated: Use `mul_le_mul_right` instead
+✔ [8093/8140] Built Formalizacao.Whitney8 (4.8s)
+✔ [8094/8140] Built Formalizacao.Whitney9 (5.1s)
+✔ [8095/8140] Built Formalizacao.Whitney10 (5.4s)
+⚠ [8096/8140] Built Formalizacao.Whitney11 (15s)
+warning: Formalizacao/Whitney11.lean:85:20: `mul_le_mul_left'` has been deprecated: Use `mul_le_mul_right` instead
+⚠ [8097/8140] Built Formalizacao.Whitney12 (5.7s)
+warning: Formalizacao/Whitney12.lean:28:18: `mul_le_mul_left'` has been deprecated: Use `mul_le_mul_right` instead
+warning: Formalizacao/Whitney12.lean:67:31: `mul_le_mul_left'` has been deprecated: Use `mul_le_mul_right` instead
+warning: Formalizacao/Whitney12.lean:69:35: `mul_le_mul_left'` has been deprecated: Use `mul_le_mul_right` instead
+✔ [8098/8140] Built Formalizacao.Whitney13 (5.3s)
+⚠ [8099/8140] Built Formalizacao.LpJackson0 (7.6s)
+warning: Formalizacao/LpJackson0.lean:63:45: This simp argument is unused:
+  cR
+
+Hint: Omit it from the simp argument list.
+  simp only [cellIcc, cL, c̵R̵,̵ ̵mem_Icc]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Formalizacao/LpJackson0.lean:67:41: This simp argument is unused:
+  cL
+
+Hint: Omit it from the simp argument list.
+  simp only [cellIcc, cL̵,̵ ̵c̵R, mem_Icc]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+✔ [8100/8140] Built Formalizacao.LowNodal (9.9s)
+✔ [8101/8140] Built Formalizacao.LpJackson1 (6.4s)
+✔ [8102/8140] Built Formalizacao.AlturaCoarse (7.3s)
+⚠ [8103/8140] Built Formalizacao.LowSup (10s)
+warning: Formalizacao/LowSup.lean:92:60: unused variable `hs`
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+⚠ [8104/8140] Built Formalizacao.LpJackson2 (11s)
+warning: Formalizacao/LpJackson2.lean:135:25: This simp argument is unused:
+  Measure.restrict_apply_univ
+
+Hint: Omit it from the simp argument list.
+  simp [vol01, M̵e̵a̵s̵u̵r̵e̵.̵r̵e̵s̵t̵r̵i̵c̵t̵_̵a̵p̵p̵l̵y̵_̵u̵n̵i̵v̵,̵ ̵Real.volume_Icc]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+✔ [8105/8140] Built Formalizacao.LpJackson3 (11s)
+✔ [8106/8140] Built Formalizacao.LowJackson (13s)
+✔ [8107/8140] Built Formalizacao.LowShift (21s)
+✔ [8108/8140] Built Formalizacao.LowJackson2 (9.1s)
+⚠ [8109/8140] Built Formalizacao.UnifSup (24s)
+warning: Formalizacao/UnifSup.lean:43:27: unused variable `hp`
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Formalizacao/UnifSup.lean:44:17: unused variable `hf`
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Formalizacao/UnifSup.lean:78:65: unused variable `hB`
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+✔ [8110/8140] Built Formalizacao.LpJackson4 (11s)
+⚠ [8111/8140] Built Formalizacao.LowTransfer (9.3s)
+warning: Formalizacao/LowTransfer.lean:138:10: `mul_le_mul_left'` has been deprecated: Use `mul_le_mul_right` instead
+warning: Formalizacao/LowTransfer.lean:29:13: unused variable `hc`
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+✔ [8112/8140] Built Formalizacao.LowTheorems (6.7s)
+✔ [8113/8140] Built Formalizacao.UnifCore (7.6s)
+✔ [8114/8140] Built Formalizacao.UnifTheorem (9.7s)
+✔ [8115/8140] Built Formalizacao.ArithmeticFloor (10s)
+✔ [8116/8140] Built Formalizacao.BinaryBudget (11s)
+✔ [8117/8140] Built Formalizacao.MinimaxDefs (10s)
+✔ [8118/8140] Built Formalizacao.RegularSchedules (22s)
+⚠ [8119/8140] Built Formalizacao.AlturaTerminal (11s)
+warning: Formalizacao/AlturaTerminal.lean:193:5: unused variable `hH`
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+⚠ [8120/8140] Built Formalizacao.AlturaBump (14s)
+warning: Formalizacao/AlturaBump.lean:87:39: unused variable `hh`
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Formalizacao/AlturaBump.lean:178:76: unused variable `hM0`
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Formalizacao/AlturaBump.lean:243:14: `mul_le_mul_left'` has been deprecated: Use `mul_le_mul_right` instead
+✔ [8121/8140] Built Formalizacao.IteratedSchedules (21s)
+✔ [8122/8140] Built Formalizacao.AlturaQuant (21s)
+✔ [8123/8140] Built Formalizacao.NodalVariable (25s)
+✔ [8124/8140] Built Formalizacao.LogLogSchedules (14s)
+⚠ [8125/8140] Built Formalizacao.AlturaBesov (41s)
+warning: Formalizacao/AlturaBesov.lean:202:66: unused variable `hs`
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+⚠ [8126/8140] Built Formalizacao.AlturaFloor (9.3s)
+warning: Formalizacao/AlturaFloor.lean:144:31: unused variable `hM`
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Formalizacao/AlturaFloor.lean:145:13: unused variable `ha`
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Formalizacao/AlturaFloor.lean:223:47: unused variable `ht1`
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Formalizacao/AlturaFloor.lean:262:28: unused variable `hct`
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+✔ [8127/8140] Built Formalizacao.Packing (16s)
+⚠ [8128/8140] Built Formalizacao.AlturaSlope (17s)
+warning: Formalizacao/AlturaSlope.lean:213:11: `ENNReal.mul_le_mul_left` has been deprecated: Use `ENNReal.mul_le_mul_iff_right` instead
+⚠ [8129/8140] Built Formalizacao.AlturaNecessity (6.0s)
+warning: Formalizacao/AlturaNecessity.lean:54:5: unused variable `hs`
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+✔ [8130/8140] Built Formalizacao.AlturaTransfer (7.5s)
+✔ [8131/8140] Built Formalizacao.LeafFloor (10s)
+⚠ [8132/8140] Built Formalizacao.AlturaCritical (11s)
+warning: Formalizacao/AlturaCritical.lean:229:29: unused variable `hp`
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+⚠ [8133/8140] Built Formalizacao.AlturaCritical2 (5.6s)
+warning: Formalizacao/AlturaCritical2.lean:37:44: unused variable `hk`
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Formalizacao/AlturaCritical2.lean:58:35: unused variable `hB`
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Formalizacao/AlturaCritical2.lean:156:27: `mul_le_mul_left'` has been deprecated: Use `mul_le_mul_right` instead
+✔ [8134/8140] Built Formalizacao.L1LinearHeight (21s)
+⚠ [8135/8140] Built Formalizacao.AlturaCritical3 (29s)
+warning: Formalizacao/AlturaCritical3.lean:276:28: unused variable `hp`
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+✔ [8136/8140] Built Formalizacao.AlturaRadius (6.6s)
+✔ [8137/8140] Built Formalizacao.MinimaxUpper (10s)
+✔ [8138/8140] Built Formalizacao.MinimaxFinal (5.1s)
+✔ [8139/8140] Built Formalizacao (4.4s)
+Build completed successfully (8140 jobs).

@@ -1,0 +1,14 @@
+test_abnt_compartilha_a_fonte_portuguesa (test_edicoes.EdicoesTest.test_abnt_compartilha_a_fonte_portuguesa) ... ok
+test_contagem_da_imagem_do_decodificador (test_edicoes.EdicoesTest.test_contagem_da_imagem_do_decodificador) ... ok
+test_dominios_corrigidos (test_edicoes.EdicoesTest.test_dominios_corrigidos) ... ok
+test_formulas_dos_novos_resultados (test_edicoes.EdicoesTest.test_formulas_dos_novos_resultados) ... ok
+test_referencias_e_citacoes_resolvidas (test_edicoes.EdicoesTest.test_referencias_e_citacoes_resolvidas) ... ok
+test_rotulos_unicos_e_na_mesma_ordem (test_edicoes.EdicoesTest.test_rotulos_unicos_e_na_mesma_ordem) ... ok
+test_altura_abaixo_do_limiar (test_quantizacao_variavel.QuantizacaoVariavelTest.test_altura_abaixo_do_limiar) ... ok
+test_amostra_reproduzivel (test_quantizacao_variavel.QuantizacaoVariavelTest.test_amostra_reproduzivel) ... ok
+test_casos_adversariais (test_quantizacao_variavel.QuantizacaoVariavelTest.test_casos_adversariais) ... ok
+
+----------------------------------------------------------------------
+Ran 9 tests in 3.441s
+
+OK

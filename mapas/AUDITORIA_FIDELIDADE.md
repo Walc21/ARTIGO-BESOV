@@ -92,6 +92,8 @@ Os enunciados da Seção 6 que envolvem `ω_2` exigem `s < 2`, como no artigo (`
 
 ## Etapa 2 — lei minimax e altura crítica
 
+Esta tabela registra a cobertura anterior às etapas F2–F6. A atualização abaixo descreve a certificação posterior.
+
 | Rótulo | Escopo efetivamente coberto em Lean | Prova analítica da edição de 21 de novembro de 2026 |
 |---|---|---|
 | `lp:prop:geom-floor` | `geometric_floor` e `terminal_affine` cobrem o piso e a folha terminal. | A prova agora explicita o campo `m+1 = 2^k` da altura e trata o zero. |
@@ -105,3 +107,7 @@ Os enunciados da Seção 6 que envolvem `ω_2` exigem `s < 2`, como no artigo (`
 | `lp:prop:critical-radius-growth` | A cota por bola para $q$ finito sob $H_B$ oferece apoio parcial. | O crescimento ótimo do raio sob $H_*$ e a obstrução por constantes são analíticos. |
 
 `nodal_jump` aceita as cotas de inclinação em cada célula como hipóteses e independe de $p$. A edição integra a dedução dessas hipóteses para $p=1$ em `lp:lem:critical-jump`. A estimativa média de projeção e a aplicação ao quantizador por nó de `lp:prop:l1-linear-height` são novas provas analíticas. A igualdade em $B^1_{1,\infty}$ com agenda fixa também é analítica.
+
+## Atualização F6 — Teorema 5.2
+
+No commit `19c85be8bd08098b4a8c6d0452e755b5e3683be7`, `FormalizacaoMinimax.minimax_nh` formaliza as duas cotas do melhor erro minimax com orçamentos independentes. A auditoria independente atribuiu parecer A ao enunciado completo. O fechamento inclui `nodal_variable_height`, `critical_upper_dyadic` e `l1_linear_height`, que dão a quantização por nó e o controle de altura linear por escala nos regimes críticos. A entrada E1 do mapa registra o apoio parcial ao item (i) do lema de empacotamento pelo caso na bola unitária com bits todos iguais a 1. A família de Hamming, as cotas inferiores de entropia e bits e os resultados globais por somabilidade requerem rastreabilidade própria. [Relatório F6](../auditorias/RELATORIO_F6_CERTIFICACAO_FINAL.md) · [Mapa atualizado](MAPA_TEX_LEAN.md)

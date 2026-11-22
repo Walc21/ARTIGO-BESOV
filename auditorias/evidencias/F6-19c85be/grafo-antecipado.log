@@ -1,0 +1,5 @@
+teorema=47167, locais=794, modulos=68, arestas_locais=3042
+uniao=47167, locais=794, arestas_locais=3042
+módulos por biblioteca: Counter({'Formalizacao': 59, 'RequestProject': 6, 'Pendencias': 3})
+axiomas ou declarações opaque do projeto: []
+declarações de escopo investigadas no fechamento: []
