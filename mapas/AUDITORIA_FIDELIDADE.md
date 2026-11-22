@@ -1,7 +1,6 @@
 # Auditoria de fidelidade: enunciados Lean × texto de `conjecturas_lp.tex`
 
-Escopo: definições (§2) e enunciados dos resultados principais (§§3–6) comparados com as
-declarações Lean. Veredito por item: **fiel** (mesmo conteúdo), **diferença documentada**
+Escopo da auditoria de base: definições (§2) e enunciados dos resultados principais (§§3–6) na numeração anterior à Etapa 2. A atualização abaixo usa os rótulos estáveis do manuscrito. Veredito por item: **fiel** (mesmo conteúdo), **diferença documentada**
 (equivalente sob as escolhas de formalização, já explicitadas no artigo), **mais geral** (Lean
 prova mais do que o texto afirma) ou **a corrigir**.
 
@@ -89,3 +88,26 @@ Os enunciados da Seção 6 que envolvem `ω_2` exigem `s < 2`, como no artigo (`
 - **Cota inferior de entropia e de bits.** `lp:lem:packing`, `lp:prop:entropy-lower` e `lp:cor:bits-lower` são demonstrados no artigo a partir da definição de Besov por diferenças de segunda ordem. A equivalência com wavelets não é necessária para essa cota inferior. A cota superior da entropia não é afirmada.
 - **Cobertura Lean.** Esses resultados **não estão formalizados**. O mapa os lista como «Demonstrado no texto (sem formalização Lean)», sem declarações Lean. As compilações e a auditoria axiomática dos módulos existentes não os certificam.
 - **Whitney.** O texto usa `m=min(k,n−2)`, igual à formalização (`Jcell`, `Iset`).
+
+
+## Etapa 2 — lei minimax e altura crítica
+
+Esta tabela registra a cobertura anterior às etapas F2–F6. A atualização abaixo descreve a certificação posterior.
+
+| Rótulo | Escopo efetivamente coberto em Lean | Prova analítica da edição de 21 de novembro de 2026 |
+|---|---|---|
+| `lp:prop:geom-floor` | `geometric_floor` e `terminal_affine` cobrem o piso e a folha terminal. | A prova agora explicita o campo `m+1 = 2^k` da altura e trata o zero. |
+| `lp:eq:nikolskii` | `kernel_is_affine_projection` e `abs_integral_kernel_le` sustentam reprodução e estimativa local. | A constante 4 resulta da aplicação a uma função afim, seguida da fórmula da inclinação. |
+| `lp:lem:leaf-budget-floor` | `L1_affine_lower` sustenta o teste contra afins em uma célula. | A normalização e a contagem das células livres de fronteiras são analíticas. |
+| `lp:thm:minimax-nh` | Pisos aritmético, geométrico e de inclinação. Cotas de quase-interpolação e quantização de denominador comum. | A equivalência minimax conjunta é analítica. |
+| `lp:lem:nodal-variable-height` | As declarações anteriores de quantização operam com denominador comum na malha. | A escolha de denominadores por nó e o teste no ponto $p=s=1$ são analíticos. |
+| `lp:cor:minimax-realization` | `bestError_le_realP` e `realP_le_bestError_add` cobrem a comparação em cada escala. | A passagem ao supremo e a equivalência minimax são analíticas. |
+| `lp:thm:critical-linear` | `critical_approx` e `critical_level` supõem controle do módulo sem parâmetro $q$. `critical_lq`, `critical_rate` e `critical_radius_ball_and_inclusion` exigem `q ≠ ⊤`. | A estimativa sequencial para $q=\infty$ e a versão por bola nesse caso são analíticas. |
+| `lp:thm:critical-fixed-agenda` | `stratum_subset_besov_conn` cobre a inclusão inversa universal. | O deslocamento a partir de $H_B$ e a igualdade sob $H_*$ são analíticos. |
+| `lp:prop:critical-radius-growth` | A cota por bola para $q$ finito sob $H_B$ oferece apoio parcial. | O crescimento ótimo do raio sob $H_*$ e a obstrução por constantes são analíticos. |
+
+`nodal_jump` aceita as cotas de inclinação em cada célula como hipóteses e independe de $p$. A edição integra a dedução dessas hipóteses para $p=1$ em `lp:lem:critical-jump`. A estimativa média de projeção e a aplicação ao quantizador por nó de `lp:prop:l1-linear-height` são novas provas analíticas. A igualdade em $B^1_{1,\infty}$ com agenda fixa também é analítica.
+
+## Atualização F6 — Teorema 5.2
+
+No commit `19c85be8bd08098b4a8c6d0452e755b5e3683be7`, `FormalizacaoMinimax.minimax_nh` formaliza as duas cotas do melhor erro minimax com orçamentos independentes. A auditoria independente atribuiu parecer A ao enunciado completo. O fechamento inclui `nodal_variable_height`, `critical_upper_dyadic` e `l1_linear_height`, que dão a quantização por nó e o controle de altura linear por escala nos regimes críticos. A entrada E1 do mapa registra o apoio parcial ao item (i) do lema de empacotamento pelo caso na bola unitária com bits todos iguais a 1. A família de Hamming, as cotas inferiores de entropia e bits e os resultados globais por somabilidade requerem rastreabilidade própria. [Relatório F6](../auditorias/RELATORIO_F6_CERTIFICACAO_FINAL.md) · [Mapa atualizado](MAPA_TEX_LEAN.md)

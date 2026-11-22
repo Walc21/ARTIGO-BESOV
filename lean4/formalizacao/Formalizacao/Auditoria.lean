@@ -248,3 +248,51 @@ e nunca `sorryAx`. Executar: `lake env lean Formalizacao/Auditoria.lean`.
 #print axioms FormalizacaoAltura.slope_necessity
 #print axioms FormalizacaoAltura.arithmetic_necessity
 #print axioms FormalizacaoCrit4.critical_radius_ball_and_inclusion
+
+-- F2: definições minimax, empacotamento de bumps e piso pelo número de folhas
+#print axioms FormalizacaoMinimax.aPS_of_lt
+#print axioms FormalizacaoMinimax.aPS_of_mid
+#print axioms FormalizacaoMinimax.aPS_of_gt
+#print axioms FormalizacaoMinimax.aPS_pos
+#print axioms FormalizacaoMinimax.aPS_eq_nuHat
+#print axioms FormalizacaoMinimax.le_Dfun
+#print axioms FormalizacaoMinimax.le_bestError_of_forall
+#print axioms FormalizacaoPacking.overlap_le_three
+#print axioms FormalizacaoPacking.diff2_scaled
+#print axioms FormalizacaoPacking.diff2_Fm_pow_le
+#print axioms FormalizacaoPacking.lint_diff_le
+#print axioms FormalizacaoPacking.Ipow_small_le
+#print axioms FormalizacaoPacking.exists_K0
+#print axioms FormalizacaoPacking.aTerm_le_low
+#print axioms FormalizacaoPacking.aTerm_le_high
+#print axioms FormalizacaoPacking.exists_Lq
+#print axioms FormalizacaoPacking.packing_norm_le
+#print axioms FormalizacaoLeaf.card_splits_le
+#print axioms FormalizacaoLeaf.affine_on_open
+#print axioms FormalizacaoLeaf.exists_good_cells
+#print axioms FormalizacaoLeaf.cell_lower
+#print axioms FormalizacaoLeaf.agg_lower
+#print axioms FormalizacaoLeaf.leaf_dist_lower
+#print axioms FormalizacaoLeaf.leaf_floor_const
+#print axioms FormalizacaoLeaf.dfun_geometric_floor
+#print axioms FormalizacaoLeaf.dfun_slope_floor
+#print axioms FormalizacaoLeaf.dfun_arithmetic_floor
+
+-- F3.1: quantização com denominadores diádicos por nó
+#print axioms FormalizacaoAltura.nodal_variable_height
+
+-- F3.2: altura linear no caso p = s = 1
+#print axioms FormalizacaoAltura.l1_linear_height
+
+-- F4: altura linear crítica, escala diádica e cota superior em dois orçamentos
+#print axioms FormalizacaoCrit2.critical_dist
+#print axioms FormalizacaoMinimax.classNH_mono
+#print axioms FormalizacaoMinimax.sigma_const_mono
+#print axioms FormalizacaoMinimax.critical_upper_dyadic
+#print axioms FormalizacaoMinimax.upper_bound_dyadic
+#print axioms FormalizacaoMinimax.exists_dyadic_scale
+#print axioms FormalizacaoMinimax.upper_bound_NH
+
+-- F5: composição da cota inferior e Teorema 5.2
+#print axioms FormalizacaoMinimax.lower_bound_NH
+#print axioms FormalizacaoMinimax.minimax_nh

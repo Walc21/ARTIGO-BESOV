@@ -6,22 +6,22 @@
 [![Artigo sob CC BY 4.0][selo-cc]](LICENSES/CC-BY-4.0.txt)
 [![Política de segurança][selo-security]](SECURITY.md)
 
-**Caracterização dos espaços de Besov em $L^p$ por realização com altura aritmética controlada**
+**Lei minimax para aproximação de Besov com folhas diádicas e altura aritmética**
 
-Victor Gabriel de Oliveira · 19 de novembro de 2026
+Victor Gabriel de Oliveira · 21 de novembro de 2026
 
 [Original revisado](conjecturas_lp.pdf) · [Edição ABNT](conjecturas_lp_abnt.pdf) · [English edition](conjecturas_lp_en.pdf) · [Explorar o mapa TeX–Lean](mapas/MAPA_TEX_LEAN.md) · [Compilar e verificar](#como-verificar-de-forma-independente)
 
 ## Resultados do artigo
 
-O artigo caracteriza os espaços de Besov $B^s_{p,q}([0,1])$, com $1\le p<\infty$, $0<s<2$ e $0<q\le\infty$, pela somabilidade diádica de um **funcional de realização**. O funcional combina o erro em $L^p$ com o módulo de suavidade de segunda ordem do aproximante. Os aproximantes são funções contínuas e afins por partes, com coeficientes racionais e partições diádicas. A construção limita o número de folhas e a altura aritmética.
+O artigo determina o pior erro de aproximação na bola unitária de $B^s_{p,q}([0,1])$ para dois orçamentos independentes. O número $N$ limita as folhas de uma árvore diádica e $H$ limita a altura aritmética de cada folha. Os aproximantes são montagens contínuas de segmentos afins racionais.
 
-- **Jackson racional em $L^p$.** Para $s>1/p$ e $f\in B^s_{p,\infty}$, a construção usa até $n$ folhas e altura no máximo $H$. Quando esses orçamentos são suficientemente grandes, o erro é limitado por $9C_W(p)\,\omega_2(f,n^{-1})_p + 16(\|f\|_\infty+1)/H$. A prova combina projeções afins locais, uma desigualdade de Whitney em partições e quantização nodal em grades alternadas.
-- **Caracterização de Besov.** Para $s>1/p$, a agenda de altura parte de $N^{\max\{1,s\}}$, com correção logarítmica de expoente $\kappa>1/q$ quando $q<\infty$ e $s\ge1$. O controle dos quase-interpolantes permite tratar funções ilimitadas nos demais regimes, com agendas da ordem de $N^{1+1/p-s}$ para $s<1/p$ e de $N$ vezes uma potência de $\log N$ na diagonal $s=1/p$.
-- **Estabilidade para redes ReLU.** A caracterização se transfere a famílias aninhadas que contêm a biblioteca racional após reescalonar linearmente o orçamento. O Teorema 3.3 admite inclusão aproximada em $L^p$ com tolerâncias tais que $(2^{rs}\varepsilon_{2^r})\in\ell^q$.
-- **Cotas uniformes e complexidade em bits.** A seção 6 demonstra cotas uniformes em bolas de Besov, um piso aritmético em $L^p$, um código de árvores livre de prefixo e um critério para agendas de log iterado. Na série de Bertrand, o limiar de convergência é $\gamma q>1$. A mesma seção prova, no texto, uma cota inferior construtiva da entropia métrica e do comprimento de códigos binários (empacotamento de funções suaves), sem recorrer a wavelets; esses resultados ainda não têm formalização em Lean.
+- **Lei minimax.** Para $1\le p<\infty$, $0<s<2$ e $0<q\le\infty$, o erro tem ordem $N^{-s}+H^{-s/a(p,s)}$. A potência $a(p,s)$ é $1+1/p-s$ para $s<1/p$, $1$ para $1/p\le s\le1$ e $s$ para $s>1$. Os pisos valem para árvores adaptativas. As construções usam malhas uniformes. A mesma lei vale para o funcional de realização.
+- **Jackson e quantização.** As projeções afins locais e a desigualdade de Whitney controlam os erros de quase-interpolação. Em $p=s=1$, denominadores diádicos por nó eliminam o fator logarítmico da taxa por escala.
+- **Caracterização por realização.** Na diagonal $s=1/p$ com $p>1$, qualquer agenda $\max\{2,\lceil A_*N\rceil\}$ com $A_*>0$ dá a igualdade de conjuntos para todo $q$, inclusive $q=\infty$. A norma da sequência cresce, no pior caso na bola, como $B^{1+1/p}$ para raios grandes. Para $p=s=1$ com $q<\infty$, continua em aberto a caracterização com agenda linear.
+- **Estabilidade e codificação.** A caracterização se transfere a famílias aninhadas de redes ReLU por inclusão exata ou aproximação com tolerância somável. O texto dá um código livre de prefixo, cotas inferiores de entropia e agendas de log iterado.
 
-O apêndice do artigo descreve a formalização em Lean 4 e a correspondência entre as demonstrações e as declarações verificadas.
+O Teorema 5.2 foi formalizado em Lean 4 como `FormalizacaoMinimax.minimax_nh` e recebeu parecer A na auditoria independente F6, sem bloqueadores ou achados maiores. O objeto certificado está no commit [19c85be8bd08098b4a8c6d0452e755b5e3683be7](https://github.com/Walc21/ARTIGO-BESOV/commit/19c85be8bd08098b4a8c6d0452e755b5e3683be7), identificado pela [tag de certificação](https://github.com/Walc21/ARTIGO-BESOV/releases/tag/teorema-5.2-lean-certificado-v1.0). Esta edição registra a certificação em uma revisão posterior. [Relatório F6](auditorias/RELATORIO_F6_CERTIFICACAO_FINAL.md) · [Evidências e reprodução](auditorias/evidencias/F6-19c85be/README.md)
 
 ## Onde encontrar cada parte
 
@@ -35,6 +35,7 @@ O apêndice do artigo descreve a formalização em Lean 4 e a correspondência e
 | [`Pendencias/`](lean4/formalizacao/Pendencias/) · [`RequestProject/`](lean4/formalizacao/RequestProject/) | Módulos auxiliares dos quais `Formalizacao` depende. |
 | [`Auditoria.lean`](lean4/formalizacao/Formalizacao/Auditoria.lean) · [saída da auditoria](lean4/formalizacao/auditoria_axiomas.txt) | Comandos de inspeção e axiomas de cada declaração auditada. |
 | [`mapas/`](mapas/) | Dados e scripts do mapa, [correspondência TeX–Lean](mapas/MAPA_TEX_LEAN.md) e [auditoria de fidelidade](mapas/AUDITORIA_FIDELIDADE.md). |
+| [`auditorias/`](auditorias/) | Relatórios de revisão e de formalização, incluindo a [certificação F6 do Teorema 5.2](auditorias/RELATORIO_F6_CERTIFICACAO_FINAL.md). |
 
 ## Como verificar de forma independente
 
@@ -43,7 +44,10 @@ Comece na raiz do repositório. Para obter uma cópia local, use:
 ```bash
 git clone https://github.com/Walc21/ARTIGO-BESOV.git
 cd ARTIGO-BESOV
+git switch --detach teorema-5.2-lean-certificado-v1.0
 ```
+
+O checkout acima reproduz a versão certificada. Execute os mesmos comandos no checkout da revisão editorial para compilar os PDFs e verificar o mapa atual.
 
 ### 1. Compilar os PDFs
 
@@ -84,7 +88,7 @@ A compilação deve terminar com `Build completed successfully`. Para conferir o
 grep -rnw 'sorry' Formalizacao/ Formalizacao.lean
 ```
 
-A saída esperada é vazia.
+A única ocorrência esperada é o comentário ``nenhum resultado depende de `sorry` `` em `Formalizacao/AlturaBump.lean`, linha 13. Não há `sorry` em demonstrações.
 
 ### 4. Auditar os axiomas
 
@@ -94,7 +98,7 @@ Ainda em `lean4/formalizacao/`, execute:
 lake env lean Formalizacao/Auditoria.lean
 ```
 
-A saída esperada tem 201 linhas para 196 declarações distintas e registra somente os axiomas `propext`, `Classical.choice` e `Quot.sound`. Para comparar com o arquivo versionado na mesma execução, use a forma abaixo. A comparação também detecta declarações ausentes e ocorrências de `sorryAx`.
+No commit certificado, a F6 registrou 239 consultas a 234 declarações distintas. A saída esperada registra somente os axiomas `propext`, `Classical.choice` e `Quot.sound`. Para comparar com o arquivo versionado na mesma execução, use a forma abaixo. A comparação também detecta declarações ausentes e ocorrências de `sorryAx`.
 
 ```bash
 set -o pipefail
@@ -111,13 +115,24 @@ Volte à raiz do repositório. Com Python 3 e o projeto Lean já compilado, exec
 python3 mapas/verificar_mapa.py
 ```
 
-O script verifica os rótulos do TeX, confirma os nomes das declarações com `#check` no Lean e compara o mapa versionado com a versão gerada.
+O script verifica os rótulos do TeX, confirma os nomes das declarações com `#check` no Lean e compara o mapa versionado com a versão gerada. A F6 conferiu 267 referências em 64 entradas no commit certificado. A revisão editorial tem 268 referências nas mesmas 64 entradas, incluindo o apoio parcial ao lema de empacotamento.
+
+### 6. Executar os testes da Etapa 2
+
+Na raiz, execute:
+
+```bash
+python3 -B -m unittest discover -s testes -v
+```
+
+A suíte usa frações exatas para testar a construção nodal e confere a correspondência editorial entre português, inglês e ABNT. Os comandos e resultados da integração estão no [relatório de validação da Etapa 2](RELATORIO_VALIDACAO_ETAPA_2.md).
 
 ## Escopo da formalização
 
-- Os Teoremas 3.1 e 3.2 estão formalizados nos três regimes, e o Teorema 3.3 cobre a inclusão aproximada. Os módulos `Formalizacao/Low*.lean` tratam $s\le1/p$ com constantes de Jackson que podem depender de $f$.
+- Os Teoremas 6.1 e 6.2 estão formalizados nos três regimes, e o Teorema 6.3 cobre a inclusão aproximada. Os módulos `Formalizacao/Low*.lean` tratam $s\le1/p$ com constantes de Jackson que podem depender de $f$.
 - O Lean usa representantes mensuráveis $\mathbb R\to\mathbb R$ e a medida de Lebesgue restrita a $[0,1]$. Os casos com agenda $\widetilde H_{s,\eta}$ assumem $1/p<s<2$.
 - As reduções usam a estimativa de Jackson com constantes que podem depender de $f$. A forma com constantes explícitas $C_0=9C_W(p)$ e $C_1=16$ está em [`hypJpStrong_of_lt`](lean4/formalizacao/Formalizacao/LpJackson4.lean).
+- A F6 certifica o melhor erro minimax $D_{p,s,q}(N,H)\asymp N^{-s}+H^{-s/a(p,s)}$ para $1\le p<\infty$, $0<s<2$ e $0<q\le\infty$, com inteiros $N,H\ge2$ independentes. O fechamento inclui o quantizador por nó e as cotas lineares por escala nos dois pontos críticos. A certificação individual do corolário minimax de realização, da extensão sequencial crítica a $q=\infty$, da agenda linear fixa e do crescimento ótimo no raio requer rastreabilidade própria. A caracterização global sob altura linear em $p=s=1$ com $q<\infty$ permanece em aberto.
 - A auditoria de fidelidade compara os enunciados e registra as escolhas de formalização, incluindo, para o estado anterior ao commit `9951091`, a referência externa usada na entropia métrica da seção 6. A cota inferior de entropia agora tem demonstração própria no artigo (ver a seção de atualização da auditoria). [Consultar a auditoria de fidelidade](mapas/AUDITORIA_FIDELIDADE.md)
 
 ## Licenças e segurança

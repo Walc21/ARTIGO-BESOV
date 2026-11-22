@@ -3,29 +3,31 @@
 \input{conjecturas_lp_citacoes.tex}
 
 \hypersetup{
-  pdftitle={A Realization Characterization of Besov Spaces in Lp with Controlled Arithmetic Height},
-  pdfsubject={Jackson theorems, Besov spaces, and stability under inclusion in ReLU network families},
+  pdftitle={A Minimax Law for Besov Approximation with Dyadic Leaves and Arithmetic Height},
+  pdfsubject={Independent leaf and height budgets in Besov approximation},
   pdfkeywords={Besov spaces, Lp approximation, arithmetic height, realization functional, ReLU networks}
 }
 
 \begin{document}
-\articletitle{A Realization Characterization of Besov Spaces in \texorpdfstring{$L^p$}{Lp} with Controlled Arithmetic Height}
-  {Independent researcher}{November 19, 2026}{}
+\articletitle{A Minimax Law for Besov Approximation with Dyadic Leaves and Arithmetic Height}
+  {Independent researcher}{November 21, 2026}{}
 
 \articleabstract{english}{Abstract}{%
-We characterize the Besov spaces $B^s_{p,q}([0,1])$, for $1\le p<\infty$, $0<s<2$, and $0<q\le\infty$, by the dyadic summability of a functional combining $L^p$ approximation error and second-order smoothness. The approximants are continuous piecewise affine functions with rational coefficients and simultaneous bounds on the number of leaves of the dyadic partition and on arithmetic height. The direct estimate combines local affine projections, a Whitney inequality, and nodal quantization. For $s<1/p$, height of order $N^{1+1/p-s}$ suffices. For $p>1$, $s=1/p$, and $0<q<\infty$, a height schedule of order $(B+1)N$ gives uniform summability on the ball of radius $B\ge1$ and characterizes membership in the realization space on that ball. Under the general schedules, the global characterization extends to nested ReLU network families that contain the rational library after a linear budget rescaling or approximate it with a tolerance that is summable on the Besov scale. For the uniform per-scale rate $N^{-s}$, lower bounds on the error determine the optimal power of the height. Iterated-logarithm schedules improve sufficient summability conditions in the regimes studied. On each ball of fixed radius, the explicit library code attains the $L^p$ error rate with $O(N\log N)$ bits, compared with an entropy lower bound of order $N$.}
-{Keywords}{Besov spaces, realization functional, arithmetic height, Jackson theorem, ReLU networks.}
+We study approximation in $L^p([0,1])$ by continuous piecewise affine functions with rational coefficients. The number $N$ of dyadic leaves and the arithmetic height $H$ are independent budgets. For $1\le p<\infty$, $0<s<2$, and $0<q\le\infty$, the minimax error on the unit Besov ball is of order $N^{-s}+H^{-s/a(p,s)}$, where $a(p,s)=1+1/p-s$ below $s=1/p$, $a(p,s)=1$ from $s=1/p$ to $s=1$, and $a(p,s)=s$ above $s=1$. The lower bounds hold for adaptive trees. The upper bounds use uniform grids, local affine projections, and nodal quantization. At $p=s=1$, dyadic denominators that vary by node remove the logarithmic loss in the per-scale error. The same law holds for the realization functional. On the diagonal $p>1$, $s=1/p$, any linear schedule with positive prefactor yields a global realization characterization of the Besov space, including $q=\infty$. Under this schedule, the uniform bound on the ball of radius $B$ grows as $B^{1+1/p}$ for large $B$. At $p=s=1$ with $q<\infty$, global characterization under a linear schedule remains open. Theorem~\ref{lp:thm:minimax-nh} on the minimax best error in $L^p$ was formalized in Lean~4 and received a grade of A in the independent F6 audit.}
+{Keywords}{Besov spaces, minimax approximation, arithmetic height, realization functional.}
 
 \section{Introduction}
 \label{lp:sec:intro}
 
-Approximation theory characterizes Besov regularity through errors associated with families of approximants, including spline spaces and classes of rational functions \citep{artigo_1-devore1998,artigo_2-devorepopov1988,artigo_2-devorepopov1988b,artigo_2-petrushev1988,lp-petrushevpopov1987}. The characterization presented here differs from these antecedents by a simultaneous restriction on the arithmetic height of the coefficients, which enters the realization functional and is quantified by the height schedules. Realization functionals add a measure of the approximant's smoothness to the approximation error \citep{lp-ditzian2007,artigo_2-hristovivanov1990,lp-kolomoitsev2019}. Estimates for approximating Besov classes with rectified linear unit (ReLU) networks relate this regularity to the network budget \citep{lp-ali2020,artigo_1-devore2021,lp-siegel2023,lp-yang2024}.
+We consider approximation of targets in $\Bes{s}{p}{q}([0,1])$ by continuous piecewise affine functions on dyadic trees. The budget $N$ limits the number of leaves. The budget $H$ limits the height of midpoint values, rational slopes, and leaf addresses. \Cref{lp:thm:minimax-nh} determines the worst-case error on the unit ball as the two budgets vary independently. The error is of order $N^{-s}+H^{-s/a(p,s)}$, and $a(p,s)$ is the optimal power of height for the uniform rate $N^{-s}$. \Cref{lp:cor:minimax-realization} gives the same law when the approximant's second-order modulus at scale $N^{-1}$ is added to the error.
 
-The approximation budget controls the number of leaves in the dyadic tree and the height of the rational numbers that define the affine segments. For each budget $N$ and schedule $H$, the realization functional minimizes the sum of the $L^p$ error and the approximant's second-order modulus at scale $N^{-1}$. Under the schedules and parameter regimes in \cref{lp:conj:besov}, dyadic summability of the functional characterizes $B^s_{p,q}([0,1])$. If a nested network family contains the rational library after a linear increase in $N$, the characterization remains valid. The same holds under approximate inclusion in $L^p$ with tolerance $\varepsilon_N$ that is summable on the Besov scale. These results extend the uniform-norm characterization and stability theorem of Part~IV of \citet{lp-oliveiravol} to the $L^p$ norm. \Cref{lp:sec:uniform} gives uniform bounds on balls, an arithmetic lower bound and the bit complexity of the approximants, and iterated-logarithm schedules.
+For the lower bound, we test the ability to resolve $2N$ bumps and use three restrictions imposed by height. They limit the admissible midpoint values, the resolution of the rightmost leaf, and the slopes. These proofs cover adaptive trees. For the upper bound, we use uniform grids and local affine projections, which allow targets defined only almost everywhere. Below $s=1/p$, the nodal magnitude determines the additional arithmetic cost. On the diagonal, jumps between adjacent nodes are bounded. At $p=s=1$, we choose a dyadic denominator at each node and control the $L^1$ error by the mean absolute nodal value. Arithmetic on each leaf uses a common denominator for its two endpoints. This construction removes the logarithmic loss in the per-scale rate.
 
-The second-order modulus controls the error of a quasi-interpolant constructed from local affine projections. Quantizing its nodal values yields a rational approximant. Above $s=1/p$, the Jackson bound for a fixed target has a quantization term of order $H^{-1}$ under the hypotheses of \cref{lp:hyp:jackson}. For $0<s<1/p$, the sup-norm bound for quasi-interpolants leads to height $N^{1+1/p-s}$. On the diagonal $s=1/p$, \cref{lp:conj:besov} gives a global schedule of the form $N[\log(eN)]^{\theta_q+\kappa}$ under the conditions of item (iii). For $p>1$ and $0<q<\infty$, controlling nodal jumps permits $H_B(N)\asymp(B+1)N$ on the ball of radius $B\ge1$ by \cref{lp:thm:critical-linear}. The inverse inequality applies to any family of approximants in $L^p$.
+Besov approximation by dyadic splines and the characterization of $\Bes{s}{p}{q}$ by approximation rates have classical antecedents \citep{artigo_1-devore1998,artigo_2-devorepopov1988,artigo_2-devorepopov1988b,artigo_2-petrushev1988,lp-petrushevpopov1987}. The direct estimate of \citet{artigo_2-devorepopov1988}, for splines on uniform dyadic partitions with real coefficients, is the starting point of the $N^{-s}$ term of the upper bound. Passing from these approximants to the rational assemblies of the library requires rationalizing the nodal values and controlling the heights of the midpoint value, the slope, and the address, which is done in the nodal quantization lemmas of this paper. Realization functionals add a measure of the approximant's smoothness to the error \citep{lp-ditzian2007,artigo_2-hristovivanov1990,lp-kolomoitsev2019}.\par Approximation by adaptive trees and optimal encoding of Besov balls were studied by \citet{lp-cohen2001}. The order $\varepsilon^{-1/s}$ of the metric entropy of these balls is a classical result, attributed to Birman and Solomyak \citep{lp-birmansolomyak1967}, with a new proof in \citet{lp-kerkyacharianpicard2003}; \cref{lp:sec:bits} applies it to the finite catalogue of the library. These works quantize coefficients and measure cost in bits, but they impose no bounded height on the midpoint value and the rational slope of continuous piecewise affine functions. They therefore do not directly yield the law in $(N,H)$ of \cref{lp:thm:minimax-nh}.\par Part~IV of \citet{lp-oliveiravol} already establishes rational Jackson estimates in the uniform norm with a common denominator, an arithmetic lower bound, and a realization characterization under height schedules. Part~II of the same series constructs, on the class $C^2$, assemblies with $n$ leaves, error of order $n^{-2}$, and height of order $n^2$, using nodal values on alternating rational grids. \Cref{lp:obs:c2-joint} deduces from this construction, with two elementary lower bounds, the joint law $N^{-2}+H^{-1}$ on that class. The deduction is a consequence of earlier results and is not to be identified with the case $s=2$ of \cref{lp:thm:minimax-nh}, whose hypothesis is $0<s<2$. Here, the $L^p$ norm requires summing local error estimates and makes it possible to exploit mean nodal bounds in quantization at $p=s=1$. \Cref{lp:thm:minimax-nh} determines the worst-case error in $L^p$ for two independent budgets, the number of leaves and the arithmetic height, throughout $0<s<2$, with lower bounds valid against adaptive trees.\par Approximation estimates for rectified linear unit (ReLU) networks provide the context for transferring the characterization \citep{lp-ali2020,artigo_1-devore2021}. \citet{lp-siegel2023} and \citet{lp-yang2024} obtain rates in terms of width and depth, with real parameters. \citet{lp-elbrachter2021} characterize optimal rates in terms of connectivity, with weights quantized at a precision of the order of a power of $\log\varepsilon^{-1}$ and error measured in $L^2$. These complexity models differ from the one adopted here, and the paper establishes no reduction between them.
 
-\Cref{lp:cor:joint-necessity} fixes a scale $N$ and an error constant $C$ common to the entire unit ball. For the rate $CN^{-s}$, the height must be at least of order $N^{1+1/p-s}$ if $s<1/p$, $N$ if $1/p\le s\le1$, and $N^s$ if $1<s<2$. The per-scale upper bounds attain these powers, with logarithmic factors in some diagonal cases. Summability across scales has its own sufficient conditions, collected in \cref{lp:tab:schedules}.
+Under the schedules in \cref{lp:conj:besov}, dyadic summability of the functional characterizes $\Bes{s}{p}{q}$. For $p>1$, $s=1/p$, the jump bound first yields a schedule of order $(B+1)N$ on the ball of radius $B$. A dyadic shift permits any fixed schedule $H_*(N)=\max\{2,\lceil A_*N\rceil\}$ with $A_*>0$ throughout the space, for $0<q\le\infty$. The equality of sets comes with a sharp bound of order $B^{1+1/p}$ for the sequence norm on large balls. Constant functions rule out a uniform linear comparison with the Besov quasi-norm. At $p=s=1$, for $q<\infty$, summability under a linear schedule remains open.
+
+The characterization transfers to nested network families that contain the rational library after a linear increase in the budget or approximate it in $L^p$ with a tolerance that is summable on the Besov scale. The coding bounds and entropy lower bound are collected in \cref{lp:sec:bits}.
 
 \section{Besov spaces and the rational library}
 \label{lp:sec:defs}
@@ -58,6 +60,20 @@ For $0<s<2$ and $0<q\le\infty$, we use the dyadic characterization of Besov spac
 \end{equation}
 For $q=\infty$, take the supremum. For $s>1/p$, \cref{lp:lem:embedding} gives the continuous representative of each Besov class, which we use for point evaluations. For $s\le1/p$, the construction uses local averages and requires no point evaluations of $f$.
 
+\begin{lema}[Properties of the modulus]
+\label{lp:lem:modulus}
+For $f,g\in L^p$ and $t>0$,
+\[
+ \wt{f+g}{t}{p}\le\wt{f}{t}{p}+\wt{g}{t}{p},
+ \qquad \wt{g}{t}{p}\le4\|g\|_p.
+\]
+In addition, $t\mapsto\wt{f}{t}{p}$ is nondecreasing.
+\end{lema}
+
+\begin{proof}
+The first inequality follows from linearity of $\Delta_h^2$ and Minkowski's inequality for each admissible $h$. For the second, each translation $x\mapsto x+jh$, $j\in\{0,1,2\}$, maps $[0,1-2h]$ into a subinterval of $[0,1]$. The absolute values of the difference coefficients sum to $4$. Monotonicity follows from inclusion of the sets over which the supremum is taken in \eqref{lp:eq:modulus-p}.
+\end{proof}
+
 \subsection{Arithmetic height and the realization functional}
 
 For a reduced fraction $u=a/b\in\Q$ with $b>0$, set
@@ -70,7 +86,7 @@ A representation on $[0,1]$ is obtained by successive dyadic bisections, with on
 
 For a nondecreasing schedule $H\colon\N\to\N$, define
 \begin{equation}
- \Sig{N}=\{0\}\cup\Aclass_{N,H(N)}([0,1]).
+ \Sig{N}=\Sigma_{N,H(N)},\qquad \Sigma_{N,H}=\{0\}\cup\Aclass_{N,H}([0,1]).
  \label{lp:eq:sigma}
 \end{equation}
 With $\nu_s=\max\{1,s\}$, the schedules are
@@ -110,6 +126,13 @@ with the convention $\inf\varnothing=+\infty$. The realization space is
 For the family $(\Sig{N})_{N\ge2}$, write $\Rfun{\Library,H}{N}$ and $\Rstr{s}{q}{\Library,H}_p$.
 \end{definicao}
 
+For $f\in L^p$ and independent budgets $N,H$, the best error for $N\ge1$ and the realization functional for $N\ge2$ are given by
+\[
+ e^H_{N,p}(f)=\inf_{g\in\Sigma_{N,H}}\|f-g\|_p,\qquad
+ R_{N,H}(f)_p=\inf_{g\in\Sigma_{N,H}}
+ \bigl(\|f-g\|_p+\wt{g}{N^{-1}}{p}\bigr).
+\]
+
 \begin{definicao}[Nested family containing the library]
 \label{lp:def:network-family}
 A family $\mathcal N=(\mathcal N_N)_{N\ge1}$ of subsets of $C([0,1])$ is nested and contains the zero function if
@@ -129,72 +152,10 @@ More generally, for a sequence $(\varepsilon_N)_{N\ge1}$ in $[0,\infty)$, we say
 \end{equation}
 \end{definicao}
 
-\section{Besov characterization and stability}
-\label{lp:sec:statements}
-
-\begin{teorema}[Characterization by arithmetic realization]
-\label{lp:conj:besov}
-Let $1\le p<\infty$ and $0<s<2$.
-\begin{enumerate}[label=(\roman*)]
-\item If $s>1/p$, the following equalities hold in $L^p([0,1])$.
-\begin{align}
- \Bes{s}{p}{\infty}
- &=\Rstr{s}{\infty}{\Library,H_{s,0}}_p,
- &&\label{lp:eq:conj-endpoint}\\
- \Bes{s}{p}{q}
- &=\Rstr{s}{q}{\Library,H_{s,0}}_p,
- &&0<q<\infty,\quad s<1,\label{lp:eq:conj-subcritical}\\
- \Bes{s}{p}{q}
- &=\Rstr{s}{q}{\Library,H_{s,\kappa}}_p,
- &&0<q<\infty,\quad s\ge1,\quad\kappa>1/q,\label{lp:eq:conj-critical}\\
- \Bes{s}{p}{q}
- &=\Rstr{s}{q}{\Library,\widetilde H_{s,\eta}}_p,
- &&0<q<\infty,\quad\eta>0.
- \label{lp:eq:besov-tilde}
-\end{align}
-\item If $0<s<1/p$ and $0<q\le\infty$, then
-\begin{equation}
- \Bes{s}{p}{q}=\Rstr{s}{q}{\Library,\widehat H_{s}}_p.
- \label{lp:eq:conj-low}
-\end{equation}
-\item If $s=1/p$, $0<q\le\infty$, and $\kappa\ge0$, with $\kappa>1/q$ when $p=1$ and $q<\infty$, then
-\begin{equation}
- \Bes{s}{p}{q}=\Rstr{s}{q}{\Library,\widehat H_{q,\kappa}}_p.
- \label{lp:eq:conj-diag}
-\end{equation}
-\end{enumerate}
-\end{teorema}
-
-\begin{teorema}[Stability under inclusion in network families]
-\label{lp:conj:stability}
-Let $p,s,q,H$ be as in any of the cases of \cref{lp:conj:besov}. If $\mathcal N$ satisfies \eqref{lp:eq:nesting} and \eqref{lp:eq:contains} for some $c\ge1$, then
-\begin{equation}
- \Bes{s}{p}{q}=\Rstr{s}{q}{\mathcal N}_p.
- \label{lp:eq:network-realization-p}
-\end{equation}
-\end{teorema}
-
-\begin{teorema}[Stability under approximate inclusion]
-\label{lp:thm:approx-stability}
-Let $p,s,q,H$ be as in any of the cases of \cref{lp:conj:besov}. If $\mathcal N$ satisfies \eqref{lp:eq:nesting} and \eqref{lp:eq:approx-contains} for some $c\ge1$ and a sequence $(\varepsilon_N)_{N\ge1}$ in $[0,\infty)$ such that
-\begin{equation}
- \big(2^{rs}\varepsilon_{2^r}\big)_{r\ge1}\in\ell^q,
- \label{lp:eq:approx-summable}
-\end{equation}
-then $\Bes{s}{p}{q}=\Rstr{s}{q}{\mathcal N}_p$.
-\end{teorema}
-
-For a family of ReLU networks, \eqref{lp:eq:contains} is an inclusion condition on the realized functions. For example, a piecewise affine function with interior knots $t_1<\cdots<t_{m-1}$ and successive slopes $\beta_1,\ldots,\beta_m$ has the following representation on $[0,1]$:
-\[
- g(x)=g(0)+\beta_1 x+\sum_{j=1}^{m-1}(\beta_{j+1}-\beta_j)(x-t_j)_+,
- \qquad u_+=\max\{u,0\}.
-\]
-Since $x=x_+$ on $[0,1]$, a single hidden layer of width at most $m$ can realize this expression. Thus the classes of functions realized by networks with one hidden layer of width at most $N$ contain $\Sig{N}$ with $c=1$. \Cref{lp:thm:approx-stability} extends this stability to architectures that reproduce the library to controlled accuracy in $L^p$, provided their tolerance satisfies \eqref{lp:eq:approx-summable}. Verifying this tolerance for a specific architecture, such as a network with quantized weights, is outside the scope of this article.
-
-In the schedules of items (ii) and (iii), the bound on the nodal values involves $n^{1/p-s}$ below the diagonal and $(\log n)^{\theta_q}$ on the diagonal. The exponent $\theta_q$ accounts for this bound on the values. The additional exponent $\kappa$ is used on the diagonal $p=s=1$ to sum the quantization-error bound when $q<\infty$. \Cref{lp:sec:ball} treats uniform schedules on balls of fixed radius.
-
 \section{Rational Jackson estimates with controlled height}
 \label{lp:sec:program}
+
+This section collects the upper bound. The theorem below states the rational Jackson estimate for $1/p<s<2$. The following subsections establish the tools for its proof (local affine projection, the Whitney inequality, embedding, and nodal quantization), the case $s\le1/p$, the uniform bounds on balls, and the critical estimates.
 
 \begin{teorema}[Jackson estimate in $L^p$]
 \label{lp:hyp:jackson}
@@ -369,7 +330,7 @@ The constant $C$ depends only on $p$ and $s$.
 \end{lema}
 
 \begin{proof}
-For a continuous function $v$ that is affine on each cell of a uniform grid of step size $m^{-1}$, norm equivalence on the space of affine functions on one cell, followed by rescaling, gives
+If $v$ is affine on a cell $I$, then $P_Iv=v$. Its absolute value is maximal at an endpoint. Applying \eqref{lp:eq:projection-bounds} at both endpoints gives $\|v\|_{L^\infty(I)}\le4|I|^{-1/p}\|v\|_{L^p(I)}$. On a uniform grid of mesh size $1/m$, this gives the first bound below with $C_p=4$, by taking the maximum over the cells and bounding each local $L^p$ norm by the global one.
 \begin{equation}
  \|v\|_\infty\le C_p m^{1/p}\|v\|_p,\qquad \|v'\|_\infty\le2m\|v\|_\infty,
  \label{lp:eq:nikolskii}
@@ -453,6 +414,27 @@ Let $x=H/(16(M+1))\ge1$, and let $Q$ be the power of two with $x<Q\le2x$. Then $
 The opposite parities of $b_j$ and $b_{j+1}$ ensure a nonzero slope. For the midpoint value, the numerator has absolute value at most $4QM+2$ and the denominator is $4Q$, both bounded by $8(M+1)Q\le H$. The slope has height $|\sigma_j|\le H$. The leaf indices satisfy $2\le r+1\le n\le H$ and $j+1\le n$. Hence $g\in\Aclass_{n,H}([0,1])$. Since $u$ and $g$ are affine on each cell, $\|u-g\|_\infty\le\max_j|v_j-y_j|\le1/(2Q)\le8(M+1)/H$.
 \end{proof}
 
+\begin{lema}[Quantization with a dyadic denominator at each node]
+\label{lp:lem:nodal-variable-height}
+Let $n=2^r\ge2$, $J\ge0$, and $y_0,\ldots,y_n\in\R$ satisfy $|y_{j+1}-y_j|\le J$ for $0\le j<n$. Set $w_j=1+J+|y_j|$. If $H$ is an integer and $H\ge\max\{8\max_j w_j,n(J+4)\}$, the interpolant $u$ of the data $(j/n,y_j)$ admits $g\in\Aclass_{n,H}([0,1])$ with
+\[
+ \|u-g\|_1\le\frac{32}{Hn}\sum_{j=0}^n w_j .
+\]
+\end{lema}
+
+\begin{proof}
+Let $Q_j$ be the largest power of two not exceeding $H/(8w_j)$. The height hypothesis gives $Q_j\ge1$, and maximality gives $Q_j>H/(16w_j)$. At even nodes, choose the closest multiple of $1/Q_j$ to $y_j$. At odd nodes, consider the closest multiple and its two immediate neighbors on that grid. At least one of the three differs from the values at both adjacent even nodes, which have already been fixed. Choose one satisfying this condition. The resulting values $v_j$ satisfy $v_j\in Q_j^{-1}\Z$, $v_{j+1}\ne v_j$, and
+\[
+ |v_j-y_j|\le 2/Q_j\le2,\qquad |v_j-y_j|\le32w_j/H.
+\]
+
+Let $g$ be the continuous interpolant of the $v_j$ on the uniform tree. On a leaf with nodes $j,j+1$, set $D=\max\{Q_j,Q_{j+1}\}$ and $w=\min\{w_j,w_{j+1}\}$. Both denominators divide $D$ because they are powers of two, and both are bounded by $H/(8w)$. Write $v_i=b_i/D$ with $b_i\in\Z$ for $i=j,j+1$. Since $\bigl||y_{j+1}|-|y_j|\bigr|\le J$, we have $\max\{|y_j|,|y_{j+1}|\}\le w$. Hence $|b_i|\le D(w+2)\le3Dw$. The midpoint value $(b_j+b_{j+1})/(2D)$ has numerator of magnitude at most $6Dw\le H$ and denominator $2D\le H$.
+
+The slope $n(b_{j+1}-b_j)/D$ is nonzero. If $n\le D$, it can be written as $(b_{j+1}-b_j)/(D/n)$, with numerator bounded by $6Dw$ and integer denominator at most $H$. If $D<n$, the slope is an integer of magnitude at most $n(J+4)\le H$, by the bound of $2$ on each nodal error. Reducing the fractions preserves the bounds. The indices meet the height constraint because $2\le r+1\le n\le H$ and $j+1\le n$. The uniform tree is therefore an admissible representation of $g$.
+
+On $[j/n,(j+1)/n]$, $u-g$ interpolates the signed nodal errors. Its absolute value is bounded by the interpolant of their magnitudes, whose integral is $(|v_j-y_j|+|v_{j+1}-y_{j+1}|)/(2n)$. Summing over the leaves gives an integral at most $n^{-1}\sum_j|v_j-y_j|$, proving the bound.
+\end{proof}
+
 \subsection{Quantization without continuity and Jackson estimates for \texorpdfstring{$s\le1/p$}{s ≤ 1/p}}
 
 In this subsection, $\theta_q=\max\{0,1-1/q\}$, with $\theta_\infty=1$. For $s\le1/p$, the construction bounds the nodal values $\lambda_j(f)$ using local projections, including in regimes without continuous embedding. The following quantization requires $Q\ge n$ and uses the bound on the nodal values to control the height.
@@ -508,24 +490,521 @@ Then there exists $g\in\Aclass_{n,H}([0,1])$ with
 Set $y_j=\lambda_j(f)$ and $M=\|Q_nf\|_\infty$. By \cref{lp:lem:sup-bound}, $|y_j|\le M\le C_0S\Lambda_n$. Since $C_0\ge1$ and $\Lambda_n\ge1$, we have $8(M+1)Q\le8C_0(S+1)\Lambda_nQ\le H$. Applying \cref{lp:lem:nodal-general} to $u=Q_nf$ gives $g\in\Aclass_{n,H}([0,1])$ with $\|Q_nf-g\|_\infty\le1/(2Q)$. The triangle inequality, \eqref{lp:eq:quasi-error}, and the unit measure of $[0,1]$ give \eqref{lp:eq:jackson-low}.
 \end{proof}
 
-\section{Proofs of the characterization and stability theorems}
-\label{lp:sec:proved}
+\subsection{Uniform bounds on Besov balls}
+\label{lp:sec:ball}
+\label{lp:sec:uniform}
 
-\subsection{Inverse estimate}
+For $B>0$, write $\mathbb B^s_{p,q}(B)=\{f\in L^p:\|f\|^*_{\Bes{s}{p}{q}}\le B\}$. In \cref{lp:conj:besov}, the same schedule is used for all functions, and the proof may use thresholds that depend on $f$. Here, for fixed $(p,s,q)$ and $B\ge1$, the bounds hold from $n=2$ onward throughout the ball, and the schedule includes a factor $B+1$. Set $\mathsf L(N)=\log(eN)$ and $\theta_q=\max\{0,1-1/q\}$, with $\theta_\infty=1$.
 
-\begin{lema}[Properties of the modulus]
-\label{lp:lem:modulus}
-For $f,g\in L^p$ and $t>0$,
-\[
- \wt{f+g}{t}{p}\le\wt{f}{t}{p}+\wt{g}{t}{p},
- \qquad \wt{g}{t}{p}\le4\|g\|_p.
-\]
-In addition, $t\mapsto\wt{f}{t}{p}$ is nondecreasing.
+\begin{definicao}[Parameters for each regime]
+\label{lp:def:regime}
+Let $1\le p<\infty$, $0<s<2$, $0<q\le\infty$, and $\kappa\ge0$. For $n=2^r\ge2$, define the pairs $(\nu',\kappa')$ and $(\hat\nu,\hat\kappa)$ and the factor $\Lambda_n$ as shown in \cref{lp:tab:regime}.
+\begin{table}[H]
+\caption{Parameters by regularity regime}
+\label{lp:tab:regime}
+\small\tablecolors
+\begin{tabularx}{\linewidth}{l*{3}{>{\centering\arraybackslash}X}}
+\toprule
+\tablehead{Regime} & \tablehead{$(\nu\prime,\kappa\prime)$} & \tablehead{$(\hat\nu,\hat\kappa)$} & \tablehead{$\Lambda_n$} \\
+\midrule
+$s>1/p$ & $(\nu_s,\kappa)$ & $(\nu_s,\kappa)$ & $1$ \\
+$s<1/p$ & $(1,0)$ & $(1+1/p-s,0)$ & $n^{1/p-s}$ \\
+$s=1/p$ & $(1,\kappa)$ & $(1,\theta_q+\kappa)$ & $r^{\theta_q}$ \\
+\bottomrule
+\end{tabularx}\par
+\tablecredit
+\end{table}
+Call $(p,s,q,\kappa)$ \emph{admissible} if $\kappa>1/q$ whenever $q<\infty$ and $s\ge1$. For $B\ge1$ and $A\ge1$, the \emph{uniform schedule} is
+\begin{equation}
+ \widehat H^{[B]}_{A}(N)=\Bigl\lceil A\,(B+1)\,(N+1)^{\hat\nu}\,\mathsf L(N)^{\hat\kappa}\Bigr\rceil .
+ \label{lp:eq:uniform-schedule}
+\end{equation}
+\end{definicao}
+
+\begin{lema}[Uniform height and quantization]
+\label{lp:lem:uniform-height}
+Let $1\le p<\infty$, $0<s<2$, $0<q\le\infty$, and $\kappa\ge0$. For $n=2^r\ge2$, let $Q(n)$ be the smallest power of two with $Q(n)\ge n^{\nu'}\mathsf L(n)^{\kappa'}$. There exists $C_*\ge1$, depending only on $(p,s,q)$, with the following properties.
+\begin{enumerate}[label=(\alph*)]
+ \item $n\le Q(n)\le2n^{\nu'}\mathsf L(n)^{\kappa'}$, $\ 1/Q(n)\le n^{-s}$ e $\Lambda_nQ(n)\le4n^{\hat\nu}\mathsf L(n)^{\hat\kappa}$;
+ \item If $f\in\mathbb B^s_{p,q}(B)$, then $\max_{0\le j\le n}|\lambda_j(f)|\le C_*B\Lambda_n$ for every $n=2^r\ge2$.
+ \item If $(p,s,q,\kappa)$ is admissible, then $\big(2^{rs}/Q(2^r)\big)_{r\ge1}\in\ell^q$, with norm bounded by a constant $c_2$ depending only on $(p,s,q,\kappa)$.
+\end{enumerate}
 \end{lema}
 
 \begin{proof}
-The first inequality follows from linearity of $\Delta_h^2$ and Minkowski's inequality for each admissible $h$. For the second, each translation $x\mapsto x+jh$, $j\in\{0,1,2\}$, maps $[0,1-2h]$ into a subinterval of $[0,1]$. The absolute values of the difference coefficients sum to $4$. Monotonicity follows from inclusion of the sets over which the supremum is taken in \eqref{lp:eq:modulus-p}.
+(a) Since $\nu'\ge1$ and $\mathsf L(n)\ge1$, we have $n^{\nu'}\mathsf L(n)^{\kappa'}\ge n$, and the smallest power of two at least $x\ge1$ is less than $2x$. Moreover, $\nu'\ge s$: for $s>1/p$, $\nu_s\ge s$, and for $s\le1/p$, $\nu'=1\ge s$. Hence $1/Q(n)\le n^{-s}$. For the last bound, if $s>1/p$, then $\Lambda_nQ(n)\le2n^{\nu_s}\mathsf L(n)^\kappa$. If $s<1/p$, then $Q(n)=n$ and $\Lambda_nQ(n)=n^{1+1/p-s}$. If $s=1/p$, then $\mathsf L(n)=1+r\log2\ge r\log2$ and $1/\log2<2$ give $r^{\theta_q}\le2^{\theta_q}\mathsf L(n)^{\theta_q}$, so $\Lambda_nQ(n)\le2^{\theta_q+1}n\,\mathsf L(n)^{\theta_q+\kappa}\le4n\,\mathsf L(n)^{\theta_q+\kappa}$.
+
+(b) If $s>1/p$, \cref{lp:lem:embedding} gives $\|F\|_\infty\le C_E\|f\|^*_{\Bes{s}{p}{\infty}}\le C_EB$ for the continuous representative $F$, because the $\ell^\infty$ norm does not exceed the $\ell^q$ norm. Part (c) of \cref{lp:lem:quasi} gives $|\lambda_j(f)|=|\lambda_j(F)|\le2C_EB$. If $s\le1/p$, \cref{lp:lem:sup-bound} gives $|\lambda_j(f)|\le C_0B\Lambda_n$. Take $C_*=\max\{2C_E,C_0,1\}$.
+
+(c) By (a), $w_n=n^s/Q(n)\le n^{s-\nu'}\mathsf L(n)^{-\kappa'}$. If $q=\infty$, then $w_n\le1$. If $q<\infty$ and $s<1$, then $\nu'=1$ and $w_{2^r}\le2^{-r(1-s)}$, so the sequence belongs to $\ell^q$. If $q<\infty$ and $s\ge1$, then $\kappa>1/q$ by admissibility, $\nu'=s$, and $\kappa'=\kappa$, so $w_{2^r}\le(1+r\log2)^{-\kappa}$ and the sequence belongs to $\ell^q$ because $\kappa q>1$.
 \end{proof}
+
+\begin{teorema}[Uniform bounds on balls]
+\label{lp:thm:uniform}
+Let $1\le p<\infty$, $0<s<2$, $0<q\le\infty$, and $\kappa\ge0$, and let $C_*$ and $c_2$ be as in \cref{lp:lem:uniform-height}. Set $A=32(C_*+1)$ and $\widehat H=\widehat H^{[B]}_{A}$. Then for every $B\ge1$, every $f\in\mathbb B^s_{p,q}(B)$, and every $n=2^r\ge2$, there exists $g\in\Aclass_{n,\widehat H(n)}([0,1])\subseteq\Sig{n}$, with schedule $\widehat H$, such that
+\begin{equation}
+ \|f-g\|_p\le9C_W\,\wt{f}{n^{-1}}{p}+\frac1{2Q(n)}\le(9C_WB+1)\,n^{-s}.
+ \label{lp:eq:uniform-approx}
+\end{equation}
+If $(p,s,q,\kappa)$ is also admissible, there exists $C=C(p,s,q,\kappa)$ such that
+\begin{equation}
+ \sup_{f\in\mathbb B^s_{p,q}(B)}\Big\|\big(2^{rs}\Rfun{\Library,\widehat H}{2^r}(f)_p\big)_{r\ge1}\Big\|_{\ell^q}\le C\,(B+1).
+ \label{lp:eq:uniform-rate}
+\end{equation}
+\end{teorema}
+
+\begin{proof}
+Fix $f\in\mathbb B^s_{p,q}(B)$ and $n=2^r\ge2$. Set $M=C_*B\Lambda_n$ and $Q=Q(n)$. By \cref{lp:lem:uniform-height}(b), $|\lambda_j(f)|\le M$ for $0\le j\le n$. Since $\Lambda_n\ge1$, part (a) of the same lemma gives
+\[
+ 8(M+1)Q\le8(C_*B+1)\Lambda_nQ\le32(C_*+1)(B+1)\,n^{\hat\nu}\mathsf L(n)^{\hat\kappa}\le\widehat H(n).
+\]
+Since $Q\ge n$, applying \cref{lp:lem:nodal-general} to $y_j=\lambda_j(f)$ gives $g\in\Aclass_{n,\widehat H(n)}([0,1])$ with $\|Q_nf-g\|_\infty\le1/(2Q)$. By \cref{lp:cor:quasi-error}, $\|f-g\|_p\le9C_W\,\wt{f}{n^{-1}}{p}+1/(2Q)$. By \eqref{lp:eq:besov-p}, $\wt{f}{n^{-1}}{p}\le Bn^{-s}$, and by (a), $1/(2Q)\le n^{-s}/2$. This proves \eqref{lp:eq:uniform-approx}.
+
+For \eqref{lp:eq:uniform-rate}, \cref{lp:lem:modulus} gives $\wt{g}{n^{-1}}{p}\le\wt{f}{n^{-1}}{p}+4\|f-g\|_p$. Thus, as in the proof of \cref{lp:thm:besov-conditional},
+\[
+ \Rfun{\Library,\widehat H}{n}(f)_p\le(1+45C_W)\,\wt{f}{n^{-1}}{p}+\frac52\,\frac1{Q(n)}.
+\]
+Multiply by $n^s=2^{rs}$ and take the $\ell^q$ norm over $r\ge1$. The first term contributes at most $(1+45C_W)B$ by \eqref{lp:eq:besov-p}, and the second at most $\tfrac52c_2$ by \cref{lp:lem:uniform-height}(c). The triangle inequality in $\ell^q$ has constant $2^{(1/q-1)_+}$, independent of $B$. This gives \eqref{lp:eq:uniform-rate}.
+\end{proof}
+
+\begin{observacao}
+\label{lp:obs:uniform-q}
+The per-scale rate \eqref{lp:eq:uniform-approx} holds with $\kappa=0$ for every $q$. On the diagonal $s=1/p$, schedule \eqref{lp:eq:uniform-schedule} still includes $\mathsf L(N)^{\theta_q}$ to control the nodal values. When $s\ge1$ and $q<\infty$, the additional factor $\mathsf L(N)^\kappa$ with $\kappa>1/q$ makes the quantization bound summable. With $\kappa=0$, the weight $2^{rs}/Q(2^r)$ lies between $1/2$ and $1$, so this majorant fails to give \eqref{lp:eq:uniform-rate}.
+\end{observacao}
+
+\subsection{Critical estimates on balls}
+
+\begin{lema}[Uniform nodal jumps]
+\label{lp:lem:critical-jump}
+Let $p\ge1$ and $0<q\le\infty$, let $f$ satisfy $\|f\|^*_{\Bes{1/p}{p}{q}}\le B$, let $n=2^r\ge2$, and set $\lambda_j=\lambda_j(f)$. For $0\le j<n$,
+\begin{equation}
+ |\lambda_{j+1}-\lambda_j|\le\frac{4\,\sup_{[0,1]}|Q_2f|}{n}+\sum_{k=1}^{r-1}\frac{K_k}{n},
+ \qquad K_k=8\,(2^{k+1})^{1/p+1}\,18\,C_W\,\wt{f}{2^{-k}}{p}.
+ \label{lp:eq:critical-jump}
+\end{equation}
+Moreover, $K_k\le 144\,C_W\,2^{1/p}\,2^{k+1}\,B$ and $\sum_{k=1}^{r-1}K_k/n\le 288\,C_W\,2^{1/p}B$.
+\end{lema}
+
+\begin{proof}
+By the telescoping identity $Q_{2^r}f=Q_2f+\sum_{k=1}^{r-1}(Q_{2^{k+1}}f-Q_{2^k}f)$ and $\lambda_j=Q_{2^r}f(j/n)$, the difference $\lambda_{j+1}-\lambda_j$ is the sum of the differences of the terms. Each term is affine on cells of length $1/2$ (for $Q_2f$) or $2^{-(k+1)}$ (for the differences), and $[j/n,(j+1)/n]$ lies in one of these cells. Applying \eqref{lp:eq:projection-bounds} to an affine function on its own cell permits $C_p=4$ in \eqref{lp:eq:nikolskii}. Thus, for $m=2^{k+1}$, the slope of $v_k=Q_{2^{k+1}}f-Q_{2^k}f$ is bounded by $8m^{1/p+1}\|v_k\|_p\le K_k$, by the quasi-interpolation bound at the two levels. The slope of $Q_2f$ is bounded by $4\sup|Q_2f|$. The inequality $2^{k/p}\wt f{2^{-k}}p\le B$ gives the second part.
+\end{proof}
+
+\begin{teorema}[Critical linear height for $s=1/p$ with $p>1$]
+\label{lp:thm:critical-linear}
+Let $p>1$, $s=1/p$, and $0<q\le\infty$. There exist $A=A(p,C_W)\ge1$ and constants $C_2,C_3>0$ depending only on $(p,q,C_W)$ such that for every $B\ge1$ the linear schedule $H_B(N)=\lceil A(B+1)(N+1)\rceil$ satisfies the following properties.
+\begin{enumerate}[label=(\alph*)]
+ \item For every $f\in\mathbb B^{1/p}_{p,q}(B)$ and $n=2^r\ge2$, there exists $g\in\Aclass_{n,H_B(n)}([0,1])$ with
+ \[
+  \|f-g\|_p\le 9C_W\,\wt{f}{n^{-1}}{p}+\frac{8(M_r+1)}{H_B(n)},\qquad M_r=\mathsf B_0(f)+144\,C_W\,2^{1/p}\,B\,r,
+ \]
+ where $\mathsf B_0(f)=8\,2^{1/p}(\|f\|_p+9C_W\wt{f}{1/2}{p})$.
+ \item For every $f\in\mathbb B^{1/p}_{p,q}(B)$ and $n=2^r\ge2$, we have $\Rfun{\Library,H_B}{n}(f)_p\le C_2(B+1)\,n^{-1/p}$.
+ \item For every $f\in\mathbb B^{1/p}_{p,q}(B)$, we have $\big\|\big(2^{r/p}\Rfun{\Library,H_B}{2^r}(f)_p\big)_{r\ge1}\big\|_{\ell^q}\le C_3(B+1)$.
+ \item If $\|f\|^*_{\Bes{1/p}{p}{q}}\le B$, then $f\in\Rstr{1/p}{q}{\Library,H_B}_p$. Conversely, $\Rstr{1/p}{q}{\Library,H_B}_p\subseteq\Bes{1/p}{p}{q}$ for every $f\in L^p$. Thus the ball of radius $B$ in $\Bes{1/p}{p}{q}$ is contained in $\Rstr{1/p}{q}{\Library,H_B}_p$, which is contained in $\Bes{1/p}{p}{q}$.
+\end{enumerate}
+\end{teorema}
+
+\begin{proof}
+For (a), inequality \eqref{lp:eq:nikolskii} with $m=2$ and the quasi-interpolation bound give $\sup|Q_2f|\le\mathsf B_0(f)\le C_0B$, with $C_0=8\,2^{1/p}(1+9C_W)$. \Cref{lp:lem:critical-jump} bounds the jumps by $J=4C_0B+288C_W2^{1/p}B$. The telescoping sum with $C_p=4$ in \eqref{lp:eq:nikolskii} gives $|\lambda_j|\le M_r$. Set $C_M=C_0+144C_W2^{1/p}+1$ and $C_J=4C_0+288C_W2^{1/p}+1$. Thus $M_r+1\le C_M(B+1)(r+1)$ and $J+1\le C_J(B+1)$. Since $r+1\le n$, with $A=16C_M+C_J+8$ the schedule satisfies $8n\le H$, $16(M_r+1)\le H$ and $n(J+1)\le H$, so \cref{lp:lem:nodal-jump} applies to $Q_nf$. Adding the quasi-interpolation error (\cref{lp:cor:quasi-error}) and the quantization error gives (a).
+
+By \cref{lp:prop:transfer}, the realization cost is at most $\wt{f}{n^{-1}}{p}+5\|f-g\|_p$. Since $H_B(n)\ge A(B+1)n$ and $M_r+1\le C_M(B+1)(r+1)$, it follows that
+\[
+ 2^{r/p}\Rfun{\Library,H_B}{2^r}(f)_p
+ \le(1+45C_W)\,2^{r/p}\wt{f}{2^{-r}}{p}
+    +C(p,C_W)(r+2)2^{-r(1-1/p)}.
+\]
+The first term has $\ell^q$ norm at most $(1+45C_W)B$. In the second, $\rho=2^{1/p-1}<1$, and $(r+2)\rho^r\le C_{\rho,\sigma}\sigma^r$ for any $\rho<\sigma<1$. This gives the per-scale bound in (b) and the sequence bound in (c). For $0<q<1$, sum the $q$th powers. For $1\le q<\infty$, use the triangle inequality, and for $q=\infty$, take the supremum. Part (c) gives the direct inclusion in (d), and \cref{lp:cor:inclusion} gives the reverse inclusion for any schedule.
+\end{proof}
+
+\begin{proposicao}[Linear height for the approximation error on $B^1_{1,q}$]
+\label{lp:prop:l1-linear-height}
+There exists $C_E\ge1$ such that, for every $0<q\le\infty$, $B\ge1$, $f\in\mathbb B^1_{1,q}(B)$, $n=2^r\ge2$, and integer $H\ge C_E(B+1)n$, there is $g\in\Aclass_{n,H}([0,1])$ with
+\[
+ \|f-g\|_1\le9C_W\wt{f}{n^{-1}}{1}+C_E(B+1)/H.
+\]
+The constant depends only on $C_W$ for $p=1$.
+\end{proposicao}
+
+\begin{proof}
+By \cref{lp:lem:critical-jump} with $p=1$, $|\lambda_{j+1}-\lambda_j|\le J=C_J'B$, since $2^k\wt{f}{2^{-k}}{1}\le B$ and $\|Q_2f\|_\infty\le8\|f\|_1\le8B$. The constant $C_J'$ depends only on $C_W$. By \eqref{lp:eq:projection-bounds}, $|\lambda_j(f)|\le4n\|f\|_{L^1(I_{c(j)})}$. The final cell is used twice and the others once. Therefore
+\[
+ \max_j|\lambda_j(f)|\le4nB,\qquad n^{-1}\sum_{j=0}^n|\lambda_j(f)|\le8\|f\|_1.
+\]
+With $w_j=1+J+|\lambda_j(f)|$, we have $8\max_jw_j\le8(1+C_J'B+4nB)$, $n(J+4)\le n(C_J'B+4)$, and $n^{-1}\sum_jw_j\le2(1+C_J'B)+8B$. Thus $C_E(B+1)n$ covers both conditions of \cref{lp:lem:nodal-variable-height} for sufficiently large $C_E$. The lemma and \cref{lp:cor:quasi-error} give the error bound, with the same constant enlarged to cover the quantization term.
+\end{proof}
+
+\section{Lower bounds for the dyadic library}
+\label{lp:sec:floors}
+
+The bounds in this section apply to all admissible dyadic trees. The three height restrictions act through midpoint values, the address of the rightmost leaf, and slopes.
+
+For an integer $H\ge1$, let $\mathcal Q_H=\{a/b\in\Q:\height(a/b)\le H\}$.
+
+\begin{proposicao}[Uniform arithmetic lower bound in $L^p$]
+\label{lp:prop:floor}
+Let $H\ge1$ be an integer, let $a_H=1/(2H)$, and let $f_H\equiv a_H$ on $[0,1]$. Then $\mathrm{dist}(a_H,\mathcal Q_H)=1/(2H)$ and, for every $N\ge1$ and every $g\in\{0\}\cup\Aclass_{N,H}([0,1])$,
+\begin{equation}
+ \|f_H-g\|_p\ge\frac1{2H}.
+ \label{lp:eq:floor}
+\end{equation}
+In particular, $e^{H}_{N,p}(f_H)\ge1/(2H)$ for every $N$.
+\end{proposicao}
+
+\begin{proof}
+Every positive rational in $\mathcal Q_H$ has a positive integer numerator and denominator at most $H$, so it is at least $1/H$ and its distance from $a_H$ is at least $1/(2H)$. Nonpositive rationals are at distance at least $a_H=1/(2H)$ from $a_H$, and $0\in\mathcal Q_H$ attains this distance.
+
+For $g=0$, we have $\|f_H\|_p=a_H$. Let $g\in\Aclass_{N,H}([0,1])$ and let $J$ be a leaf of the representation, with $g(x)=y_0+s(x-x_J)$ on $J$, where $x_J$ is the midpoint of $J$ and $\height(y_0)\le H$. Since $g$ is affine, $\int_Jg=|J|\,y_0$. Jensen's inequality for the convex function $t\mapsto|t|^p$ gives
+\[
+ \int_J|f_H-g|^p\ge|J|\Bigl|\frac1{|J|}\int_J(f_H-g)\Bigr|^p=|J|\,|a_H-y_0|^p\ge|J|\,(2H)^{-p},
+\]
+because $y_0\in\mathcal Q_H$. The leaves have disjoint interiors and union $[0,1]$. Summing gives $\|f_H-g\|_p^p\ge(2H)^{-p}$.
+\end{proof}
+
+\begin{corolario}[Necessity of the arithmetic exponent]
+\label{lp:cor:floor}
+Let $1\le p<\infty$, $0<s<2$, $0<q\le\infty$, $C>0$, and let $H$ be a schedule. Suppose that for some $N\ge2$ with $H(N)\ge2$,
+\[
+ \sup_{f\in\mathbb B^s_{p,q}(1)}\Rfun{\Library,H}{N}(f)_p\le C\,N^{-s}.
+\]
+Then $H(N)\ge N^s/(2C)$.
+\end{corolario}
+
+\begin{proof}
+Since $H(N)\ge2$, the constant function $f\equiv a_{H(N)}$ has $a_{H(N)}\le1/4$ and hence $\|f\|^*_{\Bes{s}{p}{q}}=a_{H(N)}\le1$, because its second-order modulus vanishes. For every $g\in\Sig{N}$, \cref{lp:prop:floor} gives $\|f-g\|_p+\wt{g}{N^{-1}}{p}\ge\|f-g\|_p\ge1/(2H(N))$. Hence $1/(2H(N))\le CN^{-s}$.
+\end{proof}
+
+\begin{observacao}
+\label{lp:obs:floor}
+Let $1\le s<2$ with $s>1/p$, $B\ge1$, and $\kappa=0$. The proof of \cref{lp:thm:uniform} gives, for $n=2^r\ge2$,
+\[
+ \sup_{f\in\mathbb B^s_{p,q}(B)}\Rfun{\Library,\widehat H}{n}(f)_p
+ \le\bigl((1+45C_W)B+\tfrac52\bigr)n^{-s},
+\]
+with $\widehat H(N)\asymp(B+1)N^s$. \Cref{lp:cor:floor} gives the necessary power in this range for the uniform per-scale rate. For $s<1$, the geometric floor is stronger than the arithmetic floor, and for $s<1/p$ the slope floor strengthens the bound further. \Cref{lp:cor:joint-necessity} applies all three floors to the full library, including adaptive partitions.
+\end{observacao}
+
+\begin{lema}[Scaling of a bump]
+\label{lp:lem:bump}
+Let $1\le p<\infty$, $0<s<2$, and $0<q\le\infty$. Fix $\varphi\in C^\infty_c((1/8,5/8))$ with $\varphi=1$ on $[1/4,1/2]$, and set $M_\varphi=\sup|\varphi''|$ and $\kappa_\varphi=\int_0^1(\varphi')^2>0$. There exists $\Lambda\ge1$, depending only on $(p,s,q,\varphi)$, such that for $a\in\mathbb R$ and $0<t\le1$, the function $\psi_{a,t}(x)=a\,\varphi\bigl((x-1+t)/t\bigr)$ satisfies
+\[
+ \|\psi_{a,t}\|^*_{\Bes sp q}\le\Lambda\,|a|\,t^{1/p-s}.
+\]
+Moreover, for $a\ge0$, $0<t\le1$, and every affine function $\ell$,
+\[
+ \|\psi_{a,t}-\ell\|_{L^p(1-t,1)}\ge\frac{\kappa_\varphi}{M_\varphi}\,a\,t^{1/p}.
+\]
+\end{lema}
+
+\begin{proof}
+For the norm, $\|\psi_{a,t}\|_p=|a|t^{1/p}\|\varphi\|_p$, and $\psi_{a,t}''=a\,t^{-2}\varphi''(\cdot)$. The formula $\Delta_h^2\psi(x)=\int_0^h\!\int_0^h\psi''(x+u+v)\,du\,dv$, Minkowski's inequality, and subadditivity give
+\[
+ \wt{\psi_{a,t}}{h}{p}\le|a|t^{1/p}\,\Omega(h/t),\qquad \Omega(u)=\min\{4\|\varphi\|_p,\;u^2\|\varphi''\|_p\}.
+\]
+For $h_r=2^{-r}$ and $u_r=h_r/t$, we have $|a|t^{1/p}2^{rs}=|a|t^{1/p-s}\,u_r^{-s}$, hence
+\[
+ 2^{rs}\wt{\psi_{a,t}}{h_r}{p}\le|a|t^{1/p-s}\,u_r^{-s}\Omega(u_r).
+\]
+Since $u_{r+1}=u_r/2$, for $q<\infty$ we have the geometric bounds
+\[
+ \sum_{u_r\ge1}u_r^{-sq}\le(1-2^{-sq})^{-1},
+ \qquad \sum_{u_r<1}u_r^{(2-s)q}\le(1-2^{-(2-s)q})^{-1}.
+\]
+Both are finite because $0<s<2$. For $q=\infty$, use that $u^{-s}\Omega(u)$ is bounded. Thus the sequence has $\ell^q$ norm at most $|a|t^{1/p-s}K_1$, with $K_1$ depending only on $(p,s,q,\varphi)$. Since $\|\psi_{a,t}\|_p\le|a|t^{1/p-s}\|\varphi\|_p$, it suffices to take $\Lambda=\max\{1,\|\varphi\|_p+K_1\}$.
+
+For the second inequality, let $L(y)=\ell(1-t+ty)$, which is affine. Integrating by parts, with $\varphi(0)=\varphi(1)=\varphi'(0)=\varphi'(1)=0$, we get $\int_0^1\varphi\,\varphi''=-\kappa_\varphi$ and $\int_0^1 L\,\varphi''=0$. Hence $a\kappa_\varphi\le M_\varphi\int_0^1|a\varphi(y)-L(y)|\,dy$. Substituting $x=1-t+ty$ gives $\int_{1-t}^1|\psi_{a,t}-\ell|\,dx=t\int_0^1|a\varphi-L|\,dy\ge t\,a\kappa_\varphi/M_\varphi$. Since the interval $(1-t,1)$ has length $t$, Hölder's inequality gives $\int_{1-t}^1|h|\le t^{1-1/p}\|h\|_{L^p(1-t,1)}$, and therefore $\|\psi_{a,t}-\ell\|_{L^p(1-t,1)}\ge t^{1/p-1}\cdot t\,a\kappa_\varphi/M_\varphi=\frac{\kappa_\varphi}{M_\varphi}a\,t^{1/p}$.
+\end{proof}
+
+\begin{proposicao}[Geometric floor]
+\label{lp:prop:geom-floor}
+Let $1\le p<\infty$, $0<s<2$, and $0<q\le\infty$. There exists $c_G=c_G(p,s,q)>0$ such that for every integer $H\ge2$ there is a measurable $f_H$ with $\|f_H\|^*_{\Bes sp q}\le1$ and
+\[
+ \|f_H-g\|_p\ge c_G\,H^{-s}\qquad \forall N\ge1,\quad \forall g\in\Sigma_{N,H}.
+\]
+\end{proposicao}
+
+\begin{proof}
+Let $\Lambda$ be the constant of \cref{lp:lem:bump}, with $\varphi$ fixed. Take $t=1/H$ and $a=t^{s-1/p}/\Lambda$, and let $f_H=\psi_{a,t}$. By \cref{lp:lem:bump}, $\|f_H\|^*\le\Lambda a t^{1/p-s}=1$. If $g=0$, it is affine on $[1-t,1]$. Otherwise take any admissible representation and consider its rightmost leaf $J_{k,m}$. Its right endpoint is $1$, so $m=2^k-1$ and the address field of the height gives $H\ge |m|+1=2^k$. Thus $J_{k,2^k-1}=[1-2^{-k},1]\supseteq[1-1/H,1]$. In either case $g$ is affine on $[1-t,1]$, and the local bound in \cref{lp:lem:bump} gives
+\[
+ \|f_H-g\|_p\ge\|f_H-g\|_{L^p(1-t,1)}\ge\frac{\kappa_\varphi}{M_\varphi}\,a\,t^{1/p}=\frac{\kappa_\varphi}{M_\varphi\Lambda}\,t^{s}=c_G\,H^{-s},
+\]
+with $c_G=\kappa_\varphi/(M_\varphi\Lambda)$, which depends only on $(p,s,q)$.
+\end{proof}
+
+\begin{proposicao}[Slope floor]
+\label{lp:prop:slope-floor}
+Let $1\le p<\infty$, $0<s\le1/p$, and $0<q\le\infty$, and set $\beta=s/(1+1/p-s)$. There exists $c_L=c_L(p,s,q)>0$ such that for every integer $H\ge2$ there is a measurable $f_H$ with $\|f_H\|^*_{\Bes sp q}\le1$ and
+\[
+ \|f_H-g\|_p\ge c_L\,H^{-\beta}\qquad\text{for every }N\ge1\text{ and every }g\in\Sig{N}\text{ with schedule }H.
+\]
+\end{proposicao}
+
+\begin{proof}
+Set $\delta=1/p-s$ and $c=\min\{\Lambda^{-1},2^{-(1+\delta)}\}$, with $\Lambda$ from \cref{lp:lem:bump}. Take $t=(c/(2H))^{1/(1+\delta)}\le1/2$, $a=c\,t^{-\delta}$, and $f_H(x)=a\varphi((x-1/4)/t)$. The support lies in $(0,1)$. The bounds on $\|f_H\|_p$ and the modulus in \cref{lp:lem:bump} hold with the same constant for this translated support, since they use the norms of $\varphi$ and $\varphi''$. Thus $\|f_H\|^*\le\Lambda a t^\delta\le1$.
+
+The functions $g$ are $H$-Lipschitz on $[0,1]$. For $x$ in $I=[1/4+t/4,1/4+t/2]$, we have $f_H(x)=a$ and $f_H(x+t)=0$. Since $Ht=a/2$, it follows that $|f_H-g|(x)+|f_H-g|(x+t)\ge a/2$. The intervals $I$ and $I+t$ are disjoint and lie in $[0,1]$. By convexity, the sum of the $p$th powers of the two errors is at least $2^{1-p}(a/2)^p$. Integrating over $I$, which has length $t/4$, yields
+\[
+ \|f_H-g\|_p\ge 2^{-2-1/p}a\,t^{1/p}
+ =2^{-2-1/p}c(c/2)^\beta H^{-\beta}.
+\]
+\end{proof}
+
+\begin{corolario}[Joint necessity]
+\label{lp:cor:joint-necessity}
+Let $1\le p<\infty$, $0<s<2$, $0<q\le\infty$, $C>0$, $N\ge1$, and a schedule $H$ with $H(N)\ge2$. Suppose that, for every $f\in\mathbb B^s_{p,q}(1)$,
+\[
+ e^{H(N)}_{N,p}(f)\le C\,N^{-s}.
+\]
+Then $H(N)\ge(c_G/C)^{1/s}N$. If $s\le1/p$, then $H(N)\ge(c_L/C)^{1/\beta}N^{1+1/p-s}$. Moreover, $H(N)\ge N^s/(2C)$. For $N\ge2$, the same conclusions follow from the assumption $R_{N,H(N)}(f)_p\le CN^{-s}$ for every $f$ in the ball, since $e^{H(N)}_{N,p}(f)\le R_{N,H(N)}(f)_p$ by \cref{lp:prop:transfer}.
+\end{corolario}
+
+\begin{proof}
+Let $H=H(N)$. By \cref{lp:prop:geom-floor}, there is $f_H$ with $\|f_H\|^*\le1$ such that $\|f_H-g\|_p\ge c_GH^{-s}$ for every $g\in\{0\}\cup\Aclass_{N,H}([0,1])$, the set over which $e^H_{N,p}$ is an infimum. Since $0$ is affine and every $g\in\Aclass_{N,H}([0,1])$ is affine on $[1-1/H,1]$ by the last leaf, the proposition applies to this set. Hence $c_GH^{-s}\le e^H_{N,p}(f_H)\le CN^{-s}$, which gives $H^s\ge(c_G/C)N^s$. If $s\le1/p$, \cref{lp:prop:slope-floor} gives $c_LH^{-\beta}\le CN^{-s}$, that is, $H\ge(c_L/C)^{1/\beta}N^{s/\beta}$, with $s/\beta=1+1/p-s$. For the last inequality, $f\equiv1/(2H)$ has $\|f\|^*=1/(2H)\le1$, and by \cref{lp:prop:floor} $e^H_{N,p}(f)\ge1/(2H)$; hence $1/(2H)\le CN^{-s}$.
+\end{proof}
+
+\begin{lema}[Besov packing]
+\label{lp:lem:packing}
+Let $1\le p<\infty$, $0<s<2$, $0<q\le\infty$, and let $\varphi\in C_c^\infty((0,1))$ be nonzero. Put $c_\varphi=\|\varphi\|_p$, $M_\varphi=\|\varphi''\|_p$, $C_2=\max\{4c_\varphi,M_\varphi\}$, $\theta_*=\min\{s,2-s\}$,
+\[
+K_{s,q}=\begin{cases}2^{\theta_*}\Bigl(\sum_{k\in\mathbb Z}2^{-q\theta_*|k|}\Bigr)^{1/q}, & 0<q<\infty,\\[4pt] 1, & q=\infty,\end{cases}
+\qquad
+C_1=c_\varphi+C_2K_{s,q}.
+\]
+For $B>0$, $m\in\N$ with $m\ge1$, and $\theta\in\{0,1\}^m$, define
+\[
+f_\theta(x)=\frac{B}{C_1}\,m^{-s}\sum_{j=0}^{m-1}\theta_j\,\varphi(mx-j).
+\]
+Then:
+\begin{enumerate}[label=(\roman*)]
+\item $\|f_\theta\|^*_{\Bes{s}{p}{q}}\le B$, uniformly in $m$ and $\theta$;
+\item $\|f_\theta-f_\eta\|_p=\dfrac{B}{C_1}\,c_\varphi\,m^{-s-1/p}\,d_H(\theta,\eta)^{1/p}$, where $d_H$ is the Hamming distance;
+\item for every $m\ge1$ there is $\Theta_m\subseteq\{0,1\}^m$ with $|\Theta_m|\ge 2^{m/6}$ and $d_H(\theta,\eta)\ge m/4$ for distinct $\theta,\eta\in\Theta_m$.
+\end{enumerate}
+\end{lema}
+
+\begin{proof}
+Let $a=B/C_1$ and $F=f_\theta$. Extend $\varphi$ by zero to $\R$. The support of $\varphi(m\cdot-j)$ is compact and contained in the interior $(j/m,(j+1)/m)$ of its cell. Since these interiors are disjoint, $F$ is a finite sum of smooth functions with disjoint compact supports and $\operatorname{supp}F\subset(0,1)$.
+
+\emph{Norms.} Since $\int|\varphi(mx-j)|^p\,dx=m^{-1}c_\varphi^p$ and the terms are disjoint,
+\[
+\|F\|_p^p=a^pm^{-sp-1}\,|\theta|\,c_\varphi^p
+\quad\Longrightarrow\quad \|F\|_p\le a\,m^{-s}c_\varphi,
+\]
+because $|\theta|\le m$. Similarly $F''(x)=a\,m^{2-s}\sum_j\theta_j\varphi''(mx-j)$ and $\|F''\|_p\le a\,m^{2-s}M_\varphi$.
+
+\emph{Second differences.} For $0<h\le1/2$ and $x\in\R$, $\Delta_h^2F(x)=\int_0^h\!\int_0^h F''(x+u+v)\,du\,dv$. Minkowski's inequality gives $\|\Delta_h^2F\|_{L^p([0,1-2h])}\le h^2\|F''\|_p$. Also $|\Delta_h^2F|\le|F(x+2h)|+2|F(x+h)|+|F(x)|$, which gives $\|\Delta_h^2F\|_{L^p([0,1-2h])}\le4\|F\|_p$. Hence, for $t>0$,
+\begin{align*}
+\wt{F}{t}{p}&\le\min\{4\|F\|_p,\ \min(t,\tfrac12)^2\|F''\|_p\}\\
+&\le a\,m^{-s}\min\{4c_\varphi,\,M_\varphi(mt)^2\}\le C_2\,a\,m^{-s}\min\{1,(mt)^2\}.
+\end{align*}
+The last inequality uses $\min\{4c_\varphi,M_\varphi y\}\le C_2\min\{1,y\}$ for $y\ge0$. The constant $C_2$ is independent of $m$ and $\theta$.
+
+\emph{Besov norm.} Put $a_r=2^{rs}\wt{F}{2^{-r}}{p}$ for $r\in\N_0$, and $R=\log_2 m$ (real). If $r\le R$, then $m2^{-r}\ge1$ and
+\[
+a_r\le C_2\,a\,2^{rs}m^{-s}=C_2\,a\,2^{-(R-r)s}.
+\]
+If $r\ge R$, then $m2^{-r}\le1$ and
+\[
+a_r\le C_2\,a\,2^{rs}m^{-s}(m2^{-r})^2=C_2\,a\,(m2^{-r})^{2-s}=C_2\,a\,2^{-(r-R)(2-s)}.
+\]
+Thus $a_r\le C_2\,a\,2^{-\theta_*|r-R|}$. The series converges precisely because $\theta_*=\min\{s,2-s\}>0$, that is, for $0<s<2$: at $s=2$ the exponent $2-s$ vanishes, and for $s>2$ the bound on $a_r$ grows with $r$.
+
+For $q=\infty$, $\sup_r a_r\le C_2a$. For $0<q<\infty$ no triangle inequality is used, only the sum of $q$-th powers: $\sum_{r\ge0}a_r^q\le C_2^qa^q\sum_{r\ge0}2^{-q\theta_*|r-R|}$. Write $R=\lfloor R\rfloor+\delta$ with $\delta\in[0,1)$. With $k=r-\lfloor R\rfloor\in\mathbb Z$ (distinct for distinct $r$), $|r-R|=|k-\delta|\ge|k|-1$, so the sum is at most $2^{q\theta_*}\sum_{k\in\mathbb Z}2^{-q\theta_*|k|}$. Hence $\|(a_r)_r\|_{\ell^q}\le C_2\,a\,K_{s,q}$ for all $0<q\le\infty$. Adding $\|F\|_p\le a\,c_\varphi$,
+\[
+\|F\|^*_{\Bes{s}{p}{q}}\le a\,(c_\varphi+C_2K_{s,q})=a\,C_1=B.
+\]
+This proves (i).
+
+\emph{Separation.} $f_\theta-f_\eta=a\,m^{-s}\sum_j(\theta_j-\eta_j)\varphi(mx-j)$ is a sum of terms with disjoint supports and coefficients in $\{-1,0,1\}$. Hence $\|f_\theta-f_\eta\|_p^p=a^pm^{-sp-1}\,d_H(\theta,\eta)\,c_\varphi^p$, which gives (ii).
+
+\emph{Binary packing.} Let $k=\lfloor m/4\rfloor$ and let $\Theta_m\subseteq\{0,1\}^m$ be a maximal subset whose pairwise Hamming distances are at least $k+1$ (it exists since $\{0,1\}^m$ is finite). By maximality, the Hamming balls of radius $k$ centred at $\Theta_m$ cover $\{0,1\}^m$, so $2^m\le|\Theta_m|\,V(m,k)$, where $V(m,k)=\sum_{i\le k}\binom mi$. For $k\ge1$ let $p_0=k/m\le1/4$. Since $p_0/(1-p_0)\le1$, for $i\le k$ we have $p_0^i(1-p_0)^{m-i}\ge(1-p_0)^m(p_0/(1-p_0))^k$, and therefore
+\[
+1\ge\sum_{i\le k}\binom mi p_0^i(1-p_0)^{m-i}\ge V(m,k)\,p_0^k(1-p_0)^{m-k}=V(m,k)\,2^{-mH(p_0)},
+\]
+where $H(p)=-p\log_2p-(1-p)\log_2(1-p)$. Since $H$ is increasing on $[0,1/2]$, $V(m,k)\le2^{mH(1/4)}$. The inequality $3^9>2^{14}$ gives $H(1/4)=2-\frac34\log_2 3<5/6$. Thus $|\Theta_m|\ge2^{m(1-H(1/4))}\ge2^{m/6}$. The minimum distance is at least $k+1>m/4$. For $k=0$ ($1\le m\le3$), take $\Theta_m=\{0,1\}^m$.
+\end{proof}
+
+\section{A minimax law for two budgets}
+\label{lp:sec:minimax}
+
+For $N,H\ge2$, on the unit ball of $\Bes{s}{p}{q}$, define
+\[
+ D_{p,s,q}(N,H)=\sup_{\|f\|^*_{\Bes{s}{p}{q}}\le1}\ e^H_{N,p}(f).
+\]
+The two budgets vary independently. The leaf-budget lower bound uses the same target for all heights at a given $N$.
+
+\begin{lema}[Leaf-budget lower bound]
+\label{lp:lem:leaf-budget-floor}
+Let $1\le p<\infty$, $0<s<2$, and $0<q\le\infty$. There exists $c_{\mathrm{leaf}}=c_{\mathrm{leaf}}(p,s,q)>0$ such that $D_{p,s,q}(N,H)\ge c_{\mathrm{leaf}}N^{-s}$ for all integers $N,H\ge2$.
+\end{lema}
+
+\begin{proof}
+Fix a nonzero $\varphi\in C_c^\infty((0,1))$ and extend it by zero. With $m=2N$, use
+\[
+ f_m(x)=b m^{-s}\sum_{j=0}^{m-1}\varphi(mx-j),
+\]
+where $b=1/C_1$ with $C_1$ from \cref{lp:lem:packing} for this $\varphi$. Part (i), with $B=1$ and all bits equal to $1$, gives $\|f_m\|^*\le1$. Indeed, disjoint supports give $\|f_m\|_p=b m^{-s}\|\varphi\|_p$ and $\|f_m''\|_p=b m^{2-s}\|\varphi''\|_p$. The modulus is bounded by $C_2 b m^{-s}\min\{1,(mt)^2\}$. The packing proof sums the $q$th powers of the two geometric bounds around $t=m^{-1}$ or takes the supremum for $q=\infty$, so $b$ is independent of $m$.
+
+A representation with at most $N$ leaves has at most $N-1$ internal boundaries. Each boundary can lie in the interior of at most one test cell $I_j=(j/m,(j+1)/m)$. Thus $g$ is affine in the interior of at least $m-N+1\ge m/2$ test cells. For $g=0$, all cells qualify. On each such cell, $L_j(y)=g((j+y)/m)$ is affine. As in \cref{lp:lem:bump}, integration by parts gives $\int_0^1 L_j\varphi''=0$ and $\int_0^1\varphi\varphi''=-\int_0^1|\varphi'|^2$. With $p'$ conjugate to $p$, including $p'=\infty$ when $p=1$, Hölder's inequality and the change of variable give
+\[
+ \|f_m-g\|_{L^p(I_j)}
+ \ge b m^{-s-1/p}\frac{\int_0^1|\varphi'|^2}{\|\varphi''\|_{L^{p'}(0,1)}} .
+\]
+Summing the $p$th powers over at least $m/2$ cells yields a lower bound of order $m^{-s}$ with a constant independent of the budgets. Take the infimum over $g$ and use $m=2N$.
+\end{proof}
+
+\Needspace{12\baselineskip}
+\begin{teorema}[Minimax law in leaves and arithmetic height]
+\label{lp:thm:minimax-nh}
+Let $1\le p<\infty$, $0<s<2$, and $0<q\le\infty$. There are $c,C>0$, depending only on $(p,s,q)$, such that for all integers $N,H\ge2$,
+\begin{equation}
+ c\bigl(N^{-s}+H^{-s/a(p,s)}\bigr)
+ \le D_{p,s,q}(N,H)\le C\bigl(N^{-s}+H^{-s/a(p,s)}\bigr),
+ \label{lp:eq:minimax-nh}
+\end{equation}
+where
+\[
+ a(p,s)=
+ \begin{cases}
+ 1+1/p-s,&0<s<1/p,\\
+ 1,&1/p\le s\le1,\\
+ s,&1<s<2.
+ \end{cases}
+\]
+\end{teorema}
+
+\begin{proof}
+\emph{Lower bounds.} \Cref{lp:lem:leaf-budget-floor} gives the term $N^{-s}$. Below $1/p$, \cref{lp:prop:slope-floor} gives $H^{-s/(1+1/p-s)}$. From $1/p$ to $1$, inclusive, \cref{lp:prop:geom-floor} gives $H^{-s}$. Above $1$, \cref{lp:prop:floor} gives $1/(2H)$ because the constant target $1/(2H)$ has quasi-norm $1/(2H)\le1$. These estimates yield $H^{-s/a(p,s)}$ in each range. The maximum of the two lower bounds is at least half their sum. Each test function is chosen within the minimax supremum and may depend on $N$ or $H$.
+
+\emph{Construction at a dyadic level.} Let $n=2^r\ge2$ and fix $\|f\|^*\le1$. By \cref{lp:cor:quasi-error}, $\|f-Q_nf\|_p\le9C_W n^{-s}$. For $s<1/p$, \cref{lp:lem:sup-bound} bounds the nodal magnitude by $C_0n^{1/p-s}$. With $Q=n$, \cref{lp:lem:nodal-general} requires $H\ge8(C_0+1)n^{1+1/p-s}$ and gives additional error at most $1/(2n)\le n^{-s}/2$.
+
+For $s>1/p$, embedding and projection bound the nodal magnitude by $M=C_1'(p,s)$ on the unit ball. If $s\le1$, take $Q=n$, which requires $H\ge8(M+1)n$. If $s>1$, take the smallest power of two $Q\ge n^s$, so $Q<2n^s$. It suffices that $H\ge16(M+1)n^s$. In both cases, $Q\ge n$ and the additional error is at most $1/(2Q)\le n^{-s}/2$. These are the per-scale choices in \cref{lp:thm:uniform} with $\kappa=0$ in these regimes.
+
+If $s=1/p$ and $p>1$, \cref{lp:thm:critical-linear} with $B=1$ permits $H\ge3An$, since $2A(n+1)\le3An$. The quantization error is bounded by a multiple of $(r+2)/n$, hence by a multiple of $n^{-1/p}$. If $p=s=1$, \cref{lp:prop:l1-linear-height} with $B=1$ permits $H\ge2C_E n$ and gives quantization error $\le2C_E/H\le n^{-1}$. This last estimate holds for every $q$ because it uses the mean absolute nodal value.
+
+Consequently, there are $C_*\ge1$ and $C'>0$, depending only on $(p,s,q)$, such that $H\ge C_*n^{a(p,s)}$ allows us to construct $g\in\Aclass_{n,H}([0,1])$ with $\|f-g\|_p\le C'n^{-s}$.
+
+\emph{Integer budgets.} Write $a=a(p,s)$ and $X=\min\{N,(H/C_*)^{1/a}\}$. If $X\ge2$, take $n=2^{\lfloor\log_2 X\rfloor}$. Then $X/2<n\le X$, so $n\le N$ and $C_*n^a\le H$. The constructed representation is admissible for $(N,H)$ because increasing the budgets preserves its leaves and heights. The error is bounded by
+\[
+ C'n^{-s}\le 2^s C'X^{-s}
+ \le 2^s C'\bigl(N^{-s}+C_*^{s/a}H^{-s/a}\bigr).
+\]
+If $X<2$, then $N\ge2$ implies $1\le 2^s C_*^{s/a}H^{-s/a}$. The zero approximant, with error $\le\|f\|_p\le1$, covers this case. Take the supremum over the ball.
+\end{proof}
+
+\begin{proposicao}[Exact transfer between error and realization]
+\label{lp:prop:transfer}
+Let $1\le p<\infty$, $N\ge2$, $G_N\subseteq L^p$, and $f\in L^p$. With $e_N(f)=\inf_{g\in G_N}\|f-g\|_p$ and $\mathscr R_N(f)=\inf_{g\in G_N}\{\|f-g\|_p+\wt{g}{N^{-1}}{p}\}$, we have
+\[
+ e_N(f)\le\mathscr R_N(f)\le\wt{f}{N^{-1}}{p}+5\,e_N(f).
+\]
+\end{proposicao}
+
+\begin{proof}
+If $G_N=\varnothing$, both infima are $+\infty$ by the convention in \cref{lp:def:realization}, and the inequalities hold in $[0,+\infty]$. Otherwise the infima are finite by \cref{lp:lem:modulus}. Nonnegativity of the modulus gives $e_N(f)\le\mathscr R_N(f)$. For every $g\in G_N$, the same lemma applied to $g=f+(g-f)$ gives $\wt{g}{N^{-1}}{p}\le\wt{f}{N^{-1}}{p}+4\|f-g\|_p$. For each $\delta>0$, choose $g\in G_N$ with $\|f-g\|_p<e_N(f)+\delta$. Then $\mathscr R_N(f)\le\wt{f}{N^{-1}}{p}+5(e_N(f)+\delta)$, and the limit $\delta\downarrow0$ gives the bound.
+\end{proof}
+
+\begin{corolario}[Minimax law for realization]
+\label{lp:cor:minimax-realization}
+Under the hypotheses of \cref{lp:thm:minimax-nh}, with constants depending only on $(p,s,q)$,
+\[
+ \sup_{\|f\|^*_{\Bes{s}{p}{q}}\le1}R_{N,H}(f)_p
+ \asymp N^{-s}+H^{-s/a(p,s)}.
+\]
+\end{corolario}
+
+\begin{proof}
+Apply \cref{lp:prop:transfer} to the family $\Sigma_{N,H}$, which contains zero. The lower bound follows from $R_{N,H}(f)_p\ge e^H_{N,p}(f)$. For the upper bound, take $n=2^{\lfloor\log_2N\rfloor}$, so $N/2<n\le N$. Monotonicity of the modulus and the bound on each coefficient in the definition of the ball give
+\[
+ \wt{f}{N^{-1}}{p}\le\wt{f}{n^{-1}}{p}\le n^{-s}\le2^sN^{-s}.
+\]
+Thus $R_{N,H}(f)_p\le 2^sN^{-s}+5e^H_{N,p}(f)$ on the unit ball. Apply \cref{lp:thm:minimax-nh} and take the supremum.
+\end{proof}
+
+\begin{observacao}
+\label{lp:obs:floor-closure}
+\Cref{lp:cor:joint-necessity} determines the necessary power of the height for the uniform per-scale rate $CN^{-s}$ over the unit ball, for both the best $L^p$ error and realization. The slope floor gives $H(N)\gtrsim N^{1+1/p-s}$ if $s<1/p$, the geometric floor gives $H(N)\gtrsim N$ if $1/p\le s\le1$, and the arithmetic floor gives $H(N)\gtrsim N^s$ if $1<s<2$. The constants in these bounds depend on $(p,s,q,C)$. The test target may vary with $H(N)$, and a uniform bound on a ball of radius $B\ge1$ gives the same necessity because the ball contains the unit ball.
+
+\Cref{lp:thm:minimax-nh,lp:cor:minimax-realization} attain the powers in the per-scale rates. Summability across scales is a separate requirement. The lower bounds allow the test target to vary with the budgets.
+\end{observacao}
+
+\begin{observacao}[Joint law on the class $C^2$]
+\label{lp:obs:c2-joint}
+For $R,M>0$, let $\mathcal F_{R,M}=\{f\in C^2[0,1]:\|f\|_\infty\le R,\ \|f''\|_\infty\le M\}$ and $E^H_N(f)=\inf\{\|f-g\|_\infty:g\in\Aclass_{N,H}([0,1])\}$. Part~II of \citet{lp-oliveiravol} proves that, for every power of two $n\ge2$ and every $f\in\mathcal F_{R,M}$, there is an assembly with $n$ leaves, error at most $(M+4)/(8n^2)$, and height at most $C_Hn^2$, where $C_H$ depends only on $(R,M)$. It follows that, for $N\ge2$ and $H\ge\max\{2,\lceil1/(2R)\rceil\}$,
+\[
+ c\,(N^{-2}+H^{-1})\le\sup_{f\in\mathcal F_{R,M}}E^H_N(f)\le C\,(N^{-2}+H^{-1}),
+\]
+with $c,C>0$ depending only on $(R,M)$. For the upper bound, if $H\ge4C_H$, the assembly with $n$ equal to the largest power of two with $n\le\min\{N,\sqrt{H/C_H}\}$ is admissible for $(N,H)$ and has error of order $N^{-2}+H^{-1}$; if $H<4C_H$, the affine segment $(x-\tfrac12)/H$, with one leaf and height $H$, has error at most $R+\tfrac14$. For the lower bound, take $f(x)=\lambda x^2$ with $\lambda=\min\{R,M/2\}$. Some leaf has length $\ell\ge1/N$, and the approximant is affine on it. By the equioscillation theorem, the best uniform affine approximation of $\lambda x^2$ on an interval of length $\ell$ has error $\lambda\ell^2/8$, so the error is at least $\lambda/(8N^2)$ for every $H$. For $H\ge1/(2R)$, the constant $1/(2H)$ belongs to $\mathcal F_{R,M}$, and the argument of \cref{lp:prop:floor}, which also holds in $L^\infty$ because $\|\cdot\|_p\le\|\cdot\|_\infty$ on $[0,1]$, gives error at least $1/(2H)$. The law refers to the class $C^2$ and is a consequence of earlier results. It is not the case $s=2$ of \cref{lp:thm:minimax-nh}, whose hypothesis is $0<s<2$.
+\end{observacao}
+
+\section{Besov characterization and stability}
+\label{lp:sec:statements}
+
+This section uses the realization functional to characterize $\Bes{s}{p}{q}$ by dyadic summability. The theorem below states the characterization. The following subsections treat the inverse estimate, the direct estimate under height schedules, the transfer to nested families of networks, and the regimes $s\le1/p$.
+
+\begin{teorema}[Characterization by arithmetic realization]
+\label{lp:conj:besov}
+Let $1\le p<\infty$ and $0<s<2$.
+\begin{enumerate}[label=(\roman*)]
+\item If $s>1/p$, the following equalities hold in $L^p([0,1])$.
+\begin{align}
+ \Bes{s}{p}{\infty}
+ &=\Rstr{s}{\infty}{\Library,H_{s,0}}_p,
+ &&\label{lp:eq:conj-endpoint}\\
+ \Bes{s}{p}{q}
+ &=\Rstr{s}{q}{\Library,H_{s,0}}_p,
+ &&0<q<\infty,\quad s<1,\label{lp:eq:conj-subcritical}\\
+ \Bes{s}{p}{q}
+ &=\Rstr{s}{q}{\Library,H_{s,\kappa}}_p,
+ &&0<q<\infty,\quad s\ge1,\quad\kappa>1/q,\label{lp:eq:conj-critical}\\
+ \Bes{s}{p}{q}
+ &=\Rstr{s}{q}{\Library,\widetilde H_{s,\eta}}_p,
+ &&0<q<\infty,\quad\eta>0.
+ \label{lp:eq:besov-tilde}
+\end{align}
+\item If $0<s<1/p$ and $0<q\le\infty$, then
+\begin{equation}
+ \Bes{s}{p}{q}=\Rstr{s}{q}{\Library,\widehat H_{s}}_p.
+ \label{lp:eq:conj-low}
+\end{equation}
+\item If $s=1/p$, $0<q\le\infty$, and $\kappa\ge0$, with $\kappa>1/q$ when $p=1$ and $q<\infty$, then
+\begin{equation}
+ \Bes{s}{p}{q}=\Rstr{s}{q}{\Library,\widehat H_{q,\kappa}}_p.
+ \label{lp:eq:conj-diag}
+\end{equation}
+\end{enumerate}
+\end{teorema}
+
+\begin{teorema}[Stability under inclusion in network families]
+\label{lp:conj:stability}
+Let $p,s,q,H$ be as in any of the cases of \cref{lp:conj:besov}. If $\mathcal N$ satisfies \eqref{lp:eq:nesting} and \eqref{lp:eq:contains} for some $c\ge1$, then
+\begin{equation}
+ \Bes{s}{p}{q}=\Rstr{s}{q}{\mathcal N}_p.
+ \label{lp:eq:network-realization-p}
+\end{equation}
+\end{teorema}
+
+\begin{teorema}[Stability under approximate inclusion]
+\label{lp:thm:approx-stability}
+Let $p,s,q,H$ be as in any of the cases of \cref{lp:conj:besov}. If $\mathcal N$ satisfies \eqref{lp:eq:nesting} and \eqref{lp:eq:approx-contains} for some $c\ge1$ and a sequence $(\varepsilon_N)_{N\ge1}$ in $[0,\infty)$ such that
+\begin{equation}
+ \big(2^{rs}\varepsilon_{2^r}\big)_{r\ge1}\in\ell^q,
+ \label{lp:eq:approx-summable}
+\end{equation}
+then $\Bes{s}{p}{q}=\Rstr{s}{q}{\mathcal N}_p$.
+\end{teorema}
+
+For a family of ReLU networks, \eqref{lp:eq:contains} is an inclusion condition on the realized functions. For example, a piecewise affine function with interior knots $t_1<\cdots<t_{m-1}$ and successive slopes $\beta_1,\ldots,\beta_m$ has the following representation on $[0,1]$:
+\[
+ g(x)=g(0)+\beta_1 x+\sum_{j=1}^{m-1}(\beta_{j+1}-\beta_j)(x-t_j)_+,
+ \qquad u_+=\max\{u,0\}.
+\]
+Since $x=x_+$ on $[0,1]$, a single hidden layer of width at most $m$ can realize this expression. Thus the classes of functions realized by networks with one hidden layer of width at most $N$ contain $\Sig{N}$ with $c=1$. \Cref{lp:thm:approx-stability} extends this stability to architectures that reproduce the library to controlled accuracy in $L^p$, provided their tolerance satisfies \eqref{lp:eq:approx-summable}. Verifying this tolerance for a specific architecture, such as a network with quantized weights, is outside the scope of this article.
+
+In the schedules of items (ii) and (iii), the bound on the nodal values involves $n^{1/p-s}$ below the diagonal and $(\log n)^{\theta_q}$ on the diagonal. The exponent $\theta_q$ accounts for this bound on the values. The additional exponent $\kappa$ is used on the diagonal $p=s=1$ to sum the quantization-error bound when $q<\infty$. \Cref{lp:sec:ball} treats uniform schedules on balls of fixed radius.
+
+\subsection{Inverse estimate}
+
+\label{lp:sec:proved}
 
 \begin{proposicao}[Inverse realization inequality]
 \label{lp:prop:inverse}
@@ -695,412 +1174,52 @@ The first term belongs to $\ell^q$ by the same argument as in \cref{lp:thm:low-t
 If $s>1/p$, criterion \eqref{lp:eq:summability} holds for the schedules in \cref{lp:conj:besov}, and \cref{lp:thm:approx-transfer} gives $\Bes{s}{p}{q}\subseteq\Rstr{s}{q}{\mathcal N}_p$. If $s\le1/p$, this inclusion follows from \cref{lp:thm:low-approx-transfer}. In both cases, the inverse inclusion follows from \cref{lp:cor:inclusion}.
 \end{proof}
 
-\section{Uniform bounds, bit complexity, and iterated-logarithm schedules}
-\label{lp:sec:uniform}
+\section{Height schedules and dependence on the radius}
 
-This section presents four further results formalized in Lean (see \cref{lp:sec:lean}): uniform bounds on Besov balls under a single schedule (\cref{lp:sec:ball}), an arithmetic lower bound and the bit complexity of the approximants (\cref{lp:sec:bits}), and a reduction of the critical logarithmic factor using iterated logarithms (\cref{lp:sec:loglog}). The proofs use \cref{lp:lem:nodal-general}, \cref{lp:lem:sup-bound}, and the summability criterion of \cref{lp:thm:besov-conditional}. The starting point is the uniform-norm version of these results in Part~IV of \citet{lp-oliveiravol}. Here, the continuous embedding and the sup-norm bound for the quasi-interpolants provide the sup-norm control used there.
+This section treats the diagonal $s=1/p$ with $p>1$. It shows that any fixed linear schedule characterizes the space, quantifies the dependence on the radius of the ball, and then discusses regular and iterated-logarithm schedules.
 
-\subsection{Uniform bounds on Besov balls}
-\label{lp:sec:ball}
-
-For $B\ge1$, write $\mathbb B^s_{p,q}(B)=\{f\in L^p:\|f\|^*_{\Bes{s}{p}{q}}\le B\}$. In \cref{lp:conj:besov}, the same schedule is used for all functions, and the proof may use thresholds that depend on $f$. Here, for fixed $(p,s,q)$, the bounds hold from $n=2$ onward throughout the ball, and the schedule includes a factor $B+1$. Set $\mathsf L(N)=\log(eN)$ and $\theta_q=\max\{0,1-1/q\}$, with $\theta_\infty=1$.
-
-\begin{definicao}[Parameters for each regime]
-\label{lp:def:regime}
-Let $1\le p<\infty$, $0<s<2$, $0<q\le\infty$, and $\kappa\ge0$. For $n=2^r\ge2$, define the pairs $(\nu',\kappa')$ and $(\hat\nu,\hat\kappa)$ and the factor $\Lambda_n$ as shown in \cref{lp:tab:regime}.
-\begin{table}[H]
-\caption{Parameters by regularity regime}
-\label{lp:tab:regime}
-\small\tablecolors
-\begin{tabularx}{\linewidth}{l*{3}{>{\centering\arraybackslash}X}}
-\toprule
-\tablehead{Regime} & \tablehead{$(\nu\prime,\kappa\prime)$} & \tablehead{$(\hat\nu,\hat\kappa)$} & \tablehead{$\Lambda_n$} \\
-\midrule
-$s>1/p$ & $(\nu_s,\kappa)$ & $(\nu_s,\kappa)$ & $1$ \\
-$s<1/p$ & $(1,0)$ & $(1+1/p-s,0)$ & $n^{1/p-s}$ \\
-$s=1/p$ & $(1,\kappa)$ & $(1,\theta_q+\kappa)$ & $r^{\theta_q}$ \\
-\bottomrule
-\end{tabularx}\par
-\tablecredit
-\end{table}
-Call $(p,s,q,\kappa)$ \emph{admissible} if $\kappa>1/q$ whenever $q<\infty$ and $s\ge1$. For $B\ge1$ and $A\ge1$, the \emph{uniform schedule} is
-\begin{equation}
- \widehat H^{[B]}_{A}(N)=\Bigl\lceil A\,(B+1)\,(N+1)^{\hat\nu}\,\mathsf L(N)^{\hat\kappa}\Bigr\rceil .
- \label{lp:eq:uniform-schedule}
-\end{equation}
-\end{definicao}
-
-\begin{lema}[Uniform height and quantization]
-\label{lp:lem:uniform-height}
-Let $1\le p<\infty$, $0<s<2$, $0<q\le\infty$, and $\kappa\ge0$. For $n=2^r\ge2$, let $Q(n)$ be the smallest power of two with $Q(n)\ge n^{\nu'}\mathsf L(n)^{\kappa'}$. There exists $C_*\ge1$, depending only on $(p,s,q)$, with the following properties.
-\begin{enumerate}[label=(\alph*)]
- \item $n\le Q(n)\le2n^{\nu'}\mathsf L(n)^{\kappa'}$, $\ 1/Q(n)\le n^{-s}$ e $\Lambda_nQ(n)\le4n^{\hat\nu}\mathsf L(n)^{\hat\kappa}$;
- \item If $f\in\mathbb B^s_{p,q}(B)$, then $\max_{0\le j\le n}|\lambda_j(f)|\le C_*B\Lambda_n$ for every $n=2^r\ge2$.
- \item If $(p,s,q,\kappa)$ is admissible, then $\big(2^{rs}/Q(2^r)\big)_{r\ge1}\in\ell^q$, with norm bounded by a constant $c_2$ depending only on $(p,s,q,\kappa)$.
-\end{enumerate}
-\end{lema}
-
-\begin{proof}
-(a) Since $\nu'\ge1$ and $\mathsf L(n)\ge1$, we have $n^{\nu'}\mathsf L(n)^{\kappa'}\ge n$, and the smallest power of two at least $x\ge1$ is less than $2x$. Moreover, $\nu'\ge s$: for $s>1/p$, $\nu_s\ge s$, and for $s\le1/p$, $\nu'=1\ge s$. Hence $1/Q(n)\le n^{-s}$. For the last bound, if $s>1/p$, then $\Lambda_nQ(n)\le2n^{\nu_s}\mathsf L(n)^\kappa$. If $s<1/p$, then $Q(n)=n$ and $\Lambda_nQ(n)=n^{1+1/p-s}$. If $s=1/p$, then $\mathsf L(n)=1+r\log2\ge r\log2$ and $1/\log2<2$ give $r^{\theta_q}\le2^{\theta_q}\mathsf L(n)^{\theta_q}$, so $\Lambda_nQ(n)\le2^{\theta_q+1}n\,\mathsf L(n)^{\theta_q+\kappa}\le4n\,\mathsf L(n)^{\theta_q+\kappa}$.
-
-(b) If $s>1/p$, \cref{lp:lem:embedding} gives $\|F\|_\infty\le C_E\|f\|^*_{\Bes{s}{p}{\infty}}\le C_EB$ for the continuous representative $F$, because the $\ell^\infty$ norm does not exceed the $\ell^q$ norm. Part (c) of \cref{lp:lem:quasi} gives $|\lambda_j(f)|=|\lambda_j(F)|\le2C_EB$. If $s\le1/p$, \cref{lp:lem:sup-bound} gives $|\lambda_j(f)|\le C_0B\Lambda_n$. Take $C_*=\max\{2C_E,C_0,1\}$.
-
-(c) By (a), $w_n=n^s/Q(n)\le n^{s-\nu'}\mathsf L(n)^{-\kappa'}$. If $q=\infty$, then $w_n\le1$. If $q<\infty$ and $s<1$, then $\nu'=1$ and $w_{2^r}\le2^{-r(1-s)}$, so the sequence belongs to $\ell^q$. If $q<\infty$ and $s\ge1$, then $\kappa>1/q$ by admissibility, $\nu'=s$, and $\kappa'=\kappa$, so $w_{2^r}\le(1+r\log2)^{-\kappa}$ and the sequence belongs to $\ell^q$ because $\kappa q>1$.
-\end{proof}
-
-\begin{teorema}[Uniform bounds on balls]
-\label{lp:thm:uniform}
-Let $1\le p<\infty$, $0<s<2$, $0<q\le\infty$, and $\kappa\ge0$, and let $C_*$ and $c_2$ be as in \cref{lp:lem:uniform-height}. Set $A=32(C_*+1)$ and $\widehat H=\widehat H^{[B]}_{A}$. Then for every $B\ge1$, every $f\in\mathbb B^s_{p,q}(B)$, and every $n=2^r\ge2$, there exists $g\in\Aclass_{n,\widehat H(n)}([0,1])\subseteq\Sig{n}$, with schedule $\widehat H$, such that
-\begin{equation}
- \|f-g\|_p\le9C_W\,\wt{f}{n^{-1}}{p}+\frac1{2Q(n)}\le(9C_WB+1)\,n^{-s}.
- \label{lp:eq:uniform-approx}
-\end{equation}
-If $(p,s,q,\kappa)$ is also admissible, there exists $C=C(p,s,q,\kappa)$ such that
-\begin{equation}
- \sup_{f\in\mathbb B^s_{p,q}(B)}\Big\|\big(2^{rs}\Rfun{\Library,\widehat H}{2^r}(f)_p\big)_{r\ge1}\Big\|_{\ell^q}\le C\,(B+1).
- \label{lp:eq:uniform-rate}
-\end{equation}
+\begin{teorema}[A fixed linear schedule on the diagonal]
+\label{lp:thm:critical-fixed-agenda}
+Let $1<p<\infty$ and $0<q\le\infty$. For any fixed constant $A_*>0$, set $H_*(N)=\max\{2,\lceil A_*N\rceil\}$. Then
+\[
+ \Bes{1/p}{p}{q}([0,1])=\Rstr{1/p}{q}{\Library,H_*}_p.
+\]
 \end{teorema}
 
 \begin{proof}
-Fix $f\in\mathbb B^s_{p,q}(B)$ and $n=2^r\ge2$. Set $M=C_*B\Lambda_n$ and $Q=Q(n)$. By \cref{lp:lem:uniform-height}(b), $|\lambda_j(f)|\le M$ for $0\le j\le n$. Since $\Lambda_n\ge1$, part (a) of the same lemma gives
+Fix $f\in\Bes{1/p}{p}{q}$, take $B\ge\max\{1,\|f\|^*\}$, and choose the smallest power of two $d=2^e\ge1$ with $A_*d\ge2A(B+1)$, where $A$ is the constant in \cref{lp:thm:critical-linear}. For $n=2^r\ge2$, we have $A_*dn\ge A(B+1)(n+1)$, so $H_*(dn)\ge H_B(n)$ after taking ceilings. Since $dn\ge n$, an admissible representation for $\Sigma_{n,H_B(n)}$ is also admissible for $\Sigma_{dn,H_*(dn)}$. Zero belongs to both families. The scale decreases from $n^{-1}$ to $(dn)^{-1}$, so monotonicity of the modulus gives
 \[
- 8(M+1)Q\le8(C_*B+1)\Lambda_nQ\le32(C_*+1)(B+1)\,n^{\hat\nu}\mathsf L(n)^{\hat\kappa}\le\widehat H(n).
+ R_{dn,H_*(dn)}(f)_p\le R_{n,H_B(n)}(f)_p.
 \]
-Since $Q\ge n$, applying \cref{lp:lem:nodal-general} to $y_j=\lambda_j(f)$ gives $g\in\Aclass_{n,\widehat H(n)}([0,1])$ with $\|Q_nf-g\|_\infty\le1/(2Q)$. By \cref{lp:cor:quasi-error}, $\|f-g\|_p\le9C_W\,\wt{f}{n^{-1}}{p}+1/(2Q)$. By \eqref{lp:eq:besov-p}, $\wt{f}{n^{-1}}{p}\le Bn^{-s}$, and by (a), $1/(2Q)\le n^{-s}/2$. This proves \eqref{lp:eq:uniform-approx}.
+Multiplying by $(dn)^{1/p}$ and shifting the index from $r$ to $r+e$, the tail has norm at most $C_3d^{1/p}(B+1)$ by \cref{lp:thm:critical-linear}.
 
-For \eqref{lp:eq:uniform-rate}, \cref{lp:lem:modulus} gives $\wt{g}{n^{-1}}{p}\le\wt{f}{n^{-1}}{p}+4\|f-g\|_p$. Thus, as in the proof of \cref{lp:thm:besov-conditional},
-\[
- \Rfun{\Library,\widehat H}{n}(f)_p\le(1+45C_W)\,\wt{f}{n^{-1}}{p}+\frac52\,\frac1{Q(n)}.
-\]
-Multiply by $n^s=2^{rs}$ and take the $\ell^q$ norm over $r\ge1$. The first term contributes at most $(1+45C_W)B$ by \eqref{lp:eq:besov-p}, and the second at most $\tfrac52c_2$ by \cref{lp:lem:uniform-height}(c). The triangle inequality in $\ell^q$ has constant $2^{(1/q-1)_+}$, independent of $B$. This gives \eqref{lp:eq:uniform-rate}.
+For the initial indices $1\le j\le e$, use $g=0$, which gives $2^{j/p}R_{2^j,H_*(2^j)}(f)_p\le2^{j/p}\|f\|_p$. For $q<\infty$, summing the $q$th powers gives a norm at most $(1-2^{-q/p})^{-1/q}d^{1/p}\|f\|_p$. For $q=\infty$, the bound is $d^{1/p}\|f\|_p$. If $e=0$, the initial block is empty. Combining the two blocks by summing powers or taking the supremum proves membership in $\ell^q$, including $q<1$. The reverse inclusion is \cref{lp:cor:inclusion}, which holds for any schedule.
 \end{proof}
 
-\begin{observacao}
-\label{lp:obs:uniform-q}
-The per-scale rate \eqref{lp:eq:uniform-approx} holds with $\kappa=0$ for every $q$. On the diagonal $s=1/p$, schedule \eqref{lp:eq:uniform-schedule} still includes $\mathsf L(N)^{\theta_q}$ to control the nodal values. When $s\ge1$ and $q<\infty$, the additional factor $\mathsf L(N)^\kappa$ with $\kappa>1/q$ makes the quantization bound summable. With $\kappa=0$, the weight $2^{rs}/Q(2^r)$ lies between $1/2$ and $1$, so this majorant fails to give \eqref{lp:eq:uniform-rate}.
-\end{observacao}
-
-\begin{lema}[Uniform nodal jumps]
-\label{lp:lem:critical-jump}
-Let $p>1$ and $0<q\le\infty$, let $f$ satisfy $\|f\|^*_{\Bes{1/p}{p}{q}}\le B$, let $n=2^r\ge2$, and set $\lambda_j=\lambda_j(f)$. For $0\le j<n$,
-\begin{equation}
- |\lambda_{j+1}-\lambda_j|\le\frac{4\,\sup_{[0,1]}|Q_2f|}{n}+\sum_{k=1}^{r-1}\frac{K_k}{n},
- \qquad K_k=8\,(2^{k+1})^{1/p+1}\,18\,C_W\,\wt{f}{2^{-k}}{p}.
- \label{lp:eq:critical-jump}
-\end{equation}
-Moreover, $K_k\le 144\,C_W\,2^{1/p}\,2^{k+1}\,B$ and $\sum_{k=1}^{r-1}K_k/n\le 288\,C_W\,2^{1/p}B$.
-\end{lema}
+\begin{proposicao}[Sharp growth in the radius]
+\label{lp:prop:critical-radius-growth}
+Under the conditions of \cref{lp:thm:critical-fixed-agenda}, write
+\[
+ \Xi(f)=\big\|\big(2^{r/p}R_{2^r,H_*(2^r)}(f)_p\big)_{r\ge1}\big\|_{\ell^q}.
+\]
+There exists $C=C(p,q,A_*)>0$ such that $\Xi(f)\le C(1+\|f\|^*)^{1+1/p}$ for every $f\in\Bes{1/p}{p}{q}$. There exist $c,K_0>0$, depending only on $p,A_*$, such that $\Xi(f_K)\ge cK^{1+1/p}$ for $f_K\equiv K$ and $K\ge K_0$. Hence the supremum of $\Xi$ on the ball of radius $B$ is of order $B^{1+1/p}$ for sufficiently large $B$.
+\end{proposicao}
 
 \begin{proof}
-By the telescoping identity $Q_{2^r}f=Q_2f+\sum_{k=1}^{r-1}(Q_{2^{k+1}}f-Q_{2^k}f)$ and $\lambda_j=Q_{2^r}f(j/n)$, the difference $\lambda_{j+1}-\lambda_j$ is the sum of the differences of the terms. Each term is affine on cells of length $1/2$ (for $Q_2f$) or $2^{-(k+1)}$ (for the differences), and $[j/n,(j+1)/n]$ lies in one of these cells. Applying \eqref{lp:eq:projection-bounds} to an affine function on its own cell permits $C_p=4$ in \eqref{lp:eq:nikolskii}. Thus, for $m=2^{k+1}$, the slope of $v_k=Q_{2^{k+1}}f-Q_{2^k}f$ is bounded by $8m^{1/p+1}\|v_k\|_p\le K_k$, by the quasi-interpolation bound at the two levels. The slope of $Q_2f$ is bounded by $4\sup|Q_2f|$. The inequality $2^{k/p}\wt f{2^{-k}}p\le B$ gives the second part.
-\end{proof}
+In the proof for the fixed schedule, the two parts of the sequence give $\Xi(f)\le C_{p,q}d^{1/p}(B+1)$. Minimality of $d$ gives $d\le2\max\{1,2A(B+1)/A_*\}$. Taking $B=\max\{1,\|f\|^*\}$ gives the upper bound.
 
-\begin{teorema}[Critical linear height for $s=1/p$ with $p>1$]
-\label{lp:thm:critical-linear}
-Let $p>1$, $s=1/p$, and $0<q<\infty$. There exist $A=A(p,C_W)\ge1$ and constants $C_2,C_3>0$ depending only on $(p,q,C_W)$ such that for every $B\ge1$ the linear schedule $H_B(N)=\lceil A(B+1)(N+1)\rceil$ satisfies the following properties.
-\begin{enumerate}[label=(\alph*)]
- \item For every $f\in\mathbb B^{1/p}_{p,q}(B)$ and $n=2^r\ge2$, there exists $g\in\Aclass_{n,H_B(n)}([0,1])$ with
- \[
-  \|f-g\|_p\le 9C_W\,\wt{f}{n^{-1}}{p}+\frac{8(M_r+1)}{H_B(n)},\qquad M_r=\mathsf B_0(f)+144\,C_W\,2^{1/p}\,B\,r,
- \]
- where $\mathsf B_0(f)=8\,2^{1/p}(\|f\|_p+9C_W\wt{f}{1/2}{p})$.
- \item For every $f\in\mathbb B^{1/p}_{p,q}(B)$ and $n=2^r\ge2$, we have $\Rfun{\Library,H_B}{n}(f)_p\le C_2(B+1)\,n^{-1/p}$.
- \item For every $f\in\mathbb B^{1/p}_{p,q}(B)$, we have $\big\|\big(2^{r/p}\Rfun{\Library,H_B}{2^r}(f)_p\big)_{r\ge1}\big\|_{\ell^q}\le C_3(B+1)$.
- \item If $\|f\|^*_{\Bes{1/p}{p}{q}}\le B$, then $f\in\Rstr{1/p}{q}{\Library,H_B}_p$. Conversely, $\Rstr{1/p}{q}{\Library,H_B}_p\subseteq\Bes{1/p}{p}{q}$ for every $f\in L^p$. Thus the ball of radius $B$ in $\Bes{1/p}{p}{q}$ is contained in $\Rstr{1/p}{q}{\Library,H_B}_p$, which is contained in $\Bes{1/p}{p}{q}$.
-\end{enumerate}
-\end{teorema}
-
-\begin{proof}
-For (a), inequality \eqref{lp:eq:nikolskii} with $m=2$ and the quasi-interpolation bound give $\sup|Q_2f|\le\mathsf B_0(f)\le C_0B$, with $C_0=8\,2^{1/p}(1+9C_W)$. \Cref{lp:lem:critical-jump} bounds the jumps by $J=4C_0B+288C_W2^{1/p}B$. The telescoping sum with $C_p=4$ in \eqref{lp:eq:nikolskii} gives $|\lambda_j|\le M_r$. Set $C_M=C_0+144C_W2^{1/p}+1$ and $C_J=4C_0+288C_W2^{1/p}+1$. Thus $M_r+1\le C_M(B+1)(r+1)$ and $J+1\le C_J(B+1)$. Since $r+1\le n$, with $A=16C_M+C_J+8$ the schedule satisfies $8n\le H$, $16(M_r+1)\le H$ and $n(J+1)\le H$, so \cref{lp:lem:nodal-jump} applies to $Q_nf$. Adding the quasi-interpolation error (\cref{lp:cor:quasi-error}) and the quantization error gives (a). For (b), $\mathscr R\le\omega(f,1/N)+5\|f-g\|_p$ (\cref{lp:prop:transfer}) and $\omega(f,1/N)\le BN^{-1/p}$; the quantization term is at most $C(r+2)2^{-r}\le C'2^{-r/p}$, since $(r+2)2^{-r(1-1/p)}$ is bounded. For (c), the sequence is majorized by two terms: the $\omega$ terms, whose $\ell^q$ norm is at most $B$, and quantization terms dominated by $C(r+2)\rho^r$ with $\rho=2^{1/p-1}<1$, whose $\ell^q$ norm is finite. For (d), the first assertion is item (c), since $\Rstr{1/p}{q}{\Library,H_B}_p$ is defined by the $\ell^q$ norm of $(2^{r/p}\Rfun{\Library,H_B}{2^r}(f)_p)_{r\ge1}$. The reverse inclusion is \cref{lp:cor:inclusion}, which holds for every schedule.
+On a leaf $J$, any candidate of height at most $H$ satisfies $|u|,|v|\le H$ for its midpoint value and slope, so $|g(x)|\le H+H|J|/2\le3H/2$. The same bound holds for zero. Since $H_*(M)\le(A_*+1)M$ for $M\ge2$, take $K\ge6(A_*+1)$ and the largest power of two $M\le K/[3(A_*+1)]$. Then $M\ge2$ and $\|g\|_\infty\le K/2$ for every $g\in\Sigma_{M,H_*(M)}$. Thus $R_{M,H_*(M)}(f_K)_p\ge K/2$ and
+\[
+ \Xi(f_K)\ge M^{1/p}K/2\ge \frac{K^{1+1/p}}{2[6(A_*+1)]^{1/p}}.
+\]
+The modulus of $f_K$ vanishes, so $\|f_K\|^*=K$. Taking $K=B$ gives the lower bound on the ball. In particular, uniform linear equivalence between $\|f\|^*$ and $\|f\|_p+\Xi(f)$ fails, since $\Xi(f_K)/\|f_K\|^*$ is unbounded. The reverse bound $\|f\|^*\le C_{p,q}(\|f\|_p+\Xi(f))$ follows from \eqref{lp:eq:inverse}, with the $r=0$ term bounded by $4\|f\|_p$.
 \end{proof}
 
 \begin{observacao}
 \label{lp:obs:critical-scope}
-For $p>1$ and $0<q<\infty$, \cref{lp:thm:critical-linear} permits using $H_B$ in place of $\widehat H^{[B]}_A$ on the ball of radius $B$ at $s=1/p$. The direct inclusion in item (d) starts from that ball. The inclusion of the realization space in Besov holds on all of $L^p$ for any schedule. For global equality on the diagonal, apply item (iii) of \cref{lp:conj:besov} with $\widehat H_{q,\kappa}$, which is already linear for $p>1$, $0<q\le1$, and $\kappa=0$. On the diagonal with $p>1$, extending the linear schedule to $q=\infty$ and proving global equality with a linear schedule for $1<q<\infty$ are outside the scope of this theorem.
-\end{observacao}
+For $p>1$ and $0<q\le\infty$, $H_B$ gives a realization bound calibrated to the radius. The fixed schedule $H_*$ gives equality of sets and uniform bounds on each ball, with the radius dependence in \cref{lp:prop:critical-radius-growth}.
 
-\subsection{Arithmetic lower bound and bit complexity}
-\label{lp:sec:bits}
-
-Write $e^{H}_{N,p}(f)=\inf\{\|f-g\|_p:g\in\{0\}\cup\Aclass_{N,H}([0,1])\}$. For an integer $H\ge1$, let $\mathcal Q_H=\{a/b\in\Q:\height(a/b)\le H\}$.
-
-\begin{proposicao}[Uniform arithmetic lower bound in $L^p$]
-\label{lp:prop:floor}
-Let $H\ge1$ be an integer, let $a_H=1/(2H)$, and let $f_H\equiv a_H$ on $[0,1]$. Then $\mathrm{dist}(a_H,\mathcal Q_H)=1/(2H)$ and, for every $N\ge1$ and every $g\in\{0\}\cup\Aclass_{N,H}([0,1])$,
-\begin{equation}
- \|f_H-g\|_p\ge\frac1{2H}.
- \label{lp:eq:floor}
-\end{equation}
-In particular, $e^{H}_{N,p}(f_H)\ge1/(2H)$ for every $N$.
-\end{proposicao}
-
-\begin{proof}
-Every positive rational in $\mathcal Q_H$ has a positive integer numerator and denominator at most $H$, so it is at least $1/H$ and its distance from $a_H$ is at least $1/(2H)$. Nonpositive rationals are at distance at least $a_H=1/(2H)$ from $a_H$, and $0\in\mathcal Q_H$ attains this distance.
-
-For $g=0$, we have $\|f_H\|_p=a_H$. Let $g\in\Aclass_{N,H}([0,1])$ and let $J$ be a leaf of the representation, with $g(x)=y_0+s(x-x_J)$ on $J$, where $x_J$ is the midpoint of $J$ and $\height(y_0)\le H$. Since $g$ is affine, $\int_Jg=|J|\,y_0$. Jensen's inequality for the convex function $t\mapsto|t|^p$ gives
-\[
- \int_J|f_H-g|^p\ge|J|\Bigl|\frac1{|J|}\int_J(f_H-g)\Bigr|^p=|J|\,|a_H-y_0|^p\ge|J|\,(2H)^{-p},
-\]
-because $y_0\in\mathcal Q_H$. The leaves have disjoint interiors and union $[0,1]$. Summing gives $\|f_H-g\|_p^p\ge(2H)^{-p}$.
-\end{proof}
-
-\begin{corolario}[Necessity of the arithmetic exponent]
-\label{lp:cor:floor}
-Let $s>0$, $C>0$, and let $H$ be a schedule with $H(N)\ge2$. Suppose that for some $N\ge2$,
-\[
- \sup_{f\in\mathbb B^s_{p,q}(1)}\Rfun{\Library,H}{N}(f)_p\le C\,N^{-s}.
-\]
-Then $H(N)\ge N^s/(2C)$.
-\end{corolario}
-
-\begin{proof}
-Since $H(N)\ge2$, the constant function $f\equiv a_{H(N)}$ has $a_{H(N)}\le1/4$ and hence $\|f\|^*_{\Bes{s}{p}{q}}=a_{H(N)}\le1$, because its second-order modulus vanishes. For every $g\in\Sig{N}$, \cref{lp:prop:floor} gives $\|f-g\|_p+\wt{g}{N^{-1}}{p}\ge\|f-g\|_p\ge1/(2H(N))$. Hence $1/(2H(N))\le CN^{-s}$.
-\end{proof}
-
-\begin{observacao}
-\label{lp:obs:floor}
-Let $s\ge1$ with $s>1/p$, and let $\kappa=0$. The proof of \cref{lp:thm:uniform} gives, for $n=2^r$,
-\[
- \sup_{f\in\mathbb B^s_{p,q}(B)}\Rfun{\Library,\widehat H}{n}(f)_p
- \le\bigl((1+45C_W)B+\tfrac52\bigr)n^{-s},
-\]
-with $\widehat H(N)\asymp(B+1)N^s$. \Cref{lp:cor:floor} gives the necessary power in this range for the uniform per-scale rate. For $s<1$, the geometric floor is stronger than the arithmetic floor, and for $s<1/p$ the slope floor strengthens the bound further. \Cref{lp:cor:joint-necessity} applies all three floors to the full library, including adaptive partitions.
-\end{observacao}
-
-For binary encoding, the encoder and decoder share the height budget $H$. One bit indicates $g=0$ or $g\ne0$. For $g\ne0$, choose an admissible representation. The preorder tree shape uses one bit per node to distinguish a leaf from an internal node and determines the pair $(k,m)$ for each leaf. Each leaf carries two rational coordinates $(y_0,s)$, each with a sign, numerator, and denominator.
-
-\begin{proposicao}[Bit length for $\Aclass_{N,H}$]
-\label{lp:prop:bits}
-Let $N\ge1$ and $H\ge2$ be integers, and set $c_H=\lceil\log_2(H+1)\rceil$. Every $g\in\{0\}\cup\Aclass_{N,H}([0,1])$ has a prefix-free binary description of at most $4N(c_H+1)$ bits. In particular, $\log_2\#\bigl(\{0\}\cup\Aclass_{N,H}([0,1])\bigr)\le4N(c_H+1)$.
-\end{proposicao}
-
-\begin{proof}
-A reduced coordinate $a/b$ with $b>0$ and $\height(a/b)\le H$ has $|a|\le H<2^{c_H}$ and $1\le b\le H<2^{c_H}$. It therefore uses $2c_H+1$ bits, with one sign bit and $c_H$ fixed-length bits for each integer. A leaf uses $4c_H+2$ bits. A tree with $N'\le N$ leaves has $2N'-1$ nodes. The total length is at most $1+(2N-1)+N(4c_H+2)=4N(c_H+1)$. The preorder tree shape is prefix-free, and the number of leaves it specifies fixes the length of the rest of the description. After choosing one description per function, padding each word with zeros up to length $L=4N(c_H+1)$ preserves injectivity, since two words with the same padding would be comparable by prefix. There are $2^L$ words of that length.
-\end{proof}
-
-\begin{corolario}[Approximation rate and bit length on balls]
-\label{lp:cor:bits}
-Let $1\le p<\infty$, $0<s<2$, $0<q\le\infty$, and $\widehat H=\widehat H^{[B]}_{A}$ with $\kappa=0$ and $A$ as in \cref{lp:thm:uniform}. There exists $c=c(p,s,q)$ such that, for every $B\ge1$, every $f\in\mathbb B^s_{p,q}(B)$, and every $n=2^r\ge2$, there exists $g\in\Sig{n}$ with
-\[
- \|f-g\|_p\le(9C_WB+1)\,n^{-s}
-\]
-and a binary description of length at most $c\,n\,\bigl(\log n+\log(B+1)\bigr)$.
-\end{corolario}
-
-\begin{proof}
-\Cref{lp:thm:uniform}, with $\kappa=0$, gives $g\in\Aclass_{n,\widehat H(n)}([0,1])$ satisfying the error bound. For $\kappa=0$, we have $\widehat H(n)\le A(B+1)(n+1)^{\hat\nu}\mathsf L(n)^{\theta_q}+1$, with $\hat\nu\le2$ and $\theta_q\le1$. Thus $c_{\widehat H(n)}=O(\log n+\log(B+1))$, with a constant depending only on $(p,s,q)$, and \cref{lp:prop:bits} gives the result.
-\end{proof}
-
-\begin{lema}[Besov packing]
-\label{lp:lem:packing}
-Let $1\le p<\infty$, $0<s<2$, $0<q\le\infty$, and let $\varphi\in C_c^\infty((0,1))$ be nonzero. Put $c_\varphi=\|\varphi\|_p$, $M_\varphi=\|\varphi''\|_p$, $C_2=\max\{4c_\varphi,M_\varphi\}$, $\theta_*=\min\{s,2-s\}$,
-\[
-K_{s,q}=\begin{cases}2^{\theta_*}\Bigl(\sum_{k\in\mathbb Z}2^{-q\theta_*|k|}\Bigr)^{1/q}, & 0<q<\infty,\\[4pt] 1, & q=\infty,\end{cases}
-\qquad
-C_1=c_\varphi+C_2K_{s,q}.
-\]
-For $B>0$, $m\in\N$ and $\theta\in\{0,1\}^m$, define
-\[
-f_\theta(x)=\frac{B}{C_1}\,m^{-s}\sum_{j=0}^{m-1}\theta_j\,\varphi(mx-j).
-\]
-Then:
-\begin{enumerate}[label=(\roman*)]
-\item $\|f_\theta\|^*_{\Bes{s}{p}{q}}\le B$, uniformly in $m$ and $\theta$;
-\item $\|f_\theta-f_\eta\|_p=\dfrac{B}{C_1}\,c_\varphi\,m^{-s-1/p}\,d_H(\theta,\eta)^{1/p}$, where $d_H$ is the Hamming distance;
-\item for every $m\ge1$ there is $\Theta_m\subseteq\{0,1\}^m$ with $|\Theta_m|\ge 2^{m/6}$ and $d_H(\theta,\eta)\ge m/4$ for distinct $\theta,\eta\in\Theta_m$.
-\end{enumerate}
-\end{lema}
-
-\begin{proof}
-Let $a=B/C_1$ and $F=f_\theta$. The supports of $\varphi(m\cdot-j)$ are $(j/m,(j+1)/m)\subset(0,1)$, pairwise disjoint; hence $F$ is a finite sum of compactly supported functions with disjoint supports, $F\in C^\infty$, and $\operatorname{supp}F\subset(0,1)$.
-
-\emph{Norms.} Since $\int|\varphi(mx-j)|^p\,dx=m^{-1}c_\varphi^p$ and the terms are disjoint,
-\[
-\|F\|_p^p=a^pm^{-sp-1}\,|\theta|\,c_\varphi^p,
-\qquad\text{so}\qquad \|F\|_p\le a\,m^{-s}c_\varphi,
-\]
-because $|\theta|\le m$. Similarly $F''(x)=a\,m^{2-s}\sum_j\theta_j\varphi''(mx-j)$ and $\|F''\|_p\le a\,m^{2-s}M_\varphi$.
-
-\emph{Second differences.} For $0<h\le1/2$ and $x\in\R$, $\Delta_h^2F(x)=\int_0^h\!\int_0^h F''(x+u+v)\,du\,dv$. Minkowski's inequality gives $\|\Delta_h^2F\|_{L^p([0,1-2h])}\le h^2\|F''\|_p$. Also $|\Delta_h^2F|\le|F(x+2h)|+2|F(x+h)|+|F(x)|$, which gives $\|\Delta_h^2F\|_{L^p([0,1-2h])}\le4\|F\|_p$. Hence, for $t>0$,
-\begin{align*}
-\wt{F}{t}{p}&\le\min\{4\|F\|_p,\ \min(t,\tfrac12)^2\|F''\|_p\}\\
-&\le a\,m^{-s}\min\{4c_\varphi,\,M_\varphi(mt)^2\}\le C_2\,a\,m^{-s}\min\{1,(mt)^2\}.
-\end{align*}
-the last inequality because $\min\{4c_\varphi,My\}\le C_2\min\{1,y\}$ for $y\ge0$. The constant $C_2$ does not depend on $m$ or $\theta$.
-
-\emph{Besov norm.} Put $a_r=2^{rs}\wt{F}{2^{-r}}{p}$ for $r\in\N_0$, and $R=\log_2 m$ (real). If $r\le R$, then $m2^{-r}\ge1$ and
-\[
-a_r\le C_2\,a\,2^{rs}m^{-s}=C_2\,a\,2^{-(R-r)s}.
-\]
-If $r\ge R$, then $m2^{-r}\le1$ and
-\[
-a_r\le C_2\,a\,2^{rs}m^{-s}(m2^{-r})^2=C_2\,a\,(m2^{-r})^{2-s}=C_2\,a\,2^{-(r-R)(2-s)}.
-\]
-Thus $a_r\le C_2\,a\,2^{-\theta_*|r-R|}$. The series converges precisely because $\theta_*=\min\{s,2-s\}>0$, that is, for $0<s<2$: at $s=2$ the exponent $2-s$ vanishes, and for $s>2$ the bound on $a_r$ grows with $r$.
-
-For $q=\infty$, $\sup_r a_r\le C_2a$. For $0<q<\infty$ no triangle inequality is used, only the sum of $q$-th powers: $\sum_{r\ge0}a_r^q\le C_2^qa^q\sum_{r\ge0}2^{-q\theta_*|r-R|}$. Write $R=\lfloor R\rfloor+\delta$ with $\delta\in[0,1)$. With $k=r-\lfloor R\rfloor\in\mathbb Z$ (distinct for distinct $r$), $|r-R|=|k-\delta|\ge|k|-1$, so the sum is at most $2^{q\theta_*}\sum_{k\in\mathbb Z}2^{-q\theta_*|k|}$. Hence $\|(a_r)_r\|_{\ell^q}\le C_2\,a\,K_{s,q}$ for all $0<q\le\infty$. Adding $\|F\|_p\le a\,c_\varphi$,
-\[
-\|F\|^*_{\Bes{s}{p}{q}}\le a\,(c_\varphi+C_2K_{s,q})=a\,C_1=B.
-\]
-This proves (i).
-
-\emph{Separation.} $f_\theta-f_\eta=a\,m^{-s}\sum_j(\theta_j-\eta_j)\varphi(mx-j)$ is a sum of terms with disjoint supports and coefficients in $\{-1,0,1\}$. Hence $\|f_\theta-f_\eta\|_p^p=a^pm^{-sp-1}\,d_H(\theta,\eta)\,c_\varphi^p$, which gives (ii).
-
-\emph{Binary packing.} Let $k=\lfloor m/4\rfloor$ and let $\Theta_m\subseteq\{0,1\}^m$ be a maximal subset whose pairwise Hamming distances are at least $k+1$ (it exists since $\{0,1\}^m$ is finite). By maximality, the Hamming balls of radius $k$ centred at $\Theta_m$ cover $\{0,1\}^m$, so $2^m\le|\Theta_m|\,V(m,k)$, where $V(m,k)=\sum_{i\le k}\binom mi$. For $k\ge1$ let $p_0=k/m\le1/4$. Since $p_0/(1-p_0)\le1$, for $i\le k$ we have $p_0^i(1-p_0)^{m-i}\ge(1-p_0)^m(p_0/(1-p_0))^k$, and therefore
-\[
-1\ge\sum_{i\le k}\binom mi p_0^i(1-p_0)^{m-i}\ge V(m,k)\,p_0^k(1-p_0)^{m-k}=V(m,k)\,2^{-mH(p_0)},
-\]
-where $H(p)=-p\log_2p-(1-p)\log_2(1-p)$. Since $H$ is increasing on $[0,1/2]$, $V(m,k)\le2^{mH(1/4)}$, with $H(1/4)\approx0.8113$. So $|\Theta_m|\ge2^{m(1-H(1/4))}\ge2^{m/6}$, because $1-H(1/4)\approx0.1887>1/6$. The minimal distance is $k+1>m/4$; for $k=0$ ($m\le3$) one may take $\Theta_m=\{0,1\}^m$.
-\end{proof}
-
-\begin{proposicao}[Entropy lower bound]
-\label{lp:prop:entropy-lower}
-Let $1\le p<\infty$, $0<s<2$, $0<q\le\infty$, and let $\varphi$ and $C_1$ be as in \cref{lp:lem:packing}. Put $c_3=4^{-1/p}c_\varphi$,
-\[
-\varepsilon_0=\frac{c_3}{2^{s+1}C_1},\qquad c_4=\frac1{12}\Bigl(\frac{c_3}{2C_1}\Bigr)^{1/s}.
-\]
-For $B>0$ and $0<\varepsilon\le\varepsilon_0B$,
-\[
-\log_2\mathcal N\bigl(\varepsilon,\mathbb B^s_{p,q}(B),L^p\bigr)\ \ge\ c_4\Bigl(\frac B\varepsilon\Bigr)^{1/s},
-\]
-where $\mathcal N(\varepsilon,K,L^p)$ is the least number of closed balls of radius $\varepsilon$ in $L^p([0,1])$, with arbitrary centres in $L^p$, covering $K$. The constants depend only on $(p,s,q)$ and on the fixed choice of $\varphi$.
-\end{proposicao}
-
-\begin{proof}
-Let $\Lambda=c_3B/(2C_1\varepsilon)$. The hypothesis $\varepsilon\le\varepsilon_0B$ is equivalent to $\Lambda\ge2^s$. Choose $m=\lceil\Lambda^{1/s}\rceil-1$. Then $m<\Lambda^{1/s}$, that is, $m^s<\Lambda$, and since $\Lambda^{1/s}\ge2$, $m\ge\Lambda^{1/s}-1\ge\Lambda^{1/s}/2\ge1$.
-
-By \cref{lp:lem:packing}, the family $\{f_\theta:\theta\in\Theta_m\}$ lies in $\mathbb B^s_{p,q}(B)$. For distinct $\theta,\eta\in\Theta_m$, parts (ii) and (iii) give
-\[
-\|f_\theta-f_\eta\|_p\ \ge\ \frac B{C_1}\,c_\varphi\,m^{-s-1/p}\Bigl(\frac m4\Bigr)^{1/p}=c_3\,\frac B{C_1}\,m^{-s}\ >\ c_3\frac B{C_1}\cdot\frac1\Lambda=2\varepsilon.
-\]
-A closed ball of radius $\varepsilon$ contains at most one of these points, since two points in it are at distance at most $2\varepsilon$. Hence any covering of $\mathbb B^s_{p,q}(B)$ by balls of radius $\varepsilon$ has at least $|\Theta_m|\ge2^{m/6}$ balls, and
-\[
-\log_2\mathcal N(\varepsilon)\ge\frac m6\ge\frac{\Lambda^{1/s}}{12}=c_4\Bigl(\frac B\varepsilon\Bigr)^{1/s}.\qedhere
-\]
-\end{proof}
-
-\begin{corolario}[Bit lower bound]
-\label{lp:cor:bits-lower}
-Let $1\le p<\infty$, $0<s<2$, $0<q\le\infty$, $B>0$, and $C_B>0$. Put $c_5=c_4(B/C_B)^{1/s}$, where $c_4$ is the constant of \cref{lp:prop:entropy-lower}. Let $N\ge1$ satisfy $C_BN^{-s}\le\varepsilon_0B$, and let $C:\mathbb B^s_{p,q}(B)\to\{0,1\}^{\le L}$ and $D:\{0,1\}^{\le L}\to L^p$ satisfy $\|f-D(C(f))\|_p\le C_BN^{-s}$ for every $f$ in the ball. Then
-\[
-L\ \ge\ c_5\,N-1.
-\]
-The same holds for outputs restricted to a library $\Sigma\subseteq L^p$.
-\end{corolario}
-
-\begin{proof}
-The values of $D$ on the words of length at most $L$ are $2^{L+1}-1$ elements of $L^p$, and the closed balls of radius $C_BN^{-s}$ centred at them cover the ball. Hence $\mathcal N(C_BN^{-s})\le2^{L+1}$. By \cref{lp:prop:entropy-lower} with $\varepsilon=C_BN^{-s}\le\varepsilon_0B$,
-\[
-L+1\ \ge\ \log_2\mathcal N(C_BN^{-s})\ \ge\ c_4\Bigl(\frac{B}{C_BN^{-s}}\Bigr)^{1/s}=c_4\Bigl(\frac B{C_B}\Bigr)^{1/s}N=c_5N.\qedhere
-\]
-\end{proof}
-
-\begin{observacao}
-\label{lp:obs:entropy}
-\cref{lp:prop:entropy-lower} gives only a lower bound, and only for $0<\varepsilon\le\varepsilon_0B$. We do not prove the upper bound $\log_2\mathcal N(\varepsilon)\lesssim(B/\varepsilon)^{1/s}$, so we do not assert a two-sided equivalence. The restriction $\varepsilon\le\varepsilon_0B$ is indispensable: for $\varepsilon\ge B$ one has $\mathcal N(\varepsilon)=1$, since $\|f\|_p\le\|f\|^*_{\Bes{s}{p}{q}}\le B$ on the ball, so no positive lower bound of the form $c(B/\varepsilon)^{1/s}$ can hold for all $\varepsilon>0$. The Birman--Solomyak results cited through \citet[Theorem~1]{lp-kerkyacharianpicard2003} concern balls defined by wavelet expansions; applying them to the space defined here depends on a norm equivalence that the present proof does not use and that this text does not verify.
-\end{observacao}
-
-\subsection{Geometric and slope floors, necessity, and transfer}
-\label{lp:sec:floors}
-
-The floors below complete \cref{lp:prop:floor}. They hold for the full library $\Sig{N}$, not only for the arithmetic floor, and their constants depend only on $(p,s,q)$.
-
-\begin{lema}[Scaling of a bump]
-\label{lp:lem:bump}
-Let $1\le p<\infty$, $0<s<2$, and $0<q\le\infty$. Fix $\varphi\in C^\infty_c((1/8,5/8))$ with $\varphi=1$ on $[1/4,1/2]$, and set $M_\varphi=\sup|\varphi''|$ and $\kappa_\varphi=\int_0^1(\varphi')^2>0$. There exists $\Lambda\ge1$, depending only on $(p,s,q,\varphi)$, such that for $a\in\mathbb R$ and $0<t\le1$, the function $\psi_{a,t}(x)=a\,\varphi\bigl((x-1+t)/t\bigr)$ satisfies
-\[
- \|\psi_{a,t}\|^*_{\Bes sp q}\le\Lambda\,|a|\,t^{1/p-s}.
-\]
-Moreover, for $a\ge0$, $0<t\le1$, and every affine function $\ell$,
-\[
- \|\psi_{a,t}-\ell\|_{L^p(1-t,1)}\ge\frac{\kappa_\varphi}{M_\varphi}\,a\,t^{1/p}.
-\]
-\end{lema}
-
-\begin{proof}
-For the norm, $\|\psi_{a,t}\|_p=|a|t^{1/p}\|\varphi\|_p$, and $\psi_{a,t}''=a\,t^{-2}\varphi''(\cdot)$. The formula $\Delta_h^2\psi(x)=\int_0^h\!\int_0^h\psi''(x+u+v)\,du\,dv$, Minkowski's inequality, and subadditivity give
-\[
- \wt{\psi_{a,t}}{h}{p}\le|a|t^{1/p}\,\Omega(h/t),\qquad \Omega(u)=\min\{4\|\varphi\|_p,\;u^2\|\varphi''\|_p\}.
-\]
-For $h_r=2^{-r}$ and $u_r=h_r/t$, we have $|a|t^{1/p}2^{rs}=|a|t^{1/p-s}\,u_r^{-s}$, hence
-\[
- 2^{rs}\wt{\psi_{a,t}}{h_r}{p}\le|a|t^{1/p-s}\,u_r^{-s}\Omega(u_r).
-\]
-Since $u_{r+1}=u_r/2$, for $q<\infty$ we have the geometric bounds
-\[
- \sum_{u_r\ge1}u_r^{-sq}\le(1-2^{-sq})^{-1},
- \qquad \sum_{u_r<1}u_r^{(2-s)q}\le(1-2^{-(2-s)q})^{-1}.
-\]
-Both are finite because $0<s<2$. For $q=\infty$, use that $u^{-s}\Omega(u)$ is bounded. Thus the sequence has $\ell^q$ norm at most $|a|t^{1/p-s}K_1$, with $K_1$ depending only on $(p,s,q,\varphi)$. Since $\|\psi_{a,t}\|_p\le|a|t^{1/p-s}\|\varphi\|_p$, it suffices to take $\Lambda=\max\{1,\|\varphi\|_p+K_1\}$.
-
-For the second inequality, let $L(y)=\ell(1-t+ty)$, which is affine. Integrating by parts, with $\varphi(0)=\varphi(1)=\varphi'(0)=\varphi'(1)=0$, we get $\int_0^1\varphi\,\varphi''=-\kappa_\varphi$ and $\int_0^1 L\,\varphi''=0$. Hence $a\kappa_\varphi\le M_\varphi\int_0^1|a\varphi(y)-L(y)|\,dy$. Substituting $x=1-t+ty$ gives $\int_{1-t}^1|\psi_{a,t}-\ell|\,dx=t\int_0^1|a\varphi-L|\,dy\ge t\,a\kappa_\varphi/M_\varphi$. Since the interval $(1-t,1)$ has length $t$, Hölder's inequality gives $\int_{1-t}^1|h|\le t^{1-1/p}\|h\|_{L^p(1-t,1)}$, and therefore $\|\psi_{a,t}-\ell\|_{L^p(1-t,1)}\ge t^{1/p-1}\cdot t\,a\kappa_\varphi/M_\varphi=\frac{\kappa_\varphi}{M_\varphi}a\,t^{1/p}$.
-\end{proof}
-
-\begin{proposicao}[Geometric floor]
-\label{lp:prop:geom-floor}
-Let $1\le p<\infty$, $0<s<2$, and $0<q\le\infty$. There exists $c_G=c_G(p,s,q)>0$ such that for every integer $H\ge2$ there is a measurable $f_H$ with $\|f_H\|^*_{\Bes sp q}\le1$ and
-\[
- \|f_H-g\|_p\ge c_G\,H^{-s}\qquad\text{for every }N\ge1\text{ and every }g\in\Sig N\text{ with schedule }H.
-\]
-\end{proposicao}
-
-\begin{proof}
-Let $\Lambda$ be the constant of \cref{lp:lem:bump}, with $\varphi$ fixed. Take $t=1/H$ and $a=t^{s-1/p}/\Lambda$, and let $f_H=\psi_{a,t}$. By \cref{lp:lem:bump}, $\|f_H\|^*\le\Lambda a t^{1/p-s}=1$. Let $g\in\Sig N$ have schedule $H$. By the last leaf, $g$ is affine on $[1-1/H,1]=[1-t,1]$, and since $f_H=0$ outside $(1-t,1)$, the same lemma gives
-\[
- \|f_H-g\|_p\ge\|f_H-g\|_{L^p(1-t,1)}\ge\frac{\kappa_\varphi}{M_\varphi}\,a\,t^{1/p}=\frac{\kappa_\varphi}{M_\varphi\Lambda}\,t^{s}=c_G\,H^{-s},
-\]
-with $c_G=\kappa_\varphi/(M_\varphi\Lambda)$, which depends only on $(p,s,q)$.
-\end{proof}
-
-\begin{proposicao}[Slope floor]
-\label{lp:prop:slope-floor}
-Let $1\le p<\infty$, $0<s\le1/p$, and $0<q\le\infty$, and set $\beta=s/(1+1/p-s)$. There exists $c_L=c_L(p,s,q)>0$ such that for every integer $H\ge2$ there is a measurable $f_H$ with $\|f_H\|^*_{\Bes sp q}\le1$ and
-\[
- \|f_H-g\|_p\ge c_L\,H^{-\beta}\qquad\text{for every }N\ge1\text{ and every }g\in\Sig{N}\text{ with schedule }H.
-\]
-\end{proposicao}
-
-\begin{proof}
-Set $\delta=1/p-s$ and $c=\min\{\Lambda^{-1},2^{-(1+\delta)}\}$, with $\Lambda$ from \cref{lp:lem:bump}. Take $t=(c/(2H))^{1/(1+\delta)}\le1/2$, $a=c\,t^{-\delta}$, and $f_H(x)=a\varphi((x-1/4)/t)$. The support lies in $(0,1)$. The bounds on $\|f_H\|_p$ and the modulus in \cref{lp:lem:bump} hold with the same constant for this translated support, since they use the norms of $\varphi$ and $\varphi''$. Thus $\|f_H\|^*\le\Lambda a t^\delta\le1$.
-
-The functions $g$ are $H$-Lipschitz on $[0,1]$. For $x$ in $I=[1/4+t/4,1/4+t/2]$, we have $f_H(x)=a$ and $f_H(x+t)=0$. Since $Ht=a/2$, it follows that $|f_H-g|(x)+|f_H-g|(x+t)\ge a/2$. The intervals $I$ and $I+t$ are disjoint and lie in $[0,1]$. By convexity, the sum of the $p$th powers of the two errors is at least $2^{1-p}(a/2)^p$. Integrating over $I$, which has length $t/4$, yields
-\[
- \|f_H-g\|_p\ge 2^{-2-1/p}a\,t^{1/p}
- =2^{-2-1/p}c(c/2)^\beta H^{-\beta}.
-\]
-\end{proof}
-
-\begin{corolario}[Joint necessity]
-\label{lp:cor:joint-necessity}
-Let $1\le p<\infty$, $0<s<2$, $0<q\le\infty$, $C>0$, $N\ge1$, and a schedule $H$ with $H(N)\ge2$. Suppose that, for every measurable $f$ with $\|f\|^*_{\Bes sp q}\le1$,
-\[
- e^{H(N)}_{N,p}(f)\le C\,N^{-s}.
-\]
-Then $H(N)\ge(c_G/C)^{1/s}N$. If $s\le1/p$, then $H(N)\ge(c_L/C)^{1/\beta}N^{1+1/p-s}$. Moreover, $H(N)\ge N^s/(2C)$. If the hypothesis is stated with $\mathscr R$ in place of $e$, it implies the hypothesis above, because $e\le\mathscr R$ by \cref{lp:prop:transfer}; hence the same conclusions hold.
-\end{corolario}
-
-\begin{proof}
-Let $H=H(N)$. By \cref{lp:prop:geom-floor}, there is $f_H$ with $\|f_H\|^*\le1$ such that $\|f_H-g\|_p\ge c_GH^{-s}$ for every $g\in\{0\}\cup\Aclass_{N,H}([0,1])$, the set over which $e^H_{N,p}$ is an infimum. Since $0$ is affine and every $g\in\Aclass_{N,H}([0,1])$ is affine on $[1-1/H,1]$ by the last leaf, the proposition applies to this set. Hence $c_GH^{-s}\le e^H_{N,p}(f_H)\le CN^{-s}$, which gives $H^s\ge(c_G/C)N^s$. If $s\le1/p$, \cref{lp:prop:slope-floor} gives $c_LH^{-\beta}\le CN^{-s}$, that is, $H\ge(c_L/C)^{1/\beta}N^{s/\beta}$, with $s/\beta=1+1/p-s$. For the last inequality, $f\equiv1/(2H)$ has $\|f\|^*=1/(2H)\le1$, and by \cref{lp:prop:floor} $e^H_{N,p}(f)\ge1/(2H)$; hence $1/(2H)\le CN^{-s}$.
-\end{proof}
-
-\begin{proposicao}[Exact transfer between error and realization]
-\label{lp:prop:transfer}
-Let $1\le p<\infty$, let $G_N$ be families of measurable functions, and let $f$ be measurable. With $e_N(f)=\inf_{g\in G_N}\|f-g\|_p$ and $\mathscr R_N(f)=\inf_{g\in G_N}\{\|f-g\|_p+\omega_p(g,1/N)\}$,
-\[
- e_N(f)\le\mathscr R_N(f)\le\omega_p(f,1/N)+5\,e_N(f).
-\]
-\end{proposicao}
-
-\begin{proof}
-The first inequality holds because $\mathscr R_N$ adds $\omega_p(g,1/N)\ge0$ to each term of the infimum. For the second, if $g\in G_N$, then $\omega_p(g,1/N)\le\omega_p(f,1/N)+4\|f-g\|_p$ by the subadditivity of $\omega_p$ and the bound $\omega_p(h,t)\le4\|h\|_p$. Hence $\mathscr R_N(f)\le\omega_p(f,1/N)+5\|f-g\|_p$ for every $g$, and the infimum over $g$ gives the bound.
-\end{proof}
-
-\begin{observacao}
-\label{lp:obs:floor-closure}
-\Cref{lp:cor:joint-necessity} determines the necessary power of the height for the uniform per-scale rate $CN^{-s}$ over the unit ball, for both the best $L^p$ error and realization. The slope floor gives $H(N)\gtrsim N^{1+1/p-s}$ if $s<1/p$, the geometric floor gives $H(N)\gtrsim N$ if $1/p\le s\le1$, and the arithmetic floor gives $H(N)\gtrsim N^s$ if $1<s<2$. The constants in these bounds depend on $(p,s,q,C)$. The test target may vary with $H(N)$, and a uniform bound on a ball of radius $B\ge1$ gives the same necessity because the ball contains the unit ball.
-
-The upper bounds in \cref{lp:thm:uniform} with $\kappa=0$ and in \cref{lp:thm:critical-linear} attain these powers at the dyadic budgets. For fixed $B$, when the upper bound in \cref{lp:tab:schedules} includes $\mathsf L_1^{\theta_q}$, the comparison determines only the power of $N$. Whether that factor is necessary for the per-scale rate and whether further factors are necessary for summability are separate questions. The lower bounds also leave the required height for a fixed target undetermined.
+At $p=s=1$, \cref{lp:prop:l1-linear-height} gives the per-scale rate for every $q$. For $q=\infty$, \cref{lp:prop:transfer} gives the sequence bound in the supremum norm with height $\lceil C_E(B+1)(n+1)\rceil$. The same dyadic shift, now with normalization by $dn$, transfers the bound to $H_*$, with zero controlling the initial block. The universal inverse inequality gives global equality also in $B^1_{1,\infty}$. For $q<\infty$ at $p=s=1$, the normalized quantization bound can remain of constant order, and characterization with a linear schedule remains open in this work.
 \end{observacao}
 
 \subsection{Iterated-logarithm schedules}
@@ -1163,9 +1282,9 @@ The same applies in part (iii) of \cref{lp:conj:besov} with $p=1$, $s=1$, and $q
 \tablehead{Regularity} & \tablehead{Index $q$} & \tablehead{Rate $N^{-s}$ on the ball} & \tablehead{Realization in $\ell^q$} \\
 \midrule
 $0<s<1/p$ & $0<q\le\infty$ & $N^{1+1/p-s}$ & $N^{1+1/p-s}$ \\
-$s=1/p$, $p>1$ & $0<q<\infty$ & $N$ & $N$ on the ball or $N\mathsf L_1^{\theta_q}$ globally \\
-$s=1/p$ & $q=\infty$ & $N\mathsf L_1$ & $N\mathsf L_1$ \\
-$s=p=1$ & $0<q<\infty$ & $N\mathsf L_1^{\theta_q}$ & $N\mathsf L_1^{\theta_q+\kappa}$, $\kappa>1/q$ \\
+$s=1/p$, $p>1$ & $0<q\le\infty$ & $N$ & $N$ (global) \\
+$s=p=1$ & $q=\infty$ & $N$ & $N$ (global) \\
+$s=p=1$ & $0<q<\infty$ & $N$ & $N\mathsf L_1^{\theta_q+\kappa}$, $\kappa>1/q$ \\
 $1/p<s<1$ & $0<q\le\infty$ & $N$ & $N$ \\
 $1\le s<2$, $s>1/p$ & $q=\infty$ & $N^s$ & $N^s$ \\
 $1\le s<2$, $s>1/p$ & $0<q<\infty$ & $N^s$ & $N^s\mathsf L_1^\kappa$, $\kappa>1/q$ \\
@@ -1173,21 +1292,95 @@ $1\le s<2$, $s>1/p$ & $0<q<\infty$ & $N^s$ & $N^s\mathsf L_1^\kappa$, $\kappa>1/
 \end{tabularx}
 \par\raggedright
 \par\smallskip\noindent
-The rate on the ball uses $B\ge1$ and the factor $B+1$ in the height, including the linear entry in the last column. The other entries in that column are schedules for global characterization. The prefactors are those of the corresponding theorems. On the diagonal, $\theta_q$ comes from controlling the nodal values. For $s\ge1$ and $q<\infty$, one can replace $\mathsf L_1^\kappa$ by $\mathsf L_1^{1/q}\mathsf L_2^\gamma$ with $\gamma>1/q$. For $s>1/p$ and $q<\infty$, $\widetilde H_{s,\eta}$ with $\eta>0$ also gives global characterization.
+The rate on balls uses $B\ge1$ and a height prefactor proportional to $B+1$. The final column lists global schedules. For $s\ge1$ and $q<\infty$, $\mathsf L_1^\kappa$ in that column may be replaced by $\mathsf L_1^{1/q}\mathsf L_2^\gamma$ with $\gamma>1/q$. For $s>1/p$ and $q<\infty$, $\widetilde H_{s,\eta}$ with $\eta>0$ also gives the global characterization.
 \end{table}
 
+\section{Coding and entropy}
+\label{lp:sec:bits}
+
+For binary encoding, the encoder and decoder share the height budget $H$. One bit indicates $g=0$ or $g\ne0$. For $g\ne0$, choose an admissible representation. The preorder tree shape uses one bit per node to distinguish a leaf from an internal node and determines the pair $(k,m)$ for each leaf. Each leaf carries two rational coordinates $(y_0,s)$, each with a sign, numerator, and denominator.
+
+\begin{proposicao}[Bit length for $\Aclass_{N,H}$]
+\label{lp:prop:bits}
+Let $N\ge1$ and $H\ge2$ be integers, and set $c_H=\lceil\log_2(H+1)\rceil$. Every $g\in\{0\}\cup\Aclass_{N,H}([0,1])$ has a prefix-free binary description of at most $4N(c_H+1)$ bits. In particular, $\log_2\#\bigl(\{0\}\cup\Aclass_{N,H}([0,1])\bigr)\le4N(c_H+1)$.
+\end{proposicao}
+
+\begin{proof}
+A reduced coordinate $a/b$ with $b>0$ and $\height(a/b)\le H$ has $|a|\le H<2^{c_H}$ and $1\le b\le H<2^{c_H}$. It therefore uses $2c_H+1$ bits, with one sign bit and $c_H$ fixed-length bits for each integer. A leaf uses $4c_H+2$ bits. A tree with $N'\le N$ leaves has $2N'-1$ nodes. The total length is at most $1+(2N-1)+N(4c_H+2)=4N(c_H+1)$. The preorder tree shape is prefix-free, and the number of leaves it specifies fixes the length of the rest of the description. After choosing one description per function, padding each word with zeros up to length $L=4N(c_H+1)$ preserves injectivity, since two words with the same padding would be comparable by prefix. There are $2^L$ words of that length.
+\end{proof}
+
+\begin{corolario}[Approximation rate and bit length on balls]
+\label{lp:cor:bits}
+Let $1\le p<\infty$, $0<s<2$, $0<q\le\infty$, and $\widehat H=\widehat H^{[B]}_{A}$ with $\kappa=0$ and $A$ as in \cref{lp:thm:uniform}. There exists $c=c(p,s,q)$ such that, for every $B\ge1$, every $f\in\mathbb B^s_{p,q}(B)$, and every $n=2^r\ge2$, there exists $g\in\Sig{n}$ with
+\[
+ \|f-g\|_p\le(9C_WB+1)\,n^{-s}
+\]
+and a binary description of length at most $c\,n\,\bigl(\log n+\log(B+1)\bigr)$.
+\end{corolario}
+
+\begin{proof}
+\Cref{lp:thm:uniform}, with $\kappa=0$, gives $g\in\Aclass_{n,\widehat H(n)}([0,1])$ satisfying the error bound. For $\kappa=0$, we have $\widehat H(n)\le A(B+1)(n+1)^{\hat\nu}\mathsf L(n)^{\theta_q}+1$, with $\hat\nu\le2$ and $\theta_q\le1$. Thus $c_{\widehat H(n)}=O(\log n+\log(B+1))$, with a constant depending only on $(p,s,q)$, and \cref{lp:prop:bits} gives the result.
+\end{proof}
+
+\begin{proposicao}[Entropy lower bound]
+\label{lp:prop:entropy-lower}
+Let $1\le p<\infty$, $0<s<2$, $0<q\le\infty$, and let $\varphi$ and $C_1$ be as in \cref{lp:lem:packing}. Put $c_3=4^{-1/p}c_\varphi$,
+\[
+\varepsilon_0=\frac{c_3}{2^{s+1}C_1},\qquad c_4=\frac1{12}\Bigl(\frac{c_3}{2C_1}\Bigr)^{1/s}.
+\]
+For $B>0$ and $0<\varepsilon\le\varepsilon_0B$,
+\[
+\log_2\mathcal N\bigl(\varepsilon,\mathbb B^s_{p,q}(B),L^p\bigr)\ \ge\ c_4\Bigl(\frac B\varepsilon\Bigr)^{1/s},
+\]
+where $\mathcal N(\varepsilon,K,L^p)$ is the least number of closed balls of radius $\varepsilon$ in $L^p([0,1])$, with arbitrary centres in $L^p$, covering $K$. The constants depend only on $(p,s,q)$ and on the fixed choice of $\varphi$.
+\end{proposicao}
+
+\begin{proof}
+Let $\Lambda=c_3B/(2C_1\varepsilon)$. The hypothesis $\varepsilon\le\varepsilon_0B$ is equivalent to $\Lambda\ge2^s$. Choose $m=\lceil\Lambda^{1/s}\rceil-1$. Then $m<\Lambda^{1/s}$, that is, $m^s<\Lambda$, and since $\Lambda^{1/s}\ge2$, $m\ge\Lambda^{1/s}-1\ge\Lambda^{1/s}/2\ge1$.
+
+By \cref{lp:lem:packing}, the family $\{f_\theta:\theta\in\Theta_m\}$ lies in $\mathbb B^s_{p,q}(B)$. For distinct $\theta,\eta\in\Theta_m$, parts (ii) and (iii) give
+\[
+\|f_\theta-f_\eta\|_p\ \ge\ \frac B{C_1}\,c_\varphi\,m^{-s-1/p}\Bigl(\frac m4\Bigr)^{1/p}=c_3\,\frac B{C_1}\,m^{-s}\ >\ c_3\frac B{C_1}\cdot\frac1\Lambda=2\varepsilon.
+\]
+A closed ball of radius $\varepsilon$ contains at most one of these points, since two points in it are at distance at most $2\varepsilon$. Hence any covering of $\mathbb B^s_{p,q}(B)$ by balls of radius $\varepsilon$ has at least $|\Theta_m|\ge2^{m/6}$ balls, and
+\[
+\log_2\mathcal N(\varepsilon)\ge\frac m6\ge\frac{\Lambda^{1/s}}{12}=c_4\Bigl(\frac B\varepsilon\Bigr)^{1/s}.\qedhere
+\]
+\end{proof}
+
+\begin{corolario}[Bit lower bound]
+\label{lp:cor:bits-lower}
+Let $1\le p<\infty$, $0<s<2$, $0<q\le\infty$, $B>0$, $C_B>0$, and let $L\ge0$ be an integer. Put $c_5=c_4(B/C_B)^{1/s}$, where $c_4$ is the constant of \cref{lp:prop:entropy-lower}. Let $N\ge1$ satisfy $C_BN^{-s}\le\varepsilon_0B$, and let $C:\mathbb B^s_{p,q}(B)\to\{0,1\}^{\le L}$ and $D:\{0,1\}^{\le L}\to L^p$ satisfy $\|f-D(C(f))\|_p\le C_BN^{-s}$ for every $f$ in the ball. Then
+\[
+L\ \ge\ c_5\,N-1.
+\]
+The same holds for outputs restricted to a library $\Sigma\subseteq L^p$.
+\end{corolario}
+
+\begin{proof}
+The domain of $D$ contains $\sum_{\ell=0}^L2^\ell=2^{L+1}-1$ words, including the empty word. Thus $|\operatorname{Im}D|\le2^{L+1}-1$, since distinct words can decode to the same output. The closed balls of radius $C_BN^{-s}$ centred at these outputs cover $\mathbb B^s_{p,q}(B)$. Hence $\mathcal N(C_BN^{-s})\le|\operatorname{Im}D|\le2^{L+1}-1<2^{L+1}$. By \cref{lp:prop:entropy-lower} with $\varepsilon=C_BN^{-s}\le\varepsilon_0B$,
+\[
+L+1\ \ge\ \log_2\mathcal N(C_BN^{-s})\ \ge\ c_4\Bigl(\frac{B}{C_BN^{-s}}\Bigr)^{1/s}=c_4\Bigl(\frac B{C_B}\Bigr)^{1/s}N=c_5N.\qedhere
+\]
+\end{proof}
+
+\begin{observacao}
+\label{lp:obs:entropy}
+\Cref{lp:prop:entropy-lower} proves the lower bound for $0<\varepsilon\le\varepsilon_0B$. This cutoff ensures the choice of $m$ and the strict separation used in the packing proof. The intermediate scales $\varepsilon_0B<\varepsilon<B$ lie outside the proposition's stated range. For $\varepsilon\ge B$, the single closed ball centred at zero covers the class because $\|f\|_p\le\|f\|^*_{\Bes{s}{p}{q}}\le B$. Thus $\mathcal N(\varepsilon)=1$, which rules out a positive lower bound of the form $c(B/\varepsilon)^{1/s}$ for all $\varepsilon>0$. The upper bound $\log_2\mathcal N(\varepsilon)\lesssim(B/\varepsilon)^{1/s}$ and the two-sided equivalence lie outside the proved result. The Birman--Solomyak results cited through \citet[Theorem~1]{lp-kerkyacharianpicard2003} concern balls defined by wavelet expansions; applying them to the space defined here depends on a norm equivalence that the present proof does not use and that this text does not verify. The order $\varepsilon^{-1/s}$ of the entropy of Besov balls is classical \citep{lp-birmansolomyak1967} and appears in \citet{lp-kerkyacharianpicard2003} and in \citet[Theorem~1.1]{lp-cohen2001}, where encoding and entropy are related by $H_\varepsilon\le R$. Thus \cref{lp:prop:entropy-lower} and \cref{lp:cor:bits-lower} claim no novelty in this order, only explicit constants for the definition by moduli of smoothness. The packing of \cref{lp:lem:packing} uses a hypercube of bumps and the Varshamov--Gilbert combinatorial bound.
+\end{observacao}
+
 \section{Concluding remarks}
-Dyadic summability of the realization functional characterizes the Besov spaces studied here under simultaneous leaf and arithmetic height budgets. The Jackson estimate gives the direct inclusion in each regularity regime, and the inverse inequality follows from the properties of the modulus of smoothness. The characterization transfers to nested ReLU network families under exact or approximate inclusion, with the tolerance specified in \cref{lp:thm:approx-stability}.
+\Cref{lp:thm:minimax-nh} determines the error on the unit ball as a function of $N$ and $H$ throughout $1\le p<\infty$, $0<s<2$, and $0<q\le\infty$. The lower bounds hold for the adaptive library, and the upper bound uses a uniform grid. At $p=s=1$, choosing a denominator at each node gives linear height for the rate $N^{-1}$. \Cref{lp:cor:minimax-realization} extends the law to the realization functional.
 
-For the uniform per-scale rate $N^{-s}$, the lower and upper bounds determine the power of the height throughout $0<s<2$. The power is $1+1/p-s$ below the diagonal, $1$ from $s=1/p$ to $s=1$, and $s$ above $1$. On the diagonal with $p>1$ and $0<q<\infty$, the linear schedule $H_B$ also gives a uniform $\ell^q$ bound and characterization on the ball of radius $B$. In the remaining cases where sufficient schedules include logarithms, the lower bounds leave their necessity open. Iterated-logarithm schedules refine the sufficient conditions for summability.
+On the diagonal with $p>1$, the fixed linear schedule gives equality of sets for every $q$. \Cref{lp:prop:critical-radius-growth} establishes the limits of quantitative control under this schedule. At $p=s=1$, $q<\infty$, characterization with a linear schedule remains open. Iterated-logarithm schedules are sufficient alternatives for summability in the regimes of \cref{lp:sec:loglog}. The minimax lower bounds test the worst case at each scale and leave open the arithmetic requirements for a fixed target.
 
-For fixed radius, the explicit code for the approximants has maximum length $O(N\log N)$ at the uniform rate in $L^p$. The entropy of the ball gives a lower bound of order $N$ for any code achieving the same uniform error.
+The characterization transfers to ReLU networks under the exact or approximate inclusion hypotheses of \cref{lp:conj:stability,lp:thm:approx-stability}. For fixed radius, the explicit code uses $O(N\log N)$ bits at the uniform rate in $L^p$, and the entropy of the ball gives a lower bound of order $N$. The difference between $N\log N$ and $N$ is the gap between the upper bound of the fixed-length code of \cref{lp:prop:bits} and the entropy lower bound; the text does not claim that the library requires $\Omega(N\log N)$ bits in every encoding.
 
 \articleappendix
 \section{Formalization of the proofs in Lean 4}
 \label{lp:sec:lean}
 
-The \code{lean4/formalizacao} project uses Lean 4.28.0 and Mathlib v4.28.0 \citep{lp-mathlib,lp-lean4} to verify parts (i), (ii), and (iii) of \cref{lp:conj:besov}, as well as \cref{lp:conj:stability,lp:thm:approx-stability}. The inverse inequality is proved for moduli taking values in $[0,\infty]$ and specialized to $L^p$. The direct proof combines the Whitney inequality, quasi-interpolation, continuous embedding (for $s>1/p$), a sup-norm bound for the quasi-interpolants (for $s\le1/p$), and the construction of the quantized dyadic tree. The resulting Jackson estimate is applied to the schedules in parts (i), (ii), and (iii) of \cref{lp:conj:besov} and to the shifted scales in \cref{lp:conj:stability,lp:thm:approx-stability}. The formalization includes the uniform bounds on balls, the arithmetic lower bound, the binary descriptions, and the iterated-logarithm schedules of \cref{lp:sec:uniform}.
+The \code{lean4/formalizacao} project uses Lean 4.28.0 and Mathlib v4.28.0 \citep{lp-mathlib,lp-lean4} to verify parts (i), (ii), and (iii) of \cref{lp:conj:besov}, as well as \cref{lp:conj:stability,lp:thm:approx-stability}. The inverse inequality is proved for moduli taking values in $[0,\infty]$ and specialized to $L^p$. The direct proof combines the Whitney inequality, quasi-interpolation, continuous embedding (for $s>1/p$), a sup-norm bound for the quasi-interpolants (for $s\le1/p$), and the construction of the quantized dyadic tree. The resulting Jackson estimate is applied to the schedules in parts (i), (ii), and (iii) of \cref{lp:conj:besov} and to the shifted scales in \cref{lp:conj:stability,lp:thm:approx-stability}. The formalization includes the uniform bounds on balls, the arithmetic lower bound, the binary descriptions, and the iterated-logarithm schedules in \cref{lp:sec:loglog}.
 
 \subsection{Representation of objects and theorems}
 \label{lp:sec:fidelity}
@@ -1218,9 +1411,9 @@ Approximate stability ($s\le1/p$) & \leanname{besov_subset_stratum_low_approx}, 
 \end{leantable}
 
 \par\Needspace{14\baselineskip}
-\Cref{lp:tab:uniform-lean} lists the declarations for the extensions in \cref{lp:sec:uniform}.
+\Cref{lp:tab:uniform-lean} lists the declarations for uniform bounds, the arithmetic lower bound, coding, and height schedules.
 
-\begin{leantable}{Lean declarations for the extensions in Section~6}{lp:tab:uniform-lean}{Result}{Lean declarations}
+\begin{leantable}{Lean declarations for uniform bounds, arithmetic lower bounds, coding, and schedules}{lp:tab:uniform-lean}{Result}{Lean declarations}
 Quantization and uniform bounds & \leanname{uniform_height_quantization}, \leanname{lam_bound_unif}, \leanname{uniform_quantWeight_lt_top}, \leanname{uniform_besov_ball} \\
 Arithmetic lower bound in $L^p$ & \leanname{arithmetic_floor_lp}, \leanname{arithmetic_floor_bestError}, \leanname{arithmetic_height_necessary} \\
 Binary code and approximation rate & \leanname{boundedLibrary_code}, \leanname{boundedLibrary_log_card}, \leanname{uniform_rate_bits} \\
@@ -1244,6 +1437,15 @@ Transfer & \leanname{bestError_le_realP}, \leanname{realP_le_bestError_add} \\
 Critical linear height & \leanname{critical_approx}, \leanname{critical_level}, \leanname{critical_lq}, \leanname{critical_rate}, \leanname{critical_char_radius}, \leanname{critical_radius_ball_and_inclusion} \\
 \end{leantable}
 
+\Needspace{7\baselineskip}
+The \href{https://github.com/Walc21/ARTIGO-BESOV/blob/902d2664cb5a0fa5620d3442c562c15675889eb3/auditorias/RELATORIO_F6_CERTIFICACAO_FINAL.md}{independent F6 audit} awarded a grade of A, with no blockers or major findings, to the formalization of \cref{lp:thm:minimax-nh} by \code{FormalizacaoMinimax.minimax_nh}. The certification covers the minimax best error in $L^p([0,1])$, $D_{p,s,q}(N,H)\asymp N^{-s}+H^{-s/a(p,s)}$, for $1\le p<\infty$, $0<s<2$, and $0<q\le\infty$, with independent integers $N,H\ge2$.
+\par
+The audited commit is \href{https://github.com/Walc21/ARTIGO-BESOV/commit/19c85be8bd08098b4a8c6d0452e755b5e3683be7}{\texttt{19c85be8bd08098b4a8c6d0452e755b5e3683be7}}.
+
+The geometric floor and the transfer inequality are covered by the declarations in the table. The affine reproduction and endpoint bounds support the choice $C_p=4$. The minimax proof uses \code{critical_upper_dyadic} on the diagonal $s=1/p$ with $p>1$ and \code{l1_linear_height} at $p=s=1$, both with linear height per scale for every $0<q\le\infty$. In the latter case, \code{nodal_variable_height} formalizes quantization with a denominator at each node.
+
+The global characterization concerns summability of the errors across scales. The Lean sequence and ball characterization results for $H_B$ require $q<\infty$. The minimax realization corollary, the sequence extension to $q=\infty$, the fixed linear schedule, and sharp radius growth require separate verification of their Lean counterparts. At $p=s=1$ with $q<\infty$, global characterization under linear height remains open.
+
 \subsection{Reproducing the verification}
 
 From the Lean project root, run the following commands to build the formalization and audit its axioms.
@@ -1251,7 +1453,7 @@ From the Lean project root, run the following commands to build the formalizatio
 lake build Formalizacao
 lake env lean Formalizacao/Auditoria.lean
 \end{verbatim}
-The audit runs 201 checks on 196 distinct declarations and reports only \code{propext}, \code{Classical.choice}, and \code{Quot.sound}. Its output is in \code{lean4/formalizacao/auditoria_axiomas.txt}. The map at \code{mapas/MAPA_TEX_LEAN.md} lists the qualified names and their source files. From the article root, \texttt{python3 mapas/verificar\_mapa.py} checks the TeX labels and the Lean names.
+At the certified commit, F6 recorded 239 axiom queries on 234 distinct declarations, using only \code{propext}, \code{Classical.choice}, and \code{Quot.sound}. The output is in \code{lean4/formalizacao/auditoria_axiomas.txt}. F6 checked 267 references to Lean names in the map at that commit. From the article root, \texttt{python3 mapas/verificar\_mapa.py} checks the TeX labels and the declarations listed in \code{mapas/MAPA_TEX_LEAN.md}.
 
 \articlereferences
 \end{document}

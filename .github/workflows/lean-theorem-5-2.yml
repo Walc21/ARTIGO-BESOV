@@ -1,0 +1,168 @@
+name: Lean 4 - Theorem 5.2 Verification
+
+on:
+  pull_request:
+    branches:
+      - formalizacao-teorema-5-2
+
+permissions:
+  contents: read
+
+concurrency:
+  group: theorem-5-2-pr-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    name: theorem-5-2
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - name: Check out the pull request and full history
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Set up Lean and restore Mathlib cache
+        uses: leanprover/lean-action@ba3fdfe5c4476c925da13bf11a005ddb47e47aee
+        with:
+          auto-config: false
+          build: true
+          build-args: Formalizacao
+          test: false
+          lint: false
+          use-mathlib-cache: true
+          use-github-cache: true
+          lake-package-directory: lean4/formalizacao
+
+      - name: Confirm certified commit, tag, and minimax declaration
+        run: |
+          set -euo pipefail
+          certified=19c85be8bd08098b4a8c6d0452e755b5e3683be7
+          test "$(git cat-file -t "$certified")" = commit
+          test "$(git rev-parse 'teorema-5.2-lean-certificado-v1.0^{}')" = "$certified"
+          git diff --exit-code "$certified" HEAD -- \
+            lean4/formalizacao/Formalizacao/MinimaxFinal.lean
+          changed_lean=$(git diff --name-only "$certified" HEAD -- lean4/formalizacao | grep -E '\.lean$' || true)
+          test "$changed_lean" = lean4/formalizacao/Formalizacao/Library.lean
+
+      - name: Build Formalizacao
+        working-directory: lean4/formalizacao
+        run: lake build Formalizacao
+
+      - name: Audit axioms
+        working-directory: lean4/formalizacao
+        run: |
+          set -euo pipefail
+          audit_log="$RUNNER_TEMP/axiomas-auditoria.log"
+          lake env lean Formalizacao/Auditoria.lean | tee "$audit_log"
+          python3 - "$audit_log" <<'PY'
+          from pathlib import Path
+          import sys
+
+          text = Path(sys.argv[1]).read_text(encoding="utf-8")
+          allowed = {"propext", "Classical.choice", "Quot.sound"}
+          rows = [line for line in text.splitlines() if " depends on axioms: [" in line]
+          if len(rows) != 239:
+              raise SystemExit(f"expected 239 axiom checks, got {len(rows)}")
+          unexpected = []
+          for line in rows:
+              used = line.split(" depends on axioms: [", 1)[1].split("]", 1)[0]
+              unexpected.extend(sorted(set(x.strip() for x in used.split(",") if x.strip()) - allowed))
+          if "sorryAx" in text or unexpected:
+              raise SystemExit(f"unexpected axioms: {sorted(set(unexpected))}; sorryAx={ 'sorryAx' in text }")
+          print(f"{len(rows)} declarations use only the standard axioms; no sorryAx.")
+          PY
+          cmp "$audit_log" ../../auditorias/evidencias/F6-19c85be/axiomas-auditoria.log
+
+      - name: Test Theorem 5.2
+        working-directory: lean4/formalizacao
+        run: lake env lean ../../testes/Minimax52.lean
+
+      - name: Reproduce F6 semantic and dependency evidence
+        working-directory: lean4/formalizacao
+        run: |
+          set -euo pipefail
+          evidence=../../auditorias/evidencias/F6-19c85be
+          declaration_log="$RUNNER_TEMP/declaracoes.log"
+          semantic_log="$RUNNER_TEMP/semantica.log"
+          lake env lean "$evidence/DeclaracoesF6.lean" > "$declaration_log"
+          cmp "$declaration_log" "$evidence/declaracoes.log"
+          lake env lean "$evidence/SemanticaF6.lean" > "$semantic_log"
+          cmp "$semantic_log" "$evidence/semantica.log"
+
+      - name: Test Python suite
+        run: python3 -B -m unittest discover -s testes -v
+
+      - name: Verify LaTeX-Lean map
+        run: python3 -B mapas/verificar_mapa.py
+
+      - name: Reproduce F6 graph and verify evidence
+        run: |
+          set -euo pipefail
+          evidence=auditorias/evidencias/F6-19c85be
+          cp "$evidence/declaracoes.tsv" "$RUNNER_TEMP/declaracoes.tsv"
+          cp "$evidence/arestas.tsv" "$RUNNER_TEMP/arestas.tsv"
+          cp "$evidence/modulos.tsv" "$RUNNER_TEMP/modulos.tsv"
+          python3 -B "$evidence/resumir_grafo.py" "$RUNNER_TEMP/declaracoes.log" > "$RUNNER_TEMP/grafo.log"
+          cmp "$RUNNER_TEMP/grafo.log" "$evidence/grafo.log"
+          cmp "$evidence/declaracoes.tsv" "$RUNNER_TEMP/declaracoes.tsv"
+          cmp "$evidence/arestas.tsv" "$RUNNER_TEMP/arestas.tsv"
+          cmp "$evidence/modulos.tsv" "$RUNNER_TEMP/modulos.tsv"
+          python3 - "$evidence/SHA256SUMS" <<'PY'
+          from pathlib import Path
+          import sys
+
+          rows = Path(sys.argv[1]).read_text(encoding="utf-8").splitlines()
+          if len(rows) != 26:
+              raise SystemExit(f"expected 26 F6 artifacts, got {len(rows)}")
+          PY
+          (cd "$evidence" && sha256sum -c SHA256SUMS)
+
+      - name: Check editorial links and scan changed text for credentials
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          import subprocess
+
+          report = Path("auditorias/RELATORIO_F6_CERTIFICACAO_FINAL.md")
+          links = re.findall(r"\[[^\]]*\]\(([^)]+)\)", report.read_text(encoding="utf-8"))
+          missing = []
+          for link in links:
+              if re.match(r"^[a-z][a-z0-9+.-]*:", link, re.I) or link.startswith("#"):
+                  continue
+              target = link.split("#", 1)[0].split("?", 1)[0]
+              if target and not (report.parent / target).resolve().exists():
+                  missing.append(link)
+          if missing:
+              raise SystemExit(f"broken relative report links: {missing}")
+
+          patterns = [
+              re.compile(r"-----BEGIN(?: [A-Z0-9]+)* PRIVATE KEY-----"),
+              re.compile(r"\bgh[opusr]_[A-Za-z0-9_]{20,}\b"),
+              re.compile(r"\bgithub_pat_[A-Za-z0-9_]{20,}\b"),
+              re.compile(r"\bAKIA[0-9A-Z]{16}\b"),
+              re.compile(r"\bsk-(?:proj-)?[A-Za-z0-9_-]{24,}\b"),
+          ]
+          changed = subprocess.check_output(
+              ["git", "diff", "--name-only", "19c85be8bd08098b4a8c6d0452e755b5e3683be7", "HEAD"],
+              text=True,
+          ).splitlines()
+          hits = []
+          for name in changed:
+              path = Path(name)
+              if path.suffix.lower() in {".pdf", ".png", ".jpg", ".jpeg", ".gif"} or not path.is_file():
+                  continue
+              try:
+                  content = path.read_text(encoding="utf-8")
+              except UnicodeDecodeError:
+                  continue
+              if any(pattern.search(content) for pattern in patterns):
+                  hits.append(name)
+          if hits:
+              raise SystemExit(f"possible credentials in changed files: {hits}")
+          print(f"All {len(links)} report links resolve; no common credential patterns found in changed text files.")
+          PY
