@@ -627,7 +627,9 @@ Estado: **Formalizado e compilado**. Norma de Besov do bump escalado e cota infe
 
 Texto: [conjecturas_lp.tex:794](../conjecturas_lp.tex); rótulo `lp:lem:packing`.
 
-Estado: **Demonstrado no texto (sem formalização Lean)**. Família $f_\theta$ com norma de Besov $\le B$, separação em $L^p$ por distância de Hamming e empacotamento binário. Sem declaração Lean correspondente.
+Estado: **Apoio parcial em Lean**. F6-03. A normalização do item (i) na bola unitária é formalizada para o vetor todo 1, usado no piso de folhas. O bump Lean tem região de não nulidade $(1/8,5/8)$ e suporte topológico $[1/8,5/8]$. A família completa de vetores, a separação de Hamming e o empacotamento binário são demonstrados no manuscrito.
+
+- [`FormalizacaoPacking.packing_norm_le`](../lean4/formalizacao/Formalizacao/Packing.lean) — linha 601. Apoio parcial ao item (i), no caso todo 1.
 
 ### E2 — cota inferior de entropia métrica
 
@@ -684,7 +686,7 @@ Estado: **Formalizado e compilado**. A média dos módulos dos valores nodais co
 
 Texto: [conjecturas_lp.tex:886](../conjecturas_lp.tex); rótulo `lp:thm:minimax-nh`.
 
-Estado: **Formalizado e compilado**. A cota superior usa escalas diádicas e a passagem para orçamentos independentes. A cota inferior combina o piso de folhas e os três pisos de altura no supremo sobre a bola.
+Estado: **Certificado pela auditoria F6**. Parecer A no commit `19c85be8bd08098b4a8c6d0452e755b5e3683be7` para o melhor erro minimax em Lᵖ. [Relatório F6](../auditorias/RELATORIO_F6_CERTIFICACAO_FINAL.md). A cota superior usa escalas diádicas e a passagem para orçamentos independentes. A cota inferior combina o piso de folhas e os três pisos de altura no supremo sobre a bola.
 
 - [`FormalizacaoMinimax.minimax_nh`](../lean4/formalizacao/Formalizacao/MinimaxFinal.lean) — linha 64. Enunciado completo.
 - [`FormalizacaoMinimax.lower_bound_NH`](../lean4/formalizacao/Formalizacao/MinimaxFinal.lean) — linha 35. Cota inferior.
@@ -721,12 +723,14 @@ Estado: **Demonstrado no texto (sem formalização Lean)**. A cota em função d
 
 | Estado | Entradas |
 |---|---|
-| Formalizado e compilado | 43 |
-| Demonstrado no texto (sem formalização Lean) | 7 |
+| Formalizado e compilado | 42 |
 | Formalizado (definição) | 6 |
+| Demonstrado no texto (sem formalização Lean) | 6 |
 | Formalizado e compilado, condicional a $J_p$ | 3 |
 | Apoio Lean (salto com hipóteses por célula) | 1 |
 | Formalizado para q finito, extensão analítica a q infinito | 1 |
 | Observação (escopo) | 1 |
 | Observação | 1 |
+| Apoio parcial em Lean | 1 |
 | Justificação analítica com apoio Lean | 1 |
+| Certificado pela auditoria F6 | 1 |

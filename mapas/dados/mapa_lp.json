@@ -1736,9 +1736,15 @@
       "id": "E1",
       "titulo": "empacotamento de Besov por bumps disjuntos",
       "rotulo": "lp:lem:packing",
-      "estado": "Demonstrado no texto (sem formalização Lean)",
-      "nota": "Família $f_\\theta$ com norma de Besov $\\le B$, separação em $L^p$ por distância de Hamming e empacotamento binário. Sem declaração Lean correspondente.",
-      "lean": []
+      "estado": "Apoio parcial em Lean",
+      "nota": "F6-03. A normalização do item (i) na bola unitária é formalizada para o vetor todo 1, usado no piso de folhas. O bump Lean tem região de não nulidade $(1/8,5/8)$ e suporte topológico $[1/8,5/8]$. A família completa de vetores, a separação de Hamming e o empacotamento binário são demonstrados no manuscrito.",
+      "lean": [
+        {
+          "nome": "FormalizacaoPacking.packing_norm_le",
+          "arquivo": "../lean4/formalizacao/Formalizacao/Packing.lean",
+          "nota": " Apoio parcial ao item (i), no caso todo 1."
+        }
+      ]
     },
     {
       "id": "E2",
@@ -1829,8 +1835,8 @@
       "id": "M5",
       "titulo": "lei minimax conjunta em N e H",
       "rotulo": "lp:thm:minimax-nh",
-      "estado": "Formalizado e compilado",
-      "nota": "A cota superior usa escalas diádicas e a passagem para orçamentos independentes. A cota inferior combina o piso de folhas e os três pisos de altura no supremo sobre a bola.",
+      "estado": "Certificado pela auditoria F6",
+      "nota": "Parecer A no commit `19c85be8bd08098b4a8c6d0452e755b5e3683be7` para o melhor erro minimax em Lᵖ. [Relatório F6](../auditorias/RELATORIO_F6_CERTIFICACAO_FINAL.md). A cota superior usa escalas diádicas e a passagem para orçamentos independentes. A cota inferior combina o piso de folhas e os três pisos de altura no supremo sobre a bola.",
       "lean": [
         {
           "nome": "FormalizacaoMinimax.minimax_nh",

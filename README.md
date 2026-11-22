@@ -21,7 +21,7 @@ O artigo determina o pior erro de aproximação na bola unitária de $B^s_{p,q}(
 - **Caracterização por realização.** Na diagonal $s=1/p$ com $p>1$, qualquer agenda $\max\{2,\lceil A_*N\rceil\}$ com $A_*>0$ dá a igualdade de conjuntos para todo $q$, inclusive $q=\infty$. A norma da sequência cresce, no pior caso na bola, como $B^{1+1/p}$ para raios grandes. Para $p=s=1$ com $q<\infty$, continua em aberto a caracterização com agenda linear.
 - **Estabilidade e codificação.** A caracterização se transfere a famílias aninhadas de redes ReLU por inclusão exata ou aproximação com tolerância somável. O texto dá um código livre de prefixo, cotas inferiores de entropia e agendas de log iterado.
 
-O apêndice do artigo descreve a formalização em Lean 4 e a correspondência entre as demonstrações e as declarações verificadas.
+O Teorema 5.2 foi formalizado em Lean 4 como `FormalizacaoMinimax.minimax_nh` e recebeu parecer A na auditoria independente F6, sem bloqueadores ou achados maiores. O objeto certificado está no commit [19c85be8bd08098b4a8c6d0452e755b5e3683be7](https://github.com/Walc21/ARTIGO-BESOV/commit/19c85be8bd08098b4a8c6d0452e755b5e3683be7), identificado pela [tag de certificação](https://github.com/Walc21/ARTIGO-BESOV/releases/tag/teorema-5.2-lean-certificado-v1.0). Esta edição registra a certificação em uma revisão posterior. [Relatório F6](auditorias/RELATORIO_F6_CERTIFICACAO_FINAL.md) · [Evidências e reprodução](auditorias/evidencias/F6-19c85be/README.md)
 
 ## Onde encontrar cada parte
 
@@ -35,7 +35,7 @@ O apêndice do artigo descreve a formalização em Lean 4 e a correspondência e
 | [`Pendencias/`](lean4/formalizacao/Pendencias/) · [`RequestProject/`](lean4/formalizacao/RequestProject/) | Módulos auxiliares dos quais `Formalizacao` depende. |
 | [`Auditoria.lean`](lean4/formalizacao/Formalizacao/Auditoria.lean) · [saída da auditoria](lean4/formalizacao/auditoria_axiomas.txt) | Comandos de inspeção e axiomas de cada declaração auditada. |
 | [`mapas/`](mapas/) | Dados e scripts do mapa, [correspondência TeX–Lean](mapas/MAPA_TEX_LEAN.md) e [auditoria de fidelidade](mapas/AUDITORIA_FIDELIDADE.md). |
-| [`auditorias/`](auditorias/) | Relatórios das auditorias de originalidade (E1/E2), da integração bibliográfica e da consolidação editorial (E5/E6), com as pendências registradas. |
+| [`auditorias/`](auditorias/) | Relatórios de revisão e de formalização, incluindo a [certificação F6 do Teorema 5.2](auditorias/RELATORIO_F6_CERTIFICACAO_FINAL.md). |
 
 ## Como verificar de forma independente
 
@@ -44,7 +44,10 @@ Comece na raiz do repositório. Para obter uma cópia local, use:
 ```bash
 git clone https://github.com/Walc21/ARTIGO-BESOV.git
 cd ARTIGO-BESOV
+git switch --detach teorema-5.2-lean-certificado-v1.0
 ```
+
+O checkout acima reproduz a versão certificada. Execute os mesmos comandos no checkout da revisão editorial para compilar os PDFs e verificar o mapa atual.
 
 ### 1. Compilar os PDFs
 
@@ -95,7 +98,7 @@ Ainda em `lean4/formalizacao/`, execute:
 lake env lean Formalizacao/Auditoria.lean
 ```
 
-A saída esperada tem 201 linhas para 196 declarações distintas e registra somente os axiomas `propext`, `Classical.choice` e `Quot.sound`. Para comparar com o arquivo versionado na mesma execução, use a forma abaixo. A comparação também detecta declarações ausentes e ocorrências de `sorryAx`.
+No commit certificado, a F6 registrou 239 consultas a 234 declarações distintas. A saída esperada registra somente os axiomas `propext`, `Classical.choice` e `Quot.sound`. Para comparar com o arquivo versionado na mesma execução, use a forma abaixo. A comparação também detecta declarações ausentes e ocorrências de `sorryAx`.
 
 ```bash
 set -o pipefail
@@ -112,7 +115,7 @@ Volte à raiz do repositório. Com Python 3 e o projeto Lean já compilado, exec
 python3 mapas/verificar_mapa.py
 ```
 
-O script verifica os rótulos do TeX, confirma os nomes das declarações com `#check` no Lean e compara o mapa versionado com a versão gerada.
+O script verifica os rótulos do TeX, confirma os nomes das declarações com `#check` no Lean e compara o mapa versionado com a versão gerada. A F6 conferiu 267 referências em 64 entradas no commit certificado. A revisão editorial tem 268 referências nas mesmas 64 entradas, incluindo o apoio parcial ao lema de empacotamento.
 
 ### 6. Executar os testes da Etapa 2
 
@@ -129,7 +132,7 @@ A suíte usa frações exatas para testar a construção nodal e confere a corre
 - Os Teoremas 6.1 e 6.2 estão formalizados nos três regimes, e o Teorema 6.3 cobre a inclusão aproximada. Os módulos `Formalizacao/Low*.lean` tratam $s\le1/p$ com constantes de Jackson que podem depender de $f$.
 - O Lean usa representantes mensuráveis $\mathbb R\to\mathbb R$ e a medida de Lebesgue restrita a $[0,1]$. Os casos com agenda $\widetilde H_{s,\eta}$ assumem $1/p<s<2$.
 - As reduções usam a estimativa de Jackson com constantes que podem depender de $f$. A forma com constantes explícitas $C_0=9C_W(p)$ e $C_1=16$ está em [`hypJpStrong_of_lt`](lean4/formalizacao/Formalizacao/LpJackson4.lean).
-- O minimax em dois orçamentos, o quantizador por nó, a extensão sequencial crítica a $q=\infty$, a agenda linear fixa e o crescimento ótimo no raio têm provas analíticas no artigo. A formalização existente cobre lemas de apoio e o teorema crítico por bola para $q$ finito.
+- A F6 certifica o melhor erro minimax $D_{p,s,q}(N,H)\asymp N^{-s}+H^{-s/a(p,s)}$ para $1\le p<\infty$, $0<s<2$ e $0<q\le\infty$, com inteiros $N,H\ge2$ independentes. O fechamento inclui o quantizador por nó e as cotas lineares por escala nos dois pontos críticos. A certificação individual do corolário minimax de realização, da extensão sequencial crítica a $q=\infty$, da agenda linear fixa e do crescimento ótimo no raio requer rastreabilidade própria. A caracterização global sob altura linear em $p=s=1$ com $q<\infty$ permanece em aberto.
 - A auditoria de fidelidade compara os enunciados e registra as escolhas de formalização, incluindo, para o estado anterior ao commit `9951091`, a referência externa usada na entropia métrica da seção 6. A cota inferior de entropia agora tem demonstração própria no artigo (ver a seção de atualização da auditoria). [Consultar a auditoria de fidelidade](mapas/AUDITORIA_FIDELIDADE.md)
 
 ## Licenças e segurança

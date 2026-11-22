@@ -20,8 +20,9 @@ se `A n^(aPS p s) ≤ H`, há um aproximante em `classNH n H` com erro em Lᵖ d
 | `s = 1/p`, `p > 1` | `1` | `critical_upper_dyadic` aplica `critical_dist` à altura `H` disponível. |
 | `p = s = 1` | `1` | `l1_linear_height` com raio 1 e `H ≥ 2 C_E n`. |
 
-`critical_dist` extrai de `critical_level` o erro em Lᵖ do aproximante de `critical_approx`.
-Ambas as provas reutilizam a mesma estimativa de quase-interpolação e a mesma quantização.
+`critical_dist` usa `critical_approx` e a estimativa de quase-interpolação para limitar
+o erro em Lᵖ. `critical_level` chama `critical_dist` para obter a cota de realização.
+A prova minimax usa `critical_dist` por meio de `critical_upper_dyadic`.
 Em `critical_upper_dyadic`, o controle de um termo pela norma ℓᵠ vale para `q = ∞`.
 A estimativa `E_majorant` controla o erro de quantização multiplicado por `n^(1/p)` por um
 múltiplo de `(r+2) ρ^r` com `ρ = 2^(1/p−1) < 1`. O lema `poly_geom_majorant`, aplicado
