@@ -13,7 +13,7 @@
   {Independent researcher}{November 21, 2026}{}
 
 \articleabstract{english}{Abstract}{%
-We study approximation in $L^p([0,1])$ by continuous piecewise affine functions with rational coefficients. The number $N$ of dyadic leaves and the arithmetic height $H$ are independent budgets. For $1\le p<\infty$, $0<s<2$, and $0<q\le\infty$, the minimax error on the unit Besov ball is of order $N^{-s}+H^{-s/a(p,s)}$, where $a(p,s)=1+1/p-s$ below $s=1/p$, $a(p,s)=1$ from $s=1/p$ to $s=1$, and $a(p,s)=s$ above $s=1$. The lower bounds hold for adaptive trees. The upper bounds use uniform grids, local affine projections, and nodal quantization. At $p=s=1$, dyadic denominators that vary by node remove the logarithmic loss in the per-scale error. The same law holds for the realization functional. On the diagonal $p>1$, $s=1/p$, any linear schedule with positive prefactor yields a global realization characterization of the Besov space, including $q=\infty$. Under this schedule, the uniform bound on the ball of radius $B$ grows as $B^{1+1/p}$ for large $B$. At $p=s=1$ with $q<\infty$, global characterization under a linear schedule remains open. The Lean 4 formalization covers the realization characterization, stability for networks, the uniform bounds, and the arithmetic floor; the minimax law, the nodal quantizer, the fixed linear schedule, and the growth in the radius are proved in the paper and are not yet certified in Lean.}
+We study approximation in $L^p([0,1])$ by continuous piecewise affine functions with rational coefficients. The number $N$ of dyadic leaves and the arithmetic height $H$ are independent budgets. For $1\le p<\infty$, $0<s<2$, and $0<q\le\infty$, the minimax error on the unit Besov ball is of order $N^{-s}+H^{-s/a(p,s)}$, where $a(p,s)=1+1/p-s$ below $s=1/p$, $a(p,s)=1$ from $s=1/p$ to $s=1$, and $a(p,s)=s$ above $s=1$. The lower bounds hold for adaptive trees. The upper bounds use uniform grids, local affine projections, and nodal quantization. At $p=s=1$, dyadic denominators that vary by node remove the logarithmic loss in the per-scale error. The same law holds for the realization functional. On the diagonal $p>1$, $s=1/p$, any linear schedule with positive prefactor yields a global realization characterization of the Besov space, including $q=\infty$. Under this schedule, the uniform bound on the ball of radius $B$ grows as $B^{1+1/p}$ for large $B$. At $p=s=1$ with $q<\infty$, global characterization under a linear schedule remains open. Theorem~\ref{lp:thm:minimax-nh} on the minimax best error in $L^p$ was formalized in Lean~4 and received a grade of A in the independent F6 audit.}
 {Keywords}{Besov spaces, minimax approximation, arithmetic height, realization functional.}
 
 \section{Introduction}
@@ -1437,7 +1437,14 @@ Transfer & \leanname{bestError_le_realP}, \leanname{realP_le_bestError_add} \\
 Critical linear height & \leanname{critical_approx}, \leanname{critical_level}, \leanname{critical_lq}, \leanname{critical_rate}, \leanname{critical_char_radius}, \leanname{critical_radius_ball_and_inclusion} \\
 \end{leantable}
 
-The geometric floor and the transfer inequality are covered by the declarations in the table. The affine reproduction and endpoint bounds support the choice $C_p=4$. The critical per-level declarations use a bound on the modulus coefficients without a parameter $q$. The Lean sequence and ball characterization results for $H_B$ require $q<\infty$. The extension to $q=\infty$, the $p=1$ application of the jump estimate, the quantizer with a denominator at each node, the two minimax laws, the fixed linear schedule, and sharp radius growth are proved in the article. Their new statements have no corresponding Lean certification here.
+\Needspace{7\baselineskip}
+The \href{https://github.com/Walc21/ARTIGO-BESOV/blob/902d2664cb5a0fa5620d3442c562c15675889eb3/auditorias/RELATORIO_F6_CERTIFICACAO_FINAL.md}{independent F6 audit} awarded a grade of A, with no blockers or major findings, to the formalization of \cref{lp:thm:minimax-nh} by \code{FormalizacaoMinimax.minimax_nh}. The certification covers the minimax best error in $L^p([0,1])$, $D_{p,s,q}(N,H)\asymp N^{-s}+H^{-s/a(p,s)}$, for $1\le p<\infty$, $0<s<2$, and $0<q\le\infty$, with independent integers $N,H\ge2$.
+\par
+The audited commit is \href{https://github.com/Walc21/ARTIGO-BESOV/commit/19c85be8bd08098b4a8c6d0452e755b5e3683be7}{\texttt{19c85be8bd08098b4a8c6d0452e755b5e3683be7}}.
+
+The geometric floor and the transfer inequality are covered by the declarations in the table. The affine reproduction and endpoint bounds support the choice $C_p=4$. The minimax proof uses \code{critical_upper_dyadic} on the diagonal $s=1/p$ with $p>1$ and \code{l1_linear_height} at $p=s=1$, both with linear height per scale for every $0<q\le\infty$. In the latter case, \code{nodal_variable_height} formalizes quantization with a denominator at each node.
+
+The global characterization concerns summability of the errors across scales. The Lean sequence and ball characterization results for $H_B$ require $q<\infty$. The minimax realization corollary, the sequence extension to $q=\infty$, the fixed linear schedule, and sharp radius growth require separate verification of their Lean counterparts. At $p=s=1$ with $q<\infty$, global characterization under linear height remains open.
 
 \subsection{Reproducing the verification}
 
@@ -1446,7 +1453,7 @@ From the Lean project root, run the following commands to build the formalizatio
 lake build Formalizacao
 lake env lean Formalizacao/Auditoria.lean
 \end{verbatim}
-The audit runs 201 checks on 196 distinct declarations and reports only \code{propext}, \code{Classical.choice}, and \code{Quot.sound}. Its output is in \code{lean4/formalizacao/auditoria_axiomas.txt}. The map at \code{mapas/MAPA_TEX_LEAN.md} lists the qualified names and their source files. From the article root, \texttt{python3 mapas/verificar\_mapa.py} checks the TeX labels and the Lean names.
+At the certified commit, F6 recorded 239 axiom queries on 234 distinct declarations, using only \code{propext}, \code{Classical.choice}, and \code{Quot.sound}. The output is in \code{lean4/formalizacao/auditoria_axiomas.txt}. F6 checked 267 references to Lean names in the map at that commit. From the article root, \texttt{python3 mapas/verificar\_mapa.py} checks the TeX labels and the declarations listed in \code{mapas/MAPA_TEX_LEAN.md}.
 
 \articlereferences
 \end{document}
