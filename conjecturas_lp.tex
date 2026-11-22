@@ -682,7 +682,7 @@ Em particular, $e^{H}_{N,p}(f_H)\ge1/(2H)$ para todo $N$.
 \begin{proof}
 Todo racional positivo de $\mathcal Q_H$ tem numerador inteiro positivo e denominador no máximo $H$, logo é pelo menos $1/H$, e dista de $a_H$ ao menos $1/(2H)$. Os racionais não positivos distam de $a_H$ ao menos $a_H=1/(2H)$, e $0\in\mathcal Q_H$ realiza essa distância.
 
-Para $g=0$, $\|f_H\|_p=a_H$. Seja $g\in\Aclass_{N,H}([0,1])$ e seja $J$ uma folha da representação, com $g(x)=y_0+s(x-x_J)$ em $J$, onde $x_J$ é o centro de $J$ e $\height(y_0)\le H$. Como $g$ é afim, $\int_Jg=|J|\,y_0$. A desigualdade de Jensen para a função convexa $t\mapsto|t|^p$ dá
+Para $g=0$, $\|f_H\|_p=a_H$. Seja $g\in\Aclass_{N,H}([0,1])$ e seja $J$ uma folha da representação, com $g(x)=y_0+v(x-x_J)$ em $J$, onde $x_J$ é o centro de $J$ e $\height(y_0)\le H$. Como $g$ é afim, $\int_Jg=|J|\,y_0$. A desigualdade de Jensen para a função convexa $t\mapsto|t|^p$ dá
 \[
  \int_J|f_H-g|^p\ge|J|\Bigl|\frac1{|J|}\int_J(f_H-g)\Bigr|^p=|J|\,|a_H-y_0|^p\ge|J|\,(2H)^{-p},
 \]
@@ -770,7 +770,7 @@ Sejam $1\le p<\infty$, $0<s\le1/p$ e $0<q\le\infty$, e ponha $\beta=s/(1+1/p-s)$
 \begin{proof}
 Ponha $\delta=1/p-s$ e $c=\min\{\Lambda^{-1},2^{-(1+\delta)}\}$, com $\Lambda$ do \cref{lp:lem:bump}. Tome $t=(c/(2H))^{1/(1+\delta)}\le1/2$, $a=c\,t^{-\delta}$ e $f_H(x)=a\varphi((x-1/4)/t)$. O suporte fica em $(0,1)$. As cotas de $\|f_H\|_p$ e do módulo no \cref{lp:lem:bump} valem com a mesma constante para esse suporte transladado, pois usam as normas de $\varphi$ e $\varphi''$. Assim $\|f_H\|^*\le\Lambda a t^\delta\le1$.
 
-As funções $g$ são $H$-Lipschitz em $[0,1]$. Para $x$ em $I=[1/4+t/4,1/4+t/2]$, temos $f_H(x)=a$ e $f_H(x+t)=0$. Como $Ht=a/2$, segue $|f_H-g|(x)+|f_H-g|(x+t)\ge a/2$. Os intervalos $I$ e $I+t$ são disjuntos e estão em $[0,1]$. Por convexidade, a soma das potências $p$ dos dois erros é ao menos $2^{1-p}(a/2)^p$. Integrando em $I$, de comprimento $t/4$, obtemos
+Pela continuidade global e pelo fato de que a inclinação em cada folha satisfaz $|v|\le\height(v)\le H$, toda função admissível é $H$-Lipschitz em $[0,1]$. Para $x$ em $I=[1/4+t/4,1/4+t/2]$, temos $f_H(x)=a$ e $f_H(x+t)=0$. Como $Ht=a/2$, segue $|f_H-g|(x)+|f_H-g|(x+t)\ge a/2$. Os intervalos $I$ e $I+t$ são disjuntos e estão em $[0,1]$. Por convexidade, a soma das potências $p$ dos dois erros é ao menos $2^{1-p}(a/2)^p$. Integrando em $I$, de comprimento $t/4$, obtemos
 \[
  \|f_H-g\|_p\ge 2^{-2-1/p}a\,t^{1/p}
  =2^{-2-1/p}c(c/2)^\beta H^{-\beta}.
@@ -902,7 +902,7 @@ onde
 \end{teorema}
 
 \begin{proof}
-\emph{Cotas inferiores.} O \cref{lp:lem:leaf-budget-floor} dá o termo $N^{-s}$. Abaixo de $1/p$, o \cref{lp:prop:slope-floor} dá $H^{-s/(1+1/p-s)}$. Entre $1/p$ e $1$, inclusive, o \cref{lp:prop:geom-floor} dá $H^{-s}$. Acima de $1$, o \cref{lp:prop:floor} dá $1/(2H)$, pois o alvo constante $1/(2H)$ tem quase-norma $1/(2H)\le1$. Essas cotas fornecem $H^{-s/a(p,s)}$ em cada faixa. O máximo das duas cotas é pelo menos metade da soma. Cada teste é escolhido dentro do supremo minimax e pode depender de $N$ ou $H$.
+\emph{Cotas inferiores.} O \cref{lp:lem:leaf-budget-floor} dá o termo $N^{-s}$. Abaixo de $1/p$, a \cref{lp:prop:slope-floor} dá $H^{-s/(1+1/p-s)}$. Entre $1/p$ e $1$, inclusive, a \cref{lp:prop:geom-floor} dá $H^{-s}$. Acima de $1$, a \cref{lp:prop:floor} dá $1/(2H)$, pois o alvo constante $1/(2H)$ tem quase-norma $1/(2H)\le1$. Essas cotas fornecem $H^{-s/a(p,s)}$ em cada faixa. O máximo das duas cotas é pelo menos metade da soma. Cada teste é escolhido dentro do supremo minimax e pode depender de $N$ ou $H$.
 
 \emph{Construção por nível diádico.} Seja $n=2^r\ge2$ e fixe $\|f\|^*\le1$. Pelo \cref{lp:cor:quasi-error}, $\|f-Q_nf\|_p\le9C_W n^{-s}$. Para $s<1/p$, o \cref{lp:lem:sup-bound} limita a amplitude nodal por $C_0n^{1/p-s}$. Com $Q=n$, o \cref{lp:lem:nodal-general} requer $H\ge8(C_0+1)n^{1+1/p-s}$ e dá erro adicional de no máximo $1/(2n)\le n^{-s}/2$.
 
@@ -951,9 +951,9 @@ Logo $R_{N,H}(f)_p\le 2^sN^{-s}+5e^H_{N,p}(f)$ na bola unitária. O \cref{lp:thm
 
 \begin{observacao}
 \label{lp:obs:floor-closure}
-A \cref{lp:cor:joint-necessity} determina a potência necessária da altura para a taxa uniforme por escala $CN^{-s}$ sobre a bola unitária, tanto para o melhor erro em $L^p$ quanto para a realização. O piso por inclinação dá $H(N)\gtrsim N^{1+1/p-s}$ se $s<1/p$, o geométrico dá $H(N)\gtrsim N$ se $1/p\le s\le1$ e o aritmético dá $H(N)\gtrsim N^s$ se $1<s<2$. As constantes dessas cotas dependem de $(p,s,q,C)$. O alvo de teste pode variar com $H(N)$, e uma cota uniforme para uma bola de raio $B\ge1$ implica a mesma necessidade porque a bola contém a unitária.
+O \cref{lp:cor:joint-necessity} determina a potência necessária da altura para a taxa uniforme por escala $CN^{-s}$ sobre a bola unitária, tanto para o melhor erro em $L^p$ quanto para a realização. O piso por inclinação dá $H(N)\gtrsim N^{1+1/p-s}$ se $s<1/p$, o geométrico dá $H(N)\gtrsim N$ se $1/p\le s\le1$ e o aritmético dá $H(N)\gtrsim N^s$ se $1<s<2$. As constantes dessas cotas dependem de $(p,s,q,C)$. O alvo de teste pode variar com $H(N)$, e uma cota uniforme para uma bola de raio $B\ge1$ implica a mesma necessidade porque a bola contém a unitária.
 
-Os \cref{lp:thm:minimax-nh,lp:cor:minimax-realization} atingem as potências nas taxas por escala. A somabilidade entre escalas tem condições próprias. Os alvos das cotas inferiores podem variar com os orçamentos.
+O \cref{lp:thm:minimax-nh} e o \cref{lp:cor:minimax-realization} atingem as potências nas taxas por escala. A somabilidade entre escalas tem condições próprias. Os alvos das cotas inferiores podem variar com os orçamentos.
 \end{observacao}
 
 \begin{observacao}[Lei conjunta na classe $C^2$]
@@ -1380,7 +1380,7 @@ Uma bola fechada de raio $\varepsilon$ contém no máximo um ponto de $\{f_\thet
 
 \begin{corolario}[Cota inferior de bits]
 \label{lp:cor:bits-lower}
-Sejam $1\le p<\infty$, $0<s<2$, $0<q\le\infty$, $B>0$, $C_B>0$ e um inteiro $L\ge0$. Ponha $c_5=c_4(B/C_B)^{1/s}$, em que $c_4$ é a constante do \cref{lp:prop:entropy-lower}. Se $N\ge1$ satisfaz $C_BN^{-s}\le\varepsilon_0B$ e $C:\mathbb B^s_{p,q}(B)\to\{0,1\}^{\le L}$, $D:\{0,1\}^{\le L}\to L^p$ são tais que $\|f-D(C(f))\|_p\le C_BN^{-s}$ para todo $f$ na bola, então
+Sejam $1\le p<\infty$, $0<s<2$, $0<q\le\infty$, $B>0$, $C_B>0$ e um inteiro $L\ge0$. Ponha $c_5=c_4(B/C_B)^{1/s}$, em que $c_4$ é a constante da \cref{lp:prop:entropy-lower}. Se $N\ge1$ satisfaz $C_BN^{-s}\le\varepsilon_0B$ e $C:\mathbb B^s_{p,q}(B)\to\{0,1\}^{\le L}$, $D:\{0,1\}^{\le L}\to L^p$ são tais que $\|f-D(C(f))\|_p\le C_BN^{-s}$ para todo $f$ na bola, então
 \[
 L\ \ge\ c_5\,N-1.
 \]
@@ -1404,7 +1404,7 @@ O \cref{lp:thm:minimax-nh} determina o erro na bola unitária em função de $N$
 
 Na diagonal $p>1$, a agenda linear fixa dá igualdade de conjuntos para todo $q$. A \cref{lp:prop:critical-radius-growth} estabelece os limites do controle quantitativo sob essa agenda. Em $p=s=1$, $q<\infty$, a caracterização sob agenda linear permanece em aberto. As agendas de log iterado são alternativas suficientes para a somabilidade nos regimes da \cref{lp:sec:loglog}. Os pisos minimax testam o pior caso em cada escala e deixam em aberto exigências aritméticas para um alvo fixo.
 
-A caracterização se transfere a redes ReLU sob as hipóteses de inclusão exata ou aproximada do \cref{lp:conj:stability,lp:thm:approx-stability}. Para raio fixo, o código explícito usa $O(N\log N)$ bits na taxa uniforme em $L^p$, e a entropia da bola dá uma cota inferior de ordem $N$. A diferença entre $N\log N$ e $N$ é a lacuna entre a cota superior do código de comprimento fixo da \cref{lp:prop:bits} e a cota inferior de entropia; o texto não afirma que a biblioteca exija $\Omega(N\log N)$ bits em toda codificação.
+A caracterização se transfere a redes ReLU sob as hipóteses de inclusão exata ou aproximada dos \cref{lp:conj:stability,lp:thm:approx-stability}. Para raio fixo, o código explícito usa $O(N\log N)$ bits na taxa uniforme em $L^p$, e a entropia da bola dá uma cota inferior de ordem $N$. A diferença entre $N\log N$ e $N$ é a lacuna entre a cota superior do código de comprimento fixo da \cref{lp:prop:bits} e a cota inferior de entropia; o texto não afirma que a biblioteca exija $\Omega(N\log N)$ bits em toda codificação.
 
 \ifbesovabnt
 \articlereferences
@@ -1472,9 +1472,11 @@ Altura linear crítica & \leanname{critical_approx}, \leanname{critical_level}, 
 \end{leantable}
 
 \Needspace{7\baselineskip}
-A \href{https://github.com/Walc21/ARTIGO-BESOV/blob/902d2664cb5a0fa5620d3442c562c15675889eb3/auditorias/RELATORIO_F6_CERTIFICACAO_FINAL.md}{auditoria independente F6} atribuiu parecer A, sem bloqueadores ou achados maiores, à formalização do \cref{lp:thm:minimax-nh} por \code{FormalizacaoMinimax.minimax_nh}. A certificação cobre o melhor erro minimax em $L^p([0,1])$, $D_{p,s,q}(N,H)\asymp N^{-s}+H^{-s/a(p,s)}$, para $1\le p<\infty$, $0<s<2$ e $0<q\le\infty$, com inteiros $N,H\ge2$ independentes.
-\par
-O commit auditado é \href{https://github.com/Walc21/ARTIGO-BESOV/commit/19c85be8bd08098b4a8c6d0452e755b5e3683be7}{\texttt{19c85be8bd08098b4a8c6d0452e755b5e3683be7}}.
+A declaração \texttt{FormalizacaoMinimax.minimax\_nh} formaliza o \cref{lp:thm:minimax-nh} em Lean 4.28.0, com Mathlib v4.28.0. A formalização utiliza apenas os axiomas padrão \texttt{propext}, \texttt{Classical.choice} e \texttt{Quot.sound}.
+
+O commit \href{https://github.com/Walc21/ARTIGO-BESOV/commit/19c85be8bd08098b4a8c6d0452e755b5e3683be7}{\texttt{19c85be8bd08098b4a8c6d0452e755b5e3683be7}} do repositório público reúne o código-fonte, os comandos de reprodução e o registro das consultas de axiomas.
+
+O resultado formalizado estabelece a ordem do erro minimax em $L^p([0,1])$, $D_{p,s,q}(N,H)\asymp N^{-s}+H^{-s/a(p,s)}$, para $1\le p<\infty$, $0<s<2$ e $0<q\le\infty$, com inteiros $N,H\ge2$ independentes.
 
 O piso geométrico e a desigualdade de transferência estão cobertos pelas declarações da tabela. A reprodução afim e as estimativas nos extremos sustentam a escolha $C_p=4$. A prova minimax usa \code{critical_upper_dyadic} na diagonal $s=1/p$ com $p>1$ e \code{l1_linear_height} em $p=s=1$, ambas com altura linear por escala para todo $0<q\le\infty$. No segundo caso, \code{nodal_variable_height} formaliza a quantização com denominador por nó.
 
@@ -1482,12 +1484,12 @@ A caracterização global por somabilidade diz respeito à sequência de erros n
 
 \subsection{Reprodução da verificação}
 
-Na raiz do projeto Lean, a compilação e a auditoria são executadas por
+Na raiz do projeto Lean, use os comandos a seguir para compilar a formalização e consultar os axiomas utilizados.
 \begin{verbatim}
 lake build Formalizacao
 lake env lean Formalizacao/Auditoria.lean
 \end{verbatim}
-No commit certificado, a F6 registrou 239 consultas de axiomas a 234 declarações distintas, com uso exclusivo de \code{propext}, \code{Classical.choice} e \code{Quot.sound}. A saída está em \code{lean4/formalizacao/auditoria_axiomas.txt}. A F6 verificou 267 referências a nomes no mapa daquele commit. Na raiz do artigo, \texttt{python3 mapas/verificar\_mapa.py} confere os rótulos do TeX e as declarações listadas em \code{mapas/MAPA_TEX_LEAN.md}.
+O arquivo \code{lean4/formalizacao/auditoria_axiomas.txt} registra 239 consultas de axiomas sobre 234 declarações distintas do projeto. Na raiz do artigo, \texttt{python3 mapas/verificar\_mapa.py} confere os rótulos do TeX e as declarações listadas em \code{mapas/MAPA_TEX_LEAN.md}.
 
 \ifbesovabnt\else\articlereferences\fi
 \end{document}
