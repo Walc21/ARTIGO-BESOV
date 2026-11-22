@@ -179,6 +179,10 @@
   \renewcommand{\tablename}{\articletablename}%
   \renewcommand{\crefpairconjunction}{\articleand}%
   \renewcommand{\creflastconjunction}{\articleand}%
+  \ifbesovenglish\else
+    \renewcommand{\crefpairgroupconjunction}{\articleand}%
+    \renewcommand{\creflastgroupconjunction}{\articleand}%
+  \fi
 }
 \numberwithin{equation}{section}
 

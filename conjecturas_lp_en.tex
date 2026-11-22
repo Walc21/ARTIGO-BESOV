@@ -653,7 +653,7 @@ In particular, $e^{H}_{N,p}(f_H)\ge1/(2H)$ for every $N$.
 \begin{proof}
 Every positive rational in $\mathcal Q_H$ has a positive integer numerator and denominator at most $H$, so it is at least $1/H$ and its distance from $a_H$ is at least $1/(2H)$. Nonpositive rationals are at distance at least $a_H=1/(2H)$ from $a_H$, and $0\in\mathcal Q_H$ attains this distance.
 
-For $g=0$, we have $\|f_H\|_p=a_H$. Let $g\in\Aclass_{N,H}([0,1])$ and let $J$ be a leaf of the representation, with $g(x)=y_0+s(x-x_J)$ on $J$, where $x_J$ is the midpoint of $J$ and $\height(y_0)\le H$. Since $g$ is affine, $\int_Jg=|J|\,y_0$. Jensen's inequality for the convex function $t\mapsto|t|^p$ gives
+For $g=0$, we have $\|f_H\|_p=a_H$. Let $g\in\Aclass_{N,H}([0,1])$ and let $J$ be a leaf of the representation, with $g(x)=y_0+v(x-x_J)$ on $J$, where $x_J$ is the midpoint of $J$ and $\height(y_0)\le H$. Since $g$ is affine, $\int_Jg=|J|\,y_0$. Jensen's inequality for the convex function $t\mapsto|t|^p$ gives
 \[
  \int_J|f_H-g|^p\ge|J|\Bigl|\frac1{|J|}\int_J(f_H-g)\Bigr|^p=|J|\,|a_H-y_0|^p\ge|J|\,(2H)^{-p},
 \]
@@ -741,7 +741,7 @@ Let $1\le p<\infty$, $0<s\le1/p$, and $0<q\le\infty$, and set $\beta=s/(1+1/p-s)
 \begin{proof}
 Set $\delta=1/p-s$ and $c=\min\{\Lambda^{-1},2^{-(1+\delta)}\}$, with $\Lambda$ from \cref{lp:lem:bump}. Take $t=(c/(2H))^{1/(1+\delta)}\le1/2$, $a=c\,t^{-\delta}$, and $f_H(x)=a\varphi((x-1/4)/t)$. The support lies in $(0,1)$. The bounds on $\|f_H\|_p$ and the modulus in \cref{lp:lem:bump} hold with the same constant for this translated support, since they use the norms of $\varphi$ and $\varphi''$. Thus $\|f_H\|^*\le\Lambda a t^\delta\le1$.
 
-The functions $g$ are $H$-Lipschitz on $[0,1]$. For $x$ in $I=[1/4+t/4,1/4+t/2]$, we have $f_H(x)=a$ and $f_H(x+t)=0$. Since $Ht=a/2$, it follows that $|f_H-g|(x)+|f_H-g|(x+t)\ge a/2$. The intervals $I$ and $I+t$ are disjoint and lie in $[0,1]$. By convexity, the sum of the $p$th powers of the two errors is at least $2^{1-p}(a/2)^p$. Integrating over $I$, which has length $t/4$, yields
+Global continuity and the slope bound $|v|\le\height(v)\le H$ on each leaf imply that every admissible function is $H$-Lipschitz on $[0,1]$. For $x$ in $I=[1/4+t/4,1/4+t/2]$, we have $f_H(x)=a$ and $f_H(x+t)=0$. Since $Ht=a/2$, it follows that $|f_H-g|(x)+|f_H-g|(x+t)\ge a/2$. The intervals $I$ and $I+t$ are disjoint and lie in $[0,1]$. By convexity, the sum of the $p$th powers of the two errors is at least $2^{1-p}(a/2)^p$. Integrating over $I$, which has length $t/4$, yields
 \[
  \|f_H-g\|_p\ge 2^{-2-1/p}a\,t^{1/p}
  =2^{-2-1/p}c(c/2)^\beta H^{-\beta}.
@@ -1438,9 +1438,11 @@ Critical linear height & \leanname{critical_approx}, \leanname{critical_level}, 
 \end{leantable}
 
 \Needspace{7\baselineskip}
-The \href{https://github.com/Walc21/ARTIGO-BESOV/blob/902d2664cb5a0fa5620d3442c562c15675889eb3/auditorias/RELATORIO_F6_CERTIFICACAO_FINAL.md}{independent F6 audit} awarded a grade of A, with no blockers or major findings, to the formalization of \cref{lp:thm:minimax-nh} by \code{FormalizacaoMinimax.minimax_nh}. The certification covers the minimax best error in $L^p([0,1])$, $D_{p,s,q}(N,H)\asymp N^{-s}+H^{-s/a(p,s)}$, for $1\le p<\infty$, $0<s<2$, and $0<q\le\infty$, with independent integers $N,H\ge2$.
-\par
-The audited commit is \href{https://github.com/Walc21/ARTIGO-BESOV/commit/19c85be8bd08098b4a8c6d0452e755b5e3683be7}{\texttt{19c85be8bd08098b4a8c6d0452e755b5e3683be7}}.
+The declaration \texttt{FormalizacaoMinimax.minimax\_nh} formalizes \cref{lp:thm:minimax-nh} in Lean 4.28.0 with Mathlib v4.28.0. The formalization uses only the standard axioms \texttt{propext}, \texttt{Classical.choice}, and \texttt{Quot.sound}.
+
+Commit \href{https://github.com/Walc21/ARTIGO-BESOV/commit/19c85be8bd08098b4a8c6d0452e755b5e3683be7}{\texttt{19c85be8bd08098b4a8c6d0452e755b5e3683be7}} in the public repository contains the source code, reproduction commands, and axiom query log.
+
+The formalized result establishes the order of the minimax error in $L^p([0,1])$, $D_{p,s,q}(N,H)\asymp N^{-s}+H^{-s/a(p,s)}$, for $1\le p<\infty$, $0<s<2$, and $0<q\le\infty$, with independent integers $N,H\ge2$.
 
 The geometric floor and the transfer inequality are covered by the declarations in the table. The affine reproduction and endpoint bounds support the choice $C_p=4$. The minimax proof uses \code{critical_upper_dyadic} on the diagonal $s=1/p$ with $p>1$ and \code{l1_linear_height} at $p=s=1$, both with linear height per scale for every $0<q\le\infty$. In the latter case, \code{nodal_variable_height} formalizes quantization with a denominator at each node.
 
@@ -1448,12 +1450,12 @@ The global characterization concerns summability of the errors across scales. Th
 
 \subsection{Reproducing the verification}
 
-From the Lean project root, run the following commands to build the formalization and audit its axioms.
+From the Lean project root, run the following commands to build the formalization and inspect the axioms it uses.
 \begin{verbatim}
 lake build Formalizacao
 lake env lean Formalizacao/Auditoria.lean
 \end{verbatim}
-At the certified commit, F6 recorded 239 axiom queries on 234 distinct declarations, using only \code{propext}, \code{Classical.choice}, and \code{Quot.sound}. The output is in \code{lean4/formalizacao/auditoria_axiomas.txt}. F6 checked 267 references to Lean names in the map at that commit. From the article root, \texttt{python3 mapas/verificar\_mapa.py} checks the TeX labels and the declarations listed in \code{mapas/MAPA_TEX_LEAN.md}.
+The file \code{lean4/formalizacao/auditoria_axiomas.txt} records 239 axiom queries on 234 distinct declarations in the project. From the article root, \texttt{python3 mapas/verificar\_mapa.py} checks the TeX labels and the declarations listed in \code{mapas/MAPA_TEX_LEAN.md}.
 
 \articlereferences
 \end{document}
