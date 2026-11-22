@@ -1,0 +1,5 @@
+'F6.wtP_congr_ae' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F6.ball_congr_ae' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F6.bestError_congr_ae' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F6.norm_const' depends on axioms: [propext, Classical.choice, Quot.sound]
+'F6.Dfun_eq_sup_aemeasurable' depends on axioms: [propext, Classical.choice, Quot.sound]
